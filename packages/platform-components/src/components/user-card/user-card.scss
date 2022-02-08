@@ -1,0 +1,17 @@
+@import 'design/design';
+
+.user-card
+{
+    max-width: 450px;
+    height: 45px;
+
+    padding: 0 10px;
+
+    background: $WildSand;
+
+    &_expanded
+    {
+        height: auto;
+        padding-bottom: 10px;
+    }
+}

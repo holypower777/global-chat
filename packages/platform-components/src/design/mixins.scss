@@ -1,0 +1,25 @@
+@function breakpoint-min($breakpoint)
+{
+    @return $breakpoint;
+}
+
+@function breakpoint-max($breakpoint)
+{
+    @return ($breakpoint - .02);
+}
+
+@mixin media-breakpoint-up($min)
+{
+    @media (min-width: breakpoint-min($min))
+    {
+        @content;
+    }
+}
+
+@mixin media-breakpoint-down($max)
+{
+    @media (max-width: breakpoint-max($max))
+    {
+        @content;
+    }
+}

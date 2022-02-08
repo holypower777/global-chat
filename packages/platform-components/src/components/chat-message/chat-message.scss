@@ -1,0 +1,29 @@
+@import 'design/design';
+
+.chat-message
+{
+    max-width: 470px;
+
+    &__time,
+    &__username
+    {
+        margin-right: 5px;
+    }
+
+    &__time
+    {
+        color: $Silver;
+    }
+
+    &__text
+    {
+        &_smile
+        {
+            display: inline;
+
+            width: auto;
+
+            vertical-align: middle;
+        }
+    }
+}

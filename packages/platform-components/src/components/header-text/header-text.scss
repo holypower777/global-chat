@@ -1,0 +1,62 @@
+@import 'design/design';
+
+.header-text
+{
+    margin: 0;
+
+    font-family: $familyRoboto;
+
+    &_size
+    {
+        &_s
+        {
+            font-size: $headerFontSizeS;
+            line-height: $headerLineHeightS;
+        }
+
+        &_m
+        {
+            font-size: $headerFontSizeM;
+            line-height: $headerLineHeightM;
+        }
+
+        &_l
+        {
+            font-size: $headerFontSizeL;
+            line-height: $headerLineHeightL;
+        }
+    }
+
+    &_weight
+    {
+        &_s
+        {
+            font-weight: $fontWeightNormal;
+        }
+
+        &_m
+        {
+            font-weight: $fontWeightMedium;
+        }
+
+        &_l
+        {
+            font-weight: $fontWeightBold;
+        }
+    }
+
+    &_ellipsis
+    {
+        display: block;
+
+        overflow: hidden;
+
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+
+    &_uppercase
+    {
+        text-transform: uppercase;
+    }
+}

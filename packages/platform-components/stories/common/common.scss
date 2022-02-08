@@ -1,0 +1,23 @@
+@import 'design/design';
+
+.button-group
+{
+    display: flex;
+
+    flex-direction: column;
+
+    .header-text:not(:first-child)
+    {
+        margin-top: 30px;
+    }
+
+    &__with-theme,
+    &__with-icon
+    {
+        display: flex;
+
+        align-items: flex-start;
+
+        gap: 30px;
+    }
+}

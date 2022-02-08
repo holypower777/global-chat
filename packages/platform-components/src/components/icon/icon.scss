@@ -1,0 +1,19 @@
+.icon
+{
+    display: inline-block;
+
+    text-align: center;
+
+    background: 50% no-repeat;
+    background-size: contain;
+
+    &:after
+    {
+        content: '\00A0';
+    }
+
+    &_hidden
+    {
+        display: none;
+    }
+}

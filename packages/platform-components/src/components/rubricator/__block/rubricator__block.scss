@@ -1,0 +1,34 @@
+@import 'design/design';
+
+.rubricator
+{
+    &__block
+    {
+        display: flex;
+
+        flex-direction: column;
+
+        width: 250px;
+
+        &-items
+        {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+
+            margin-top: 20px;
+        }
+
+        &-item
+        {
+            transition: $transitionColor01;
+
+            &:hover
+            {
+                cursor: pointer;
+
+                color: $Twitch;
+            }
+        }
+    }
+}

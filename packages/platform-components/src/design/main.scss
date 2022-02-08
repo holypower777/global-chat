@@ -1,0 +1,142 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i&subset=cyrillic,cyrillic-ext');
+@import 'typography';
+@import 'fonts';
+@import 'colors';
+
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+font,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td
+{
+    margin: 0;
+    padding: 0;
+
+    vertical-align: baseline;
+
+    border: 0;
+
+    background: transparent;
+}
+
+html,
+button
+{
+    color: $Black;
+
+    font-family: Roboto, sans-serif;
+
+    font-size: $defaultSize;
+
+    font-weight: $fontWeightNormal;
+}
+
+body,
+html
+{
+    height: 100%;
+}
+
+input,
+select
+{
+    vertical-align: middle;
+}
+
+h1
+{
+    font-size: $headerFontSizeL;
+    font-weight: $fontWeightBold;
+
+    line-height: $headerLineHeightL;
+}
+
+h2
+{
+    font-size: $headerFontSizeM;
+    font-weight: $fontWeightMedium;
+
+    line-height: $headerLineHeightM;
+}
+
+h3,
+h4,
+h5,
+h6
+{
+    font-size: $headerFontSizeS;
+    font-weight: $fontWeightNormal;
+
+    line-height: $headerLineHeightS;
+}
+
+img
+{
+    width: 100%;
+    height: auto;
+}
+
+ul
+{
+    margin: 0;
+    padding: 0;
+
+    list-style: none;
+}

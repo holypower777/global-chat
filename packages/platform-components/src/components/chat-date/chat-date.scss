@@ -1,0 +1,42 @@
+@import 'design/design';
+
+.chat-date
+{
+    position: relative;
+
+    display: flex;
+
+    max-width: 470px;
+
+    color: $Silver;
+    justify-content: center;
+
+    &:before,
+    &:after
+    {
+        position: absolute;
+
+        width: 35%;
+        height: 1px;
+
+        content: '';
+
+        background-color: $Silver;
+        align-self: center;
+
+        @include media-breakpoint-down($tabletBp)
+        {
+            width: 25%;
+        }
+    }
+
+    &:before
+    {
+        left: 0;
+    }
+
+    &:after
+    {
+        right: 0;
+    }
+}

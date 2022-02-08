@@ -1,0 +1,32 @@
+{
+    "compilerOptions": {
+        "typeRoots": [
+            "@types",
+            "node_modules/@types",
+            "src/typings",
+        ],
+        "lib": [
+            "ES2020",
+            "DOM"
+        ],
+        "jsx": "react",
+        "allowJs": true,
+        "downlevelIteration": true,
+        "strictNullChecks": true,
+        "target": "ES6",
+        "allowSyntheticDefaultImports": true,
+        "resolveJsonModule": true,
+        "esModuleInterop": true,
+        "moduleResolution": "node",
+        "noEmit": true,
+        "noImplicitAny": true,
+        "noImplicitReturns": true,
+    },
+    "include": [
+        "packages",
+        "stylelint.config.js",
+    ],
+    "exclude": [
+        "node_modules/**/*"
+    ],
+}

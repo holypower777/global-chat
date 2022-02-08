@@ -1,0 +1,70 @@
+@import 'design/design';
+
+$largeLogoImageWidth: 28px;
+$largeLogoImageHeight: 28px;
+$mediumLogoImageWidth: 24px;
+$mediumLogoImageHeight: 24px;
+$smallLogoImageWidth: 20px;
+$smallLogoImageHeight: 20px;
+
+.logo
+{
+    display: flex;
+    align-items: baseline;
+
+    color: $Black;
+
+    &_size
+    {
+        &_l
+        {
+            .icon__ez img
+            {
+                width: $largeLogoImageWidth;
+                height: $largeLogoImageHeight;
+            }
+        }
+
+        &_m
+        {
+            .icon__ez img
+            {
+                width: $mediumLogoImageWidth;
+                height: $mediumLogoImageHeight;
+            }
+        }
+
+        &_s
+        {
+            .icon__ez img
+            {
+                width: $smallLogoImageWidth;
+                height: $smallLogoImageHeight;
+            }
+        }
+    }
+
+    &__text
+    {
+        margin-right: 10px;
+
+        &-first
+        {
+            color: $Twitch;
+        }
+    }
+
+    &_adaptive
+    {
+        @include media-breakpoint-down($desktopBp)
+        {
+            .logo
+            {
+                &__text
+                {
+                    display: none;
+                }
+            }
+        }
+    }
+}

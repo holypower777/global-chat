@@ -1,0 +1,72 @@
+@import 'design/design';
+
+.text
+{
+    font-family: $familyRoboto;
+
+    &_size
+    {
+        &_xs
+        {
+            font-size: $fontSizeXS;
+            line-height: $lineHeightXS;
+        }
+
+        &_s
+        {
+            font-size: $fontSizeS;
+            line-height: $lineHeightS;
+        }
+
+        &_m
+        {
+            font-size: $fontSizeM;
+            line-height: $lineHeightM;
+        }
+
+        &_l
+        {
+            font-size: $fontSizeL;
+            line-height: $lineHeightL;
+        }
+
+        &_xl
+        {
+            font-size: $fontSizeXL;
+            line-height: $lineHeightXL;
+        }
+    }
+
+    &_weight
+    {
+        &_s
+        {
+            font-weight: $fontWeightNormal;
+        }
+
+        &_m
+        {
+            font-weight: $fontWeightMedium;
+        }
+
+        &_l
+        {
+            font-weight: $fontWeightBold;
+        }
+    }
+
+    &_ellipsis
+    {
+        display: block;
+
+        overflow: hidden;
+
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+
+    &_uppercase
+    {
+        text-transform: uppercase;
+    }
+}

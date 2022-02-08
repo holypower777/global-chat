@@ -1,0 +1,35 @@
+@import 'design/design';
+
+.user-card
+{
+    &__header
+    {
+        display: flex;
+
+        height: 45px;
+
+        justify-content: space-between;
+        align-items: center;
+
+        &_icons
+        {
+            display: flex;
+
+            height: 15px;
+            gap: 10px;
+        }
+
+        .icon__arrow,
+        .icon__twitch
+        {
+            fill: $Mercury;
+
+            cursor: pointer;
+
+            &:hover
+            {
+                fill: $Boulder;
+            }
+        }
+    }
+}

@@ -1,0 +1,48 @@
+@import 'design/design';
+
+.rubricator
+{
+    &__alphabet
+    {
+        display: flex;
+
+        justify-content: center;
+        flex-wrap: wrap;
+
+        margin: 0;
+        padding: 8px 0;
+
+        list-style: none;
+
+        gap: 20px;
+
+        text-transform: uppercase;
+
+        &-symbol
+        {
+            cursor: default;
+
+            transition: $transitionColor01;
+
+            color: $Mercury;
+
+            font-family: $familyRoboto;
+            font-size: $fontSizeL;
+            font-weight: $fontWeightMedium;
+
+            line-height: $lineHeightL;
+
+            &_presence
+            {
+                cursor: pointer;
+
+                color: $Black;
+
+                &:hover
+                {
+                    color: $Twitch;
+                }
+            }
+        }
+    }
+}

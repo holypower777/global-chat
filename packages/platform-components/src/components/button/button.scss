@@ -1,0 +1,106 @@
+@import 'design/design';
+
+.button
+{
+    display: flex;
+
+    cursor: pointer;
+
+    border: none;
+
+    font-weight: $fontWeightMedium;
+
+    align-items: center;
+
+    &_size
+    {
+        &_l
+        {
+            padding: 15px 60px;
+        }
+
+        &_m
+        {
+            padding: 10px 40px;
+        }
+
+        &_s
+        {
+            padding: 5px 25px;
+
+            font-size: $fontSizeXS;
+
+            .icon
+            {
+                width: 10px;
+                height: 10px;
+            }
+        }
+    }
+
+    &_theme
+    {
+        transition: border-bottom-color 0.1s ease-in-out;
+
+        &_dark
+        {
+            color: $WildSand;
+
+            border-bottom: 1px solid $WildSand;
+
+            background-color: $Boulder;
+
+            &:hover:not(:disabled),
+            &:focus:not(:disabled)
+            {
+                border-bottom-color: $Twitch;
+            }
+
+            .icon
+            {
+                fill: $WildSand;
+            }
+        }
+
+        &_light
+        {
+            color: $Boulder;
+
+            border-bottom: 1px solid $Mercury;
+
+            background-color: $WildSand;
+
+            &:hover:not(:disabled),
+            &:focus:not(:disabled)
+            {
+                border-bottom-color: $Boulder;
+            }
+
+            .icon
+            {
+                fill: $Boulder;
+            }
+        }
+    }
+
+    &_disabled
+    {
+        cursor: default;
+
+        color: $Silver;
+
+        border-bottom: 1px solid $Mercury;
+
+        background-color: $AthensGray;
+
+        .icon
+        {
+            fill: $Silver;
+        }
+    }
+
+    .icon
+    {
+        margin-left: 10px;
+    }
+}

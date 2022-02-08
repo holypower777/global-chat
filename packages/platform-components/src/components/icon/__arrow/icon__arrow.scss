@@ -1,0 +1,36 @@
+@import 'design/design';
+
+.icon__arrow
+{
+    width: 15px;
+    height: 15px;
+
+    transition: transform 0.2s ease-in-out, fill 0.2s ease-in-out;
+
+    fill: $Black;
+    fill-rule: evenodd;
+
+    &_direction
+    {
+        &_up
+        {
+            transform: rotate(180deg);
+        }
+
+        &_right
+        {
+            transform: rotate(-90deg);
+        }
+
+        &_left
+        {
+            transform: rotate(90deg);
+        }
+    }
+
+    svg
+    {
+        width: 100%;
+        height: 100%;
+    }
+}
