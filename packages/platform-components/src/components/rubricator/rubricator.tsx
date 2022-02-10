@@ -2,8 +2,8 @@
 import React from 'react';
 
 interface Channel {
-    user_id: string;
-    display_name: string;
+    userId: string;
+    displayName: string;
 }
 
 interface RubricatorProps {
@@ -11,12 +11,11 @@ interface RubricatorProps {
 }
 
 const Rubricator = ({ channels = [] }: RubricatorProps) => {
-    const availableLetters = channels.map((e) => e[0].display_name[0].toLowerCase());
-    console.log(availableLetters);
+    const availableLetters = channels.map((e) => e[0].displayName[0].toLowerCase());
     
     return (
         <div>
-            kek
+            {availableLetters}
         </div>
     );
 };

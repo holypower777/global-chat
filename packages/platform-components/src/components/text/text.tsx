@@ -1,5 +1,6 @@
 import b from 'b_';
 import cx from 'classnames';
+import { SimpleCallback } from 'platform-components/src/typings';
 import React, { CSSProperties, ReactNode } from 'react';
 import { useIntl } from 'react-intl';
 
@@ -16,6 +17,7 @@ interface TextProps {
     uppercase?: boolean;
     ellipsis?: boolean;
     style?: CSSProperties;
+    handleClick?: SimpleCallback;
     mix?: string;
 }
 
@@ -27,6 +29,7 @@ const Text = ({
     children,
     uppercase,
     ellipsis,
+    handleClick,
     mix,
     ...props
 }: TextProps) => {
@@ -35,9 +38,9 @@ const Text = ({
     const content = id ? intl.formatMessage({ id }) : children;
 
     if (tag === TEXT_TAG.LI) {
-        return <li className={className} {...props}>{content}{id ? children : null}</li>;
+        return <li className={className} onClick={handleClick} {...props}>{content}{id ? children : null}</li>;
     }
-    return <span className={className} {...props}>{content}{id ? children : null}</span>;
+    return <span className={className} onClick={handleClick} {...props}>{content}{id ? children : null}</span>;
 };
 
 Text.TAG = TEXT_TAG;

@@ -1,0 +1,87 @@
+@import 'design/design';
+
+.input
+{
+    &__container
+    {
+        display: flex;
+
+        width: fit-content;
+        height: 50px;
+
+        padding: 0 16px;
+
+        gap: 16px;
+
+        transition: border-bottom 0.2s ease-in-out;
+
+        align-items: center;
+
+        border: none;
+        border-bottom: 1px solid $Mercury;
+
+        background-color: $WildSand;
+
+        &_focus:not(.input__container_disabled),
+        &:hover:not(.input__container_disabled)
+        {
+            border-bottom: 1px solid $Black;
+        }
+
+        &_full
+        {
+            width: auto;
+        }
+
+        &_disabled
+        {
+            .icon
+            {
+                fill: $Silver;
+            }
+        }
+    }
+
+    &__field
+    {
+        width: 100%;
+        height: calc(100% - 2px);
+
+        border: none;
+
+        outline: none;
+
+        background-color: inherit;
+
+        font-size: $fontSizeM;
+        font-weight: $fontWeightMedium;
+        line-height: $lineHeightM;
+
+        &::placeholder
+        {
+            color: $Boulder;
+        }
+
+        &_disabled
+        {
+            &::placeholder
+            {
+                color: $Mercury;
+            }
+        }
+    }
+
+    &__clear
+    {
+        cursor: pointer;
+
+        transition: color 0.2s ease-in-out;
+
+        color: $Boulder;
+
+        &:hover
+        {
+            color: $Black;
+        }
+    }
+}
