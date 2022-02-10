@@ -13,7 +13,8 @@
     "lint:css": "stylelint 'packages/**/*.scss'",
     "lint:css:fix": "yarn run lint:css --fix",
     "storybook:build": "yarn clean-dist && build-storybook -o ./story-dist -c .storybook -s .storybook/static",
-    "storybook:start": "start-storybook -p 9000 -s .storybook/static -c .storybook"
+    "storybook:start": "start-storybook -p 9000 -s .storybook/static -c .storybook",
+    "prepare": "husky install"
   },
   "devDependencies": {
     "@babel/core": "^7.15.8",
@@ -41,7 +42,7 @@
     "file-loader": "^6.2.0",
     "gulp": "^4.0.2",
     "html-webpack-plugin": "^5.5.0",
-    "husky": "^7.0.4",
+    "husky": "^7.0.0",
     "lerna": "^4.0.0",
     "lint-staged": "^12.3.3",
     "react": "^17.0.2",
