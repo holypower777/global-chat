@@ -29,3 +29,4 @@ export { default as IconUser } from './__user/icon__user';
 export { default as IconEz } from './__ez/icon__ez';
 export { default as IconTwitch } from './__twitch/icon__twitch';
 export { default as IconSearch } from './__search/icon__search';
+export { default as IconCategory } from './__category/icon__category';

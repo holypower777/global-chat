@@ -48,6 +48,8 @@ $smallLogoImageHeight: 20px;
     {
         margin-right: 10px;
 
+        white-space: nowrap;
+
         &-first
         {
             color: $Twitch;

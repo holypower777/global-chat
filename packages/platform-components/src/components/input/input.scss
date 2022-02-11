@@ -30,7 +30,7 @@
 
         &_full
         {
-            width: auto;
+            width: inherit;
         }
 
         &_disabled
@@ -75,7 +75,7 @@
     {
         cursor: pointer;
 
-        transition: color 0.2s ease-in-out;
+        transition: $transitionColor01;
 
         color: $Boulder;
 

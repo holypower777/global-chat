@@ -1,0 +1,89 @@
+@import 'design/design';
+
+.header
+{
+    &__menu
+    {
+        position: relative;
+
+        width: 24px;
+        height: 24px;
+
+        .icon
+        {
+            position: absolute;
+
+            z-index: 2;
+
+            top: 0;
+            left: 0;
+
+            cursor: pointer;
+
+            fill: $Boulder;
+
+            &:hover
+            {
+                fill: $Black;
+            }
+        }
+
+        &_open
+        {
+            .icon
+            {
+                fill: $Black;
+            }
+        }
+
+        &_links
+        {
+            position: absolute;
+
+            top: -33px;
+            left: -180px;
+
+            width: 160px;
+            height: calc(100vh - 110px);
+
+            padding: 110px 0 0 38px;
+
+            animation: slide 0.2s forwards;
+
+            background-color: $WildSand;
+
+            box-shadow: $shadow400;
+
+            &_link
+            {
+                margin-bottom: 20px;
+
+                cursor: pointer;
+
+                font-weight: $fontWeightMedium;
+
+                a
+                {
+                    transition: $transitionColor01;
+
+                    color: $Boulder;
+
+                    &:hover
+                    {
+                        color: $Black;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@-webkit-keyframes slide
+{
+    100% { left: 0; }
+}
+
+@keyframes slide
+{
+    100% { left: -36px; }
+}

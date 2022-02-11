@@ -19,8 +19,8 @@ const StoryInput = () => {
                 autoFocus={boolean('auto focus', false)}
                 disabled={boolean('disabled', false)}
                 fullWidth={boolean('full width', false)}
+                handleChange={handleInput}
                 name={text('name', '')}
-                onChange={handleInput}
                 placeholder={text('placeholder', 'placeholder')}
                 readOnly={boolean('read only', false)}
                 required={boolean('required', false)}

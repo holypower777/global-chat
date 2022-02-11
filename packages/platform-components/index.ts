@@ -2,6 +2,7 @@
 export { default as Button } from './src/components/button/button';
 export { default as ChatDate } from './src/components/chat-date/chat-date';
 export { default as ChatMessage } from './src/components/chat-message/chat-message';
+export { default as Header } from './src/components/header/header';
 export * from './src/components/header-text/header-text';
 export { default as Heatmap } from './src/components/heatmap/heatmap';
 export * from './src/components/icon/icon';

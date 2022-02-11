@@ -17,7 +17,7 @@ interface InputProps {
     required?: boolean;
     type?: string;
     value?: string;
-    onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+    handleChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
     autoFocus?: boolean;
 }
 
@@ -33,7 +33,7 @@ const Input = (props: InputProps) => {
         required = false,
         type = 'string',
         value,
-        onChange,
+        handleChange,
         autoFocus = false,
     } = props;
 
@@ -49,7 +49,7 @@ const Input = (props: InputProps) => {
                 disabled={disabled}
                 name={name}
                 onBlur={() => (setFocus(false))}
-                onChange={onChange}
+                onChange={handleChange}
                 onFocus={() => (setFocus(true))}
                 placeholder={placeholder}
                 readOnly={readOnly}
@@ -60,7 +60,7 @@ const Input = (props: InputProps) => {
             {value && fullWidth && !disabled && !readOnly &&
                 <Text 
                     //@ts-expect-error
-                    handleClick={() => onChange!(handleClear)} 
+                    handleClick={() => handleChange!(handleClear)} 
                     id="input.clear"
                     mix={b('input', 'clear')}
                 />
