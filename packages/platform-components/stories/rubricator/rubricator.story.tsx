@@ -8,21 +8,21 @@ import { STORY_GROUPS } from '../constants';
 
 const chans = [
     [
-        { display_name: 'Arlene.Becker', user_id: '1' },
+        { displayName: 'Arlene.Becker', userId: '1' },
     ],
     [
-        { display_name: 'Bridgette9', user_id: '2' },
-        { display_name: 'Brenda23', user_id: '3' },
+        { displayName: 'Bridgette9', userId: '2' },
+        { displayName: 'Brenda23', userId: '3' },
     ],
     [
-        { display_name: 'Earnest35', user_id: '4' },
+        { displayName: 'Earnest35', userId: '4' },
     ],
     [
-        { display_name: 'Flavie24', user_id: '5' },
-        { display_name: 'Francis54', user_id: '6' },
+        { displayName: 'Flavie24', userId: '5' },
+        { displayName: 'Francis54', userId: '6' },
     ],
     [
-        { display_name: 'Joy78', user_id: '7' },
+        { displayName: 'Joy78', userId: '7' },
     ],
 ];
 

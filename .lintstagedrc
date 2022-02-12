@@ -1,4 +1,4 @@
 {
-    "*.{js,jsx,ts,tsx}": [yarn lint:js],
+    "*.{js,jsx,ts,tsx}": [yarn lint:js, yarn test],
     "*.{css,scss}": [yarn lint:css]
 }

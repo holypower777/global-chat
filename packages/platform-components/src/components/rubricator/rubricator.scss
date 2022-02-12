@@ -1,0 +1,21 @@
+.rubricator
+{
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 30px;
+
+    &__columns
+    {
+        display: flex;
+    }
+
+    &__column
+    {
+        display: flex;
+        flex-direction: column;
+
+        gap: 30px;
+    }
+}

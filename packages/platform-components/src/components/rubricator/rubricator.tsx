@@ -1,5 +1,11 @@
-// import b from 'b_';
-import React from 'react';
+import b from 'b_';
+import { splitIntoColumns } from 'platform-components/src/utils';
+import React, { useEffect, useRef, useState } from 'react';
+
+import RubricatorAlphabet from './__alphabet/rubricator__alphabet';
+import RubricatorBlock from './__block/rubricator__block';
+
+import './rubricator.scss';
 
 interface Channel {
     userId: string;
@@ -11,11 +17,53 @@ interface RubricatorProps {
 }
 
 const Rubricator = ({ channels = [] }: RubricatorProps) => {
+    const parentRef = useRef<HTMLDivElement>(null);
+    const [width, setWidth] = useState(0);
+    const [columns, setColumns] = useState<Array<Array<Array<Channel>>>>([]);
+
+    useEffect(() => {
+        setWidth(parentRef.current!.getBoundingClientRect().width);
+        const numberOfColumns = Math.floor(width / 250);
+
+        const balancedColumns = splitIntoColumns(channels.map((e) => e.length), numberOfColumns);
+        const res = [];
+        let lastIndex = 0;
+        for (let i = 0; i < balancedColumns.length; i += 1) {
+            res.push(channels.slice(lastIndex, lastIndex + balancedColumns[i].length));
+            lastIndex += balancedColumns[i].length;
+        }
+
+        setColumns(res);
+
+        const handleResize = () => {
+            setWidth(parentRef.current!.getBoundingClientRect().width);
+        };
+
+        window.addEventListener('resize', handleResize);
+
+        return () => window.removeEventListener('resize', handleResize);
+        
+    }, [channels, parentRef, width]);
+
     const availableLetters = channels.map((e) => e[0].displayName[0].toLowerCase());
-    
+
     return (
-        <div>
-            {availableLetters}
+        <div className="rubricator" ref={parentRef}>
+            {width && columns.length && <>
+                <RubricatorAlphabet availableLetters={availableLetters} />
+                <div className={b('rubricator', 'columns')}>
+                    {columns.map((column, columnIndex) => (
+                        <div className={b('rubricator', 'column')} key={columnIndex}>
+                            {column.map((chan, chanIndex) => (
+                                <RubricatorBlock 
+                                    items={chan.map(e => e.displayName)}
+                                    key={chanIndex}
+                                />
+                            ))}
+                        </div>
+                    ))}
+                </div>
+            </>}
         </div>
     );
 };

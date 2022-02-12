@@ -8,7 +8,6 @@ import { STORY_GROUPS } from '../constants';
 import values from './heatmapData';
 
 const StoryHeatmap = () => {
-    
     const parentRef = useRef<HTMLDivElement>(null);
     const [width, setWidth] = useState(0);
 

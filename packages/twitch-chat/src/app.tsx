@@ -1,7 +1,8 @@
-import { Logo, UserCard } from 'platform-components';
-import React from 'react';
+import { Header } from 'platform-components';
+import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 import { IntlProvider } from 'react-intl';
+import { BrowserRouter as Router } from 'react-router-dom';
 
 import messages from '../../../global-chat.json';
 
@@ -16,23 +17,20 @@ function createContainer(targetParent: Element) {
 const container = document.getElementById(rootContainerId) ?? createContainer(document.body);
 
 const App = () => {
+    const [value, setValue] = useState('');
+
     return (
         <IntlProvider
             defaultLocale="en-US"
             locale={navigator.language}
             messages={messages['en-US'].common}
         >
-            <div>
-                <Logo />
-                <UserCard 
-                    avatarSrc="https://static-cdn.jtvnw.net/user-default-pictures-uv/de130ab0-def7-11e9-b668-784f43822e80-profile_image-70x70.png"
-                    createdAt={new Date()}
-                    totalMessages={2}
-                    userId={12932497}
-                    username="Gazely"
+            <Router>
+                <Header 
+                    handleChange={(e) => setValue(e.target.value)}
+                    value={value}
                 />
-                heleloddwqwqw dwq../
-            </div>
+            </Router>
         </IntlProvider>
     );
 };
