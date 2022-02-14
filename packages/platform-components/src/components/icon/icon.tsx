@@ -1,5 +1,6 @@
 import b from 'b_';
 import cx from 'classnames';
+import { SimpleCallback } from 'platform-components/src/typings';
 import React, { ReactNode } from 'react';
 
 import './icon.scss';
@@ -11,13 +12,14 @@ interface IconProps {
     mods?: Record<string, unknown>;
     theme?: string;
     children?: ReactNode | Array<ReactNode>;
+    handleClick: SimpleCallback;
 }
 
-const Icon = ({ hidden, ico, mix, mods={}, theme, children, ...props }: IconProps) => {
+const Icon = ({ hidden, ico, mix, mods={}, theme, handleClick, children, ...props }: IconProps) => {
     const className = b('icon', ico, { hidden, theme, ...mods });
 
     return (
-        <i className={cx('icon', className, mix)} {...props}>
+        <i className={cx('icon', className, mix)} onClick={handleClick} {...props}>
             {children}
         </i>
     );

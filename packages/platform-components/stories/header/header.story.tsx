@@ -1,4 +1,4 @@
-import { withKnobs } from '@storybook/addon-knobs';
+import { boolean, withKnobs } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/react';
 import React, { useState } from 'react';
 
@@ -11,6 +11,8 @@ const StoryHeader = () => {
     return (
         <Header 
             handleChange={(e) => (setValue(e.target.value))}
+            handleSubmit={() => ({})}
+            isLoading={boolean('disabled', false)}
             value={value}
         />
     );

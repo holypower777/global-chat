@@ -64,6 +64,14 @@ describe('Split into chunks', () => {
                 expect(columns).toEqual([[4, 2], [4], [3, 3], [5, 1, 1]]);
             });
         });
+
+        describe('6 columns', () => {
+            it('[1, 1, 2, 1, 1, 1, 1, 1]', () => {
+                const columns = splitIntoColumns([1, 1, 2, 1, 1, 1, 1, 1], 6);
+
+                expect(columns).toEqual([[1], [1], [2], [1], [1], [1, 1, 1]]);
+            });
+        });
     });
 
     describe('corner cases', () => {

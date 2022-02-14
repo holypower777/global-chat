@@ -8,6 +8,7 @@
 
         flex-direction: column;
 
+        width: 100%;
         min-width: 250px;
 
         &-items
@@ -27,6 +28,11 @@
             {
                 cursor: pointer;
 
+                color: $Twitch;
+            }
+
+            &_selected
+            {
                 color: $Twitch;
             }
         }

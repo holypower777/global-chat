@@ -8,6 +8,7 @@ export { default as Heatmap } from './src/components/heatmap/heatmap';
 export * from './src/components/icon/icon';
 export { default as Input } from './src/components/input/input';
 export { default as Logo } from './src/components/logo/logo';
+export { default as Rubricator } from './src/components/rubricator/rubricator';
 export { default as Spin } from './src/components/spin/spin';
 export { default as Tabs } from './src/components/tabs/tabs';
 export { default as Text } from './src/components/text/text';

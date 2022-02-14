@@ -1,8 +1,15 @@
+@import 'design/design';
+
 .rubricator
 {
     display: flex;
 
+    overflow-y: auto;
+
     flex-direction: column;
+
+    width: 100%;
+    height: 100%;
 
     gap: 30px;
 
@@ -16,6 +23,27 @@
         display: flex;
         flex-direction: column;
 
+        width: 100%;
+
         gap: 30px;
+    }
+
+    &::-webkit-scrollbar-track
+    {
+        border-radius: 10px;
+        background-color: $WildSand;
+    }
+
+    &::-webkit-scrollbar
+    {
+        width: 8px;
+
+        background-color: rgba(0, 0, 0, 0);
+    }
+
+    &::-webkit-scrollbar-thumb
+    {
+        border-radius: 10px;
+        background-color: $Silver;
     }
 }

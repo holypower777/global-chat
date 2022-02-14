@@ -1,0 +1,17 @@
+{
+  "name": "platform-apis",
+  "version": "0.0.1",
+  "main": "dist/index.js",
+  "license": "UNLICENSED",
+  "private": true,
+  "scripts": {},
+  "devDependencies": {
+    "@types/react": "^17.0.30"
+  },
+  "dependencies": {
+    "@reduxjs/toolkit": "^1.7.2",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-redux": "^7.2.6"
+  }
+}

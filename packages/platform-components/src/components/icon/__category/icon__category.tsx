@@ -6,7 +6,7 @@ import Icon from '../icon';
 import './icon__category.scss';
 
 interface IconSearchProps {
-    onClick?: SimpleCallback;
+    handleClick?: SimpleCallback;
 }
 
 const IconCategory = (props: IconSearchProps) => {

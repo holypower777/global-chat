@@ -10,7 +10,7 @@
     "clean-dist": "rm -rf dist && mkdir dist",
     "lint:js": "eslint --ext .js,.jsx,.ts,.tsx packages",
     "lint:js:fix": "yarn run lint:js --fix",
-    "lint:css": "stylelint 'packages/**/*.scss'",
+    "lint:css": "stylelint '{app/packages}/**/*.scss'",
     "lint:css:fix": "yarn run lint:css --fix",
     "test": "jest",
     "storybook:build": "yarn clean-dist && build-storybook -o ./story-dist -c .storybook -s .storybook/static",

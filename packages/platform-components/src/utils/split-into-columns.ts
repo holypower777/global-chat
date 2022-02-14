@@ -1,4 +1,4 @@
-const getSumOfArray = (nums: Array<number>) => nums.reduce((total, len) => (total += len), 0);
+import getSumOfArray from './get-sum-of-array';
 
 const findBestDistribution = (nums: Array<Array<Array<number>>>) => {
     let smallestDiff = Infinity;
@@ -73,10 +73,19 @@ const getDistribution = (lengths: Array<number>, columns: number, maxColumnLen: 
         balancedColumns[balancedColumns.length - 1].push(...tempArr);
     }
 
+    if (balancedColumns.length > columns) {
+        const last = balancedColumns.pop();
+        balancedColumns[balancedColumns.length - 1].push(...last!);
+    }
+
     return balancedColumns;
 };
 
 const splitIntoColumns = (lengths: Array<number>, columns: number) => {
+    if (!lengths) {
+        return [];
+    }
+
     if (columns === 1 || columns === 0) {
         return [lengths];
     }
@@ -89,6 +98,7 @@ const splitIntoColumns = (lengths: Array<number>, columns: number) => {
     const variants = [
         getDistribution(lengths, columns, maxColumnLen),
         getDistribution(lengths, columns, Math.ceil(getSumOfArray(lengths) / columns)),
+        getDistribution(lengths, columns, Math.ceil(getSumOfArray(lengths) / columns) - 1),
         getDistribution(lengths.reverse(), columns, maxColumnLen).map(e => e.reverse()).reverse(),
     ];
 

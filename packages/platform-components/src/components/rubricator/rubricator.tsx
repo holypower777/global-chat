@@ -8,15 +8,18 @@ import RubricatorBlock from './__block/rubricator__block';
 import './rubricator.scss';
 
 interface Channel {
-    userId: string;
-    displayName: string;
+    userId: number;
+    username: string;
+    login: string;
 }
 
 interface RubricatorProps {
     channels: Array<Array<Channel>>;
+    handleSelect: (item: string) => void;
+    selectedItem: string;
 }
 
-const Rubricator = ({ channels = [] }: RubricatorProps) => {
+const Rubricator = React.memo(({ channels = [], handleSelect, selectedItem }: RubricatorProps) => {
     const parentRef = useRef<HTMLDivElement>(null);
     const [width, setWidth] = useState(0);
     const [columns, setColumns] = useState<Array<Array<Array<Channel>>>>([]);
@@ -45,19 +48,22 @@ const Rubricator = ({ channels = [] }: RubricatorProps) => {
         
     }, [channels, parentRef, width]);
 
-    const availableLetters = channels.map((e) => e[0].displayName[0].toLowerCase());
+    const availableLetters = channels.map((e) => e[0].login[0].toLowerCase());
+    const activeLetter = selectedItem.charAt(0).toLowerCase();
 
     return (
         <div className="rubricator" ref={parentRef}>
             {width && columns.length && <>
-                <RubricatorAlphabet availableLetters={availableLetters} />
+                <RubricatorAlphabet activeLetter={activeLetter} availableLetters={availableLetters} />
                 <div className={b('rubricator', 'columns')}>
                     {columns.map((column, columnIndex) => (
                         <div className={b('rubricator', 'column')} key={columnIndex}>
                             {column.map((chan, chanIndex) => (
                                 <RubricatorBlock 
-                                    items={chan.map(e => e.displayName)}
+                                    handleSelect={handleSelect}
+                                    items={chan.map(e => e.username)}
                                     key={chanIndex}
+                                    selectedItem={selectedItem}
                                 />
                             ))}
                         </div>
@@ -66,6 +72,6 @@ const Rubricator = ({ channels = [] }: RubricatorProps) => {
             </>}
         </div>
     );
-};
+});
 
 export default Rubricator;

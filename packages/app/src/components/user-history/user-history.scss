@@ -1,0 +1,15 @@
+@import 'design/design';
+
+.user-history
+{
+    display: flex;
+    // grid-template-columns: 1fr 470px;
+    // grid-template-rows: auto;
+
+    height: calc(100vh - 170px);
+    justify-content: space-between;
+
+    padding: 40px;
+
+    gap: 20px;
+}

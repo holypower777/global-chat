@@ -14,7 +14,7 @@ enum DIRECTIONS {
 
 interface IconArrowProps {
     direction?: DIRECTIONS;
-    onClick?: SimpleCallback;
+    handleClick?: SimpleCallback;
 }
 
 const IconArrow = ({ direction = DIRECTIONS.DOWN, ...props }: IconArrowProps) => {

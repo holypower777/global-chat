@@ -280,10 +280,6 @@ module.exports = {
         'react/jsx-indent': 2,
         'react/jsx-indent-props': 2,
         'react-hooks/rules-of-hooks': 2,
-        'react-hooks/exhaustive-deps': [1, {
-            'enableDangerousAutofixThisMayCauseInfiniteLoops': true,
-            'additionalHooks': '(useIsomorphicLayoutEffect)',
-        }],
     },
 
     settings: {

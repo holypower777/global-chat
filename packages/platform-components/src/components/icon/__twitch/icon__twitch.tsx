@@ -6,7 +6,7 @@ import Icon from '../icon';
 import './icon__twitch.scss';
 
 interface IconTwitchProps {
-    onClick?: SimpleCallback;
+    handleClick?: SimpleCallback;
 }
 
 const IconTwitch = (props: IconTwitchProps) => {

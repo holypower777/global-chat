@@ -6,7 +6,7 @@ import Icon from '../icon';
 import './icon__user.scss';
 
 interface IconUserProps {
-    onClick?: SimpleCallback;
+    handleClick?: SimpleCallback;
 }
 
 const IconUser = (props: IconUserProps) => {

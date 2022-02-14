@@ -7,7 +7,7 @@ import Icon from '../icon';
 import './icon__ez.scss';
 
 interface IconEzProps {
-    onClick?: SimpleCallback;
+    handleClick?: SimpleCallback;
 }
 
 const IconEz = (props: IconEzProps) => {

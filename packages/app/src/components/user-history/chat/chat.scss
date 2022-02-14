@@ -1,0 +1,42 @@
+@import 'design/design';
+
+.chat
+{
+    display: flex;
+
+    flex-direction: column;
+
+    width: 450px;
+    height: calc(100% - 40px);
+
+    padding: 20px 0 20px 20px;
+
+    border-left: 1px solid $Mercury;
+
+    gap: 30px;
+
+    &__messages
+    {
+        overflow-x: hidden;
+        overflow-y: auto;
+
+        &::-webkit-scrollbar
+        {
+            width: 8px;
+
+            background-color: rgba(0, 0, 0, 0);
+        }
+
+        &::-webkit-scrollbar-track
+        {
+            border-radius: 10px;
+            background-color: $WildSand;
+        }
+
+        &::-webkit-scrollbar-thumb
+        {
+            border-radius: 10px;
+            background-color: $Silver;
+        }
+    }
+}

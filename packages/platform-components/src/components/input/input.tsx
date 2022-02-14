@@ -18,6 +18,7 @@ interface InputProps {
     type?: string;
     value?: string;
     handleChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+    handleKeyDown?: (e: React.KeyboardEvent) => void;
     autoFocus?: boolean;
 }
 
@@ -34,6 +35,7 @@ const Input = (props: InputProps) => {
         type = 'string',
         value,
         handleChange,
+        handleKeyDown,
         autoFocus = false,
     } = props;
 
@@ -51,9 +53,11 @@ const Input = (props: InputProps) => {
                 onBlur={() => (setFocus(false))}
                 onChange={handleChange}
                 onFocus={() => (setFocus(true))}
+                onKeyDown={handleKeyDown}
                 placeholder={placeholder}
                 readOnly={readOnly}
                 required={required}
+                spellCheck={false}
                 type={type}
                 value={value}
             />

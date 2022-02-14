@@ -1,6 +1,6 @@
 import React from 'react';
 import { IntlProvider } from 'react-intl';
-import { MemoryRouter } from 'react-router-dom';
+import { BrowserRouter as Router } from 'react-router-dom';
 
 const messages = require(`../global-chat.json`);
 
@@ -19,15 +19,15 @@ export const decorators = [
         const defaultLocale = context.parameters.globalTypes.locale.defaultValue
 
         return (
-            <MemoryRouter>
-                <IntlProvider
-                    locale={context.globals.locale}
-                    defaultLocale={defaultLocale}
-                    messages={messages[locale]['common']}
-                >
+            <IntlProvider
+                locale={context.globals.locale}
+                defaultLocale={defaultLocale}
+                messages={messages[locale]['common']}
+            >
+                <Router>
                     <Story />
-                </IntlProvider>
-            </MemoryRouter>
+                </Router>
+            </IntlProvider>
         )
     },
 ];
