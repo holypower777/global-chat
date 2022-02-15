@@ -1,4 +1,5 @@
 import b from 'b_';
+import cx from 'classnames';
 import React from 'react';
 
 import './rubricator__alphabet.scss';
@@ -27,7 +28,7 @@ const RubricatorAlphabet = React.memo(({ activeLetter, availableLetters }: Rubri
         );
     });
 
-    return <ul className={b('rubricator', 'alphabet')}>{ symbols }</ul>;
+    return <ul className={cx(b('rubricator', 'alphabet'), 'custom-scroll')}>{ symbols }</ul>;
 });
 
 export default RubricatorAlphabet;

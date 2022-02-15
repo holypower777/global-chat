@@ -28,4 +28,9 @@
             vertical-align: middle;
         }
     }
+
+    @include media-breakpoint-down($tabletBp)
+    {
+        max-width: 100%;
+    }
 }

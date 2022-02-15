@@ -761,6 +761,12 @@ smiles.set('xqcSlam', 'https://cdn.betterttv.net/emote/5cb9176c750fbb4a2533fc42/
 
 export const messageToSmile = (message: string) => {
     return message.split(' ').map((e, i) => {
+        if (e.startsWith('http')) {
+            return (
+                <a href={e}>{e}</a>
+            );
+        }
+
         if (smiles.get(e)) {
             return (
                 <img

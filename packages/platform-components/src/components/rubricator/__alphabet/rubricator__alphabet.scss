@@ -49,5 +49,14 @@
                 color: $Twitch;
             }
         }
+
+        @include media-breakpoint-down($desktopSBp)
+        {
+            overflow-y: auto;
+
+            width: 40px;
+
+            justify-content: flex-start;
+        }
     }
 }

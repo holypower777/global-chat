@@ -3,6 +3,7 @@
 .chat-date
 {
     position: relative;
+    z-index: -1;
 
     display: flex;
 
@@ -38,5 +39,10 @@
     &:after
     {
         right: 0;
+    }
+
+    @include media-breakpoint-down($tabletBp)
+    {
+        max-width: 100%;
     }
 }

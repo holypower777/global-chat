@@ -12,7 +12,7 @@
     "lint:js:fix": "yarn run lint:js --fix",
     "lint:css": "stylelint '{app/packages}/**/*.scss'",
     "lint:css:fix": "yarn run lint:css --fix",
-    "test": "jest",
+    "test": "jest --passWithNoTests",
     "storybook:build": "yarn clean-dist && build-storybook -o ./story-dist -c .storybook -s .storybook/static",
     "storybook:start": "start-storybook -p 9000 -s .storybook/static -c .storybook",
     "prepare": "husky install"

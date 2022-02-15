@@ -1,18 +1,19 @@
 import b from 'b_';
-import { ChatDate, ChatMessage, UserCard } from 'platform-components';
+import { ChatDate, ChatMessage, UserCard, Text } from 'platform-components';
 import React from 'react';
 import { useSelector } from 'react-redux';
 
+import { getSelectedChannel } from '../../../store/slices/channels';
 import { getMessagesDates, getSelectedMessages } from '../../../store/slices/messages';
 import { getUser } from '../../../store/slices/twitch-user';
 
 import './chat.scss';
 
 const Chat = () => {
-
     const user = useSelector(getUser);
     const messagesDates = useSelector(getMessagesDates);
     const messages = useSelector(getSelectedMessages);
+    const selectedChannel = useSelector(getSelectedChannel);
     let previousDay = 0;
 
     return (
@@ -26,6 +27,9 @@ const Chat = () => {
                 userId={user.userId}
                 username={user.username}
             />
+            {selectedChannel && <Text id="chat.channelName" mix={b('chat', 'title')} size={Text.SIZE.XL}>
+                <Text mix={b('chat', 'title-channel')} size={Text.SIZE.XL}>{selectedChannel}</Text>
+            </Text>}
             <div className={b('chat', 'messages')}>
                 {messages.map((message, i) => {
                     const date = new Date(message.time);

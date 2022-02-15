@@ -4,8 +4,6 @@
 {
     display: flex;
 
-    overflow-y: auto;
-
     flex-direction: column;
 
     width: 100%;
@@ -16,6 +14,10 @@
     &__columns
     {
         display: flex;
+
+        overflow-x: hidden;
+        overflow-y: auto;
+        flex-grow: 1;
     }
 
     &__column
@@ -28,22 +30,10 @@
         gap: 30px;
     }
 
-    &::-webkit-scrollbar-track
+    @include media-breakpoint-down($desktopSBp)
     {
-        border-radius: 10px;
-        background-color: $WildSand;
-    }
+        overflow-y: hidden;
 
-    &::-webkit-scrollbar
-    {
-        width: 8px;
-
-        background-color: rgba(0, 0, 0, 0);
-    }
-
-    &::-webkit-scrollbar-thumb
-    {
-        border-radius: 10px;
-        background-color: $Silver;
+        flex-direction: row;
     }
 }

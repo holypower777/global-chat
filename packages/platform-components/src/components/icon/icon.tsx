@@ -12,7 +12,7 @@ interface IconProps {
     mods?: Record<string, unknown>;
     theme?: string;
     children?: ReactNode | Array<ReactNode>;
-    handleClick: SimpleCallback;
+    handleClick?: SimpleCallback;
 }
 
 const Icon = ({ hidden, ico, mix, mods={}, theme, handleClick, children, ...props }: IconProps) => {

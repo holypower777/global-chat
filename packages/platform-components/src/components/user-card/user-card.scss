@@ -14,4 +14,9 @@
         height: auto;
         padding-bottom: 10px;
     }
+
+    @include media-breakpoint-down($tabletBp)
+    {
+        max-width: 100%;
+    }
 }

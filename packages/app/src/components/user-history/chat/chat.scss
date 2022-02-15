@@ -13,7 +13,7 @@
 
     border-left: 1px solid $Mercury;
 
-    gap: 30px;
+    gap: 20px;
 
     &__messages
     {
@@ -38,5 +38,31 @@
             border-radius: 10px;
             background-color: $Silver;
         }
+    }
+
+    &__title
+    {
+        color: $Boulder;
+
+        align-self: center;
+
+        &-channel
+        {
+            color: $Black;
+        }
+    }
+
+    @include media-breakpoint-down($desktopBp)
+    {
+        width: 380px;
+    }
+
+    @include media-breakpoint-down($tabletBp)
+    {
+        width: 100%;
+
+        padding: 0;
+
+        border: none;
     }
 }

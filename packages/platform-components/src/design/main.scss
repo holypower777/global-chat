@@ -145,3 +145,25 @@ a
 {
     text-decoration: none;
 }
+
+.custom-scroll
+{
+    &::-webkit-scrollbar-track
+        {
+        border-radius: 10px;
+        background-color: $WildSand;
+    }
+
+    &::-webkit-scrollbar
+        {
+        width: 8px;
+
+        background-color: rgba(0, 0, 0, 0);
+    }
+
+    &::-webkit-scrollbar-thumb
+        {
+        border-radius: 10px;
+        background-color: $Silver;
+    }
+}

@@ -1,4 +1,5 @@
 import b from 'b_';
+import cx from 'classnames';
 import { splitIntoColumns } from 'platform-components/src/utils';
 import React, { useEffect, useRef, useState } from 'react';
 
@@ -45,31 +46,29 @@ const Rubricator = React.memo(({ channels = [], handleSelect, selectedItem }: Ru
         window.addEventListener('resize', handleResize);
 
         return () => window.removeEventListener('resize', handleResize);
-        
+
     }, [channels, parentRef, width]);
 
     const availableLetters = channels.map((e) => e[0].login[0].toLowerCase());
     const activeLetter = selectedItem.charAt(0).toLowerCase();
 
     return (
-        <div className="rubricator" ref={parentRef}>
-            {width && columns.length && <>
-                <RubricatorAlphabet activeLetter={activeLetter} availableLetters={availableLetters} />
-                <div className={b('rubricator', 'columns')}>
-                    {columns.map((column, columnIndex) => (
-                        <div className={b('rubricator', 'column')} key={columnIndex}>
-                            {column.map((chan, chanIndex) => (
-                                <RubricatorBlock 
-                                    handleSelect={handleSelect}
-                                    items={chan.map(e => e.username)}
-                                    key={chanIndex}
-                                    selectedItem={selectedItem}
-                                />
-                            ))}
-                        </div>
-                    ))}
-                </div>
-            </>}
+        <div className="rubricator">
+            {columns.length && <RubricatorAlphabet activeLetter={activeLetter} availableLetters={availableLetters} />}
+            <div className={cx(b('rubricator', 'columns'), 'custom-scroll')} ref={parentRef}>
+                {width && columns.length && columns.map((column, columnIndex) => (
+                    <div className={b('rubricator', 'column')} key={columnIndex}>
+                        {column.map((chan, chanIndex) => (
+                            <RubricatorBlock
+                                handleSelect={handleSelect}
+                                items={chan.map(e => e.username)}
+                                key={chanIndex}
+                                selectedItem={selectedItem}
+                            />
+                        ))}
+                    </div>
+                ))}
+            </div>
         </div>
     );
 });
