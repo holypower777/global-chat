@@ -58,6 +58,12 @@ export enum THEME {
     dark = 'dark',
 }
 
+export enum SETTINGS {
+    SORT_BY_DATE = 'sortByDate',
+    SHOW_BADGES = 'showBadges',
+    SHOW_MESSAGE_TIME = 'showMessageTime',
+}
+
 export const MONTHS = [
     'january', 
     'february', 

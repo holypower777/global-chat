@@ -15,6 +15,7 @@ interface TextProps {
     size?: TEXT_SIZE;
     weight?: TEXT_WEIGHT;
     uppercase?: boolean;
+    center?: boolean;
     ellipsis?: boolean;
     style?: CSSProperties;
     handleClick?: SimpleCallback;
@@ -28,13 +29,14 @@ const Text = ({
     tag = TEXT_TAG.SPAN,
     children,
     uppercase,
+    center = false,
     ellipsis,
     handleClick,
     mix,
     ...props
 }: TextProps) => {
     const intl = useIntl();
-    const className = cx(b('text', { ellipsis, size, weight, uppercase }), mix);
+    const className = cx(b('text', { ellipsis, size, weight, uppercase, center }), mix);
     const content = id ? intl.formatMessage({ id }) : children;
 
     if (tag === TEXT_TAG.LI) {

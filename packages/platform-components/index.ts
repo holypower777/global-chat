@@ -15,3 +15,4 @@ export { default as Tab } from './src/components/tabs/__tab/tabs__tab';
 export { default as Text } from './src/components/text/text';
 export { default as Tooltip } from './src/components/tooltip/tooltip';
 export { default as UserCard } from './src/components/user-card/user-card';
+export { default as Switcher } from './src/components/switcher/switcher';

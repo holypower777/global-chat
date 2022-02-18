@@ -1,0 +1,25 @@
+@import 'design/design';
+
+.badge
+{
+    width: 18px;
+    height: 18px;
+
+    border-radius: 5px;
+}
+
+.chat-message
+{
+    &__badges
+    {
+        display: inline-flex;
+
+        margin-right: 5px;
+
+        padding-bottom: 4px;
+
+        vertical-align: middle;
+
+        gap: 4px;
+    }
+}

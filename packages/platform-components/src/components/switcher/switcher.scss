@@ -1,0 +1,66 @@
+@import 'design/design';
+
+.switch
+{
+    visibility: hidden;
+
+    width: 0;
+    height: 0;
+
+    &__label
+    {
+        position: relative;
+
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        width: 30px;
+        height: 16px;
+
+        cursor: pointer;
+
+        transition: bacgroun-color .2s;
+
+        border-radius: 100px;
+
+        background-color: $Boulder;
+
+        &_on
+        {
+            background-color: $ChateauGreen;
+        }
+
+        &_disabled
+        {
+            background-color: $WildSand;
+        }
+    }
+
+    &__button
+    {
+        position: absolute;
+
+        top: 2px;
+        left: 2px;
+
+        width: 12px;
+        height: 12px;
+
+        content: '';
+
+        transition: transform .2s ease-in-out, left .2s ease-in-out;
+
+        border-radius: 45px;
+
+        background-color: $White;
+        box-shadow: 0 0 2px 0 rgba(10, 10, 10, 0.29);
+    }
+
+    &:checked ~ &__button
+    {
+        left: calc(100% - 2px);
+
+        transform: translateX(-100%);
+    }
+}

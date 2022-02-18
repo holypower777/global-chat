@@ -14,6 +14,7 @@ const StoryUserCard = () => {
             heatmapDates={values}
             mostActiveChannel={text('most active channel', 'Klean')}
             totalMessages={number('total messages', 2)}
+            updateSettings={() => ({})}
             userId={number('user id', 12932497)}
             username={text('username', 'Gazely')}
         />

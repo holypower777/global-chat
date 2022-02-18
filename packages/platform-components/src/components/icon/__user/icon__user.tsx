@@ -1,15 +1,10 @@
-import { SimpleCallback } from 'platform-components/src/typings';
 import React from 'react';
 
-import Icon from '../icon';
+import Icon, { SingleIconProps } from '../icon';
 
 import './icon__user.scss';
 
-interface IconUserProps {
-    handleClick?: SimpleCallback;
-}
-
-const IconUser = (props: IconUserProps) => {
+const IconUser = (props: SingleIconProps) => {
     return (
         <Icon ico="user" {...props}>
             <svg viewBox="0 0 15 15">

@@ -1,0 +1,38 @@
+@import 'design/design';
+
+.user-card
+{
+    &__settings
+    {
+        display: flex;
+
+        flex-direction: column;
+
+        margin-top: 10px;
+
+        gap: 5px;
+
+        color: $Black;
+
+        &_title
+        {
+            color: $Boulder;
+        }
+
+        &-option
+        {
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+        }
+
+        select
+        {
+            border: none;
+
+            background-color: none;
+        }
+    }
+}

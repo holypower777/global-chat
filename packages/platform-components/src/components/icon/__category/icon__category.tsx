@@ -1,15 +1,10 @@
-import { SimpleCallback } from 'platform-components/src/typings';
 import React from 'react';
 
-import Icon from '../icon';
+import Icon, { SingleIconProps } from '../icon';
 
 import './icon__category.scss';
 
-interface IconSearchProps {
-    handleClick?: SimpleCallback;
-}
-
-const IconCategory = (props: IconSearchProps) => {
+const IconCategory = (props: SingleIconProps) => {
     return (
         <Icon ico="category" {...props}>
             <svg viewBox="0 0 24 24">

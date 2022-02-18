@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 
 import UserCardContent from './__content/user-card__content';
 import UserCardHeader from './__header/user-card__header';
+import UserCardSettings from './__settings/user-card__settings';
 
 import './user-card.scss';
 
@@ -16,6 +17,7 @@ interface UserCardProps {
     heatmapDates: Array<string>;
     mostActiveChannel: string;
     mix?: string;
+    updateSettings: (key: string, value: unknown) => void;
 }
 
 const UserCard = (props: UserCardProps) => {
@@ -28,26 +30,31 @@ const UserCard = (props: UserCardProps) => {
         heatmapDates,
         mix,
         mostActiveChannel,
+        updateSettings,
     } = props;
-    const [isExpanded, setIsExpanded] = useState(false);
+    const [isContentExpanded, setIsContentExpanded] = useState(false);
+    const [isSettingsExpanded, setIsSettingsExpanded] = useState(false);
 
     return (
-        <div className={cx(b('user-card', { expanded: isExpanded }), mix)}>
+        <div className={cx(b('user-card', { expanded: isContentExpanded || isSettingsExpanded }), mix)}>
             <UserCardHeader
-                isExpanded={isExpanded}
-                setIsExpanded={setIsExpanded}
+                isContentExpanded={isContentExpanded}
+                isSettingsExpanded={isSettingsExpanded}
+                setIsExpanded={setIsContentExpanded}
+                setIsSettingsExpanded={setIsSettingsExpanded}
                 username={username}
             />
-            {isExpanded && <>
-                <UserCardContent
-                    avatarSrc={avatarSrc}
-                    createdAt={createdAt}
-                    heatmapDates={heatmapDates}
-                    mostActiveChannel={mostActiveChannel}
-                    totalMessages={totalMessages}
-                    userId={userId}
-                />
-            </>}
+            {isContentExpanded && <UserCardContent
+                avatarSrc={avatarSrc}
+                createdAt={createdAt}
+                heatmapDates={heatmapDates}
+                mostActiveChannel={mostActiveChannel}
+                totalMessages={totalMessages}
+                userId={userId}
+            />}
+            {isSettingsExpanded && <UserCardSettings 
+                updateSettings={updateSettings}
+            />}
         </div>
     );
 };

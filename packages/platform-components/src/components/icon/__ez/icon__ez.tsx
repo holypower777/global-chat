@@ -1,16 +1,11 @@
-import { SimpleCallback } from 'platform-components/src/typings';
 import React from 'react';
 import { useIntl } from 'react-intl';
 
-import Icon from '../icon';
+import Icon, { SingleIconProps } from '../icon';
 
 import './icon__ez.scss';
 
-interface IconEzProps {
-    handleClick?: SimpleCallback;
-}
-
-const IconEz = (props: IconEzProps) => {
+const IconEz = (props: SingleIconProps) => {
     const intl = useIntl();
 
     return (

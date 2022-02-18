@@ -20,6 +20,7 @@
         }
 
         .icon__arrow,
+        .icon__cog,
         .icon__twitch
         {
             fill: $Mercury;
@@ -29,6 +30,14 @@
             &:hover
             {
                 fill: $Boulder;
+            }
+        }
+
+        .icon__twitch
+        {
+            &:hover
+            {
+                fill: $Twitch;
             }
         }
     }

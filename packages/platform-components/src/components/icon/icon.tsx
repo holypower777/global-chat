@@ -1,18 +1,20 @@
 import b from 'b_';
 import cx from 'classnames';
-import { SimpleCallback } from 'platform-components/src/typings';
-import React, { ReactNode } from 'react';
+import React, { MouseEventHandler, ReactNode } from 'react';
 
 import './icon.scss';
 
-interface IconProps {
+export interface SingleIconProps {
+    handleClick?: MouseEventHandler<HTMLElement>;
+}
+
+interface IconProps extends SingleIconProps {
     ico: string
     hidden?: boolean;
     mix?: string;
     mods?: Record<string, unknown>;
     theme?: string;
     children?: ReactNode | Array<ReactNode>;
-    handleClick?: SimpleCallback;
 }
 
 const Icon = ({ hidden, ico, mix, mods={}, theme, handleClick, children, ...props }: IconProps) => {
@@ -32,3 +34,4 @@ export { default as IconEz } from './__ez/icon__ez';
 export { default as IconTwitch } from './__twitch/icon__twitch';
 export { default as IconSearch } from './__search/icon__search';
 export { default as IconCategory } from './__category/icon__category';
+export { default as IconCog } from './__cog/icon__cog';

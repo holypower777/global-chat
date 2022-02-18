@@ -1,7 +1,6 @@
-import { SimpleCallback } from 'platform-components/src/typings';
 import React from 'react';
 
-import Icon from '../icon';
+import Icon, { SingleIconProps } from '../icon';
 
 import './icon__arrow.scss';
 
@@ -12,9 +11,8 @@ enum DIRECTIONS {
     LEFT = 'left'
 }
 
-interface IconArrowProps {
+interface IconArrowProps extends SingleIconProps {
     direction?: DIRECTIONS;
-    handleClick?: SimpleCallback;
 }
 
 const IconArrow = ({ direction = DIRECTIONS.DOWN, ...props }: IconArrowProps) => {
