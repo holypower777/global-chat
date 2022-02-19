@@ -2,10 +2,11 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { IntlProvider } from 'react-intl';
 import { Provider as ReduxProvider } from 'react-redux';
-import { BrowserRouter as Router } from 'react-router-dom';
+import { Routes, Route, BrowserRouter } from 'react-router-dom';
 
 import messages from '../../../global-chat.json';
 
+import Home from './components/home/home';
 import UserHistory from './components/user-history/user-history';
 import { store } from './store/store';
 
@@ -27,9 +28,16 @@ const App = () => {
             messages={messages['en-US'].common}
         >
             <ReduxProvider store={store}>
-                <Router>
-                    <UserHistory />
-                </Router>
+                <BrowserRouter>
+                    <Routes>
+                        <Route>
+                            <Route path="/">
+                                <Route element={<UserHistory />} index />
+                                <Route element={<Home />} path="*"/>
+                            </Route>
+                        </Route>
+                    </Routes>
+                </BrowserRouter>
             </ReduxProvider>
         </IntlProvider>
     );

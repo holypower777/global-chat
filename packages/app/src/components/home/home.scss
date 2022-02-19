@@ -1,0 +1,52 @@
+@import 'design/design';
+
+.home
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    height: 100vh;
+
+    &__container
+    {
+        display: flex;
+        flex-direction: column;
+
+        width: 1000px;
+
+        align-items: center;
+    }
+
+    &__search
+    {
+        display: flex;
+        align-items: center;
+
+        width: 100%;
+
+        gap: 40px;
+
+        margin: 40px 0 20px;
+    }
+
+    &__info
+    {
+        color: $Silver;
+    }
+
+    @include media-breakpoint-down($desktopBp)
+    {
+        &__container
+        {
+            width: 80%;
+        }
+
+        &__search
+        {
+            flex-direction: column;
+
+            gap: 20px;
+        }
+    }
+}

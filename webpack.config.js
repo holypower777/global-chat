@@ -45,9 +45,6 @@ module.exports = {
         ],
     },
     resolve: {
-        alias: {
-            hooks: path.resolve(__dirname, 'packages/platform-components/src/hooks'),
-        },
         extensions: ['.ts', '.tsx', '.js', '.json'],
     },
 };
