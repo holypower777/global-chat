@@ -16,7 +16,10 @@ const RubricatorBlock = React.memo(({ items, handleSelect, selectedItem }: Rubri
     const blockLetter = items[0].charAt(0).toUpperCase();
 
     return (
-        <section className={b('rubricator', 'block')} id={`block${blockLetter}`}>
+        <section 
+            className={b('rubricator', 'block', { selected: selectedItem.charAt(0).toUpperCase() === blockLetter })} 
+            id={`block${blockLetter}`}
+        >
             <H1>{blockLetter}</H1>
             <ul className={b('rubricator', 'block-items')}>
                 {items.map((item) => 

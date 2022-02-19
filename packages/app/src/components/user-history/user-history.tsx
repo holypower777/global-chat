@@ -3,6 +3,7 @@ import { Header, Spin, Tab, Tabs } from 'platform-components';
 import { useWindowSize } from 'platform-components/src/hooks';
 import React, { useEffect, useState, TouchEvent } from 'react';
 import { useDispatch } from 'react-redux';
+import { useParams } from 'react-router-dom';
 
 import { clearChannelsState, setChannels } from '../../store/slices/channels';
 import { clearMessages, setMessages } from '../../store/slices/messages';
@@ -15,9 +16,10 @@ import Chat from './chat/chat';
 import './user-history.scss';
 
 const UserHistory = () => {
+    const { username: usernameParam } = useParams();
     const dispatch = useDispatch();
-    const [skip, setSkip] = useState(true);
-    const [username, setUsername] = useState('');
+    const [skip, setSkip] = useState(usernameParam ? false : true);
+    const [username, setUsername] = useState(usernameParam || '');
     const [activeTab, setActiveTab] = useState('Channels');
     const { data, isFetching } = useGetMessagesByNameQuery(username, { skip });
     const { width } = useWindowSize();
@@ -33,11 +35,11 @@ const UserHistory = () => {
     }
 
     function handleTouchEnd() {
-        if (touchStart - touchEnd > 75) {
+        if (touchStart - touchEnd > 120) {
             setActiveTab('History');
         }
 
-        if (touchStart - touchEnd < -75) {
+        if (touchStart - touchEnd < -120) {
             setActiveTab('Channels');
         }
     }

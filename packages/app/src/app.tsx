@@ -32,8 +32,10 @@ const App = () => {
                     <Routes>
                         <Route>
                             <Route path="/">
-                                <Route element={<UserHistory />} index />
-                                <Route element={<Home />} path="*"/>
+                                <Route element={<Home />} index/>
+                                <Route element={<UserHistory />} path="messages">
+                                    <Route element={<UserHistory />} path=":username" />
+                                </Route>
                             </Route>
                         </Route>
                     </Routes>

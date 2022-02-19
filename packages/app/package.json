@@ -5,7 +5,8 @@
   "license": "UNLICENSED",
   "private": true,
   "scripts": {
-    "start": "webpack serve --mode development --port 8081 --open"
+    "start": "webpack serve --mode development --port 8081 --open",
+    "build": "webpack"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.7.2",

@@ -35,7 +35,7 @@ const Header = ({ handleChange, handleSubmit, value, isLoading }:  HeaderProps) 
                 fullWidth={true}
                 handleChange={handleChange}
                 handleKeyDown={handleKeyDown}
-                icon={<IconSearch handleClick={handleSubmit} />}
+                icon={<IconSearch />}
                 name="user-search"
                 placeholder={intl.formatMessage({ id: 'header.inputPlaceholder' })}
                 value={value}

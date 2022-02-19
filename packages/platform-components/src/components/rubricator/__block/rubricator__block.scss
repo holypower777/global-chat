@@ -11,6 +11,14 @@
         width: 100%;
         min-width: 250px;
 
+        &_selected
+        {
+            .header-text
+            {
+                color: $Twitch;
+            }
+        }
+
         &-items
         {
             display: flex;

@@ -19,7 +19,7 @@ const ChatMessageBadges = ({ subBadges, badges }: ChatMessageBadges) => {
 
     return (
         <span className={b('chat-message', 'badges')}>
-            {badges.split(',').map((e) => {
+            {badges.split(',').map((e, i) => {
                 const badge = e.split('/')[0];
                 const version = e.split('/')[1];
                 let imageSrc = '';
@@ -33,7 +33,7 @@ const ChatMessageBadges = ({ subBadges, badges }: ChatMessageBadges) => {
                 }
                 
                 if (imageSrc) {
-                    return <Badge imageSrc={imageSrc} />;
+                    return <Badge imageSrc={imageSrc} key={i} />;
                 }
 
                 return null;

@@ -2,12 +2,20 @@ import b from 'b_';
 import { Button, IconSearch, Input, Logo, Text } from 'platform-components';
 import React, { useState } from 'react';
 import { useIntl } from 'react-intl';
+import { Link, useNavigate } from 'react-router-dom';
 
 import './home.scss';
 
 const Home = () => {
     const intl = useIntl();
-    const [value, setValue] = useState('');
+    const navigate = useNavigate();
+    const [username, setUsername] = useState('');
+
+    const handleSubmit = (e: React.KeyboardEvent) => {
+        if (username.length > 2 && e.key === 'Enter') {
+            navigate(`messages/${username}`);
+        }
+    };
 
     return (
         <main className="home">
@@ -17,14 +25,16 @@ const Home = () => {
                     <Input
                         disabled={false}
                         fullWidth={true}
-                        handleChange={(e) => setValue(e.target.value)}
-                        handleKeyDown={() => ({})}
-                        icon={<IconSearch handleClick={() => ({})} />}
+                        handleChange={(e) => setUsername(e.target.value)}
+                        handleKeyDown={handleSubmit}
+                        icon={<IconSearch />}
                         name="user-search"
                         placeholder={intl.formatMessage({ id: 'header.inputPlaceholder' })}
-                        value={value}
+                        value={username}
                     />
-                    <Button>{intl.formatMessage({ id: 'header.overallStatsButton' })}</Button>
+                    <Link to="user/kek">
+                        <Button>{intl.formatMessage({ id: 'header.overallStatsButton' })}</Button>
+                    </Link>
                 </section>
                 <Text
                     center
