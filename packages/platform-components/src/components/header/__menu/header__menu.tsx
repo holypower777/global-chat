@@ -14,7 +14,7 @@ const HeaderMenu = () => {
 
     return (
         <nav className={b('header', 'menu', { open: navOpen })} ref={ref}>
-            <IconCategory onClick={() => setNavOpen(!navOpen)}/>
+            <IconCategory handleClick={() => setNavOpen(!navOpen)}/>
             {navOpen && <ul className={b('header', 'menu_links')}>
                 <li className={b('header', 'menu_links_link')}>
                     <NavLink to="/">Home</NavLink>

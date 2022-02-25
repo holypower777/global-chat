@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/dist/query/react';
 
 import { baseBadgesUrl, getSubscriberBadgesByChannelIdDef } from '../api-defs';

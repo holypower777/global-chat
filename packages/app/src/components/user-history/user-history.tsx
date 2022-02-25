@@ -1,9 +1,10 @@
 import { useGetMessagesByNameQuery } from 'platform-apis';
 import { Header, Spin, Tab, Tabs } from 'platform-components';
 import { useWindowSize } from 'platform-components/src/hooks';
-import React, { useEffect, useState, TouchEvent } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import SwipeableViews from 'react-swipeable-views';
 
 import { clearChannelsState, setChannels } from '../../store/slices/channels';
 import { clearMessages, setMessages } from '../../store/slices/messages';
@@ -17,32 +18,13 @@ import './user-history.scss';
 
 const UserHistory = () => {
     const { username: usernameParam } = useParams();
+    const navigate = useNavigate();
     const dispatch = useDispatch();
     const [skip, setSkip] = useState(usernameParam ? false : true);
     const [username, setUsername] = useState(usernameParam || '');
-    const [activeTab, setActiveTab] = useState('Channels');
+    const [activeTab, setActiveTab] = useState(0);
     const { data, isFetching } = useGetMessagesByNameQuery(username, { skip });
     const { width } = useWindowSize();
-    const [touchStart, setTouchStart] = React.useState(0);
-    const [touchEnd, setTouchEnd] = React.useState(0);
-
-    function handleTouchStart(e: TouchEvent<HTMLButtonElement>) {
-        setTouchStart(e.targetTouches[0].clientX);
-    }
-
-    function handleTouchMove(e: TouchEvent<HTMLButtonElement>) {
-        setTouchEnd(e.targetTouches[0].clientX);
-    }
-
-    function handleTouchEnd() {
-        if (touchStart - touchEnd > 120) {
-            setActiveTab('History');
-        }
-
-        if (touchStart - touchEnd < -120) {
-            setActiveTab('Channels');
-        }
-    }
 
     useEffect(() => {
         if (data) {
@@ -63,7 +45,11 @@ const UserHistory = () => {
         dispatch(clearChannelsState());
         dispatch(clearMessages());
         setSkip(false);
+
+        navigate(username, { replace: true });
     };
+
+    const handleChangeTab = (index: number) => (setActiveTab(index));
 
     if (width && width < 769) {
         return (
@@ -74,15 +60,21 @@ const UserHistory = () => {
                     isLoading={isFetching}
                     value={username}
                 />
-                <main className="user-history" onTouchEnd={handleTouchEnd} onTouchMove={handleTouchMove} onTouchStart={handleTouchStart}>
+                <main className="user-history">
                     {isFetching && <Spin center size={Spin.SIZE.L} />}
                     {data && !isFetching && <>
-                        <Tabs activeTab={activeTab} setActiveTab={setActiveTab}>
+                        <Tabs activeTab={activeTab} setActiveTab={handleChangeTab}>
                             <Tab label="Channels" />
                             <Tab label="History" />
                         </Tabs>
-                        {activeTab === 'Channels' && <Channels />}
-                        {activeTab === 'History' && <Chat />}
+                        <SwipeableViews
+                            containerStyle={{ height: 'calc(100vh - 160px)' }}
+                            index={activeTab}
+                            onChangeIndex={handleChangeTab}
+                        >
+                            <Channels handlePickChannel={() => handleChangeTab(1)}/>
+                            <Chat />
+                        </SwipeableViews>
                     </>}
                 </main>
             </>

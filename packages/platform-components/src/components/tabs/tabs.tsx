@@ -1,13 +1,13 @@
 import cx from 'classnames';
-import React, { Dispatch, ReactElement, SetStateAction } from 'react';
+import React, { ReactElement } from 'react';
 
 import TabItem from './__tab-item/tabs__tab-item';
 
 import './tabs.scss';
 
 interface TabsProps {
-    activeTab: string;
-    setActiveTab: Dispatch<SetStateAction<string>>;
+    activeTab: number;
+    setActiveTab: (index: number) => void;
     children: Array<ReactElement>;
     mix?: string;
 }
@@ -15,13 +15,14 @@ interface TabsProps {
 const Tabs = ({ activeTab, setActiveTab, children, mix }: TabsProps) => {
     return (
         <ul className={cx('tabs', mix)}>
-            {children!.map((child) => {
+            {children!.map((child, index) => {
                 const label = child.props.label;
 
                 return (
                     <TabItem 
                         handleClick={setActiveTab}
-                        isActive={label === activeTab}
+                        index={index}
+                        isActive={index === activeTab}
                         label={label}
                     />
                 );

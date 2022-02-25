@@ -1,4 +1,5 @@
 import { Rubricator } from 'platform-components';
+import { SimpleCallback } from 'platform-components/src/typings';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -6,7 +7,11 @@ import { getChannels, setSelectedChannel } from '../../../store/slices/channels'
 
 import './channels.scss';
 
-const Channels = () => {
+interface ChannelsProps {
+    handlePickChannel?: SimpleCallback;
+}
+
+const Channels = ({ handlePickChannel }: ChannelsProps) => {
     const dispatch = useDispatch();
     const channels = useSelector(getChannels);
 
@@ -48,11 +53,19 @@ const Channels = () => {
         setSortedChannels(Object.values(dict));
     }, [channels]);
 
+    const handleSelect = (item: string) => {
+        if (handlePickChannel) {
+            handlePickChannel();
+        }
+
+        setPickedChannel(item);
+    };
+
     return (
         <section className="channels">
             {sortedChannels.length && <Rubricator
                 channels={sortedChannels}
-                handleSelect={(item) => (setPickedChannel(item))}
+                handleSelect={handleSelect}
                 selectedItem={pickedChannel}
             />}
         </section>

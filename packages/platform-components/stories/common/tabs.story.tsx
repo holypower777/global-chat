@@ -6,7 +6,7 @@ import Tabs from '../../src/components/tabs/tabs';
 import { STORY_GROUPS } from '../constants';
 
 const StoryTabs = () => {
-    const [activeTab, setActiveTab] = useState('tab1');
+    const [activeTab, setActiveTab] = useState(0);
 
     return (
         <div>

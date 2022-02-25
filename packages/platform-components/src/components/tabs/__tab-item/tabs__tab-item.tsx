@@ -1,19 +1,20 @@
 import b from 'b_';
-import React, { Dispatch, SetStateAction } from 'react';
+import React from 'react';
 
 import './tabs__tab-item.scss';
 
 interface TabItemProps {
     label: string;
-    handleClick: Dispatch<SetStateAction<string>>;
+    handleClick: (index: number) => void;
     isActive: boolean;
+    index: number;
 }
 
-const TabItem = ({ label, handleClick, isActive }: TabItemProps) => {
+const TabItem = ({ label, handleClick, isActive, index }: TabItemProps) => {
     return (
         <li
             className={b('tabs', 'tab', { active: isActive })}
-            onClick={() => handleClick(label)}
+            onClick={() => handleClick(index)}
         >
             {label}
         </li>

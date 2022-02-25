@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import { TwitchUserId } from './user';
 
 export interface MessageAPI {

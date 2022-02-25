@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 export interface TwitchUserAPI {
     broadcaster_type: 'partner' | 'affiliate' | '';
     created_at: string;

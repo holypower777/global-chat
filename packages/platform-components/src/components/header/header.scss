@@ -12,11 +12,6 @@
     align-items: center;
     gap: 40px;
 
-    &__menu
-    {
-        display: none;
-    }
-
     @include media-breakpoint-down($desktopBp)
     {
         width: calc(100% - 40px);
@@ -32,11 +27,6 @@
         .button
         {
             display: none;
-        }
-
-        &__menu
-        {
-            display: block;
         }
     }
 }

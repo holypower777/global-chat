@@ -16,9 +16,9 @@
     @include media-breakpoint-down($desktopBp)
     {
         width: calc(100% - 40px);
-        height: calc(100vh - 130px);
+        height: calc(100vh - 110px);
 
-        padding: 20px;
+        padding: 0 20px;
     }
 
     @include media-breakpoint-down($tabletBp)
