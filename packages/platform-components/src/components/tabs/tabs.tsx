@@ -23,6 +23,7 @@ const Tabs = ({ activeTab, setActiveTab, children, mix }: TabsProps) => {
                         handleClick={setActiveTab}
                         index={index}
                         isActive={index === activeTab}
+                        key={index}
                         label={label}
                     />
                 );
