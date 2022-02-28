@@ -1,0 +1,66 @@
+@import 'design/design';
+
+.possibilities
+{
+    display: flex;
+
+    width: fit-content;
+    min-width: 50px;
+    min-height: 50px;
+
+    border-radius: 10px;
+
+    background-color: $Mercury;
+
+    align-items: center;
+    justify-content: center;
+
+    &__expanded
+    {
+        display: flex;
+    }
+}
+
+.possibility
+{
+    display: flex;
+
+    width: 50px;
+    height: 50px;
+
+    cursor: pointer;
+
+    align-items: center;
+    justify-content: center;
+
+    &__bug
+    {
+        background-color: $ChateauGreen;
+    }
+
+    &__donate
+    {
+        background-color: $SmithApple;
+    }
+
+    &__more
+    {
+        .icon
+        {
+            transition: transform 0.3s ease-in-out;
+        }
+
+        &_expanded
+        {
+            .icon
+            {
+                transform: rotate(0.5turn);
+            }
+        }
+    }
+
+    &:last-child
+    {
+        border-radius: 0 10px 10px 0;
+    }
+}

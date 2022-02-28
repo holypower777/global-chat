@@ -1,6 +1,7 @@
 import { SimpleCallback } from 'platform-components/src/typings';
 import React from 'react';
 import { useIntl } from 'react-intl';
+import { Link } from 'react-router-dom';
 
 import Button from '../button/button';
 import { IconSearch } from '../icon/icon';
@@ -40,7 +41,9 @@ const Header = ({ handleChange, handleSubmit, value, isLoading }:  HeaderProps) 
                 placeholder={intl.formatMessage({ id: 'header.inputPlaceholder' })}
                 value={value}
             />
-            <Button>{intl.formatMessage({ id: 'header.overallStatsButton' })}</Button>
+            <Link to="/overall-stats">
+                <Button>{intl.formatMessage({ id: 'header.overallStatsButton' })}</Button>
+            </Link>
         </header>
     );
 };

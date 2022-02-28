@@ -2,10 +2,11 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { IntlProvider } from 'react-intl';
 import { Provider as ReduxProvider } from 'react-redux';
-import { Routes, Route, BrowserRouter } from 'react-router-dom';
+import { Routes, Route, BrowserRouter, Navigate } from 'react-router-dom';
 
 import messages from '../../../global-chat.json';
 
+import DevPage from './components/dev-page/dev-page';
 import Home from './components/home/home';
 import UserHistory from './components/user-history/user-history';
 import { store } from './store/store';
@@ -36,6 +37,8 @@ const App = () => {
                                 <Route element={<UserHistory />} path="messages">
                                     <Route element={<UserHistory />} path=":username" />
                                 </Route>
+                                <Route element={<DevPage />} path="overall-stats"/>
+                                <Route element={<Navigate to="/"/>} path="*"/>
                             </Route>
                         </Route>
                     </Routes>

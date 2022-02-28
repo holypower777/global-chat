@@ -35,3 +35,6 @@ export { default as IconTwitch } from './__twitch/icon__twitch';
 export { default as IconSearch } from './__search/icon__search';
 export { default as IconCategory } from './__category/icon__category';
 export { default as IconCog } from './__cog/icon__cog';
+export { default as IconBug } from './__bug/icon__bug';
+export { default as IconDonate } from './__donate/icon__donate';
+export { default as IconMoreCircle } from './__more-circle/icon__more-circle';

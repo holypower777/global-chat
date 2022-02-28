@@ -1,0 +1,15 @@
+@import 'design/design';
+
+.icon__more-circle
+{
+    width: 30px;
+    height: 30px;
+
+    fill: $Black;
+    fill-rule: evenodd;
+
+    svg
+    {
+        height: 100%;
+    }
+}

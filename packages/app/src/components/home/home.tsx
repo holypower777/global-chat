@@ -32,13 +32,13 @@ const Home = () => {
                         placeholder={intl.formatMessage({ id: 'header.inputPlaceholder' })}
                         value={username}
                     />
-                    <Link to="user/kek">
+                    <Link to="/overall-stats">
                         <Button>{intl.formatMessage({ id: 'header.overallStatsButton' })}</Button>
                     </Link>
                 </section>
                 <Text
                     center
-                    id="home.info"
+                    id="info.home"
                     mix={b('home', 'info')}
                     size={Text.SIZE.S}
                 />

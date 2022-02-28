@@ -8,10 +8,12 @@ import { getSelectedChannel } from './channels';
 
 interface MessagesState {
     messages: Messages;
+    isFetching: boolean;
 }
 
 const initialState: MessagesState = {
     messages: [],
+    isFetching: false,
 };
 
 export const messagesSlice = createSlice({
@@ -33,13 +35,25 @@ export const messagesSlice = createSlice({
         clearMessages: (state) => {
             state.messages = [];
         },
+        setIsMessagesFetching: (state, action: PayloadAction<boolean>) => {
+            state.isFetching = action.payload;
+        },
     },
 });
 
-export const { setMessages, clearMessages } = messagesSlice.actions;
+export const { 
+    setMessages, 
+    clearMessages,
+    setIsMessagesFetching,
+} = messagesSlice.actions;
 
+export const getRootMessages = (state: RootState) => state.messages;
 export const getMessages = (state: RootState) => state.messages.messages;
 export const getMessagesDates = (state: RootState) => state.messages.messages.map(e => e.time);
+export const getIsMessagesFetching = createSelector(
+    getRootMessages, 
+    (rootMessages) => rootMessages.isFetching
+);
 export const getSelectedMessages = createSelector(
     getMessages,
     getSelectedChannel,

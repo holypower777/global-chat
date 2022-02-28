@@ -1,0 +1,45 @@
+@import 'design/design';
+
+.dev-page
+{
+    display: flex;
+
+    height: calc(100vh - 90px);
+
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+
+    gap: 20px;
+
+    &__smile-block
+    {
+        display: flex;
+        align-items: center;
+    }
+
+    &__pickaxe
+    {
+        width: 69px;
+        height: 110px;
+
+        transform: rotate(-40deg) scaleX(-1);
+    }
+
+    &__smile
+    {
+        width: 56px;
+        height: 56px;
+    }
+
+    @include media-breakpoint-down($tabletBp)
+    {
+        flex-direction: column;
+
+        &__smile-block:last-child
+        {
+            display: none;
+        }
+    }
+}

@@ -1,0 +1,37 @@
+@import 'design/design';
+
+.smile-block
+{
+    display: flex;
+    flex-direction: column;
+
+    width: 120px;
+    height: 120px;
+
+    align-items: center;
+    justify-content: center;
+
+    transition: $transitionBackgroundColor01;
+
+    border-radius: 10px;
+
+    background-color: $WildSand;
+
+    gap: 5px;
+
+    &__smile
+    {
+        width: 56px;
+        height: 56px;
+    }
+
+    .text
+    {
+        color: $Boulder;
+    }
+
+    &:hover
+    {
+        background-color: $AthensGray;
+    }
+}

@@ -1,14 +1,15 @@
 import { useGetMessagesByNameQuery } from 'platform-apis';
-import { Header, Spin, Tab, Tabs } from 'platform-components';
+import { Spin, Tab, Tabs } from 'platform-components';
 import { useWindowSize } from 'platform-components/src/hooks';
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import SwipeableViews from 'react-swipeable-views';
 
-import { clearChannelsState, setChannels } from '../../store/slices/channels';
-import { clearMessages, setMessages } from '../../store/slices/messages';
-import { clearUser, setMostActiveChannel, setTotalMessages, setUser } from '../../store/slices/twitch-user';
+import { CommonHeader } from '../../common.components';
+import { setChannels } from '../../store/slices/channels';
+import { setIsMessagesFetching, setMessages } from '../../store/slices/messages';
+import { setMostActiveChannel, setTotalMessages, setUser } from '../../store/slices/twitch-user';
 import { findMostFrequestChannel } from '../../utils';
 
 import Channels from './channels/channels';
@@ -17,13 +18,11 @@ import Chat from './chat/chat';
 import './user-history.scss';
 
 const UserHistory = () => {
-    const { username: usernameParam } = useParams();
-    const navigate = useNavigate();
+    const { username } = useParams();
     const dispatch = useDispatch();
-    const [skip, setSkip] = useState(usernameParam ? false : true);
-    const [username, setUsername] = useState(usernameParam || '');
+    const [skip, setSkip] = useState(true);
     const [activeTab, setActiveTab] = useState(0);
-    const { data, isFetching } = useGetMessagesByNameQuery(username, { skip });
+    const { data, isFetching } = useGetMessagesByNameQuery(username!, { skip });
     const { width } = useWindowSize();
 
     useEffect(() => {
@@ -37,29 +36,22 @@ const UserHistory = () => {
         }
     }, [data]);
 
-    const handleSubmit = () => {
-        if (username.length < 2) {
-            return;
-        }
-        dispatch(clearUser());
-        dispatch(clearChannelsState());
-        dispatch(clearMessages());
-        setSkip(false);
+    useEffect(() => {
+        dispatch(setIsMessagesFetching(isFetching));
+    }, [isFetching]);
 
-        navigate(username, { replace: true });
-    };
+    useEffect(() => {
+        if (username) {
+            setSkip(false);
+        }
+    }, [username]);
 
     const handleChangeTab = (index: number) => (setActiveTab(index));
 
     if (width && width < 769) {
         return (
             <>
-                <Header
-                    handleChange={(e) => setUsername(e.target.value)}
-                    handleSubmit={handleSubmit}
-                    isLoading={isFetching}
-                    value={username}
-                />
+                <CommonHeader />
                 <main className="user-history">
                     {isFetching && <Spin center size={Spin.SIZE.L} />}
                     {data && !isFetching && <>
@@ -83,12 +75,7 @@ const UserHistory = () => {
 
     return (
         <>
-            <Header
-                handleChange={(e) => setUsername(e.target.value)}
-                handleSubmit={handleSubmit}
-                isLoading={isFetching}
-                value={username}
-            />
+            <CommonHeader />
             <main className="user-history">
                 {isFetching && <Spin center size={Spin.SIZE.L} />}
                 {data && !isFetching && <>

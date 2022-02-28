@@ -167,3 +167,13 @@ a
         background-color: $Silver;
     }
 }
+
+main
+{
+    padding: 40px;
+
+    @include media-breakpoint-down($desktopBp)
+    {
+        padding: 0 20px;
+    }
+}
