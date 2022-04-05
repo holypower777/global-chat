@@ -12,18 +12,18 @@ import './user-card__content.scss';
 
 interface UserCardContentProps {
     userId: number;
-    avatarSrc: string;
-    totalMessages: number;
-    createdAt: Date;
-    heatmapDates: Array<string>;
+    profileImageUrl: string;
+    messagesAmount: number;
+    createdAt: Date | null;
+    heatmapDates: Array<Date>;
     mostActiveChannel: string;
 }
 
 const UserCardContent = (props: UserCardContentProps) => {
     const {
         userId,
-        avatarSrc,
-        totalMessages,
+        profileImageUrl,
+        messagesAmount,
         createdAt,
         heatmapDates,
         mostActiveChannel,
@@ -45,7 +45,7 @@ const UserCardContent = (props: UserCardContentProps) => {
                 <img
                     alt={intl.formatMessage({ id: 'chat.userCard.avatarImageAlt' })}
                     className={b('user-card', 'content_user-info_avatar')}
-                    src={avatarSrc}
+                    src={profileImageUrl}
                 />
                 <div className={b('user-card', 'content_user-info_content')}>
                     <Text>{`${intl.formatMessage({ id: 'chat.userCard.id' })}: ${userId}`}</Text>
@@ -57,8 +57,8 @@ const UserCardContent = (props: UserCardContentProps) => {
                 width={heatmapWidth}
             />}
             <UserCardStats 
-                mostActiveChannel={mostActiveChannel}
-                totalMessages={totalMessages}  
+                messagesAmount={messagesAmount}
+                mostActiveChannel={mostActiveChannel}  
             />
         </div>
     );

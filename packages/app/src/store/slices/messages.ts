@@ -1,18 +1,17 @@
 import { createSelector, createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { MessagesAPI } from 'platform-apis/types/messages';
+import { Messages } from 'platform-apis/types';
 
 import { RootState } from '../store';
-import { Messages } from '../types/messages';
-
-import { getSelectedChannel } from './channels';
 
 interface MessagesState {
     messages: Messages;
+    messagesDates: Array<Date>;
     isFetching: boolean;
 }
 
 const initialState: MessagesState = {
     messages: [],
+    messagesDates: [],
     isFetching: false,
 };
 
@@ -20,17 +19,14 @@ export const messagesSlice = createSlice({
     name: 'messages',
     initialState,
     reducers: {
-        setMessages: (state, action: PayloadAction<MessagesAPI>) => {
-            state.messages = action.payload.map((message) => ({
-                channelId: message.chan_id,
-                channelLogin: message.chan_login,
-                channelName: message.chan_name,
-                badges: message.badges,
-                message: message.message,
-                messageId: message.message_id,
-                time: message.time,
-                userId: message.user_id,
-            }));
+        setMessages: (state, action: PayloadAction<Messages>) => {
+            state.messages = action.payload;
+        },
+        pushMessages: (state, action: PayloadAction<Messages>) => {
+            state.messages.push(...action.payload);
+        },
+        setMessagesDates: (state, action: PayloadAction<Array<Date>>) => {
+            state.messagesDates = action.payload;
         },
         clearMessages: (state) => {
             state.messages = [];
@@ -41,23 +37,36 @@ export const messagesSlice = createSlice({
     },
 });
 
-export const { 
-    setMessages, 
+export const {
+    setMessages,
+    pushMessages,
+    setMessagesDates,
     clearMessages,
     setIsMessagesFetching,
 } = messagesSlice.actions;
 
-export const getRootMessages = (state: RootState) => state.messages;
-export const getMessages = (state: RootState) => state.messages.messages;
-export const getMessagesDates = (state: RootState) => state.messages.messages.map(e => e.time);
-export const getIsMessagesFetching = createSelector(
-    getRootMessages, 
-    (rootMessages) => rootMessages.isFetching
+const getRootMessages = (state: RootState) => state.messages;
+export const getMessages = createSelector(
+    getRootMessages,
+    (rootMessages) => {
+        let previousDay = 0;
+        return rootMessages.messages.map((msg) => {
+            if (previousDay !== msg.time!.getDate()) {
+                previousDay = msg.time!.getDate();
+                return { ...msg, renderDate: true };
+            }
+
+            return msg;
+        });
+    },
 );
-export const getSelectedMessages = createSelector(
-    getMessages,
-    getSelectedChannel,
-    (messages, selectedChannel) => messages.filter((message) => message.channelName === selectedChannel)
+export const getMessagesDates = createSelector(
+    getRootMessages,
+    (rootMessages) => rootMessages.messagesDates,
+);
+export const getIsMessagesFetching = createSelector(
+    getRootMessages,
+    (rootMessages) => rootMessages.isFetching
 );
 
 export default messagesSlice.reducer;

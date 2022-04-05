@@ -1,4 +1,4 @@
-import { useGetMessagesByNameQuery } from 'platform-apis';
+import { useGetTwitchUserWithChannelsByUsernameQuery } from 'platform-apis';
 import { Spin, Tab, Tabs } from 'platform-components';
 import { useWindowSize } from 'platform-components/src/hooks';
 import React, { useEffect, useState } from 'react';
@@ -8,8 +8,8 @@ import SwipeableViews from 'react-swipeable-views';
 
 import { CommonHeader } from '../../common.components';
 import { setChannels } from '../../store/slices/channels';
-import { setIsMessagesFetching, setMessages } from '../../store/slices/messages';
-import { setMostActiveChannel, setTotalMessages, setUser } from '../../store/slices/twitch-user';
+import { setMessagesDates } from '../../store/slices/messages';
+import { setIsUserWithChannelsFetching, setMostActiveChannel, setUser } from '../../store/slices/twitch-user';
 import { findMostFrequestChannel } from '../../utils';
 
 import Channels from './channels/channels';
@@ -22,22 +22,21 @@ const UserHistory = () => {
     const dispatch = useDispatch();
     const [skip, setSkip] = useState(true);
     const [activeTab, setActiveTab] = useState(0);
-    const { data, isFetching } = useGetMessagesByNameQuery(username!, { skip });
+    const { data, isFetching } = useGetTwitchUserWithChannelsByUsernameQuery({ username: username! }, { skip });
     const { width } = useWindowSize();
 
     useEffect(() => {
         if (data) {
             dispatch(setUser(data.user));
-            dispatch(setTotalMessages(data.messages.length));
-            dispatch(setMostActiveChannel(findMostFrequestChannel(data.messages)));
+            dispatch(setMostActiveChannel(findMostFrequestChannel(data.channels)));
             dispatch(setChannels(data.channels));
-            dispatch(setMessages(data.messages));
+            dispatch(setMessagesDates(data.messagesDates));
             setSkip(true);
         }
     }, [data]);
 
     useEffect(() => {
-        dispatch(setIsMessagesFetching(isFetching));
+        dispatch(setIsUserWithChannelsFetching(isFetching));
     }, [isFetching]);
 
     useEffect(() => {

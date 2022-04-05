@@ -7,7 +7,7 @@ import './tooltip.scss';
 
 interface TooltipProps {
     children: ReactNode | Array<ReactNode>;
-    title: string;
+    title: ReactNode | string;
     arrow?: boolean;
     direction?: TOOLTIP_DIRECTION;
     theme?: TOOLTIP_THEME;
@@ -37,5 +37,8 @@ const Tooltip = ({
         </div>
     );
 };
+
+Tooltip.TOOLTIP_DIRECTION = TOOLTIP_DIRECTION;
+Tooltip.TOOLTIP_THEME = TOOLTIP_THEME;
 
 export default Tooltip;

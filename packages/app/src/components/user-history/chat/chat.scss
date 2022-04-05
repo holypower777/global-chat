@@ -17,31 +17,6 @@
 
     gap: 20px;
 
-    &__messages
-    {
-        overflow-x: hidden;
-        overflow-y: auto;
-
-        &::-webkit-scrollbar
-        {
-            width: 8px;
-
-            background-color: rgba(0, 0, 0, 0);
-        }
-
-        &::-webkit-scrollbar-track
-        {
-            border-radius: 10px;
-            background-color: $WildSand;
-        }
-
-        &::-webkit-scrollbar-thumb
-        {
-            border-radius: 10px;
-            background-color: $Silver;
-        }
-    }
-
     &__title
     {
         color: $Boulder;

@@ -11,15 +11,15 @@ interface UserCardHeaderProps {
     isSettingsExpanded: boolean;
     setIsExpanded: Dispatch<SetStateAction<boolean>>;
     setIsSettingsExpanded: Dispatch<SetStateAction<boolean>>;
-    username: string;
+    displayName: string;
 }
 
-const UserCardHeader = ({ isContentExpanded, isSettingsExpanded, setIsExpanded, setIsSettingsExpanded, username }: UserCardHeaderProps) => {
+const UserCardHeader = ({ isContentExpanded, isSettingsExpanded, setIsExpanded, setIsSettingsExpanded, displayName }: UserCardHeaderProps) => {
     const arrowDirection = isContentExpanded ? IconArrow.DIREACTIONS.UP : IconArrow.DIREACTIONS.DOWN;
 
     return (
         <div className={b('user-card', 'header')} onClick={() => (setIsExpanded(!isContentExpanded))}>
-            <Text size={Text.SIZE.XL}>{username}</Text>
+            <Text size={Text.SIZE.XL}>{displayName}</Text>
             <div className={b('user-card', 'header_icons')}>
                 <IconArrow direction={arrowDirection} />
                 <IconCog handleClick={(e) => {
@@ -27,7 +27,7 @@ const UserCardHeader = ({ isContentExpanded, isSettingsExpanded, setIsExpanded, 
                     setIsSettingsExpanded(!isSettingsExpanded);
                 }}
                 />
-                <a href={`https://www.twitch.tv/${username}`} target="_blank">
+                <a href={`https://www.twitch.tv/${displayName}`} target="_blank">
                     <IconTwitch />
                 </a>
             </div>

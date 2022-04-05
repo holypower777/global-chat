@@ -13,12 +13,11 @@ const messages = [
 ];
 
 const badges = [
-    'vip/1,subscriber/1,broadcaster/1,moderator/1,partner/1',
-    'moderator/1,subscriber/1',
+    'vip/1,broadcaster/1,moderator/1,partner/1',
+    'moderator/1',
     'vip/1',
     'broadcaster/1',
     'moderator/1',
-    'subscriber/1',
     'partner/1',
 ];
 

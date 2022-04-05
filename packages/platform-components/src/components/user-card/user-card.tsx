@@ -9,23 +9,23 @@ import UserCardSettings from './__settings/user-card__settings';
 import './user-card.scss';
 
 interface UserCardProps {
-    username: string;
     userId: number;
-    avatarSrc: string;
-    totalMessages: number;
-    createdAt: Date;
-    heatmapDates: Array<string>;
+    displayName: string;
+    profileImageUrl: string;
+    messagesAmount: number;
+    createdAt: Date | null;
+    heatmapDates: Array<Date>;
     mostActiveChannel: string;
-    mix?: string;
     updateSettings: (key: string, value: unknown) => void;
+    mix?: string;
 }
 
 const UserCard = (props: UserCardProps) => {
     const {
-        username,
+        displayName,
         userId,
-        avatarSrc,
-        totalMessages,
+        profileImageUrl,
+        messagesAmount,
         createdAt,
         heatmapDates,
         mix,
@@ -38,18 +38,18 @@ const UserCard = (props: UserCardProps) => {
     return (
         <div className={cx(b('user-card', { expanded: isContentExpanded || isSettingsExpanded }), mix)}>
             <UserCardHeader
+                displayName={displayName}
                 isContentExpanded={isContentExpanded}
                 isSettingsExpanded={isSettingsExpanded}
                 setIsExpanded={setIsContentExpanded}
                 setIsSettingsExpanded={setIsSettingsExpanded}
-                username={username}
             />
             {isContentExpanded && <UserCardContent
-                avatarSrc={avatarSrc}
                 createdAt={createdAt}
                 heatmapDates={heatmapDates}
+                messagesAmount={messagesAmount}
                 mostActiveChannel={mostActiveChannel}
-                totalMessages={totalMessages}
+                profileImageUrl={profileImageUrl}
                 userId={userId}
             />}
             {isSettingsExpanded && <UserCardSettings 

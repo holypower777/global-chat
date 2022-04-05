@@ -1,22 +1,15 @@
-/* eslint-disable camelcase */
-import { MessagesAPI } from 'platform-apis/types/messages';
+import { TwitchUserChannels } from 'platform-apis/types';
 
-const findMostFrequestChannel = (arr: MessagesAPI) => {
-    let compare = -Infinity;
+const findMostFrequestChannel = (channels: TwitchUserChannels) => {
     let mostFreq = '';
+    let max = 0;
 
-    arr.reduce<Record<string, number>>((acc, { chan_name }) => {
-        if (chan_name in acc) {
-            acc[chan_name] += 1;
-        } else {
-            acc[chan_name] = 1;
+    channels.forEach((chan) => {
+        if (chan.messages > max) {
+            max = chan.messages;
+            mostFreq = chan.displayName;
         }
-        if (acc[chan_name] > compare) {
-            compare = acc[chan_name];
-            mostFreq = chan_name;
-        }
-        return acc;
-    }, {});
+    });
 
     return mostFreq;
 };

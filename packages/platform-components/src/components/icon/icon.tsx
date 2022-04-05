@@ -38,3 +38,5 @@ export { default as IconCog } from './__cog/icon__cog';
 export { default as IconBug } from './__bug/icon__bug';
 export { default as IconDonate } from './__donate/icon__donate';
 export { default as IconMoreCircle } from './__more-circle/icon__more-circle';
+export { default as IconGithub } from './__github/icon__github';
+export { default as IconIdea } from './__idea/icon__idea';

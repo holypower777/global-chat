@@ -43,11 +43,21 @@
         background-color: $SmithApple;
     }
 
+    &__github
+    {
+        background-color: $AthensGray;
+    }
+
+    &__idea
+    {
+        background-color: $SeaGreen;
+    }
+
     &__more
     {
         .icon
         {
-            transition: transform 0.3s ease-in-out;
+            transition: transform 0.3s ease-in-out, fill 0.3s ease-in-out;
         }
 
         &_expanded
@@ -55,6 +65,7 @@
             .icon
             {
                 transform: rotate(0.5turn);
+                fill: $Boulder;
             }
         }
     }

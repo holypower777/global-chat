@@ -1,5 +1,6 @@
 import b from 'b_';
 import cx from 'classnames';
+import { TwitchUserChannel, TwitchUserChannels } from 'platform-apis/types';
 import { splitIntoColumns } from 'platform-components/src/utils';
 import React, { useEffect, useRef, useState } from 'react';
 
@@ -8,22 +9,16 @@ import RubricatorBlock from './__block/rubricator__block';
 
 import './rubricator.scss';
 
-interface Channel {
-    userId: number;
-    username: string;
-    login: string;
-}
-
 interface RubricatorProps {
-    channels: Array<Array<Channel>>;
-    handleSelect: (item: string) => void;
-    selectedItem: string;
+    channels: Array<TwitchUserChannels>;
+    handleSelect: (item: TwitchUserChannel) => void;
+    selectedItem: TwitchUserChannel | null;
 }
 
 const Rubricator = React.memo(({ channels = [], handleSelect, selectedItem }: RubricatorProps) => {
     const parentRef = useRef<HTMLDivElement>(null);
     const [width, setWidth] = useState(0);
-    const [columns, setColumns] = useState<Array<Array<Array<Channel>>>>([]);
+    const [columns, setColumns] = useState<Array<Array<TwitchUserChannels>>>([]);
 
     useEffect(() => {
         setWidth(parentRef.current!.getBoundingClientRect().width);
@@ -50,7 +45,7 @@ const Rubricator = React.memo(({ channels = [], handleSelect, selectedItem }: Ru
     }, [channels, parentRef, width]);
 
     const availableLetters = channels.map((e) => e[0].login[0].toLowerCase());
-    const activeLetter = selectedItem.charAt(0).toLowerCase();
+    const activeLetter = channels.flat().find((e) => selectedItem && e.userId === selectedItem.userId)?.displayName.charAt(0).toLowerCase();
 
     return (
         <div className="rubricator">
@@ -60,8 +55,9 @@ const Rubricator = React.memo(({ channels = [], handleSelect, selectedItem }: Ru
                     <div className={b('rubricator', 'column')} key={columnIndex}>
                         {column.map((chan, chanIndex) => (
                             <RubricatorBlock
+                                activeLetter={activeLetter}
                                 handleSelect={handleSelect}
-                                items={chan.map(e => e.username)}
+                                items={chan}
                                 key={chanIndex}
                                 selectedItem={selectedItem}
                             />

@@ -1,24 +1,61 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
-import { baseUrl, getMessagesByNameDef } from '../api-defs';
-import { ChannelsAPI } from '../types/channel';
-import { MessagesAPI } from '../types/messages';
-import { TwitchUserAPI } from '../types/user';
+import { baseUrl, getMessagesByUserIdAndChannelIdDef, getMessagesByUserIdDef } from '../api-defs';
+import { convertMessagesApi, Messages, MessagesAPI } from '../types/messages';
+import { GetTwitchUserWithChannelsQuery, UserIdQuery } from '../types/query';
+
+interface MessagesResponseTypeRaw {
+    items: MessagesAPI;
+    total: number;
+}
 
 interface MessagesResponseType {
-    user: TwitchUserAPI;
-    messages: MessagesAPI;
-    channels: ChannelsAPI;
+    items: Messages;
+    total: number;
+}
+
+interface MessagesOfChannelsResponseCommonType {
+    dateFrom: string;
+    dateTo: string;
+    limit: number;
+    next: string;
+    offset: string;
+    previous: string;
+    sort: 'asc' | 'desc';
+    total: number;
+}
+
+interface MessagesOfChannelsResponseTypeRaw extends MessagesOfChannelsResponseCommonType {
+    items: MessagesAPI;
+}
+
+interface MessagesOfChannelsResponseType extends MessagesOfChannelsResponseCommonType {
+    items: Messages;
 }
 
 export const messagesApi = createApi({
     reducerPath: 'messagesApi',
     baseQuery: fetchBaseQuery({ baseUrl }),
     endpoints: (builder) => ({
-        getMessagesByName: builder.query<MessagesResponseType, string>({
-            query: getMessagesByNameDef,
+        getMessagesByUserId: builder.query<MessagesResponseType, UserIdQuery>({
+            query: getMessagesByUserIdDef,
+            transformResponse: (response: MessagesResponseTypeRaw) => ({
+                ...response,
+                items: convertMessagesApi(response.items),
+            }),
         }),
+        getMessagesByUserIdAndChannelId: 
+            builder.query<MessagesOfChannelsResponseType, GetTwitchUserWithChannelsQuery>({
+                query: getMessagesByUserIdAndChannelIdDef,
+                transformResponse: (response: MessagesOfChannelsResponseTypeRaw) => ({
+                    ...response,
+                    items: convertMessagesApi(response.items),
+                }),
+            }),
     }),
 });
 
-export const { useGetMessagesByNameQuery } = messagesApi;
+export const {
+    useGetMessagesByUserIdQuery,
+    useGetMessagesByUserIdAndChannelIdQuery,
+} = messagesApi;

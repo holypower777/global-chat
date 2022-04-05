@@ -1,3 +1,4 @@
+import { TwitchUserChannel, TwitchUserChannels } from 'platform-apis/types';
 import { Rubricator } from 'platform-components';
 import { SimpleCallback } from 'platform-components/src/typings';
 import React, { useEffect, useState } from 'react';
@@ -15,8 +16,8 @@ const Channels = ({ handlePickChannel }: ChannelsProps) => {
     const dispatch = useDispatch();
     const channels = useSelector(getChannels);
 
-    const [sortedChannels, setSortedChannels] = useState([]);
-    const [pickedChannel, setPickedChannel] = useState('');
+    const [sortedChannels, setSortedChannels] = useState<Array<TwitchUserChannels>>([]);
+    const [pickedChannel, setPickedChannel] = useState<TwitchUserChannel | null>(null);
 
     useEffect(() => {
         dispatch(setSelectedChannel(pickedChannel));
@@ -36,7 +37,7 @@ const Channels = ({ handlePickChannel }: ChannelsProps) => {
         });
 
         const dict = channelsCopy.reduce((a, c) => {
-            const k = c.login[0].toLocaleUpperCase();
+            const k = c.login[0].toUpperCase();
             
             //@ts-ignore
             if (a[k]) {
@@ -53,7 +54,7 @@ const Channels = ({ handlePickChannel }: ChannelsProps) => {
         setSortedChannels(Object.values(dict));
     }, [channels]);
 
-    const handleSelect = (item: string) => {
+    const handleSelect = (item: TwitchUserChannel) => {
         if (handlePickChannel) {
             handlePickChannel();
         }

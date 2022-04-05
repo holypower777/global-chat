@@ -1,0 +1,57 @@
+@import 'design/design';
+
+.possibility
+{
+    &__bug
+    {
+        position: relative;
+
+        &_form
+        {
+            position: absolute;
+
+            right: 0;
+            bottom: 50px;
+
+            display: flex;
+            flex-direction: column;
+
+            width: 530px;
+            min-height: 230px;
+
+            padding: 10px;
+
+            border-radius: 10px;
+
+            background-color: $WildSand;
+
+            gap: 5px;
+
+            &_option
+            {
+                display: flex;
+
+                width: 100%;
+
+                gap: 10px;
+
+                .text
+                {
+                    min-width: 150px;
+                }
+
+                textarea
+                {
+                    width: 100%;
+                }
+            }
+
+            select
+            {
+                border: none;
+
+                background-color: none;
+            }
+        }
+    }
+}

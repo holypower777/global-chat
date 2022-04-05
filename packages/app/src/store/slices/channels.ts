@@ -1,42 +1,44 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { ChannelsAPI } from 'platform-apis/types/channel';
+import { createSelector, createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { TwitchUserChannel, TwitchUserChannels } from 'platform-apis/types';
 
 import { RootState } from '../store';
-import { Channels } from '../types/channels';
 
 interface ChannelsState {
-    channels: Channels;
-    selectedChannel: string;
+    channels: TwitchUserChannels;
+    selectedChannel: TwitchUserChannel | null;
 }
 
 const initialState: ChannelsState = {
     channels: [],
-    selectedChannel: '',
+    selectedChannel: null,
 };
 
 export const channelsSlice = createSlice({
     name: 'channels',
     initialState,
     reducers: {
-        setChannels: (state, action: PayloadAction<ChannelsAPI>) => {
-            state.channels = action.payload.map((channel) => ({
-                username: channel.display_name,
-                userId: channel.user_id,
-                login: channel.login,
-            }));
+        setChannels: (state, action: PayloadAction<TwitchUserChannels>) => {
+            state.channels = action.payload;
         },
-        setSelectedChannel: (state, action: PayloadAction<string>) => {
+        setSelectedChannel: (state, action: PayloadAction<TwitchUserChannel | null>) => {
             state.selectedChannel = action.payload;
         },
         clearChannelsState: (state) => {
             state.channels = [];
-            state.selectedChannel = '';
+            state.selectedChannel = null;
         },
     },
 });
 
 export const { setChannels, setSelectedChannel, clearChannelsState } = channelsSlice.actions;
-export const getChannels = (state: RootState) => state.channels.channels;
-export const getSelectedChannel = (state: RootState) => state.channels.selectedChannel;
+const getRootChannels = (state: RootState) => state.channels;
+export const getChannels = createSelector(
+    getRootChannels,
+    (rootChannels) => rootChannels.channels,
+);
+export const getSelectedChannel = createSelector(
+    getRootChannels,
+    (rootChannels) => rootChannels.selectedChannel,
+);
 
 export default channelsSlice.reducer;

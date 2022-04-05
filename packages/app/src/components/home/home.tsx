@@ -33,7 +33,7 @@ const Home = () => {
                         value={username}
                     />
                     <Link to="/overall-stats">
-                        <Button>{intl.formatMessage({ id: 'header.overallStatsButton' })}</Button>
+                        <Button>{intl.formatMessage({ id: 'link.overallStats' })}</Button>
                     </Link>
                 </section>
                 <Text

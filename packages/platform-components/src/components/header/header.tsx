@@ -42,7 +42,7 @@ const Header = ({ handleChange, handleSubmit, value, isLoading }:  HeaderProps) 
                 value={value}
             />
             <Link to="/overall-stats">
-                <Button>{intl.formatMessage({ id: 'header.overallStatsButton' })}</Button>
+                <Button>{intl.formatMessage({ id: 'link.overallStats' })}</Button>
             </Link>
         </header>
     );

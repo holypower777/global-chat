@@ -1,54 +1,93 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { TwitchUserAPI } from 'platform-apis/types/user';
+import { createSelector, createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { TwitchUser } from 'platform-apis/types/twitch-user';
 
 import { RootState } from '../store';
-import { TwitchUser } from '../types/twitch-user';
 
-interface TwitchUserState extends TwitchUser {}
+interface TwitchUserState {
+    user: TwitchUser;
+    isFetching: boolean;
+    mostActiveChannel: string,
+}
 
 const initialState: TwitchUserState = {
-    avatarSrc: '',
-    createdAt: null,
+    user: {
+        userId: 0,
+        login: '',
+        displayName: '',
+        type: '',
+        broadcasterType: '',
+        description: '',
+        profileImageUrl: '',
+        offlineImageUrl: '',
+        viewCount: 0,
+        createdAt: null,
+        wereInterested: 0,
+        messagesAmount: 0,
+        meta: {},
+    },
+    isFetching: false,
     mostActiveChannel: '',
-    totalMessages: null,
-    userId: 0,
-    username: '',
 };
 
 export const twitchUserSlice = createSlice({
     name: 'twitchUser',
     initialState,
     reducers: {
-        setUser: (state, action: PayloadAction<TwitchUserAPI>) => {
-            state.avatarSrc = action.payload.profile_image_url;
-            state.createdAt = action.payload.created_at;
-            state.userId = action.payload.user_id;
-            state.username = action.payload.display_name;
+        setUser: (state, action: PayloadAction<TwitchUser>) => {
+            state.user = action.payload;
         },
         setMostActiveChannel: (state, action: PayloadAction<string>) => {
             state.mostActiveChannel = action.payload;
         },
-        setTotalMessages: (state, action: PayloadAction<number>) => {
-            state.totalMessages = action.payload;
+        setIsUserWithChannelsFetching: (state, action: PayloadAction<boolean>) => {
+            state.isFetching = action.payload;
         },
         clearUser: (state) => {
-            state.avatarSrc = '';
-            state.createdAt = null;
+            state.user.userId = 0;
+            state.user.login = '';
+            state.user.displayName = '';
+            state.user.type = '';
+            state.user.broadcasterType = '';
+            state.user.description = '';
+            state.user.profileImageUrl = '';
+            state.user.offlineImageUrl = '';
+            state.user.viewCount = 0;
+            state.user.createdAt = null;
+            state.user.wereInterested = 0;
+            state.user.messagesAmount = 0;
+            state.user.meta = {};
             state.mostActiveChannel = '';
-            state.totalMessages = null;
-            state.userId = 0;
-            state.username = '';
         },
     },
 });
 
-export const { 
+export const {
     setUser,
     setMostActiveChannel,
-    setTotalMessages,
+    setIsUserWithChannelsFetching,
     clearUser,
 } = twitchUserSlice.actions;
-export const getUser = (state: RootState) => state.user;
-export const getUsername = (state: RootState) => state.user.username;
+
+const getRootUser = (state: RootState) => state.twitchUser;
+export const getUser = createSelector(
+    getRootUser,
+    (rootUser) => rootUser.user,
+);
+export const getMostActiveChannel = createSelector(
+    getRootUser,
+    (user) => user.mostActiveChannel,
+);
+export const getDisplayName = createSelector(
+    getUser,
+    (user) => user.displayName,
+);
+export const getUserId = createSelector(
+    getUser,
+    (user) => user.userId,
+);
+export const getIsUserFetching = createSelector(
+    getRootUser,
+    (rootUser) => rootUser.isFetching,
+);
 
 export default twitchUserSlice.reducer;

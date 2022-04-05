@@ -7,7 +7,7 @@ import { CIRCLE_SIZE, MONTH_LABEL_SIZE, WEEK_LABEL_SIZE } from './heatmap-consta
 import HeatmapView from './heatmap-view';
 
 interface HeatmapProps {
-    values: Array<string>;
+    values: Array<Date>;
     gutterSize?: number;
     showMonthLabel?: boolean;
     showWeekLabel?: boolean;
@@ -15,11 +15,11 @@ interface HeatmapProps {
     mix?: string;
 }
 
-const mapDatesToAmountOfMessages = (values: Array<string>) => {
+const mapDatesToAmountOfMessages = (values: Array<Date>) => {
     const result = new Map<string, number>();
 
     values.forEach((date) => {
-        const dateString = formatDate(new Date(date));
+        const dateString = formatDate(date);
 
         if (result.has(dateString)) {
             result.set(dateString, result.get(dateString)! + 1);

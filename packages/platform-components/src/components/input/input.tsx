@@ -2,6 +2,7 @@ import b from 'b_';
 import cx from 'classnames';
 import React, { useState } from 'react';
 
+import { SIZE } from '../constants';
 import Text from '../text/text';
 
 import './input.scss';
@@ -17,6 +18,7 @@ interface InputProps {
     required?: boolean;
     type?: string;
     value?: string;
+    size?: SIZE;
     handleChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
     handleKeyDown?: (e: React.KeyboardEvent) => void;
     autoFocus?: boolean;
@@ -34,6 +36,7 @@ const Input = (props: InputProps) => {
         required = false,
         type = 'string',
         value,
+        size = SIZE.L,
         handleChange,
         handleKeyDown,
         autoFocus = false,
@@ -43,7 +46,7 @@ const Input = (props: InputProps) => {
     const handleClear = { target: { value: '' } };
 
     return (
-        <div className={cx(b('input', 'container', { full: fullWidth, focus, disabled }), mix)}>
+        <div className={cx(b('input', 'container', { full: fullWidth, size, focus, disabled }), mix)}>
             {icon}
             <input 
                 autoFocus={autoFocus}
@@ -72,5 +75,7 @@ const Input = (props: InputProps) => {
         </div>
     );
 };
+
+Input.SIZE = SIZE;
 
 export default Input;

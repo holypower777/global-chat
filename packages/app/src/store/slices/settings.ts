@@ -1,4 +1,4 @@
-import { Action, AnyAction, createSlice, Dispatch, PayloadAction } from '@reduxjs/toolkit';
+import { Action, AnyAction, createSelector, createSlice, Dispatch, PayloadAction } from '@reduxjs/toolkit';
 import { SETTINGS } from 'platform-components/src/components/constants';
 import { getLocalStorageValue } from 'platform-components/src/hooks';
 
@@ -41,8 +41,17 @@ export const settingsMiddleware = () => (next: Dispatch<AnyAction>) => (action: 
 
 export const { updateSetting } = settingsSlice.actions;
 export const getSettings = (state: RootState) => state.settings;
-export const getSortByDateSetting = (state: RootState) => state.settings.sortByDate;
-export const getShowBadgesSetting = (state: RootState) => state.settings.showBadges;
-export const getShowMessageTimeSetting = (state: RootState) => state.settings.showMessageTime;
+export const getSortByDateSetting = createSelector(
+    getSettings,
+    (settings) => settings.sortByDate,
+);
+export const getShowBadgesSetting = createSelector(
+    getSettings,
+    (settings) => settings.showBadges,
+);
+export const getShowMessageTimeSetting = createSelector(
+    getSettings,
+    (settings) => settings.showMessageTime,
+);
 
 export default settingsSlice.reducer;
