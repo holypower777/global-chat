@@ -38,7 +38,7 @@ const ChatMessages = () => {
         useGetSubscriberBadgesByChannelIdQuery({ channelId: selectedChannel ? selectedChannel.userId : 0 }, { skip: skipBadges });
     const { data, error, isFetching } = useGetMessagesByUserIdAndChannelIdQuery({
         userId,
-        channelId: selectedChannel ? selectedChannel.userId + 1 : 0,
+        channelId: selectedChannel ? selectedChannel.userId : 0,
         offset,
         limit: 100,
     }, { skip: skipMessages });
