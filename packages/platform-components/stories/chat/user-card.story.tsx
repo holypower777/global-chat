@@ -9,14 +9,14 @@ import { STORY_GROUPS } from '../constants';
 const StoryUserCard = () => {
     return (
         <UserCard
-            avatarSrc={text('avatar src', 'https://static-cdn.jtvnw.net/user-default-pictures-uv/de130ab0-def7-11e9-b668-784f43822e80-profile_image-70x70.png')}
             createdAt={new Date(date('created at', new Date()))}
+            displayName={text('displayName', 'Gazely')}
             heatmapDates={values}
+            messagesAmount={number('messages amount', 2)}
             mostActiveChannel={text('most active channel', 'Klean')}
-            totalMessages={number('total messages', 2)}
+            profileImageUrl={text('profile image url', 'https://static-cdn.jtvnw.net/user-default-pictures-uv/de130ab0-def7-11e9-b668-784f43822e80-profile_image-70x70.png')}
             updateSettings={() => ({})}
             userId={number('user id', 12932497)}
-            username={text('username', 'Gazely')}
         />
     );
 };

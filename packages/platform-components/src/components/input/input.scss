@@ -4,6 +4,8 @@
 {
     &__container
     {
+        position: relative;
+
         display: flex;
 
         width: fit-content;
@@ -52,6 +54,18 @@
             width: inherit;
         }
 
+        .icon__dots
+        {
+            fill: $Silver;
+
+            cursor: pointer;
+
+            &:hover
+            {
+                fill: $Boulder;
+            }
+        }
+
         &_disabled
         {
             .icon
@@ -87,20 +101,6 @@
             {
                 color: $Mercury;
             }
-        }
-    }
-
-    &__clear
-    {
-        cursor: pointer;
-
-        transition: $transitionColor01;
-
-        color: $Boulder;
-
-        &:hover
-        {
-            color: $Black;
         }
     }
 }

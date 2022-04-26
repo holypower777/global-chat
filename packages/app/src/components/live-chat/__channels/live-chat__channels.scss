@@ -1,0 +1,37 @@
+@import 'design/design';
+
+.live-chat
+{
+    &__channels
+    {
+        display: flex;
+
+        flex-direction: column;
+
+        width: min-content;
+
+        flex-grow: 1;
+
+        padding: 20px 0;
+
+        gap: 30px;
+
+        &-list
+        {
+            display: flex;
+            flex-wrap: wrap;
+
+            overflow-y: auto;
+
+            gap: 20px;
+        }
+
+        @include media-breakpoint-down($desktopBp)
+        {
+            width: auto;
+            height: 100%;
+
+            padding: 0;
+        }
+    }
+}

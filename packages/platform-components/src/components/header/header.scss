@@ -23,8 +23,8 @@
 
     @include media-breakpoint-down($tabletBp)
     {
-        .logo,
-        .button
+        &__link,
+        .logo__link
         {
             display: none;
         }

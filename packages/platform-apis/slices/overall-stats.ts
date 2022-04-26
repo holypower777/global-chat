@@ -12,7 +12,7 @@ export const overallStatsApi = createApi({
             query: getOverallStatsDef,
             transformResponse: convertOverallStatsApi,
         }),
-        getOverallStatsPlots: builder.query<OverallStatsPlots, GetOverallStatsPlotsQuery>({
+        getOverallStatsPlots: builder.query<OverallStatsPlots, GetOverallStatsPlotsQuery | object>({
             query: getOverallStatsPlotsDef,
             transformResponse: convertOverallStatsPlotsApi,
         }),

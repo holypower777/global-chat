@@ -7,7 +7,12 @@ import { STORY_GROUPS } from '../constants';
 
 const availableLetters = ['a', 'b', 'e', 'f', 'j'];
 
-const StoryRubricatorAlphabet = () => <RubricatorAlphabet availableLetters={availableLetters}/>;
+const StoryRubricatorAlphabet = () => (
+    <RubricatorAlphabet 
+        activeLetter={availableLetters[0]}
+        availableLetters={availableLetters}    
+    />
+);
 
 storiesOf(STORY_GROUPS.rubricator, module)
     .addDecorator(withKnobs)

@@ -1,0 +1,53 @@
+@import 'design/design';
+
+.overall-stats
+{
+    &__stats
+    {
+        display: flex;
+        flex-direction: column;
+
+        gap: 10px;
+
+        &-key
+        {
+            color: $Silver;
+        }
+
+        &-value
+        {
+            margin-left: 5px;
+
+            color: $Boulder;
+        }
+
+        .icon__twitch
+        {
+            fill: $Mercury;
+
+            margin: 0 10px 0 5px;
+
+            cursor: pointer;
+
+            &:hover
+            {
+                fill: $Twitch;
+            }
+        }
+
+        &-update
+        {
+            display: flex;
+            align-items: center;
+
+            color: $SmithApple;
+
+            gap: 10px;
+
+            .icon__time
+            {
+                fill: $SmithApple;
+            }
+        }
+    }
+}

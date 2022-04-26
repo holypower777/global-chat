@@ -33,10 +33,11 @@ const ChatMessageBadges = ({ subBadges, badges }: ChatMessageBadges) => {
                         !subBadges.badgeSets.subscriber.versions[version] ||//@ts-ignore
                         !subBadges.badgeSets.subscriber.versions[version].image_url_1x
                     ) {
-                        return null;
+                        imageSrc = commonBadges.subscriber.versions[1].image_url_1x;
+                    } else {
+                        //@ts-ignore
+                        imageSrc = subBadges.badgeSets.subscriber.versions[version].image_url_1x;
                     }
-                    //@ts-ignore
-                    imageSrc = subBadges.badgeSets.subscriber.versions[version].image_url_1x;
                 } else {
                     //@ts-ignore
                     imageSrc = commonBadges[badge].versions[version].image_url_1x;

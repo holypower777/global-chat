@@ -1,0 +1,27 @@
+.skeleton
+{
+    position: relative;
+
+    width: 100%;
+
+    &_variant
+    {
+        &_message
+        {
+            display: flex;
+            flex-direction: column;
+
+            gap: 5px;
+        }
+
+        &_chip
+        {
+            width: auto;
+        }
+
+        &_live-chat
+        {
+            overflow: hidden;
+        }
+    }
+}

@@ -62,6 +62,7 @@ const UserHistory = () => {
                             containerStyle={{ height: 'calc(100vh - 160px)' }}
                             index={activeTab}
                             onChangeIndex={handleChangeTab}
+                            resistance={true}
                         >
                             <Channels handlePickChannel={() => handleChangeTab(1)}/>
                             <Chat />

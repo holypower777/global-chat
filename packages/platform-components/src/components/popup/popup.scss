@@ -1,0 +1,41 @@
+@import 'design/design';
+
+.popup
+{
+    position: relative;
+
+    width: max-content;
+
+    &__target
+    {
+        cursor: pointer;
+    }
+
+    &__content
+    {
+        position: absolute;
+
+        z-index: 11;
+
+        top: 95%;
+
+        padding: 10px;
+
+        background-color: $WildSand;
+
+        box-shadow: $shadow400;
+
+        &_direction
+        {
+            &_right
+            {
+                left: 0;
+            }
+
+            &_left
+            {
+                right: 0;
+            }
+        }
+    }
+}

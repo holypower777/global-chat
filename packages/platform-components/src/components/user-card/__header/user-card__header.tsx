@@ -16,12 +16,25 @@ interface UserCardHeaderProps {
 
 const UserCardHeader = ({ isContentExpanded, isSettingsExpanded, setIsExpanded, setIsSettingsExpanded, displayName }: UserCardHeaderProps) => {
     const arrowDirection = isContentExpanded ? IconArrow.DIREACTIONS.UP : IconArrow.DIREACTIONS.DOWN;
+    const handleHeaderClick = () => {
+        if (isContentExpanded || isSettingsExpanded) {
+            setIsExpanded(false);
+            setIsSettingsExpanded(false);
+            return;
+        }
+
+        setIsExpanded(!isContentExpanded);
+    };
 
     return (
-        <div className={b('user-card', 'header')} onClick={() => (setIsExpanded(!isContentExpanded))}>
+        <div className={b('user-card', 'header')} onClick={handleHeaderClick}>
             <Text size={Text.SIZE.XL}>{displayName}</Text>
             <div className={b('user-card', 'header_icons')}>
-                <IconArrow direction={arrowDirection} />
+                <IconArrow direction={arrowDirection} handleClick={(e) => {
+                    e.stopPropagation();
+                    setIsExpanded(!isContentExpanded);
+                }}
+                />
                 <IconCog handleClick={(e) => {
                     e.stopPropagation();
                     setIsSettingsExpanded(!isSettingsExpanded);

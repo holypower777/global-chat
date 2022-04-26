@@ -5,5 +5,6 @@ import { STORY_GROUPS } from '../constants';
 
 const stories = storiesOf(STORY_GROUPS.icons, module);
 Object.keys(Icons).forEach((iconName) => {
+    //@ts-ignore
     stories.add(iconName, Icons[iconName]);
 });

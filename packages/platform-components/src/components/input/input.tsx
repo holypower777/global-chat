@@ -1,9 +1,8 @@
 import b from 'b_';
 import cx from 'classnames';
-import React, { useState } from 'react';
+import React, { ReactNode, useState } from 'react';
 
 import { SIZE } from '../constants';
-import Text from '../text/text';
 
 import './input.scss';
 
@@ -22,6 +21,7 @@ interface InputProps {
     handleChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
     handleKeyDown?: (e: React.KeyboardEvent) => void;
     autoFocus?: boolean;
+    settings?: ReactNode | Array<ReactNode>;
 }
 
 const Input = (props: InputProps) => {
@@ -40,10 +40,9 @@ const Input = (props: InputProps) => {
         handleChange,
         handleKeyDown,
         autoFocus = false,
+        settings,
     } = props;
-
     const [focus, setFocus] = useState(false);
-    const handleClear = { target: { value: '' } };
 
     return (
         <div className={cx(b('input', 'container', { full: fullWidth, size, focus, disabled }), mix)}>
@@ -64,14 +63,7 @@ const Input = (props: InputProps) => {
                 type={type}
                 value={value}
             />
-            {value && fullWidth && !disabled && !readOnly &&
-                <Text 
-                    //@ts-expect-error
-                    handleClick={() => handleChange!(handleClear)} 
-                    id="input.clear"
-                    mix={b('input', 'clear')}
-                />
-            }
+            {settings}
         </div>
     );
 };

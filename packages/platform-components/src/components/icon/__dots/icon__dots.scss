@@ -1,0 +1,21 @@
+@import 'design/design';
+
+.icon__dots
+{
+    width: 16px;
+    height: 16px;
+
+    fill: $Black;
+    fill-rule: evenodd;
+
+    svg
+    {
+        height: 100%;
+    }
+
+    rect
+    {
+        width: 16px;
+        height: 16px;
+    }
+}

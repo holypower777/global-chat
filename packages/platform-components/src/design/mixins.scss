@@ -23,3 +23,28 @@
         @content;
     }
 }
+
+@function randomNum($min, $max)
+{
+    $rand: random();
+    $randomNum: $min + floor($rand * (($max - $min) + 1));
+
+    @return $randomNum;
+}
+
+@mixin animation($name, $from, $to)
+{
+    @keyframes #{$name}
+    {
+        0%
+        {
+            transform: translateX($from);
+        }
+
+        50%,
+        100%
+        {
+            transform: translateX($to);
+        }
+    }
+}

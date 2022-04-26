@@ -48,7 +48,7 @@ const Rubricator = React.memo(({ channels = [], handleSelect, selectedItem }: Ru
     const activeLetter = channels.flat().find((e) => selectedItem && e.userId === selectedItem.userId)?.displayName.charAt(0).toLowerCase();
 
     return (
-        <div className="rubricator">
+        <div className="rubricator custom-scroll">
             {columns.length && <RubricatorAlphabet activeLetter={activeLetter} availableLetters={availableLetters} />}
             <div className={cx(b('rubricator', 'columns'), 'custom-scroll')} ref={parentRef}>
                 {width && columns.length && columns.map((column, columnIndex) => (

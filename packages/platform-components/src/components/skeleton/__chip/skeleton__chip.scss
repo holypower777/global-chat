@@ -1,0 +1,49 @@
+@import 'design/design';
+
+.skeleton
+{
+    &__chip
+    {
+        position: relative;
+
+        overflow: hidden;
+
+        /* stylelint-disable-next-line function-name-case */
+        // width: #{randomNum(150, 210)}px;
+        height: 35px;
+
+        border-radius: 50px;
+
+        background: $WildSand;
+
+        &:before
+        {
+            position: absolute;
+            top: 0;
+            left: 0;
+
+            width: 150px;
+            height: 200%;
+
+            content: '';
+
+            animation: loading 1.6s infinite linear;
+
+            background: linear-gradient(to right, $WildSand, $AthensGray, $WildSand);
+        }
+    }
+}
+
+@keyframes loading
+{
+    0%
+    {
+        transform: translateX(-100px);
+    }
+
+    50%,
+    100%
+    {
+        transform: translateX(300%);
+    }
+}

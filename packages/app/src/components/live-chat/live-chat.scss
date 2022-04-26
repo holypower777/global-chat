@@ -1,0 +1,20 @@
+@import 'design/design';
+
+.live-chat
+{
+    display: flex;
+
+    width: calc(100% - 80px);
+    height: calc(100vh - 170px);
+    justify-content: space-between;
+
+    gap: 20px;
+
+    @include media-breakpoint-down($desktopBp)
+    {
+        flex-direction: column;
+
+        width: calc(100% - 40px);
+        height: calc(100vh - 110px);
+    }
+}

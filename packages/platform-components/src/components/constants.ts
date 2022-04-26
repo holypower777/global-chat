@@ -17,6 +17,11 @@ export enum TEXT_TAG {
     SPAN = 'span',
 }
 
+export enum CHIP_TAG {
+    LI = 'li',
+    DIV = 'div',
+}
+
 export enum HEADER_TEXT_SIZE {
     S = 's',
     M = 'm',
@@ -42,9 +47,39 @@ export enum TOOLTIP_DIRECTION {
     top = 'top',
 }
 
+export enum POPUP_DIRECTION {
+    left = 'left',
+    right = 'right',
+}
+
 export enum TOOLTIP_THEME {
     light = 'light',
     dark = 'dark',
+}
+
+export enum SNACKBAR_TYPE {
+    WARNING = 'warning',
+    ERROR = 'error',
+    INFO = 'info',
+    SUCCESS = 'success',
+}
+
+export enum SNACKBAR_DIRECTION {
+    TOP_LEFT = 'top-left',
+    TOP_CENTER = 'top-center',
+    TOP_RIGHT = 'top-right',
+    BOTTOM_LEFT = 'bottom-left',
+    BOTTOM_CENTER = 'bottom-center',
+    BOTTOM_RIGHT = 'bottom-right',
+}
+
+export enum NOTIFICATIONS_DIRECTION {
+    TOP_LEFT = 'top-left',
+    TOP_CENTER = 'top-center',
+    TOP_RIGHT = 'top-right',
+    BOTTOM_LEFT = 'bottom-left',
+    BOTTOM_CENTER = 'bottom-center',
+    BOTTOM_RIGHT = 'bottom-right',
 }
 
 export enum SIZE {
@@ -58,10 +93,19 @@ export enum THEME {
     dark = 'dark',
 }
 
+export enum SEARCH_TYPE {
+    USERNAME = 'username',
+    USER_ID = 'user_id',
+}
+
 export enum SETTINGS {
     SORT_BY_DATE = 'sortByDate',
     SHOW_BADGES = 'showBadges',
     SHOW_MESSAGE_TIME = 'showMessageTime',
+    USER_TYPE = 'userType',
+    LIVE_CHAT_SHOW_BADGES = 'liveChatShowBadges',
+    LIVE_CHAT_SHOW_MESSAGE_TIME = 'liveChatShowMessageTime',
+    LIVE_CHAT_USE_CHAT_COLORS = 'liveChatUseChatColors',
 }
 
 export const MONTHS = [

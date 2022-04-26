@@ -1,5 +1,5 @@
 import { Message, TwitchUser } from 'platform-apis/types';
-import { ChatDate, ChatMessage } from 'platform-components';
+import { ChatDate, ChatMessage, Skeleton } from 'platform-components';
 import React, { useEffect, useRef } from 'react';
 
 interface RowProps {
@@ -11,6 +11,7 @@ interface RowProps {
     showMessageTime: boolean;
     showBadges: boolean;
     badgesData: object;
+    isItemLoaded: boolean;
 }
 
 const ChatMessageRow = ({
@@ -22,6 +23,7 @@ const ChatMessageRow = ({
     showMessageTime,
     showBadges,
     badgesData,
+    isItemLoaded,
 }: RowProps) => {
     const rowRef = useRef<HTMLDivElement>(null);
 
@@ -33,20 +35,28 @@ const ChatMessageRow = ({
         }
     }, [rowRef]);
 
+    let content;
+
+    if (!isItemLoaded) {
+        content = <Skeleton variant={Skeleton.SKELETON_VARIANT.MESSAGE} />;
+    } else {
+        content = (<>
+            {message.renderDate && <ChatDate date={message.time!} />}
+            <ChatMessage
+                badges={message.badges}
+                message={message.message}
+                showBadges={showBadges}
+                showMessageTime={showMessageTime}
+                subBadges={badgesData}
+                time={message.time!}
+                username={user.displayName}
+            />
+        </>);
+    }
+
     return (
         <li style={style}>
-            <div ref={rowRef}>
-                {message.renderDate && <ChatDate date={message.time!} />}
-                <ChatMessage
-                    badges={message.badges}
-                    message={message.message}
-                    showBadges={showBadges}
-                    showMessageTime={showMessageTime}
-                    subBadges={badgesData}
-                    time={message.time!}
-                    username={user.displayName}
-                />
-            </div>
+            <div ref={rowRef}>{content}</div>
         </li>
     );
 };

@@ -1,18 +1,37 @@
 import b from 'b_';
-import { Button, IconSearch, Input, Logo, Text } from 'platform-components';
-import React, { useState } from 'react';
+import { Button, HeaderSettings, IconSearch, Input, Logo, SNACKBAR_TYPE, Text } from 'platform-components';
+import React, { useEffect, useState } from 'react';
 import { useIntl } from 'react-intl';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
+
+import { getUserTypeSetting, updateSetting } from '../../store/slices/settings';
+import { addNotification, isValidSearchChange, isValidSearchSubmit } from '../../utils';
 
 import './home.scss';
 
 const Home = () => {
     const intl = useIntl();
+    const dispatch = useDispatch();
     const navigate = useNavigate();
     const [username, setUsername] = useState('');
+    const userType = useSelector(getUserTypeSetting);
+
+    useEffect(() => {
+        setUsername('');
+    }, [userType]);
 
     const handleSubmit = (e: React.KeyboardEvent) => {
-        if (username.length > 2 && e.key === 'Enter') {
+        if (e.key === 'Enter') {
+            if (!isValidSearchSubmit(userType, username)) {
+                addNotification({
+                    id: `notification.searchInput.${userType}.submit`,
+                    type: SNACKBAR_TYPE.ERROR,
+                    autoHideDuration: 4000,
+                }, dispatch);
+                return;
+            }
+
             navigate(`messages/${username}`);
         }
     };
@@ -25,16 +44,32 @@ const Home = () => {
                     <Input
                         disabled={false}
                         fullWidth={true}
-                        handleChange={(e) => setUsername(e.target.value)}
+                        handleChange={(e) => {
+                            if (!isValidSearchChange(userType, e.target.value)) {
+                                addNotification({
+                                    id: `notification.searchInput.${userType}`,
+                                    type: SNACKBAR_TYPE.WARNING,
+                                    autoHideDuration: 4000,
+                                }, dispatch);
+                                return;
+                            }
+                            setUsername(e.target.value);
+                        }}
                         handleKeyDown={handleSubmit}
                         icon={<IconSearch />}
                         name="user-search"
                         placeholder={intl.formatMessage({ id: 'header.inputPlaceholder' })}
+                        settings={<HeaderSettings updateSettings={(key, value) => dispatch(updateSetting({ key, value }))}/>}
                         value={username}
                     />
-                    <Link to="/overall-stats">
-                        <Button>{intl.formatMessage({ id: 'link.overallStats' })}</Button>
-                    </Link>
+                    <div className={b('home', 'search-links')}>
+                        <Link to="/overall-stats">
+                            <Button>{intl.formatMessage({ id: 'link.overallStats' })}</Button>
+                        </Link>
+                        <Link to="/live-chat">
+                            <Button>{intl.formatMessage({ id: 'link.liveChat' })}</Button>
+                        </Link>
+                    </div>
                 </section>
                 <Text
                     center

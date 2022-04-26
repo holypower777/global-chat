@@ -1,0 +1,86 @@
+@import 'design/design';
+
+.live-chat
+{
+    &__channels
+    {
+        &_settings
+        {
+            display: flex;
+
+            flex-wrap: wrap;
+
+            justify-content: flex-end;
+            align-items: center;
+
+            gap: 40px;
+
+            &-online,
+            {
+                margin-right: auto;
+            }
+
+            &-sort
+            {
+                display: flex;
+                align-items: baseline;
+
+                gap: 5px;
+            }
+
+            &-unselect
+            {
+                cursor: pointer;
+
+                transition: $transitionColor01;
+
+                &:hover
+                {
+                    color: $Twitch;
+                }
+            }
+
+            select
+            {
+                width: max-content;
+
+                cursor: pointer;
+
+                border: none;
+                background: none;
+            }
+
+            .icon__cog
+            {
+                width: 20px;
+                height: 20px;
+            }
+
+            &-cog
+            {
+                display: flex;
+                flex-direction: column;
+
+                &-option
+                {
+                    display: flex;
+                    justify-content: space-between;
+
+                    width: 250px;
+                }
+
+                &-title
+                {
+                    color: $Boulder;
+                }
+            }
+
+            @include media-breakpoint-down($fullHdBp)
+            {
+                flex-direction: column;
+                gap: 0;
+                align-items: flex-start;
+            }
+        }
+    }
+}

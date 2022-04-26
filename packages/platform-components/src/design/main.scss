@@ -77,7 +77,8 @@ td
 }
 
 html,
-button
+button,
+select
 {
     color: $Black;
 
@@ -91,7 +92,28 @@ button
 body,
 html
 {
+    position: relative;
+
     height: 100%;
+
+    &::-webkit-scrollbar-track
+        {
+        border-radius: 10px;
+        background-color: $WildSand;
+    }
+
+    &::-webkit-scrollbar
+        {
+        width: 8px;
+
+        background-color: rgba(0, 0, 0, 0);
+    }
+
+    &::-webkit-scrollbar-thumb
+        {
+        border-radius: 10px;
+        background-color: $Silver;
+    }
 }
 
 input,
@@ -144,6 +166,8 @@ ul
 a
 {
     text-decoration: none;
+
+    color: inherit;
 }
 
 .custom-scroll

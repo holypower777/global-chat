@@ -33,8 +33,20 @@ export const formatDate = (d: Date | null, withMonthName = false) => {
     return `${date}.${month}.${year}`;
 };
 
-export const getHoursAndMinutes = (d: Date) => {
+export const getHoursAndMinutes = (d: Date | null) => {
+    if (!d) {
+        return '';
+    }
+
     return `${addBackwordZero(d.getHours())}:${addBackwordZero(d.getMinutes())}`;
+};
+
+export const getFullDate = (d: Date | null, withMonthName = false) => {
+    if (!d) {
+        return '';
+    }
+
+    return `${formatDate(d, withMonthName)} ${getHoursAndMinutes(d)}`;
 };
 
 export const getDateFromString = (d: string): Date | null => {

@@ -30,7 +30,8 @@ const InfiniteScrollWrapper = ({
     const user = useSelector(getUser);
 
     const itemCount = hasNextPage ? items.length + 1 : items.length;
-    const loadMoreItems = isNextPageLoading ? () => ({}) : loadNextPage;
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
+    const loadMoreItems = isNextPageLoading ? () => {} : loadNextPage;
     const isItemLoaded = (index: number) => !hasNextPage || index < items.length;
     const rowHeights = useRef({});
     const listRef = useRef<List | null>();
@@ -38,12 +39,16 @@ const InfiniteScrollWrapper = ({
     //@ts-ignore
     const getRowHeight = (index: number) => rowHeights.current[index] || 24;
     const setRowHeight = (index: number, size: number) => {
-        listRef!.current!.resetAfterIndex(0);
+        if (listRef && listRef.current) {
+            listRef!.current!.resetAfterIndex(0);
+        }
         rowHeights.current = { ...rowHeights.current, [index]: size };
     };
 
     useEffect(() => {
-        listRef!.current!.scrollToItem(0);
+        if (listRef && listRef.current) {
+            listRef.current.scrollToItem(0);
+        }
     }, [badgesData]);
 
     return (
@@ -64,13 +69,14 @@ const InfiniteScrollWrapper = ({
                             itemSize={getRowHeight}
                             onItemsRendered={onItemsRendered}
                             outerRef={ref}
-                            ref={el => (listRef!.current = el)}
+                            ref={el => (listRef.current = el)}
                             width={width}
                         >
                             {({ index, style }) => (
                                 <ChatMessage
                                     badgesData={badgesData}
                                     index={index}
+                                    isItemLoaded={isItemLoaded(index + 1)}
                                     message={items[index]}
                                     setRowHeight={setRowHeight}
                                     showBadges={showBadges}

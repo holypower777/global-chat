@@ -27,6 +27,9 @@ const HeaderMenu = () => {
                 <li className={b('header', 'menu_links_link')}>
                     <Link to="/overall-stats">{intl.formatMessage({ id: 'link.overallStats' })}</Link>
                 </li>
+                <li className={b('header', 'menu_links_link')}>
+                    <Link to="/live-chat">{intl.formatMessage({ id: 'link.liveChat' })}</Link>
+                </li>
             </ul>}
         </nav>
     );

@@ -763,7 +763,7 @@ export const messageToSmile = (message: string) => {
     return message.split(' ').map((e, i) => {
         if (e.startsWith('http')) {
             return (
-                <a href={e} key={`${e}${i}`}>{e}</a>
+                <a className={b('chat-message', 'link')} href={e} key={`${e}${i}`}>{e}</a>
             );
         }
 

@@ -1,0 +1,121 @@
+@import 'design/design';
+
+.notifications
+{
+    &__snackbar
+    {
+        position: relative;
+
+        z-index: 25;
+
+        overflow: hidden;
+
+        box-sizing: border-box;
+
+        width: 350px;
+
+        &-content
+        {
+            display: flex;
+            align-items: center;
+
+            margin-top: 10px;
+            padding: 10px;
+
+            word-break: break-word;
+
+            color: $White;
+
+            gap: 10px;
+
+            font-size: $fontSizeM;
+            font-weight: $fontWeightMedium;
+            line-height: $lineHeightM;
+
+            &:first-letter
+            {
+                text-transform: capitalize;
+            }
+
+            &_type
+            {
+                &_warning
+                {
+                    background-color: $SmithApple;
+                }
+
+                &_error
+                {
+                    background-color: $Bittersweet;
+                }
+
+                &_info
+                {
+                    background-color: $Silver;
+                }
+
+                &_success
+                {
+                    background-color: $ChateauGreen;
+                }
+            }
+        }
+
+        &-life
+        {
+            position: absolute;
+
+            bottom: 0;
+            left: 0;
+
+            width: auto;
+            height: 5px;
+
+            &_type
+            {
+                &_warning
+                {
+                    background-image: linear-gradient(130deg, $SmithApple, #d4fadb);
+                }
+
+                &_error
+                {
+                    background-image: linear-gradient(130deg, $Bittersweet, #ffb3b5);
+                }
+
+                &_info
+                {
+                    background-image: linear-gradient(130deg, $Silver, #f5f5f5);
+                }
+
+                &_success
+                {
+                    background-image: linear-gradient(130deg, $ChateauGreen, #81db98);
+                }
+            }
+        }
+
+        .icon
+        {
+            fill: $White;
+            stroke: $White;
+
+            &__cross
+            {
+                display: flex;
+
+                width: 12px;
+                height: 12px;
+
+                margin-left: auto;
+
+                cursor: pointer;
+            }
+        }
+
+        @include media-breakpoint-down($tabletBp)
+        {
+            width: calc(100vw - 48px);
+        }
+    }
+}

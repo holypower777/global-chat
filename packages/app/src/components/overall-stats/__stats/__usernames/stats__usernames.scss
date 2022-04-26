@@ -1,0 +1,28 @@
+@import 'design/design';
+
+.overall-stats
+{
+    &__stats
+    {
+        &-usernames
+        {
+            display: flex;
+            align-items: center;
+
+            flex-wrap: wrap;
+
+            a
+            {
+                .text
+                {
+                    transition: $transitionColor01;
+
+                    &:hover
+                    {
+                        color: $Black;
+                    }
+                }
+            }
+        }
+    }
+}

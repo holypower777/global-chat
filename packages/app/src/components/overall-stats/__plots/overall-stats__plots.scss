@@ -1,0 +1,22 @@
+@import 'design/design';
+
+.overall-stats
+{
+    &__plots
+    {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(580px, 1fr));
+
+        gap: 20px;
+
+        @include media-breakpoint-down($desktopBp)
+        {
+            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+        }
+
+        @include media-breakpoint-down($mobileBp)
+        {
+            grid-template-columns: 1fr;
+        }
+    }
+}

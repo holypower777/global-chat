@@ -37,7 +37,7 @@ const Chat = () => {
                 <Text mix={b('chat', 'title-channel')} size={Text.SIZE.XL}>{selectedChannel.displayName}</Text>
             </Text>}
             <ChatMessages />
-        </section>
+        </section >
     );
 };
 

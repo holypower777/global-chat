@@ -10,6 +10,11 @@
 
     flex-grow: 1;
 
+    .rubricator__block-item
+    {
+        width: max-content;
+    }
+
     @include media-breakpoint-down($tabletBp)
     {
         width: auto;

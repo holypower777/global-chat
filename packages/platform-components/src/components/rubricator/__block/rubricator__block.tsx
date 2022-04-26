@@ -4,8 +4,6 @@ import { formatDate, isArrayEqual } from 'platform-components/src/utils';
 import React from 'react';
 
 import { H1 } from '../../header-text/header-text';
-import Text from '../../text/text';
-import Tooltip from '../../tooltip/tooltip';
 
 import './rubricator__block.scss';
 
@@ -37,17 +35,11 @@ const RubricatorBlock = React.memo(({ items, handleSelect, selectedItem, activeL
                         data-profile-image-url={item.profileImageUrl}
                         key={item.userId}
                         onClick={() => handleSelect(item)}
+                        title={`Messages: ${item.messages}
+First message: ${formatDate(item.firstMessageDate)}
+Last message: ${formatDate(item.lastMessageDate)}`}
                     >
-                        <Tooltip  direction={Tooltip.TOOLTIP_DIRECTION.right} title={<>
-                            <div className={b('rubricator', 'block-item-tooltip')}>
-                                <Text size={Text.SIZE.S}>Messages: {item.messages}</Text>
-                                <Text size={Text.SIZE.S}>First message: {formatDate(item.firstMessageDate)}</Text>
-                                <Text size={Text.SIZE.S}>Last message: {formatDate(item.lastMessageDate)}</Text>
-                            </div>
-                        </>}
-                        >
-                            {item.displayName}
-                        </Tooltip>
+                        {item.displayName}
                     </li>)
                 )}
             </ul>
@@ -56,7 +48,7 @@ const RubricatorBlock = React.memo(({ items, handleSelect, selectedItem, activeL
 }, (prevProps, nextProps) => {
     const blockLetter = nextProps.items[0].displayName.charAt(0).toLowerCase();
 
-    return isArrayEqual(prevProps.items, nextProps.items) && prevProps.activeLetter !== blockLetter && nextProps.activeLetter !== blockLetter;
+    return isArrayEqual(prevProps.items.map((e) => e.userId), nextProps.items.map((e) => e.userId)) && prevProps.activeLetter !== blockLetter && nextProps.activeLetter !== blockLetter;
 });
 
 export default RubricatorBlock;

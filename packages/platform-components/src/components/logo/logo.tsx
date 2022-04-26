@@ -18,7 +18,7 @@ const Logo = ({ alwaysFull = false, size = HEADER_TEXT_SIZE.L }: LogoProps) => {
     const intl = useIntl();
 
     return (
-        <Link to="/">
+        <Link className={b('logo', 'link')} to="/">
             <div className={b('logo', { adaptive: !alwaysFull, size })}>
                 <H1 mix={b('logo', 'text')} size={size} weight={TEXT_WEIGHT.L}>
                     <span className={b('logo', 'text-first')}>{intl.formatMessage({ id: 'logo.text.firstWord' })} </span>

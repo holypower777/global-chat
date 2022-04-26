@@ -1,11 +1,15 @@
 const isArrayEqual = (a: Array<unknown>, b: Array<unknown>) => {
-    let i = a.length;
-    if (i !== b.length) {
+    if (a === b) {
+        return true;
+    }
+    if (a === null || b === null) {
+        return false;
+    }
+    if (a.length !== b.length) {
         return false;
     }
 
-    // eslint-disable-next-line no-cond-assign
-    while (i -= 1) {
+    for (let i = 0; i < a.length; i+=1) {
         if (a[i] !== b[i]) {
             return false;
         }

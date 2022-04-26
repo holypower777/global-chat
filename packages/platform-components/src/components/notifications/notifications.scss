@@ -1,0 +1,56 @@
+.notifications
+{
+    position: absolute;
+
+    display: flex;
+    flex-direction: column;
+
+    &_direction
+    {
+        &_top
+        {
+            &-left
+            {
+                top: 24px;
+                left: 24px;
+            }
+
+            &-center
+            {
+                top: 24px;
+                left: 50%;
+
+                transform: translateX(-50%);
+            }
+
+            &-right
+            {
+                top: 24px;
+                right: 24px;
+            }
+        }
+
+        &_bottom
+        {
+            &-left
+            {
+                bottom: 24px;
+                left: 24px;
+            }
+
+            &-center
+            {
+                bottom: 24px;
+                left: 50%;
+
+                transform: translateX(-50%);
+            }
+
+            &-right
+            {
+                right: 24px;
+                bottom: 24px;
+            }
+        }
+    }
+}

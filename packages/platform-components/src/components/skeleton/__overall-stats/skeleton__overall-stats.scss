@@ -1,0 +1,155 @@
+@import 'design/design';
+
+.skeleton
+{
+    &__overall-stats
+    {
+        display: flex;
+
+        overflow-x: hidden;
+
+        flex-direction: column;
+
+        gap: 20px;
+
+        &__plots
+        {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(580px, 1fr));
+
+            gap: 20px;
+
+            @include media-breakpoint-down($desktopBp)
+            {
+                grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+            }
+
+            @include media-breakpoint-down($mobileBp)
+            {
+                grid-template-columns: 1fr;
+            }
+
+            &-plot
+            {
+                position: relative;
+
+                overflow: hidden;
+
+                height: 454px;
+
+                background: $WildSand;
+
+                &:before
+                {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+
+                    width: 150px;
+                    height: 200%;
+
+                    content: '';
+
+                    animation: loading 1.6s infinite linear;
+
+                    background: linear-gradient(to right, $WildSand, $AthensGray, $WildSand);
+
+                    @include media-breakpoint-down($desktopBp)
+                    {
+                        animation: loading2 1.6s infinite linear;
+                    }
+
+                    @include media-breakpoint-down($mobileBp)
+                    {
+                        animation: loading 1.6s infinite linear;
+                    }
+                }
+            }
+        }
+
+        &__stats
+        {
+            display: flex;
+            flex-direction: column;
+
+            gap: 10px;
+
+            &-amount-msg,
+            &-unique-users,
+            &-unique-channels,
+            &-users-most,
+            &-channels-most,
+            &-most-searched,
+            &-online-amount,
+            &-update
+            {
+                position: relative;
+
+                overflow: hidden;
+
+                height: 24px;
+
+                background: $WildSand;
+
+                &:before
+                {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+
+                    width: 150px;
+                    height: 200%;
+
+                    content: '';
+
+                    animation: loading 1.6s infinite linear;
+
+                    background: linear-gradient(to right, $WildSand, $AthensGray, $WildSand);
+                }
+            }
+
+            &-amount-msg
+            {
+                width: 285px;
+            }
+
+            &-unique-users
+            {
+                width: 230px;
+            }
+
+            &-unique-channels
+            {
+                width: 240px;
+            }
+
+            &-users-most
+            {
+                width: 720px;
+            }
+
+            &-channels-most
+            {
+                width: 600px;
+            }
+
+            &-most-searched
+            {
+                width: 445px;
+            }
+
+            &-online-amount
+            {
+                width: 405px;
+            }
+
+            &-update
+            {
+                width: 215px;
+            }
+        }
+    }
+}
+
+@include animation(loading, -100px, 500%);
+@include animation(loading2, -100px, 700%);
