@@ -18,6 +18,7 @@ const StoryButton = () => {
                 <Button
                     disabled={boolean('disabled', false)}
                     href={text('href', '')}
+                    loading={boolean('loading', true)}
                     size={select('size', Object.values(Button.SIZE), Button.SIZE.L)}
                     theme={select('theme', Object.values(Button.THEME), Button.THEME.light)}
                 >

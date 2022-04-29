@@ -6,32 +6,23 @@ import { addNotification } from '../../utils';
 const rtkQueryErrorMiddleware: Middleware = (api: MiddlewareAPI) => (next: Dispatch<AnyAction>) => (action: Action<unknown>) => {
     if (isRejectedWithValue(action)) {
         //@ts-ignore
-        if (action.payload && action.payload.data && action.payload.data.error && action.payload.data.error.message) {
+        if (action.payload && action.payload.data && action.payload.data.error) {
             let id = null;
             let children = null;
             let uniqueKey = false;
 
             //@ts-ignore
-            switch (action.payload.data.error.message) {
-                case 'user not found':
-                    id = 'backendError.userNotFound';
-                    break;
-                case 'messages not found':
-                    id = 'backendError.messagesNotFound';
-                    break;
-                case 'messages of that channel_id not found':
-                    id = 'backendError.indeedMessagesNotFound';
-                    uniqueKey = true;
-                    break;
-                case 'something wrong happend :(':
-                    id = 'backendError.somethingWrong';
-                    break;
-                case 'not acceptable':
-                    id = 'backendError.notAcceptable';
-                    break;
-                default: //@ts-ignore
-                    children = action.payload.data.error.message;
-                    break;
+            if (!action.payload.data.error.intlId) { //@ts-ignore
+                children = action.payload.data.error.message;
+            } else { //@ts-ignore
+                id = action.payload.data.error.intlId;
+            }
+
+            if (
+                id === 'backendError.messagesOfThatChannelIdNotFound'
+                || id === 'backendError.userNotFound'
+            ) {
+                uniqueKey = true;
             }
 
             addNotification({

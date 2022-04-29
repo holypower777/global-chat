@@ -1,17 +1,18 @@
 import { createSelector, createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { SEARCH_TYPE, SETTINGS } from 'platform-components/src/components/constants';
+import { LANGUAGES, SEARCH_TYPE, SETTINGS, SORT_ORDER } from 'platform-components/src/components/constants';
 import { getLocalStorageValue } from 'platform-components/src/hooks';
 
 import { RootState } from '../store';
 
 interface SettingsState {
-    sortByDate: 'asc' | 'desc';
+    sortByDate: SORT_ORDER;
     showBadges: boolean;
     showMessageTime: boolean;
     userType: SEARCH_TYPE;
     liveChatShowBadges: boolean;
     liveChatShowMessageTime: boolean;
     liveChatUseChatColors: boolean;
+    language: LANGUAGES;
 }
 
 interface UpdateSetting {
@@ -19,14 +20,33 @@ interface UpdateSetting {
     value: unknown;
 }
 
-const initialState: SettingsState = {
-    sortByDate: getLocalStorageValue(SETTINGS.SORT_BY_DATE, 'desc'),
-    showBadges: getLocalStorageValue(SETTINGS.SHOW_BADGES, true),
-    showMessageTime: getLocalStorageValue(SETTINGS.SHOW_MESSAGE_TIME, true),
-    userType: getLocalStorageValue(SETTINGS.USER_TYPE, SEARCH_TYPE.USERNAME),
-    liveChatShowBadges: getLocalStorageValue(SETTINGS.LIVE_CHAT_SHOW_BADGES, true),
-    liveChatShowMessageTime: getLocalStorageValue(SETTINGS.LIVE_CHAT_SHOW_MESSAGE_TIME, true),
-    liveChatUseChatColors: getLocalStorageValue(SETTINGS.LIVE_CHAT_USE_CHAT_COLORS, true),
+const initialState = (): SettingsState => {
+    let defaultLanguage;
+    switch (navigator.language) {
+        case 'ru':
+            defaultLanguage = 'ru-RU';
+            break;
+        case 'ru-RU':
+            defaultLanguage = 'ru-RU';
+            break;
+        case 'RU':
+            defaultLanguage = 'ru-RU';
+            break;
+        default:
+            defaultLanguage = 'en-US';
+            break;
+    }
+
+    return {
+        sortByDate: getLocalStorageValue(SETTINGS.SORT_BY_DATE, SORT_ORDER.DESC),
+        showBadges: getLocalStorageValue(SETTINGS.SHOW_BADGES, true),
+        showMessageTime: getLocalStorageValue(SETTINGS.SHOW_MESSAGE_TIME, true),
+        userType: getLocalStorageValue(SETTINGS.USER_TYPE, SEARCH_TYPE.USERNAME),
+        liveChatShowBadges: getLocalStorageValue(SETTINGS.LIVE_CHAT_SHOW_BADGES, true),
+        liveChatShowMessageTime: getLocalStorageValue(SETTINGS.LIVE_CHAT_SHOW_MESSAGE_TIME, true),
+        liveChatUseChatColors: getLocalStorageValue(SETTINGS.LIVE_CHAT_USE_CHAT_COLORS, true),
+        language: getLocalStorageValue(SETTINGS.LANGUAGE, defaultLanguage),
+    };
 };
 
 export const settingsSlice = createSlice({
@@ -69,6 +89,10 @@ export const getLiveChatShowMessageTimeSetting = createSelector(
 export const getLiveChatUseChatColors = createSelector(
     getSettings,
     (settings) => settings.liveChatUseChatColors,
+);
+export const getLanguage = createSelector(
+    getSettings,
+    (settings) => settings.language,
 );
 
 export default settingsSlice.reducer;

@@ -20,10 +20,6 @@ export interface GetOverallStatsPlotsQuery {
     dateTo: Date;
 }
 
-export interface UsernameQuery {
-    username: string;
-}
-
 export interface UserIdQuery {
     userId: TwitchUserId;
 }

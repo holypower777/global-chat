@@ -1,13 +1,13 @@
 import { AnyAction, Dispatch } from '@reduxjs/toolkit';
 import { SNACKBAR_TYPE } from 'platform-components';
-import React, { ErrorInfo, ReactNode } from 'react';
+import { ChildrenProps } from 'platform-components/src/typings';
+import React, { ErrorInfo } from 'react';
 import { connect } from 'react-redux';
 
 import { addNotification } from '../../utils';
 
-interface ErrorBoundaryProps {
+interface ErrorBoundaryProps extends ChildrenProps {
     dispatch: Dispatch<AnyAction>;
-    children: ReactNode | Array<ReactNode>;
 }
 
 interface ErrorBoundaryState {

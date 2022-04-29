@@ -2,13 +2,14 @@ import { useGetTwitchUserWithChannelsByUsernameQuery } from 'platform-apis';
 import { Spin, Tab, Tabs } from 'platform-components';
 import { useWindowSize } from 'platform-components/src/hooks';
 import React, { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import SwipeableViews from 'react-swipeable-views';
 
 import { CommonHeader } from '../../common.components';
 import { setChannels } from '../../store/slices/channels';
 import { setMessagesDates } from '../../store/slices/messages';
+import { getUserTypeSetting } from '../../store/slices/settings';
 import { setIsUserWithChannelsFetching, setMostActiveChannel, setUser } from '../../store/slices/twitch-user';
 import { findMostFrequestChannel } from '../../utils';
 
@@ -20,9 +21,10 @@ import './user-history.scss';
 const UserHistory = () => {
     const { username } = useParams();
     const dispatch = useDispatch();
+    const userType = useSelector(getUserTypeSetting);
     const [skip, setSkip] = useState(true);
     const [activeTab, setActiveTab] = useState(0);
-    const { data, isFetching } = useGetTwitchUserWithChannelsByUsernameQuery({ username: username! }, { skip });
+    const { data, isFetching } = useGetTwitchUserWithChannelsByUsernameQuery({ username: username!, type: userType }, { skip });
     const { width } = useWindowSize();
 
     useEffect(() => {

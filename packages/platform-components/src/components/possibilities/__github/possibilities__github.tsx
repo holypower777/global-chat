@@ -1,14 +1,24 @@
 import b from 'b_';
 import cx from 'classnames';
 import React from 'react';
+import { animated } from 'react-spring';
 
 import { IconGithub } from '../../icon/icon';
+import Text from '../../text/text';
+import { PossibilityProps } from '../possibilities';
 
-const GithubPossibility = () => {
+const GithubPossibility = ({ style, disabled = false }: PossibilityProps) => {
     return (
-        <div className={cx('possibility', b('possibility', 'github'))}>
+        <animated.a 
+            className={cx(b('possibility', { disabled }), b('possibility', 'github'))}
+            href="https://github.com/holypower777/global-chat"
+            onClick={(e) => e.stopPropagation()}
+            style={style}
+            target="_blank"
+        >
+            <Text id="possibilities.github" />
             <IconGithub />
-        </div>
+        </animated.a>
     );
 };
 

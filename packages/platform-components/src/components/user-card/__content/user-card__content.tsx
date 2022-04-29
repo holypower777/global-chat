@@ -16,6 +16,7 @@ interface UserCardContentProps {
     createdAt: Date | null;
     heatmapDates: Array<Date>;
     mostActiveChannel: string;
+    wereInterested: number;
     width: number;
 }
 
@@ -26,6 +27,7 @@ const UserCardContent = (props: UserCardContentProps) => {
         messagesAmount,
         createdAt,
         heatmapDates,
+        wereInterested,
         mostActiveChannel,
         width,
     } = props;
@@ -52,6 +54,7 @@ const UserCardContent = (props: UserCardContentProps) => {
             <UserCardStats 
                 messagesAmount={messagesAmount}
                 mostActiveChannel={mostActiveChannel}  
+                wereInterested={wereInterested}
             />
         </div>
     );

@@ -41,6 +41,11 @@
             {
                 background-color: rgba(0, 0, 0, 0.5);
             }
+
+            @include media-breakpoint-down($mobileBp)
+            {
+                height: 50px;
+            }
         }
     }
 }

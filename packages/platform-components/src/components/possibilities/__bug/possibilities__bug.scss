@@ -25,6 +25,8 @@
 
             background-color: $WildSand;
 
+            box-shadow: $shadow100;
+
             gap: 5px;
 
             &_option
@@ -43,6 +45,7 @@
                 textarea
                 {
                     width: 100%;
+                    max-height: 200px;
                 }
             }
 
@@ -51,6 +54,16 @@
                 border: none;
 
                 background-color: none;
+            }
+
+            @include media-breakpoint-down($mobileBp)
+            {
+                width: 80vw;
+
+                &_option
+                {
+                    flex-direction: column;
+                }
             }
         }
     }

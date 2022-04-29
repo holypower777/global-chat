@@ -1,14 +1,14 @@
 import b from 'b_';
-import { 
+import {
     useGetMessagesByUserIdAndChannelIdQuery,
     useGetSubscriberBadgesByChannelIdQuery,
 } from 'platform-apis';
-import { Skeleton } from 'platform-components';
+import { Skeleton, SNACKBAR_TYPE } from 'platform-components';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import ErrorBoundary from '../../../../containers/error-boundary/error-boundary';
-import { getSelectedChannel } from '../../../../store/slices/channels';
+import { getSelectedChannel, setSelectedChannel } from '../../../../store/slices/channels';
 import {
     clearMessages,
     getIsMessagesFetching,
@@ -16,7 +16,9 @@ import {
     pushMessages,
     setIsMessagesFetching,
 } from '../../../../store/slices/messages';
+import { getSortByDateSetting } from '../../../../store/slices/settings';
 import { getUserId } from '../../../../store/slices/twitch-user';
+import { addNotification } from '../../../../utils';
 
 import InifiniteScrollWrapper from './infinite-scroll-wrapper';
 
@@ -28,6 +30,7 @@ const ChatMessages = () => {
     const messages = useSelector(getMessages);
     const isMessagesFetching = useSelector(getIsMessagesFetching);
     const selectedChannel = useSelector(getSelectedChannel);
+    const sort = useSelector(getSortByDateSetting);
 
     const userId = useSelector(getUserId);
     const [offset, setOffset] = useState(0);
@@ -38,14 +41,17 @@ const ChatMessages = () => {
         useGetSubscriberBadgesByChannelIdQuery({ channelId: selectedChannel ? selectedChannel.userId : 0 }, { skip: skipBadges });
     const { data, error, isFetching } = useGetMessagesByUserIdAndChannelIdQuery({
         userId,
-        channelId: selectedChannel ? selectedChannel.userId : 0,
+        channelId: selectedChannel?.userId || 0,
         offset,
+        sort,
         limit: 100,
     }, { skip: skipMessages });
 
     const loadNextPage = (startIndex: number) => {
         setOffset(startIndex);
-        setSkipMessages(false);
+        if (selectedChannel) {
+            setSkipMessages(false);
+        }
     };
 
     useEffect(() => {
@@ -53,6 +59,21 @@ const ChatMessages = () => {
             setSkipBadges(true);
         }
     }, [badgesData]);
+
+    useEffect(() => {
+        if (selectedChannel) {
+            dispatch(clearMessages());
+            loadNextPage(0);
+            if (isMessagesFetching) {
+                addNotification({
+                    id: 'notification.chat.sortChange',
+                    autoHideDuration: 7000,
+                    type: SNACKBAR_TYPE.WARNING,
+                    disableReloadButton: false,
+                }, dispatch);
+            }
+        }
+    }, [sort]);
 
     useEffect(() => {
         dispatch(setIsMessagesFetching(isFetching));
@@ -77,9 +98,13 @@ const ChatMessages = () => {
         }
     }, [data]);
 
+    useEffect(() => () => {
+        dispatch(setSelectedChannel(null));
+    }, []);
+
     return (
         <div className={b('chat', 'messages')}>
-            <ErrorBoundary>
+            {selectedChannel && <ErrorBoundary>
                 {error && <div className={b('chat', 'messages-error')}>
                     <img
                         alt="clear gif"
@@ -94,7 +119,7 @@ const ChatMessages = () => {
                     items={messages}
                     loadNextPage={loadNextPage}
                 />
-            </ErrorBoundary>
+            </ErrorBoundary>}
         </div>
     );
 };

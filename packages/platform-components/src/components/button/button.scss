@@ -2,6 +2,8 @@
 
 .button
 {
+    position: relative;
+
     display: flex;
 
     cursor: pointer;
@@ -105,6 +107,13 @@
         {
             fill: $Silver;
         }
+    }
+
+    .spin
+    {
+        position: absolute;
+
+        left: 25px;
     }
 
     .icon

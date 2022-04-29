@@ -11,6 +11,7 @@ export interface NotificationRaw {
     autoHideDuration?: number | null;
     mix?: string;
     disableWindowBlurListener?: boolean;
+    disableReloadButton?: boolean;
     disableCloseButton?: boolean;
 }
 
@@ -24,6 +25,7 @@ export interface Notification {
     mix?: string;
     disableWindowBlurListener?: boolean;
     disableCloseButton?: boolean;
+    disableReloadButton?: boolean;
     life?: object | null;
 }
 

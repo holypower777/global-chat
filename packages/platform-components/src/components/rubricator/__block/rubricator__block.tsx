@@ -2,6 +2,7 @@ import b from 'b_';
 import { TwitchUserChannel, TwitchUserChannels } from 'platform-apis/types';
 import { formatDate, isArrayEqual } from 'platform-components/src/utils';
 import React from 'react';
+import { useIntl } from 'react-intl';
 
 import { H1 } from '../../header-text/header-text';
 
@@ -15,6 +16,7 @@ interface RubricatorBlockProps {
 }
 
 const RubricatorBlock = React.memo(({ items, handleSelect, selectedItem, activeLetter }: RubricatorBlockProps) => {
+    const intl = useIntl();
     const blockLetter = items[0].displayName.charAt(0).toUpperCase();
 
     return (
@@ -35,9 +37,9 @@ const RubricatorBlock = React.memo(({ items, handleSelect, selectedItem, activeL
                         data-profile-image-url={item.profileImageUrl}
                         key={item.userId}
                         onClick={() => handleSelect(item)}
-                        title={`Messages: ${item.messages}
-First message: ${formatDate(item.firstMessageDate)}
-Last message: ${formatDate(item.lastMessageDate)}`}
+                        title={`${intl.formatMessage({ id: 'rubricator.item.title.messages' }, { amount: item.messages })}
+${intl.formatMessage({ id: 'rubricator.item.title.firstMessage' }, { date: formatDate(item.firstMessageDate) })}
+${intl.formatMessage({ id: 'rubricator.item.title.lastMessage' }, { date: formatDate(item.lastMessageDate) })}`}
                     >
                         {item.displayName}
                     </li>)

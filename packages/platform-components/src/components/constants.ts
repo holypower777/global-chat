@@ -106,6 +106,17 @@ export enum SETTINGS {
     LIVE_CHAT_SHOW_BADGES = 'liveChatShowBadges',
     LIVE_CHAT_SHOW_MESSAGE_TIME = 'liveChatShowMessageTime',
     LIVE_CHAT_USE_CHAT_COLORS = 'liveChatUseChatColors',
+    LANGUAGE = 'language',
+}
+
+export enum SORT_ORDER {
+    ASC = 'asc',
+    DESC = 'desc',
+}
+
+export enum LANGUAGES {
+    ENG = 'en-US',
+    RU = 'ru-RU',
 }
 
 export const MONTHS = [

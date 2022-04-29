@@ -18,6 +18,7 @@ interface NotificationsSnackbarProps {
     onClose?: SimpleCallback;
     mix?: string;
     disableCloseButton?: boolean;
+    disableReloadButton?: boolean;
     life?: SpringValue<string> | null;
     style?: object;
 }
@@ -29,6 +30,7 @@ const NotificationsSnackbar = ({
     onClose = () => ({}),
     mix,
     disableCloseButton = false,
+    disableReloadButton = true,
     life = null,
     style,
     setRef,
@@ -64,11 +66,17 @@ const NotificationsSnackbar = ({
                 {life && <animated.div className={b('notifications', 'snackbar-life', { type })} style={{ right: life }} />}
                 {icon}
                 {content}{id ? children : null}
-                {!disableCloseButton && <IconCross handleClick={(e) => {
-                    e.stopPropagation();
-                    onClose();
-                }}
-                />}
+                <div className={b('notifications', 'snackbar-buttons')}>
+                    {!disableReloadButton && <button
+                        className={b('notifications', 'snackbar-reload')}
+                        onClick={() => window.location.reload()}
+                    >reload the page</button>}
+                    {!disableCloseButton && <IconCross handleClick={(e) => {
+                        e.stopPropagation();
+                        onClose();
+                    }}
+                    />}
+                </div>
             </div>
         </animated.div>
     );

@@ -6,8 +6,9 @@ import {
     getTwitchUserWithChannelsByUsernameDef,
     getTwitchUserWereInterestedByUserIdDef,
     putTwitchUserWereInterestedByUserIdDef,
+    getRandomTwitchUser,
 } from '../api-defs';
-import { GetTwitchUserQuery, UserIdQuery, UsernameQuery } from '../types/query';
+import { GetTwitchUserQuery, UserIdQuery } from '../types/query';
 import { convertTwitchUserApi, TwitchUser, TwitchUserAPI } from '../types/twitch-user';
 import { convertTwitchUserChannelsApi, TwitchUserChannels, TwitchUserChannelsAPI } from '../types/twitch-user-channel';
 
@@ -41,8 +42,13 @@ export const twitchUsersApi = createApi({
             query: getTwitchUserByUsernameDef,
             transformResponse: convertTwitchUserApi,
         }),
+        getRandomTwitchUser: builder.query<TwitchUserResponseType, null>({
+            query: getRandomTwitchUser,
+            keepUnusedDataFor: 0,
+            transformResponse: convertTwitchUserApi,
+        }),
         getTwitchUserWithChannelsByUsername:
-            builder.query<TwitchUserWithChannelsResponseType, UsernameQuery>({
+            builder.query<TwitchUserWithChannelsResponseType, GetTwitchUserQuery>({
                 query: getTwitchUserWithChannelsByUsernameDef,
                 transformResponse: (response: TwitchUserWithChannelsResponseTypeRaw) => {
                     return {
@@ -68,6 +74,7 @@ export const twitchUsersApi = createApi({
 
 export const {
     useGetTwitchUserByUsernameQuery,
+    useGetRandomTwitchUserQuery,
     useGetTwitchUserWithChannelsByUsernameQuery,
     useGetTwitchUserWereInterestedByUserIdQuery,
     usePutTwitchUserWereInterestedByUserIdQuery,

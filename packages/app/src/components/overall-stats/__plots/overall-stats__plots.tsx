@@ -2,6 +2,7 @@ import b from 'b_';
 import React from 'react';
 //@ts-ignore
 import Charty from 'react-charty';
+import { useIntl } from 'react-intl';
 import { useSelector } from 'react-redux';
 
 import { 
@@ -24,22 +25,23 @@ const commonConfig = {
     stepX: 86400000,
 };
 
-const messagesConfig = {
-    colors: { y: '#558DED' },
-    names: { y: 'messages' },
-    ...commonConfig,
-};
-
-const usersConfig = {
-    colors: { y: '#558DED' },
-    names: { y: 'users' },
-    ...commonConfig,
-};
-
 const OverallStatsPlots = () => {
+    const intl = useIntl();
     const totalMessages = useSelector(getTotalMessagesPlots);
     const totalUsers = useSelector(getTotalUsersPlots);
     const periodActivity = useSelector(getPeriodActivityPlots);
+
+    const messagesConfig = {
+        colors: { y: '#558DED' },
+        names: { y: intl.formatMessage({ id: 'overall-stats.plots.messages' }) },
+        ...commonConfig,
+    };
+    
+    const usersConfig = {
+        colors: { y: '#558DED' },
+        names: { y: intl.formatMessage({ id: 'overall-stats.plots.users' }) },
+        ...commonConfig,
+    };
 
     const handleZoomIn = (xPos: number, data: PlotData, config: object) => new Promise((resolve) => {
         const firstIndex = data.x.findIndex((e) => e > xPos - 86400000 * 2);
@@ -65,28 +67,28 @@ const OverallStatsPlots = () => {
             {totalMessages.x.length > 0 && <Charty
                 colors={{ y: '#2373DB' }}
                 data={splitDataByDay(totalMessages)}
-                names={{ y: 'messages' }}
+                names={{ y: intl.formatMessage({ id: 'overall-stats.plots.messages' }) }}
                 onZoomIn={(x: number) => handleZoomIn(x, totalMessages, messagesConfig)}
                 rangeTextType="longDate"
-                title="Total messages"
+                title={intl.formatMessage({ id: 'overall-stats.plots.totalMessages' })}
                 xAxisType="date"
             />}
             {totalUsers.x.length > 0 && <Charty
                 colors={{ y: '#2373DB' }}
                 data={splitDataByDay(totalUsers)}
-                names={{ y: 'users' }}
+                names={{ y: intl.formatMessage({ id: 'overall-stats.plots.users' }) }}
                 onZoomIn={(x: number) => handleZoomIn(x, totalUsers, usersConfig)}
                 rangeTextType="longDate"
-                title="Total users"
+                title={intl.formatMessage({ id: 'overall-stats.plots.totalUsers' })}
                 xAxisType="date"
             />}
             {periodActivity.x.length > 0 && <Charty
                 colors={{ y: '#2373DB' }}
                 data={splitDataByDay(periodActivity)}
-                names={{ y: 'messages' }}
+                names={{ y: intl.formatMessage({ id: 'overall-stats.plots.messages' }) }}
                 onZoomIn={(x: number) => handleZoomIn(x, periodActivity, messagesConfig)}
                 rangeTextType="longDate"
-                title="Amount of messages per day"
+                title={intl.formatMessage({ id: 'overall-stats.plots.periodActivity' })}
                 type="bar"
                 xAxisType="date"
             />}

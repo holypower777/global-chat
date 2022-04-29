@@ -19,6 +19,7 @@ interface UserCardProps {
     createdAt: Date | null;
     heatmapDates: Array<Date>;
     mostActiveChannel: string;
+    wereInterested: number;
     updateSettings: (key: string, value: unknown) => void;
     mix?: string;
 }
@@ -33,6 +34,7 @@ const UserCard = (props: UserCardProps) => {
         heatmapDates,
         mix,
         mostActiveChannel,
+        wereInterested,
         updateSettings,
     } = props;
     const defaultHeight = 45;
@@ -67,6 +69,7 @@ const UserCard = (props: UserCardProps) => {
                         mostActiveChannel={mostActiveChannel}
                         profileImageUrl={profileImageUrl}
                         userId={userId}
+                        wereInterested={wereInterested}
                         width={width}
                     />}
                     {isSettingsExpanded && <UserCardSettings

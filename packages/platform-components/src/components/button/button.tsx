@@ -5,6 +5,7 @@ import React, { ReactNode } from 'react';
 import { Link } from 'react-router-dom';
 
 import { SIZE, THEME } from '../constants';
+import Spin from '../spin/spin';
 
 import './button.scss';
 
@@ -13,6 +14,7 @@ interface ButtonProps {
     theme?: THEME;
     mix?: string;
     disabled?: boolean;
+    loading?: boolean;
     children?: ReactNode | Array<ReactNode>;
     icon?: JSX.Element;
     href?: string;
@@ -25,6 +27,7 @@ const Button = (props: ButtonProps) => {
         theme = THEME.light,
         mix = '',
         disabled = false,
+        loading = false,
         children,
         icon = null,
         href,
@@ -36,11 +39,15 @@ const Button = (props: ButtonProps) => {
     if (href) {
         return (
             <Link to={href}>
-                <button 
-                    className={className} 
+                <button
+                    className={className}
                     disabled={disabled}
                     onClick={handleClick}
                 >
+                    {loading && <Spin
+                        size={Spin.SIZE.S}
+                        theme={theme === THEME.light ? Spin.THEME.BLACK : Spin.THEME.WHITE}
+                    />}
                     {children}
                     {icon}
                 </button>
@@ -49,11 +56,15 @@ const Button = (props: ButtonProps) => {
     }
 
     return (
-        <button 
-            className={className} 
+        <button
+            className={className}
             disabled={disabled}
             onClick={handleClick}
         >
+            {loading && <Spin
+                size={Spin.SIZE.S}
+                theme={theme === THEME.light ? Spin.THEME.BLACK : Spin.THEME.WHITE}
+            />}
             {children}
             {icon}
         </button>

@@ -4,7 +4,6 @@ import {
     GetTwitchUserQuery, 
     GetTwitchUserWithChannelsQuery, 
     UserIdQuery, 
-    UsernameQuery,
 } from './types/query';
 
 /* eslint-disable max-params */
@@ -17,7 +16,8 @@ export const baseBadgesUrl = 'https://badges.twitch.tv/';
 export const getTwitchUserByUsernameDef = 
     ({ username, type }: GetTwitchUserQuery) => `twitch-user/${username}?type=${type}`;
 export const getTwitchUserWithChannelsByUsernameDef = 
-    ({ username }: UsernameQuery) => `twitch-user/${username}/user-with-channels`;
+    ({ username, type }: GetTwitchUserQuery) => `twitch-user/${username}/user-with-channels?type=${type}`;
+export const getRandomTwitchUser = () => 'twitch-user/random';
 export const getTwitchUserWereInterestedByUserIdDef = 
     ({ userId }: UserIdQuery) => `twitch-user/${userId}/were-interested`;
 export const putTwitchUserWereInterestedByUserIdDef = 

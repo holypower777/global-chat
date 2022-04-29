@@ -32,6 +32,7 @@ const Chat = () => {
                     dispatch(updateSetting({ key, value }));
                 }}
                 userId={user.userId}
+                wereInterested={user.wereInterested}
             />
             {selectedChannel && <Text id="chat.channelName" mix={b('chat', 'title')} size={Text.SIZE.XL}>
                 <Text mix={b('chat', 'title-channel')} size={Text.SIZE.XL}>{selectedChannel.displayName}</Text>

@@ -1,6 +1,7 @@
 import b from 'b_';
 import { formatDate } from 'platform-components/src/utils/format-date';
 import React from 'react';
+import { useIntl } from 'react-intl';
 
 import { SECONDS_IN_ONE_DAY } from '../../constants';
 import { CIRCLE_RADIUS } from '../heatmap-constants';
@@ -33,6 +34,7 @@ const getDataLevel = (amountOfMessages: number | undefined) => {
 };
 
 const HeatmapDay = React.memo(({ dayIndex, day, numberOfDays, cellSize, xPadding, datesToCount }: HeatmapDayProps) => {
+    const intl = useIntl();
     const currentTimestamp = Math.floor(Date.now() / 1000);
     const secondsDiff = (numberOfDays - day - 1) * SECONDS_IN_ONE_DAY;
     const newTimestamp = currentTimestamp - secondsDiff;
@@ -55,7 +57,7 @@ const HeatmapDay = React.memo(({ dayIndex, day, numberOfDays, cellSize, xPadding
             data-level={getDataLevel(amountOfMessages)}
             r={CIRCLE_RADIUS}
         >
-            <title>{`${amountOfMessages ? amountOfMessages : 'No'} messages on ${formatDate(date, true)}`}</title>
+            <title>{intl.formatMessage({ id: 'chat.userCard.heatmap' }, { amount: amountOfMessages || 0, date: formatDate(date, true) })}</title>
         </circle>
     );
 });

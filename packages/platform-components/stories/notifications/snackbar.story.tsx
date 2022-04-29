@@ -11,6 +11,7 @@ const StorySnackbar = () => {
     return (
         <NotificationsSnackbar
             disableCloseButton={boolean('disable close button', false)}
+            disableReloadButton={boolean('disable reload button', true)}
             setRef={(ref: HTMLDivElement) => (refMap.set({}, ref))}
             type={select('type', Object.values(NotificationsSnackbar.TYPE), NotificationsSnackbar.TYPE.ERROR)}
         >

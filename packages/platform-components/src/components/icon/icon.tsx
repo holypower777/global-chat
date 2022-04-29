@@ -39,6 +39,8 @@ export { default as IconCross } from './__cross/icon__cross';
 export { default as IconDonate } from './__donate/icon__donate';
 export { default as IconDots } from './__dots/icon__dots';
 export { default as IconEz } from './__ez/icon__ez';
+export { default as IconFlagRu } from './__flag-ru/icon__flag-ru';
+export { default as IconFlagUsa } from './__flag-usa/icon__flag-usa';
 export { default as IconGithub } from './__github/icon__github';
 export { default as IconIdea } from './__idea/icon__idea';
 export { default as IconMoreCircle } from './__more-circle/icon__more-circle';

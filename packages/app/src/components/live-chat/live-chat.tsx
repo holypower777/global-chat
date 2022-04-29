@@ -41,10 +41,10 @@ const LiveChat = () => {
 
     const handleChangeTab = (index: number, indexLatest: number) => {
         if (indexLatest === undefined || indexLatest === 0) {
-            setActiveTab(0);
+            setActiveTab(1);
             return;
         }
-        setActiveTab(1);
+        setActiveTab(0);
     };
 
     useEffect(() => {
