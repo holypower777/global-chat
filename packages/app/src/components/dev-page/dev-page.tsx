@@ -1,6 +1,7 @@
 import b from 'b_';
 import { H1 } from 'platform-components';
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useIntl } from 'react-intl';
 
 import { CommonHeader } from '../../common.components';
 
@@ -11,6 +12,12 @@ interface DevPageProps {
 }
 
 const DevPage = ({ maintenance = false }: DevPageProps) => {
+    const intl = useIntl();
+
+    useEffect(() => {
+        document.title = intl.formatMessage({ id: 'title.common' });
+    }, []);
+
     return (
         <>
             <CommonHeader />

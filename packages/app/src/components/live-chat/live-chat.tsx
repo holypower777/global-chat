@@ -3,6 +3,7 @@ import { DocumentData, DocumentSnapshot, Unsubscribe } from 'firebase/firestore'
 import { SNACKBAR_TYPE, Tab, Tabs, WithSkeleton, Text } from 'platform-components';
 import { useWindowSize } from 'platform-components/src/hooks';
 import React, { useEffect, useState } from 'react';
+import { useIntl } from 'react-intl';
 import { useDispatch, useSelector } from 'react-redux';
 import SwipeableViews from 'react-swipeable-views';
 
@@ -17,6 +18,7 @@ import LiveChatChat from './__chat/live-chat__chat';
 import './live-chat.scss';
 
 const LiveChat = () => {
+    const intl = useIntl();
     const dispatch = useDispatch();
     const client = useSelector(getClient);
     const hasChannels = useSelector(hasActualChannels);
@@ -47,6 +49,10 @@ const LiveChat = () => {
         }
         setActiveTab(0);
     };
+
+    useEffect(() => {
+        document.title = intl.formatMessage({ id: 'title.liveChat' });
+    }, []);
 
     useEffect(() => {
         let unsub: Unsubscribe;

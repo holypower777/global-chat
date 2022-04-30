@@ -32,6 +32,10 @@ const Home = () => {
         }
     }, [data]);
 
+    useEffect(() => {
+        document.title = intl.formatMessage({ id: 'title.common' });
+    }, []);
+
     const handleSubmit = (e: React.KeyboardEvent) => {
         if (e.key === 'Enter') {
             if (!isValidSearchSubmit(userType, username)) {
@@ -75,7 +79,7 @@ const Home = () => {
                 />
                 <section className={b('home', 'search')}>
                     <div className={b('home', 'search-links')}>
-                        <Button 
+                        <Button
                             handleClick={() => setSkip(false)}
                             loading={isFetching}
                         >

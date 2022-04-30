@@ -1,5 +1,7 @@
+const CompressionPlugin = require('compression-webpack-plugin');
 const dotenv = require('dotenv');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const path = require('path');
 const webpack = require('webpack');
 
@@ -23,9 +25,14 @@ module.exports = {
         splitChunks: { chunks: 'all' },
     },
     plugins: [
-        new HtmlWebpackPlugin(),
+        new MiniCssExtractPlugin(),
+        new CompressionPlugin(),
+        new HtmlWebpackPlugin({
+            favicon: `${__dirname}/../../static/favicon.ico`,
+        }),
         new webpack.DefinePlugin({
             'process.env': JSON.stringify(env),
         }),
+        
     ],
 };

@@ -1,3 +1,4 @@
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const path = require('path');
 
 module.exports = {
@@ -19,9 +20,20 @@ module.exports = {
                 },
                 exclude: /node_modules/,
             },
+            // {
+            //     test: /\.(scss|css)$/,
+            //     use: ['style-loader', 'css-loader', {
+            //         loader: 'sass-loader',
+            //         options: {
+            //             sassOptions: {
+            //                 includePaths: [path.resolve(__dirname, './packages/platform-components/src')],
+            //             },
+            //         },
+            //     }],
+            // },
             {
-                test: /\.(scss|css)$/,
-                use: ['style-loader', 'css-loader', {
+                test: /\.(s(a|c)ss)$/,
+                use: [MiniCssExtractPlugin.loader, 'css-loader', {
                     loader: 'sass-loader',
                     options: {
                         sassOptions: {

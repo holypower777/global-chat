@@ -1,6 +1,7 @@
 import { useGetOverallStatsPlotsQuery, useGetOverallStatsQuery } from 'platform-apis';
 import { H1, WithSkeleton } from 'platform-components';
 import React, { useEffect } from 'react';
+import { useIntl } from 'react-intl';
 import { useDispatch } from 'react-redux';
 
 import { CommonHeader } from '../../common.components';
@@ -18,9 +19,14 @@ import OverallStatsStats from './__stats/overall-stats__stats';
 import './overall-stats.scss';
 
 const OverallStats = () => {
+    const intl = useIntl();
     const dispatch = useDispatch();
     const { data: stats, isFetching: isStatsFetching } = useGetOverallStatsQuery();
     const { data: plots, isFetching: isPlotsFetching } = useGetOverallStatsPlotsQuery({});
+
+    useEffect(() => {
+        document.title = intl.formatMessage({ id: 'title.overallStats' });
+    }, []);
 
     useEffect(() => {
         dispatch(setIsStatsFetching(isStatsFetching));

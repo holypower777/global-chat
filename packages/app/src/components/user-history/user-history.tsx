@@ -43,6 +43,7 @@ const UserHistory = () => {
 
     useEffect(() => {
         if (username) {
+            document.title = username;
             setSkip(false);
         }
     }, [username]);
