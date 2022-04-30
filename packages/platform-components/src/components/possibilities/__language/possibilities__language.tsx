@@ -5,6 +5,7 @@ import { animated } from 'react-spring';
 
 import { getLocalStorageValue } from '../../../hooks';
 import { UpdateSettingsProps } from '../../../typings';
+import { getDefaultLanguage } from '../../../utils';
 import { SETTINGS, LANGUAGES } from '../../constants';
 import { IconFlagRu, IconFlagUsa } from '../../icon/icon';
 import Text from '../../text/text';
@@ -13,7 +14,9 @@ import { PossibilityProps } from '../possibilities';
 interface LanguagePossibilityProps extends UpdateSettingsProps, PossibilityProps {}
 
 const LanguagePossibility = ({ style, disabled = false, updateSettings }: LanguagePossibilityProps) => {
-    const [lang, setLang] = useState(getLocalStorageValue(SETTINGS.LANGUAGE, LANGUAGES.ENG));
+    const defaultLanguage = getDefaultLanguage();
+    
+    const [lang, setLang] = useState(getLocalStorageValue(SETTINGS.LANGUAGE, defaultLanguage));
 
     return (
         <animated.div 

@@ -5,8 +5,10 @@
   "license": "UNLICENSED",
   "private": true,
   "scripts": {
-    "start": "webpack serve --mode development --port 8081 --open",
-    "build": "webpack"
+    "start": "webpack serve --config webpack.config.js --mode development --port 8081 --open",
+    "build": "webpack --config webpack.prod.js",
+    "build:stats": "webpack --config webpack.prod.js --profile --json > webpack.analyze.json",
+    "build:analyze": "webpack-bundle-analyzer webpack.analyze.json"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.7.2",
@@ -39,7 +41,8 @@
     "@types/react-window-infinite-loader": "^1.0.6",
     "@types/tmi.js": "^1.8.1",
     "dotenv": "^16.0.0",
-    "webpack": "^5.53.0"
+    "webpack": "^5.53.0",
+    "webpack-bundle-analyzer": "^4.5.0"
   },
   "peerDependencies": {
     "react": "^17.0.2",

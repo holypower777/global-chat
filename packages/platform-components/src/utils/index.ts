@@ -5,3 +5,4 @@ export { default as isArrayEqual } from './is-array-equal';
 export { default as getRandomColor } from './get-random-color';
 export { default as timer } from './timer';
 export { default as generateRandom } from './get-random-number';
+export { default as getDefaultLanguage } from './get-default-language';

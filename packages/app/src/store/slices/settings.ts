@@ -1,6 +1,7 @@
 import { createSelector, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { LANGUAGES, SEARCH_TYPE, SETTINGS, SORT_ORDER } from 'platform-components/src/components/constants';
 import { getLocalStorageValue } from 'platform-components/src/hooks';
+import { getDefaultLanguage } from 'platform-components/src/utils';
 
 import { RootState } from '../store';
 
@@ -21,21 +22,7 @@ interface UpdateSetting {
 }
 
 const initialState = (): SettingsState => {
-    let defaultLanguage;
-    switch (navigator.language) {
-        case 'ru':
-            defaultLanguage = 'ru-RU';
-            break;
-        case 'ru-RU':
-            defaultLanguage = 'ru-RU';
-            break;
-        case 'RU':
-            defaultLanguage = 'ru-RU';
-            break;
-        default:
-            defaultLanguage = 'en-US';
-            break;
-    }
+    const defaultLanguage = getDefaultLanguage();
 
     return {
         sortByDate: getLocalStorageValue(SETTINGS.SORT_BY_DATE, SORT_ORDER.DESC),

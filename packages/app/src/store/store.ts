@@ -36,7 +36,7 @@ export const store = configureStore({
             settingsMiddleware,
             rtkQueryErrorMiddleware,
         ),
-    devTools: true,
+    devTools: process.env.NODE_ENV === 'production' ? false : true,
 });
 
 setupListeners(store.dispatch);

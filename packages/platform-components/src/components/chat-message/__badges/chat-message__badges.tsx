@@ -40,7 +40,11 @@ const ChatMessageBadges = ({ subBadges, badges }: ChatMessageBadges) => {
                     }
                 } else {
                     //@ts-ignore
-                    imageSrc = commonBadges[badge].versions[version].image_url_1x;
+                    // eslint-disable-next-line no-lonely-if
+                    if (commonBadges[badge] && commonBadges[badge].versions[version] && commonBadges[badge].versions[version].image_url_1x) {
+                        //@ts-ignore
+                        imageSrc = commonBadges[badge].versions[version].image_url_1x;
+                    }
                 }
                 
                 if (imageSrc) {

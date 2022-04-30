@@ -10,6 +10,13 @@
 
     gap: 20px;
 
+    &__mobile
+    {
+        margin: auto 0;
+
+        text-align: center;
+    }
+
     @include media-breakpoint-down($desktopBp)
     {
         flex-direction: column;

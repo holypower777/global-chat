@@ -13,6 +13,8 @@ if (isDevelopment) {
 
 module.exports = {
     ...rootWebpackConfig,
+    devtool: 'source-map',
+    mode: 'development',
     entry: {
         main: require.resolve('./src/app.tsx'),
     },

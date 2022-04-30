@@ -1,5 +1,6 @@
+import b from 'b_';
 import { DocumentData, DocumentSnapshot, Unsubscribe } from 'firebase/firestore';
-import { SNACKBAR_TYPE, Tab, Tabs, WithSkeleton } from 'platform-components';
+import { SNACKBAR_TYPE, Tab, Tabs, WithSkeleton, Text } from 'platform-components';
 import { useWindowSize } from 'platform-components/src/hooks';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -49,6 +50,7 @@ const LiveChat = () => {
 
     useEffect(() => {
         let unsub: Unsubscribe;
+
         client.connect()
             .then(() => {
                 setIsConnected(true);
@@ -81,6 +83,17 @@ const LiveChat = () => {
             setIsLoading(false);
         }
     }, [isConnected, hasChannels]);
+
+    if (width && width < 769) {
+        return (
+            <>
+                <CommonHeader />
+                <main className="live-chat">
+                    <Text id="live-chat.mobile" mix={b('live-chat', 'mobile')} />
+                </main>
+            </>
+        );
+    }
 
     if (width && width < 1281) {
         return (
