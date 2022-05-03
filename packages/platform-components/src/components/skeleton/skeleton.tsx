@@ -14,6 +14,7 @@ export enum SKELETON_VARIANT {
     CHIP = 'chip',
     LIVE_CHAT = 'live-chat',
     OVERALL_STATS = 'overall-stats',
+    OVERALL_STATS_NO_PLOTS = 'overall-stats-no-plots',
 }
 
 interface SkeletonProps {
@@ -37,6 +38,9 @@ const Skeleton = ({ variant, style, mix }: SkeletonProps) => {
             break;
         case SKELETON_VARIANT.OVERALL_STATS:
             comp = <SkeletonOverallStats />;
+            break;
+        case SKELETON_VARIANT.OVERALL_STATS_NO_PLOTS:
+            comp = <SkeletonOverallStats disablePlots />;
             break;
         default:
             comp = null;

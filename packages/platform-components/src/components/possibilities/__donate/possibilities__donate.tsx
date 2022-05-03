@@ -9,13 +9,16 @@ import { PossibilityProps } from '../possibilities';
 
 const DonatePossibility = ({ style, disabled = false }: PossibilityProps) => {
     return (
-        <animated.div 
+        <animated.a 
             className={cx(b('possibility', { disabled }), b('possibility', 'donate'))}
+            href="https://boosty.to/holypower77"
+            onClick={(e) => e.stopPropagation()}
             style={style}
+            target="_blank"
         >
             <Text id="possibilities.donate" />
             <IconDonate />
-        </animated.div>
+        </animated.a>
     );
 };
 

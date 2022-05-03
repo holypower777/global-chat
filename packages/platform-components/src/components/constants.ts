@@ -119,6 +119,10 @@ export enum LANGUAGES {
     RU = 'ru-RU',
 }
 
+export enum FROM_PAGE {
+    RANDOM_USER = 'randomUser',
+}
+
 export const MONTHS = [
     'january', 
     'february', 

@@ -1,3 +1,5 @@
+import flagsmith from 'flagsmith';
+import { FlagsmithProvider } from 'flagsmith/react';
 import { Spin } from 'platform-components';
 import React, { lazy, Suspense } from 'react';
 import ReactDOM from 'react-dom';
@@ -26,31 +28,36 @@ const UserHistory = lazy(() => import('./components/user-history/user-history'))
 
 const App = () => {
     return (
-        <ReduxProvider store={store}>
-            <LanguageProvider>
-                <NotificationProvider>
-                    <Suspense fallback={<Spin center />}>
-                        <PossibilitiesProvider>
-                            <BrowserRouter>
-                                <Routes>
-                                    <Route>
-                                        <Route path="/">
-                                            <Route element={<Home />} index />
-                                            <Route element={<LiveChat />} path="live-chat" />
-                                            <Route element={<UserHistory />} path="messages">
-                                                <Route element={<UserHistory />} path=":username" />
+        <FlagsmithProvider
+            flagsmith={flagsmith}
+            options={{ environmentID: process.env.FLAGSMITH_API_KEY || '' }}
+        >
+            <ReduxProvider store={store}>
+                <LanguageProvider>
+                    <NotificationProvider>
+                        <Suspense fallback={<Spin center />}>
+                            <PossibilitiesProvider>
+                                <BrowserRouter>
+                                    <Routes>
+                                        <Route>
+                                            <Route path="/">
+                                                <Route element={<Home />} index />
+                                                <Route element={<LiveChat />} path="live-chat" />
+                                                <Route element={<UserHistory />} path="messages">
+                                                    <Route element={<UserHistory />} path=":username" />
+                                                </Route>
+                                                <Route element={<OverallStats />} path="overall-stats" />
+                                                <Route element={<Navigate to="/" />} path="*" />
                                             </Route>
-                                            <Route element={<OverallStats />} path="overall-stats" />
-                                            <Route element={<Navigate to="/" />} path="*" />
                                         </Route>
-                                    </Route>
-                                </Routes>
-                            </BrowserRouter>
-                        </PossibilitiesProvider>
-                    </Suspense>
-                </NotificationProvider>
-            </LanguageProvider>
-        </ReduxProvider>
+                                    </Routes>
+                                </BrowserRouter>
+                            </PossibilitiesProvider>
+                        </Suspense>
+                    </NotificationProvider>
+                </LanguageProvider>
+            </ReduxProvider>
+        </FlagsmithProvider>
     );
 };
 

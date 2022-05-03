@@ -40,7 +40,11 @@ const UserCardHeader = ({ isContentExpanded, isSettingsExpanded, setIsExpanded, 
                     setIsSettingsExpanded(!isSettingsExpanded);
                 }}
                 />
-                <a href={`https://www.twitch.tv/${displayName}`} target="_blank">
+                <a 
+                    href={`https://www.twitch.tv/${displayName}`} 
+                    onClick={(e) => (e.stopPropagation())}
+                    target="_blank"
+                >
                     <IconTwitch />
                 </a>
             </div>

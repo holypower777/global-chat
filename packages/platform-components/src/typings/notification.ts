@@ -10,6 +10,9 @@ export interface NotificationRaw {
     type?: SNACKBAR_TYPE;
     autoHideDuration?: number | null;
     mix?: string;
+    handleClick?: SimpleCallback;
+    clickable?: boolean;
+    isLoading?: boolean;
     disableWindowBlurListener?: boolean;
     disableReloadButton?: boolean;
     disableCloseButton?: boolean;
@@ -23,6 +26,9 @@ export interface Notification {
     autoHideDuration?: number | null;
     onClose?: SimpleCallback;
     mix?: string;
+    handleClick?: SimpleCallback;
+    clickable?: boolean;
+    isLoading?: boolean;
     disableWindowBlurListener?: boolean;
     disableCloseButton?: boolean;
     disableReloadButton?: boolean;

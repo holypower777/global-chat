@@ -7,9 +7,9 @@ import {
 } from './types/query';
 
 /* eslint-disable max-params */
-export const baseUrl = process.env.NODE_ENV 
+export const baseUrl = process.env.NODE_ENV === 'development'
     ? 'http://192.168.1.12:3000/v1/'
-    : '/api/v1/';
+    : '/v1/';
 export const baseBadgesUrl = 'https://badges.twitch.tv/';
 
 // user defs

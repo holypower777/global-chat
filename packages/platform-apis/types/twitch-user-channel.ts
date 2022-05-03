@@ -42,4 +42,4 @@ const convertTwitchUserChannelApi = (channel: TwitchUserChannelAPI): TwitchUserC
 };
 
 export const convertTwitchUserChannelsApi = (channels: TwitchUserChannelsAPI): TwitchUserChannels => 
-    channels.map(convertTwitchUserChannelApi);
+    channels ? channels.map(convertTwitchUserChannelApi) : [];

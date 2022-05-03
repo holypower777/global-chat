@@ -1,7 +1,8 @@
 import b from 'b_';
-import { UserCard, Text } from 'platform-components';
+import { UserCard, Text, SETTINGS, SEARCH_TYPE } from 'platform-components';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 import { getSelectedChannel } from '../../../store/slices/channels';
 import { getMessagesDates } from '../../../store/slices/messages';
@@ -35,7 +36,12 @@ const Chat = () => {
                 wereInterested={user.wereInterested}
             />
             {selectedChannel && <Text id="chat.channelName" mix={b('chat', 'title')} size={Text.SIZE.XL}>
-                <Text mix={b('chat', 'title-channel')} size={Text.SIZE.XL}>{selectedChannel.displayName}</Text>
+                <Link 
+                    onClick={() => dispatch(updateSetting({ key: SETTINGS.USER_TYPE, value: SEARCH_TYPE.USERNAME }))}
+                    to={`/messages/${selectedChannel.displayName}`}
+                >
+                    <Text mix={b('chat', 'title-channel')} size={Text.SIZE.XL}>{selectedChannel.displayName}</Text>
+                </Link>
             </Text>}
             <ChatMessages />
         </section >

@@ -1,5 +1,5 @@
 import { TwitchUserChannel, TwitchUserChannels } from 'platform-apis/types';
-import { Rubricator } from 'platform-components';
+import { Rubricator, Text } from 'platform-components';
 import { SimpleCallback } from 'platform-components/src/typings';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -64,11 +64,11 @@ const Channels = ({ handlePickChannel }: ChannelsProps) => {
 
     return (
         <section className="channels">
-            {sortedChannels.length && <Rubricator
+            {sortedChannels.length > 0 ? <Rubricator
                 channels={sortedChannels}
                 handleSelect={handleSelect}
                 selectedItem={pickedChannel}
-            />}
+            /> : <Text id="userHistory.noChannels" />}
         </section>
     );
 };

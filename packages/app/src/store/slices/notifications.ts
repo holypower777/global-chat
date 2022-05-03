@@ -11,6 +11,11 @@ const initialState: NotificationsState = {
     notifications: [],
 };
 
+interface UpdateLoadingState {
+    key: number;
+    isLoading: boolean;
+}
+
 export const notificationsSlice = createSlice({
     name: 'notifications',
     initialState,
@@ -26,6 +31,14 @@ export const notificationsSlice = createSlice({
         removeNotification: (state, action: PayloadAction<number>) => {
             state.notifications = state.notifications.filter((item) => item.key !== action.payload);
         },
+        updateNotificationLoadingState: (state, action: PayloadAction<UpdateLoadingState>) => {
+            state.notifications = state.notifications.map((item) => {
+                if (item.key === action.payload.key) {
+                    return { ...item, isLoading: action.payload.isLoading };
+                }
+                return item;
+            });
+        },
     },
 });
 
@@ -33,6 +46,7 @@ export const {
     pushNotification,
     clearNotifications,
     removeNotification,
+    updateNotificationLoadingState,
 } = notificationsSlice.actions;
 
 const getRootNotifications = (state: RootState) => state.notifications;

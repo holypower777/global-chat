@@ -53,7 +53,7 @@ const Possibilities = ({ updateSettings }: UpdateSettingsProps) => {
                     case 'github':
                         return <GithubPossibility style={style} />;
                     case 'donate':
-                        return <DonatePossibility disabled style={style} />;
+                        return <DonatePossibility style={style} />;
                     case 'idea':
                         return <IdeaPossibility style={style} />;
                     case 'language':

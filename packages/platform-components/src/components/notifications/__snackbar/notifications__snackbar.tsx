@@ -7,6 +7,7 @@ import { animated, SpringValue } from 'react-spring';
 import { SimpleCallback, Notification } from '../../../typings';
 import { SNACKBAR_TYPE } from '../../constants';
 import { IconBell, IconCircleExc, IconCross, IconSquareTick, IconTriangleExc } from '../../icon/icon';
+import Spin from '../../spin/spin';
 
 import './notifications__snackbar.scss';
 
@@ -17,6 +18,9 @@ interface NotificationsSnackbarProps {
     type?: SNACKBAR_TYPE;
     onClose?: SimpleCallback;
     mix?: string;
+    handleClick?: SimpleCallback;
+    clickable?: boolean;
+    isLoading?: boolean;
     disableCloseButton?: boolean;
     disableReloadButton?: boolean;
     life?: SpringValue<string> | null;
@@ -29,6 +33,9 @@ const NotificationsSnackbar = ({
     type = SNACKBAR_TYPE.ERROR,
     onClose = () => ({}),
     mix,
+    handleClick = () => ({}),
+    clickable = false,
+    isLoading = false,
     disableCloseButton = false,
     disableReloadButton = true,
     life = null,
@@ -56,15 +63,16 @@ const NotificationsSnackbar = ({
 
     return (
         <animated.div
-            className={cx(b('notifications', 'snackbar'), mix)}
+            className={cx(b('notifications', 'snackbar', { clickable }), mix)}
+            onClick={handleClick}
             style={style}
         >
             <div
-                className={b('notifications', 'snackbar-content', { type })}
+                className={b('notifications', 'snackbar-content', { type, clickable })}
                 ref={(ref: HTMLDivElement) => ref && setRef(ref)}
             >
                 {life && <animated.div className={b('notifications', 'snackbar-life', { type })} style={{ right: life }} />}
-                {icon}
+                {isLoading ? <Spin size={Spin.SIZE.S} /> : icon}
                 {content}{id ? children : null}
                 <div className={b('notifications', 'snackbar-buttons')}>
                     {!disableReloadButton && <button

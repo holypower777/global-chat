@@ -8520,6 +8520,11 @@ flagged-respawn@^1.0.0:
   resolved "https://registry.yarnpkg.com/flagged-respawn/-/flagged-respawn-1.0.1.tgz#e7de6f1279ddd9ca9aac8a5971d618606b3aab41"
   integrity sha512-lNaHNVymajmk0OJMBn8fVUAU1BtDeKIqKoVhk4xAALB57aALg6b4W0MfJ/cUE0g9YBXy5XhSlPIpYIJ7HaY/3Q==
 
+flagsmith@^2.0.9:
+  version "2.0.9"
+  resolved "https://registry.yarnpkg.com/flagsmith/-/flagsmith-2.0.9.tgz#52eeefdeea527f50afb7de6130b44d9bfb2b04c9"
+  integrity sha512-8SdOly1Z/Fph8Wf0A3//HW06v+Uo5MZm0pItR7rSdmBUv53eIVAFvQNq9AvGX0D4W5beLdcgfISSUGdPHGIkaQ==
+
 flat-cache@^3.0.4:
   version "3.0.4"
   resolved "https://registry.yarnpkg.com/flat-cache/-/flat-cache-3.0.4.tgz#61b0338302b2fe9f957dcc32fc2a87f1c3048b11"

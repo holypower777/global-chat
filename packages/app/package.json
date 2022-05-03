@@ -16,6 +16,7 @@
     "classnames": "^2.3.1",
     "dank-twitch-irc": "^4.3.0",
     "firebase": "^9.6.10",
+    "flagsmith": "^2.0.9",
     "react-charty": "^0.1.7",
     "react-hot-loader": "^4.13.0",
     "react-intl": "^5.20.13",

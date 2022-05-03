@@ -1,7 +1,7 @@
 import { SEARCH_TYPE } from 'platform-components/src/components/constants';
 
 const usernameRegexp = new RegExp(/^[\w]{0,25}$/);
-const usernameSubmitRegexp = new RegExp(/^[a-zA-Z0-9][\w]{4,25}$/);
+const usernameSubmitRegexp = new RegExp(/^[a-zA-Z0-9][\w]{3,25}$/);
 const userIdRegexp = new RegExp(/^[0-9]{0,20}$/);
 const userIdSubmitRegexp = new RegExp(/^[0-9]{1,20}$/);
 

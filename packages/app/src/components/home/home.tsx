@@ -1,6 +1,6 @@
 import b from 'b_';
 import { useGetRandomTwitchUserQuery } from 'platform-apis/slices/twitch-users';
-import { Button, HeaderSettings, IconSearch, Input, Logo, SEARCH_TYPE, SETTINGS, SNACKBAR_TYPE, Text } from 'platform-components';
+import { Button, FROM_PAGE, HeaderSettings, IconSearch, Input, Logo, SEARCH_TYPE, SETTINGS, SNACKBAR_TYPE, Text } from 'platform-components';
 import React, { useEffect, useState } from 'react';
 import { useIntl } from 'react-intl';
 import { useDispatch, useSelector } from 'react-redux';
@@ -28,7 +28,7 @@ const Home = () => {
         if (data) {
             setSkip(true);
             dispatch(updateSetting({ key: SETTINGS.USER_TYPE, value: SEARCH_TYPE.USERNAME }));
-            navigate(`messages/${data.displayName}`);
+            navigate(`messages/${data.displayName}?from=${FROM_PAGE.RANDOM_USER}`);
         }
     }, [data]);
 

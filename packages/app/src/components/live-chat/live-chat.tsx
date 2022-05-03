@@ -1,5 +1,6 @@
 import b from 'b_';
 import { DocumentData, DocumentSnapshot, Unsubscribe } from 'firebase/firestore';
+import { useFlags } from 'flagsmith/react';
 import { SNACKBAR_TYPE, Tab, Tabs, WithSkeleton, Text } from 'platform-components';
 import { useWindowSize } from 'platform-components/src/hooks';
 import React, { useEffect, useState } from 'react';
@@ -11,6 +12,7 @@ import { CommonHeader } from '../../common.components';
 import { streamActualChannels } from '../../services/firestore';
 import { getClient, hasActualChannels, setActualChannels } from '../../store/slices/live-chat';
 import { addNotification } from '../../utils';
+import DevPage from '../dev-page/dev-page';
 
 import LiveChatChannels from './__channels/live-chat__channels';
 import LiveChatChat from './__chat/live-chat__chat';
@@ -26,6 +28,7 @@ const LiveChat = () => {
     const [isConnected, setIsConnected] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
     const { width } = useWindowSize();
+    const { livechatdev } = useFlags(['livechatdev']);
 
     const handleOnSnapshot = (doc: DocumentSnapshot<DocumentData>) => {
         if (doc.exists()) {
@@ -89,6 +92,10 @@ const LiveChat = () => {
             setIsLoading(false);
         }
     }, [isConnected, hasChannels]);
+
+    if (livechatdev.enabled) {
+        return <DevPage maintenance={livechatdev.value as boolean} />;
+    }
 
     if (width && width < 769) {
         return (

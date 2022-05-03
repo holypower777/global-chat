@@ -26,6 +26,8 @@ const addNotification = (notification: NotificationRaw, dispatch: Dispatch<any>,
     };
 
     dispatch(pushNotification(formattedNotification));
+
+    return key;
 };
 
 export default addNotification;

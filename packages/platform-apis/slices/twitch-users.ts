@@ -54,7 +54,7 @@ export const twitchUsersApi = createApi({
                     return {
                         user: convertTwitchUserApi(response.user),
                         channels: convertTwitchUserChannelsApi(response.channels),
-                        messagesDates: response.messages_dates.map((e) => new Date(e)),
+                        messagesDates: response.messages_dates ? response.messages_dates.map((e) => new Date(e)) : [],
                     };
                 },
             }),

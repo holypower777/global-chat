@@ -1,3 +1,4 @@
+import { useFlags } from 'flagsmith/react';
 import { useGetOverallStatsPlotsQuery, useGetOverallStatsQuery } from 'platform-apis';
 import { H1, WithSkeleton } from 'platform-components';
 import React, { useEffect } from 'react';
@@ -23,6 +24,7 @@ const OverallStats = () => {
     const dispatch = useDispatch();
     const { data: stats, isFetching: isStatsFetching } = useGetOverallStatsQuery();
     const { data: plots, isFetching: isPlotsFetching } = useGetOverallStatsPlotsQuery({});
+    const { showplots } = useFlags(['showplots']);
 
     useEffect(() => {
         document.title = intl.formatMessage({ id: 'title.overallStats' });
@@ -53,8 +55,11 @@ const OverallStats = () => {
             <CommonHeader />
             <main className="overall-stats">
                 <H1 id="overall-stats.header" />
-                <WithSkeleton isLoading={isPlotsFetching || isStatsFetching} variant={WithSkeleton.SKELETON_VARIANT.OVERALL_STATS}>
-                    <OverallStatsPlots />
+                <WithSkeleton 
+                    isLoading={isPlotsFetching || isStatsFetching} 
+                    variant={showplots.enabled ? WithSkeleton.SKELETON_VARIANT.OVERALL_STATS : WithSkeleton.SKELETON_VARIANT.OVERALL_STATS_NO_PLOTS}
+                >
+                    {showplots.enabled && <OverallStatsPlots />}
                     <OverallStatsStats />
                 </WithSkeleton>
             </main>

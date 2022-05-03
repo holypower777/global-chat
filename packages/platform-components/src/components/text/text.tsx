@@ -8,9 +8,12 @@ import { TEXT_SIZE, TEXT_TAG, TEXT_WEIGHT } from '../constants';
 
 import './text.scss';
 
+type MessageFormatPrimitiveValue = string | number | boolean | null | undefined
+
 interface TextProps {
     children?: ReactNode | Array<ReactNode>;
     id?: string;
+    values?: Record<string, MessageFormatPrimitiveValue>;
     tag?: TEXT_TAG;
     size?: TEXT_SIZE;
     weight?: TEXT_WEIGHT;
@@ -24,6 +27,7 @@ interface TextProps {
 
 const Text = ({
     id,
+    values = {},
     size = TEXT_SIZE.M,
     weight = TEXT_WEIGHT.S,
     tag = TEXT_TAG.SPAN,
@@ -37,7 +41,7 @@ const Text = ({
 }: TextProps) => {
     const intl = useIntl();
     const className = cx(b('text', { ellipsis, size, weight, uppercase, center }), mix);
-    const content = id ? intl.formatMessage({ id }) : children;
+    const content = id ? intl.formatMessage({ id }, values) : children;
 
     if (tag === TEXT_TAG.LI) {
         return <li className={className} onClick={handleClick} {...props}>{content}{id ? children : null}</li>;

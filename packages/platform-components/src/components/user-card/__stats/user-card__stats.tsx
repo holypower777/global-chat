@@ -23,7 +23,7 @@ const UserCardStats = ({ messagesAmount, wereInterested, mostActiveChannel }: Us
                 : <span className={valueClassName}>{wereInterested}</span>
             </Text>
             <Text id="chat.userCard.mostSentMessages" tag={Text.TAG.LI}  weight={Text.WEIGHT.M}>
-                : <span className={valueClassName}>{mostActiveChannel}</span>
+                : <span className={valueClassName}>{mostActiveChannel || <Text id="chat.userCard.noChannel" weight={Text.WEIGHT.M} />}</span>
             </Text>
         </ul>
     );
