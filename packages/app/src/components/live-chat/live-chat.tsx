@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import b from 'b_';
 import { DocumentData, DocumentSnapshot, Unsubscribe } from 'firebase/firestore';
 import { useFlags } from 'flagsmith/react';
@@ -29,6 +30,10 @@ const LiveChat = () => {
     const [isLoading, setIsLoading] = useState(true);
     const { width } = useWindowSize();
     const { livechatdev } = useFlags(['livechatdev']);
+
+    if (livechatdev.enabled) {
+        return <DevPage maintenance={livechatdev.value as boolean} />;
+    }
 
     const handleOnSnapshot = (doc: DocumentSnapshot<DocumentData>) => {
         if (doc.exists()) {
@@ -92,10 +97,6 @@ const LiveChat = () => {
             setIsLoading(false);
         }
     }, [isConnected, hasChannels]);
-
-    if (livechatdev.enabled) {
-        return <DevPage maintenance={livechatdev.value as boolean} />;
-    }
 
     if (width && width < 769) {
         return (

@@ -48,11 +48,13 @@ const UserHistory = () => {
             }, dispatch);
             setNotificationKey(key);
         }
+    }, [searchParams]);
 
+    useEffect(() => {
         return () => {
             dispatch(removeNotification(notificationKey));
         };
-    }, [searchParams]);
+    }, [notificationKey]);
 
     useEffect(() => {
         dispatch(updateNotificationLoadingState({ key: notificationKey, isLoading: isRandomUserFetching }));
