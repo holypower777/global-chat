@@ -29,6 +29,8 @@ module.exports = {
         new CompressionPlugin(),
         new HtmlWebpackPlugin({
             favicon: `${__dirname}/../../static/favicon.ico`,
+            title: 'Global chat',
+            template: `${__dirname}/../../static/index.html`,
         }),
         new webpack.DefinePlugin({
             'process.env': JSON.stringify(env),

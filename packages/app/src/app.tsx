@@ -39,16 +39,14 @@ const App = () => {
                             <PossibilitiesProvider>
                                 <BrowserRouter>
                                     <Routes>
-                                        <Route>
-                                            <Route path="/">
-                                                <Route element={<Home />} index />
-                                                <Route element={<LiveChat />} path="live-chat" />
-                                                <Route element={<UserHistory />} path="messages">
-                                                    <Route element={<UserHistory />} path=":username" />
-                                                </Route>
-                                                <Route element={<OverallStats />} path="overall-stats" />
-                                                <Route element={<Navigate to="/" />} path="*" />
+                                        <Route path="/">
+                                            <Route element={<Home />} index />
+                                            <Route element={<LiveChat />} path="live-chat" />
+                                            <Route element={<UserHistory />} path="messages">
+                                                <Route element={<UserHistory />} path=":username" />
                                             </Route>
+                                            <Route element={<OverallStats />} path="overall-stats" />
+                                            <Route element={<Navigate to="/" />} path="*" />
                                         </Route>
                                     </Routes>
                                 </BrowserRouter>
