@@ -1,0 +1,17 @@
+@import 'design/design';
+
+.watermark
+{
+    position: absolute;
+    right: 24px;
+    bottom: 0;
+
+    color: $Silver;
+
+    &-link
+    {
+        color: $Boulder;
+
+        font-size: $fontSizeS;
+    }
+}

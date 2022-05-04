@@ -56,7 +56,7 @@ const InfiniteScrollWrapper = ({
             isItemLoaded={isItemLoaded}
             itemCount={itemCount}
             loadMoreItems={loadMoreItems}
-            threshold={100}
+            threshold={15}
         >
             {({ onItemsRendered, ref }) => (
                 <AutoSizer>

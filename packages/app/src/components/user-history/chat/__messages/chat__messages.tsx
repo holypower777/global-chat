@@ -8,7 +8,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import ErrorBoundary from '../../../../containers/error-boundary/error-boundary';
-import { getSelectedChannel, setSelectedChannel } from '../../../../store/slices/channels';
+import { getSelectedChannel } from '../../../../store/slices/channels';
 import {
     clearMessages,
     getIsMessagesFetching,
@@ -97,10 +97,6 @@ const ChatMessages = () => {
             }
         }
     }, [data]);
-
-    useEffect(() => () => {
-        dispatch(setSelectedChannel(null));
-    }, []);
 
     return (
         <div className={b('chat', 'messages')}>

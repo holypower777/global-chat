@@ -8,7 +8,7 @@ import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import SwipeableViews from 'react-swipeable-views';
 
 import { CommonHeader } from '../../common.components';
-import { setChannels } from '../../store/slices/channels';
+import { setChannels, setSelectedChannel } from '../../store/slices/channels';
 import { setMessagesDates } from '../../store/slices/messages';
 import { removeNotification, updateNotificationLoadingState } from '../../store/slices/notifications';
 import { getUserTypeSetting, updateSetting } from '../../store/slices/settings';
@@ -85,6 +85,7 @@ const UserHistory = () => {
     useEffect(() => {
         if (username) {
             document.title = username;
+            dispatch(setSelectedChannel(null));
             setSkip(false);
         }
     }, [username]);

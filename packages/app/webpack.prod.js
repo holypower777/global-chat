@@ -19,13 +19,16 @@ module.exports = {
     output: {
         publicPath: '',
         path: path.join(__dirname, 'dist'),
+        filename: '[name].[chunkhash].js',
         clean: true,
     },
     optimization: {
         splitChunks: { chunks: 'all' },
     },
     plugins: [
-        new MiniCssExtractPlugin(),
+        new MiniCssExtractPlugin({
+            filename: '[name].[chunkhash].css',
+        }),
         new CompressionPlugin(),
         new HtmlWebpackPlugin({
             favicon: `${__dirname}/../../static/favicon.ico`,

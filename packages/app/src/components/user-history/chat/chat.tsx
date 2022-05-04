@@ -13,7 +13,7 @@ import ChatMessages from './__messages/chat__messages';
 
 import './chat.scss';
 
-const Chat = () => {
+const Chat = React.memo(() => {
     const dispatch = useDispatch();
     const user = useSelector(getUser);
     const mostActiveChannel = useSelector(getMostActiveChannel);
@@ -46,6 +46,6 @@ const Chat = () => {
             <ChatMessages />
         </section >
     );
-};
+});
 
 export default Chat;

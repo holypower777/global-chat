@@ -4,7 +4,7 @@ import { SimpleCallback } from 'platform-components/src/typings';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { getChannels, setSelectedChannel } from '../../../store/slices/channels';
+import { getChannels, getSelectedChannel, setSelectedChannel } from '../../../store/slices/channels';
 
 import './channels.scss';
 
@@ -12,15 +12,18 @@ interface ChannelsProps {
     handlePickChannel?: SimpleCallback;
 }
 
-const Channels = ({ handlePickChannel }: ChannelsProps) => {
+const Channels = React.memo(({ handlePickChannel }: ChannelsProps) => {
     const dispatch = useDispatch();
     const channels = useSelector(getChannels);
+    const selectedChannel = useSelector(getSelectedChannel);
 
     const [sortedChannels, setSortedChannels] = useState<Array<TwitchUserChannels>>([]);
-    const [pickedChannel, setPickedChannel] = useState<TwitchUserChannel | null>(null);
+    const [pickedChannel, setPickedChannel] = useState<TwitchUserChannel | null>(selectedChannel);
 
     useEffect(() => {
-        dispatch(setSelectedChannel(pickedChannel));
+        if (pickedChannel) {
+            dispatch(setSelectedChannel(pickedChannel));
+        }
     }, [pickedChannel]);
 
     useEffect(() => {
@@ -71,6 +74,6 @@ const Channels = ({ handlePickChannel }: ChannelsProps) => {
             /> : <Text id="userHistory.noChannels" />}
         </section>
     );
-};
+});
 
 export default Channels;
