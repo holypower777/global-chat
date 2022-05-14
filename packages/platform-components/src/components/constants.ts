@@ -123,6 +123,17 @@ export enum FROM_PAGE {
     RANDOM_USER = 'randomUser',
 }
 
+export enum SEARCH_PARAMS {
+    FROM = 'from',
+    REPLY = 'reply',
+}
+
+export interface REPLY_MESSAGE {
+    channelId: number;
+    messageId: string;
+    index: number;
+}
+
 export const MONTHS = [
     'january', 
     'february', 

@@ -20,8 +20,8 @@ export const channelsSlice = createSlice({
         setChannels: (state, action: PayloadAction<TwitchUserChannels>) => {
             state.channels = action.payload;
         },
-        setSelectedChannel: (state, action: PayloadAction<TwitchUserChannel | null>) => {
-            state.selectedChannel = action.payload;
+        setSelectedChannel: (state, action: PayloadAction<TwitchUserChannel | null | undefined>) => {
+            state.selectedChannel = action.payload || null;
         },
         clearChannelsState: (state) => {
             state.channels = [];

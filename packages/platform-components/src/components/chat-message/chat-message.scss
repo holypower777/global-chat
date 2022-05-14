@@ -2,7 +2,30 @@
 
 .chat-message
 {
-    max-width: 470px;
+    position: relative;
+
+    overflow-x: hidden;
+
+    &_highlited
+    {
+        background-color: rgba(147, 231, 162, 0.4);
+    }
+
+    &__container
+    {
+        width: calc(100% - 19px);
+    }
+
+    &__reply
+    {
+        position: absolute;
+        top: 2px;
+        right: 4px;
+        stroke: $Mercury;
+        fill: $Mercury;
+
+        cursor: pointer;
+    }
 
     &__time,
     &__username

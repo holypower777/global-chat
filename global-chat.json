@@ -20,14 +20,17 @@
             "rubricator.item.title.firstMessage": "Первое сообщение: {date}",
             "rubricator.item.title.lastMessage": "Последнее сообщение: {date}",
             "userHistory.noChannels": "Никакой активности не найдено",
+            "chatMessage.reply.title": "Скопировать ссылку на сообщение",
             "chat.userCard.id": "Айди",
             "chat.userCard.createdAt": "Создан",
             "chat.userCard.totalCount": "Всего сообщений",
             "chat.userCard.wereInterested": "Пользователем интересовались",
             "chat.userCard.mostSentMessages": "Канал с наибольшим кол-ом сообщений",
             "chat.userCard.noChannel": "Нет канала",
+            "chat.userCard.twitch.title": "Открыть твич пользователя",
             "chat.userCard.avatarImageAlt": "Аватарка пользователя",
             "chat.userCard.settings": "Настройки",
+            "chat.userCard.settings.title": "Настройки",
             "chat.userCard.settings.sort": "Сортировка сообщений по дате:",
             "chat.userCard.settings.sort.asc": "сначала старые",
             "chat.userCard.settings.sort.desc": "сначала новые",
@@ -136,7 +139,8 @@
             "notification.liveChat.snapshotError": "Не удалось синхронизировать каналы",
             "notification.chat.sortChange": "Лучше не менять сортировку, когда подгружаются другие сообщения. Лучше перезагрузить страницу. Баг, который надо пофиксить...",
             "notification.userHistory.nextRandom": "Найти другого пользователя",
-            "notification.userHistory.nextRandom.loading": "Ищем пользователя..."
+            "notification.userHistory.nextRandom.loading": "Ищем пользователя...",
+            "notification.copied": "Ссылка скопирована"
         }
     },
     "en-US": {
@@ -160,14 +164,17 @@
             "rubricator.item.title.firstMessage": "First message: {date}",
             "rubricator.item.title.lastMessage": "Last message: {date}",
             "userHistory.noChannels": "No activity found",
+            "chatMessage.reply.title": "Copy message link",
             "chat.userCard.id": "ID",
             "chat.userCard.createdAt": "Created at",
             "chat.userCard.totalCount": "Total messages",
             "chat.userCard.wereInterested": "User was interested",
             "chat.userCard.mostSentMessages": "Channel with most sent messages",
             "chat.userCard.noChannel": "No channel",
+            "chat.userCard.twitch.title": "Open user's twitch",
             "chat.userCard.avatarImageAlt": "User avatar",
             "chat.userCard.settings": "Settings",
+            "chat.userCard.settings.title": "Settings",
             "chat.userCard.settings.sort": "Sort messages by date:",
             "chat.userCard.settings.sort.asc": "asc",
             "chat.userCard.settings.sort.desc": "desc",
@@ -276,7 +283,8 @@
             "notification.liveChat.snapshotError": "Faild to sync channel with backend",
             "notification.chat.sortChange": "It's better not to change sorting when other messages are loaded. Please, reload the page. A bug that needs to be fixed...",
             "notification.userHistory.nextRandom": "Find another user",
-            "notification.userHistory.nextRandom.loading": "Looking for user..."
+            "notification.userHistory.nextRandom.loading": "Looking for user...",
+            "notification.copied": "Copied to clipboard"
         }
     }
 }

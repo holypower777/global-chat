@@ -1,6 +1,6 @@
 import { useGetTwitchUserWithChannelsByUsernameQuery } from 'platform-apis';
 import { useGetRandomTwitchUserQuery } from 'platform-apis/slices/twitch-users';
-import { FROM_PAGE, SEARCH_TYPE, SETTINGS, SNACKBAR_TYPE, Spin, Tab, Tabs } from 'platform-components';
+import { FROM_PAGE, SEARCH_PARAMS, SEARCH_TYPE, SETTINGS, SNACKBAR_TYPE, Spin, Tab, Tabs } from 'platform-components';
 import { useWindowSize } from 'platform-components/src/hooks';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -35,11 +35,11 @@ const UserHistory = () => {
     const [notificationKey, setNotificationKey] = useState(0);
 
     useEffect(() => {
-        if (!searchParams.get('from')) {
+        if (!searchParams.get(SEARCH_PARAMS.FROM)) {
             dispatch(removeNotification(notificationKey));
         }
 
-        if (searchParams.get('from') === FROM_PAGE.RANDOM_USER) {
+        if (searchParams.get(SEARCH_PARAMS.FROM) === FROM_PAGE.RANDOM_USER) {
             const key = addNotification({
                 type: SNACKBAR_TYPE.INFO,
                 id: 'notification.userHistory.nextRandom',

@@ -6,6 +6,7 @@ import './icon.scss';
 
 export interface SingleIconProps {
     handleClick?: MouseEventHandler<HTMLElement>;
+    title?: string;
     mix?: string;
 }
 
@@ -45,6 +46,7 @@ export { default as IconGithub } from './__github/icon__github';
 export { default as IconIdea } from './__idea/icon__idea';
 export { default as IconMoreCircle } from './__more-circle/icon__more-circle';
 export { default as IconPause } from './__pause/icon__pause';
+export { default as IconReply } from './__reply/icon__reply';
 export { default as IconSearch } from './__search/icon__search';
 export { default as IconSquareTick } from './__square-tick/icon__square-tick';
 export { default as IconTime } from './__time/icon__time';

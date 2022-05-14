@@ -763,8 +763,19 @@ export const messageToSmile = (message: string) => {
     return message.split(' ').map((e, i) => {
         if (e.startsWith('http')) {
             return (
-                <a className={b('chat-message', 'link')} href={e} key={`${e}${i}`}>{e}</a>
+                <a 
+                    className={b('chat-message', 'link')} 
+                    href={e} 
+                    key={`${e}${i}`} 
+                    target="_blank"
+                >
+                    {e}
+                </a>
             );
+        }
+
+        if (e.startsWith('@')) {
+            // TODO: redirect to user history
         }
 
         if (smiles.get(e)) {
@@ -774,6 +785,7 @@ export const messageToSmile = (message: string) => {
                     className={b('chat-message', 'text_smile')}
                     key={`${e}${i}`}
                     src={smiles.get(e)}
+                    title={e}
                 />
             );
         }

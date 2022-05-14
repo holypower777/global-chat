@@ -26,9 +26,11 @@ const StoryChatMessage = () => {
         <ChatMessage
             badges={select('badges', badges, badges[0])}
             channelName={text('channel name', '')}
+            highlited={boolean('highlited', false)}
             message={select('message', messages, messages[0])}
             showBadges={boolean('show badges', true)}
             showMessageTime={boolean('show message time', true)}
+            showReplyIcon={boolean('show reply icon', true)}
             subBadges={{}}
             time={new Date(date('time', new Date()))}
             username={text('username', 'Mariam58')}

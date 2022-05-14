@@ -4,10 +4,10 @@ import React from 'react';
 import { useIntl } from 'react-intl';
 import { Link } from 'react-router-dom';
 
-import Button from '../button/button';
 import { IconSearch } from '../icon/icon';
 import Input from '../input/input';
 import Logo from '../logo/logo';
+import Text from '../text/text';
 
 import HeaderMenu from './__menu/header__menu';
 import HeaderSettings from './__settings/header__settings';
@@ -46,10 +46,10 @@ const Header = ({ handleChange, updateSettings, handleSubmit, value, isLoading }
                 value={value}
             />
             <Link className={b('header', 'link')} to="/overall-stats">
-                <Button>{intl.formatMessage({ id: 'link.overallStats' })}</Button>
+                <Text id="link.overallStats" weight={Text.WEIGHT.M} />
             </Link>
             <Link className={b('header', 'link')} to="/live-chat">
-                <Button>{intl.formatMessage({ id: 'link.liveChat' })}</Button>
+                <Text id="link.liveChat" weight={Text.WEIGHT.M} />
             </Link>
         </header>
     );

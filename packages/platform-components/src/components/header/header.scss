@@ -12,6 +12,13 @@
     align-items: center;
     gap: 40px;
 
+    &__link
+    {
+        white-space: nowrap;
+
+        color: $Boulder;
+    }
+
     @include media-breakpoint-down($desktopBp)
     {
         width: calc(100% - 40px);

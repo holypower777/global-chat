@@ -16,6 +16,7 @@ interface InfiniteScrollWrapperProps {
     items: Messages;
     loadNextPage: (startIndex: number) => void;
     badgesData: object;
+    highlitedMessage?: string | null;
 }
 
 const InfiniteScrollWrapper = ({
@@ -24,6 +25,7 @@ const InfiniteScrollWrapper = ({
     items,
     loadNextPage,
     badgesData,
+    highlitedMessage = null,
 }: InfiniteScrollWrapperProps) => {
     const showBadges = useSelector(getShowBadgesSetting);
     const showMessageTime = useSelector(getShowMessageTimeSetting);
@@ -47,9 +49,14 @@ const InfiniteScrollWrapper = ({
 
     useEffect(() => {
         if (listRef && listRef.current) {
-            listRef.current.scrollToItem(0);
+            let scrollTo = 0;
+            if (highlitedMessage) {
+                scrollTo = items.findIndex((e) => e.messageId === highlitedMessage) || 0;
+            }
+
+            listRef.current.scrollToItem(scrollTo, 'center');
         }
-    }, [badgesData]);
+    }, [badgesData, highlitedMessage, items]);
 
     return (
         <InfiniteLoader
@@ -75,6 +82,7 @@ const InfiniteScrollWrapper = ({
                             {({ index, style }) => (
                                 <ChatMessage
                                     badgesData={badgesData}
+                                    highlitedMessage={highlitedMessage}
                                     index={index}
                                     isItemLoaded={isItemLoaded(index + 1)}
                                     message={items[index]}

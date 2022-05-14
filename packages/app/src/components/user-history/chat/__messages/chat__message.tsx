@@ -1,6 +1,9 @@
 import { Message, TwitchUser } from 'platform-apis/types';
-import { ChatDate, ChatMessage, Skeleton } from 'platform-components';
+import { ChatDate, ChatMessage, SEARCH_PARAMS, Skeleton, SNACKBAR_TYPE } from 'platform-components';
 import React, { useEffect, useRef } from 'react';
+import { useDispatch } from 'react-redux';
+
+import { addNotification } from '../../../../utils';
 
 interface RowProps {
     index: number;
@@ -12,6 +15,7 @@ interface RowProps {
     showBadges: boolean;
     badgesData: object;
     isItemLoaded: boolean;
+    highlitedMessage?: string | null;
 }
 
 const ChatMessageRow = ({
@@ -24,8 +28,10 @@ const ChatMessageRow = ({
     showBadges,
     badgesData,
     isItemLoaded,
+    highlitedMessage = null,
 }: RowProps) => {
     const rowRef = useRef<HTMLDivElement>(null);
+    const dispatch = useDispatch();
 
     useEffect(() => {
         if (rowRef) {
@@ -44,6 +50,22 @@ const ChatMessageRow = ({
             {message.renderDate && <ChatDate date={message.time!} />}
             <ChatMessage
                 badges={message.badges}
+                handleReply={() => {
+                    addNotification({
+                        id: 'notification.copied',
+                        type: SNACKBAR_TYPE.SUCCESS,
+                        autoHideDuration: 4000,
+                    }, dispatch, true);
+
+                    const reply = { 
+                        channelId: message.channelId,
+                        messageId: message.messageId,
+                        index: index,
+                    };
+
+                    navigator.clipboard.writeText(`${window.location.origin}/messages/${user.displayName}?${SEARCH_PARAMS.REPLY}=${window.btoa(JSON.stringify(reply))}`);
+                }}
+                highlited={highlitedMessage === message.messageId}
                 message={message.message}
                 showBadges={showBadges}
                 showMessageTime={showMessageTime}
