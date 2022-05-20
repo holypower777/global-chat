@@ -1,4 +1,5 @@
 import { Messages } from 'platform-apis/types';
+import { REPLY_MESSAGE } from 'platform-components';
 import React, { useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
 import { AutoSizer } from 'react-virtualized';
@@ -16,7 +17,7 @@ interface InfiniteScrollWrapperProps {
     items: Messages;
     loadNextPage: (startIndex: number) => void;
     badgesData: object;
-    highlitedMessage?: string | null;
+    highlitedMessage?: REPLY_MESSAGE | null;
 }
 
 const InfiniteScrollWrapper = ({
@@ -48,13 +49,9 @@ const InfiniteScrollWrapper = ({
     };
 
     useEffect(() => {
-        if (listRef && listRef.current) {
-            let scrollTo = 0;
-            if (highlitedMessage) {
-                scrollTo = items.findIndex((e) => e.messageId === highlitedMessage) || 0;
-            }
-
-            listRef.current.scrollToItem(scrollTo, 'center');
+        //@ts-ignore
+        if (highlitedMessage?.index && listRef && listRef.current && !listRef.current.state.isScrolling) {
+            listRef.current.scrollToItem(highlitedMessage.index, 'center');
         }
     }, [badgesData, highlitedMessage, items]);
 
@@ -82,7 +79,7 @@ const InfiniteScrollWrapper = ({
                             {({ index, style }) => (
                                 <ChatMessage
                                     badgesData={badgesData}
-                                    highlitedMessage={highlitedMessage}
+                                    highlitedMessage={highlitedMessage?.messageId || null}
                                     index={index}
                                     isItemLoaded={isItemLoaded(index + 1)}
                                     message={items[index]}
