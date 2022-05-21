@@ -38,7 +38,7 @@ const ChatMessages = () => {
     const userId = useSelector(getUserId);
     const [offset, setOffset] = useState(0);
     const [limit, setLimit] = useState(100);
-    const [highlitedMessage, setHighlitedMessage] = useState<string | null>(null);
+    const [highlitedMessage, setHighlitedMessage] = useState<REPLY_MESSAGE | null>(null);
     const [skipMessages, setSkipMessages] = useState(true);
     const [skipBadges, setSkipBadges] = useState(true);
     const [hasNextPage, setHasNextPage] = useState(true);
@@ -69,7 +69,7 @@ const ChatMessages = () => {
         if (searchParams.get(SEARCH_PARAMS.REPLY) && channels.length > 0) {
             const reply = JSON.parse(window.atob(searchParams.get(SEARCH_PARAMS.REPLY)!)) as REPLY_MESSAGE;
             setLimit(reply.index + 100);
-            setHighlitedMessage(reply.messageId);
+            setHighlitedMessage(reply);
             dispatch(setSelectedChannel(channels.find((e) => e.userId === reply.channelId)));
         }
     }, [searchParams, channels]);
