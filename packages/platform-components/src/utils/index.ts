@@ -6,3 +6,4 @@ export { default as getRandomColor } from './get-random-color';
 export { default as timer } from './timer';
 export { default as generateRandom } from './get-random-number';
 export { default as getDefaultLanguage } from './get-default-language';
+export { default as sliceIntoChunks } from './split-into-chunks';
