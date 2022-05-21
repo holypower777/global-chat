@@ -71,7 +71,6 @@ const ChatMessages = () => {
             setLimit(reply.index + 100);
             setHighlitedMessage(reply.messageId);
             dispatch(setSelectedChannel(channels.find((e) => e.userId === reply.channelId)));
-            
         }
     }, [searchParams, channels]);
 

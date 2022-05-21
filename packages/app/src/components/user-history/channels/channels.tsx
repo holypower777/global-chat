@@ -27,6 +27,10 @@ const Channels = React.memo(({ handlePickChannel }: ChannelsProps) => {
     }, [pickedChannel]);
 
     useEffect(() => {
+        setPickedChannel(selectedChannel);
+    }, [selectedChannel]);
+
+    useEffect(() => {
         const channelsCopy = [...channels];
         channelsCopy.sort((a, b) => {
             if (a.login < b.login) {
