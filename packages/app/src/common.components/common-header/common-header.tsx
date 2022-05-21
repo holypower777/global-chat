@@ -39,6 +39,10 @@ const CommonHeader = () => {
             return;
         }
 
+        if (username === usernameParam) {
+            return;
+        }
+
         dispatch(clearUser());
         dispatch(clearChannelsState());
         dispatch(clearMessages());
