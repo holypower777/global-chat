@@ -1,4 +1,5 @@
 import b from 'b_';
+import { getSumOfArray, sliceIntoChunks } from 'platform-components/src/utils';
 import React from 'react';
 //@ts-ignore
 import Charty from 'react-charty';
@@ -22,7 +23,7 @@ const commonConfig = {
     xAxisType: 'time',
     rangeTextType: 'longDateWeekDay',
     showPreview: false,
-    stepX: 86400000,
+    stepX: 86400000 * 2,
 };
 
 const OverallStatsPlots = () => {
@@ -43,15 +44,22 @@ const OverallStatsPlots = () => {
         ...commonConfig,
     };
 
+    const periodActivityConfig = {
+        ...commonConfig,
+        colors: { y: '#a5d258' },
+        names: { y: intl.formatMessage({ id: 'overall-stats.plots.messagesPerActivity' }) },
+        type: 'stacked_bar',
+    };
+
     const handleZoomIn = (xPos: number, data: PlotData, config: object) => new Promise((resolve) => {
-        const firstIndex = data.x.findIndex((e) => e > xPos - 86400000 * 2);
-        const lastIndex = data.x.findIndex((e) => e > xPos + 86400000 * 2);
+        const firstIndex = data.x.findIndex((e) => e > xPos - 86400000 * 4);
+        const lastIndex = data.x.findIndex((e) => e > xPos + 86400000 * 4);
         const newData = {
+            ...config,
             data: {
                 x: data.x.slice(firstIndex, lastIndex),
                 y: data.y.slice(firstIndex, lastIndex),
             },
-            ...config,
         };
 
         resolve(newData);
@@ -60,6 +68,11 @@ const OverallStatsPlots = () => {
     const splitDataByDay = (data: PlotData) => ({
         x: data.x.filter((v, i) => i % 48 === 0),
         y: data.y.filter((v, i) => i % 48 === 0),
+    });
+
+    const splitDataByDayIntoBar = (data: PlotData) => ({
+        x: data.x.filter((v, i) => i % 48 === 0),
+        y: sliceIntoChunks(data.y, 48).map(getSumOfArray),
     });
 
     return (
@@ -83,11 +96,12 @@ const OverallStatsPlots = () => {
                 xAxisType="date"
             />}
             {periodActivity.x.length > 0 && <Charty
-                colors={{ y: '#2373DB' }}
-                data={splitDataByDay(periodActivity)}
-                names={{ y: intl.formatMessage({ id: 'overall-stats.plots.messages' }) }}
-                onZoomIn={(x: number) => handleZoomIn(x, periodActivity, messagesConfig)}
+                colors={{ y: '#6fb34d' }}
+                data={splitDataByDayIntoBar(periodActivity)}
+                names={{ y: intl.formatMessage({ id: 'overall-stats.plots.messagesPerDay' }) }}
+                onZoomIn={(x: number) => handleZoomIn(x, periodActivity, periodActivityConfig)}
                 rangeTextType="longDate"
+                startX={periodActivity.x[0]}
                 title={intl.formatMessage({ id: 'overall-stats.plots.periodActivity' })}
                 type="bar"
                 xAxisType="date"
