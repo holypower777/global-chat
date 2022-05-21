@@ -6,7 +6,7 @@ describe('Split into chunks', () => {
         describe('1 column', () => {
             it('[21, 3, 3, 13, 1]', () => {
                 const columns = splitIntoColumns([21, 3, 3, 13, 1], 1);
-    
+
                 expect(columns).toEqual([[21, 3, 3, 13, 1]]);
             });
         });
@@ -14,13 +14,13 @@ describe('Split into chunks', () => {
         describe('2 columns', () => {
             it('[21, 3, 3, 13, 1]', () => {
                 const columns = splitIntoColumns([21, 3, 3, 13, 1], 2);
-    
+
                 expect(columns).toEqual([[21], [3, 3, 13, 1]]);
             });
-    
+
             it('[4, 4, 5, 8, 4, 3]', () => {
                 const columns = splitIntoColumns([4, 4, 5, 8, 4, 3], 2);
-        
+
                 expect(columns).toEqual([[4, 4, 5], [8, 4, 3]]);
             });
         });
@@ -28,25 +28,25 @@ describe('Split into chunks', () => {
         describe('3 columns', () => {
             it('[1, 2, 1, 2, 1]', () => {
                 const columns = splitIntoColumns([1, 2, 1, 2, 1], 3);
-        
+
                 expect(columns).toEqual([[1, 2], [1, 2], [1]]);
             });
-    
+
             it('[4, 2, 4, 3, 3, 5, 1, 1]', () => {
                 const columns = splitIntoColumns([4, 2, 4, 3, 3, 5, 1, 1], 3);
-    
+
                 expect(columns).toEqual([[4, 2, 4], [3, 3], [5, 1, 1]]);
             });
-    
+
             it('[21, 3, 3, 13, 1]', () => {
                 const columns = splitIntoColumns([21, 3, 3, 13, 1], 3);
-    
+
                 expect(columns).toEqual([[21], [3, 3], [13, 1]]);
             });
-    
+
             it('[4, 4, 5, 8, 4, 3]', () => {
                 const columns = splitIntoColumns([4, 4, 5, 8, 4, 3], 3);
-        
+
                 expect(columns).toEqual([[4, 4], [5, 8], [4, 3]]);
             });
         });
@@ -54,7 +54,7 @@ describe('Split into chunks', () => {
         describe('4 columns', () => {
             it('[1, 2, 1, 2, 1]', () => {
                 const columns = splitIntoColumns([1, 2, 1, 2, 1], 4);
-                
+
                 expect(columns).toEqual([[1], [2], [1], [2, 1]]);
             });
 
@@ -69,7 +69,7 @@ describe('Split into chunks', () => {
             it('[1, 1, 2, 1, 1, 1, 1, 1]', () => {
                 const columns = splitIntoColumns([1, 1, 2, 1, 1, 1, 1, 1], 6);
 
-                expect(columns).toEqual([[1], [1], [2], [1], [1], [1, 1, 1]]);
+                expect(columns).toEqual([[1, 1], [2], [1], [1, 1], [1], [1]]);
             });
         });
     });
@@ -91,6 +91,14 @@ describe('Split into chunks', () => {
             const columns = splitIntoColumns([5, 5, 5, 5, 5], 5);
 
             expect(columns).toEqual([[5], [5], [5], [5], [5]]);
+        });
+    });
+
+    describe('RazDva search bug, FR-1', () => {
+        it('should not return undefined', () => {
+            const columns = splitIntoColumns([1, 1, 1, 1, 1, 1, 1, 1], 5);
+
+            expect(columns).toEqual([[1, 1], [1, 1], [1], [1, 1], [1]]);
         });
     });
 });

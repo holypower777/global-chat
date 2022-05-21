@@ -78,11 +78,21 @@ const getDistribution = (lengths: Array<number>, columns: number, maxColumnLen: 
         balancedColumns[balancedColumns.length - 1].push(...last!);
     }
 
+    if (balancedColumns.length < columns) {
+        const biggestArray = Math.max(...balancedColumns.map((e) => e.length));
+
+        if (balancedColumns[biggestArray]) {
+            const itemToPush = balancedColumns[biggestArray].pop()!;
+
+            balancedColumns.push([itemToPush]);
+        }
+    }
+
     return balancedColumns;
 };
 
 const splitIntoColumns = (lengths: Array<number>, columns: number) => {
-    if (!lengths) {
+    if (!lengths || !lengths.length) {
         return [];
     }
 
