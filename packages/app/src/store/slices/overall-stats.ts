@@ -76,5 +76,9 @@ export const getPeriodActivityPlots = createSelector(
     [getOverallStatsPlots, getOverallStatsTimes],
     (plots, times) => ({ x: times, y: plots.map((e) => e.periodActivity) }),
 );
+export const getOnlineParsedChannels = createSelector(
+    [getOverallStatsPlots, getOverallStatsTimes],
+    (plots, times) => ({ x: times, y: plots.map((e) => e.currentlyActiveChannels) }),
+);
 
 export default overallStatsSlice.reducer;

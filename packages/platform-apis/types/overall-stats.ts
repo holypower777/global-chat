@@ -50,6 +50,7 @@ export interface OverallStatsPlot {
     totalChannels: number;
     totalUsers: number;
     periodActivity: number;
+    currentlyActiveChannels: number;
     time: Date | null;
 }
 
@@ -74,6 +75,7 @@ const convertOverallStatsPlotApi = (plot: OverallStatsPlotAPI): OverallStatsPlot
     totalChannels: plot.total_channels,
     totalUsers: plot.total_users,
     periodActivity: plot.period_activity,
+    currentlyActiveChannels: plot.currently_active_channels,
     time: getDateFromString(plot.time),
 });
 
