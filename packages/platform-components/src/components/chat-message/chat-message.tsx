@@ -1,6 +1,6 @@
 import b from 'b_';
 import cx from 'classnames';
-import { getHoursAndMinutes } from 'platform-components/src/utils';
+import { getFullDate, getHoursAndMinutes } from 'platform-components/src/utils';
 import React, { ReactNode } from 'react';
 import { useIntl } from 'react-intl';
 
@@ -52,7 +52,7 @@ const ChatMessage = React.memo(({
     return (
         <div className={cx(b('chat-message', { highlited }), mix)}>
             <div className={b('chat-message', 'container')}>
-                {showMessageTime && <Text mix={b('chat-message', 'time')}>{getHoursAndMinutes(time)}</Text>}
+                {showMessageTime && <Text mix={b('chat-message', 'time')} title={getFullDate(time, true, true)}>{getHoursAndMinutes(time)}</Text>}
                 {channelName && <Text mix={b('chat-message', 'username')} weight={Text.WEIGHT.L}>{channelName}:</Text>}
                 {showBadges && <ChatMessageBadges badges={badges} subBadges={subBadges!} />}
                 <Text mix={b('chat-message', 'username')} style={style} weight={Text.WEIGHT.L}>{username}:</Text>

@@ -21,6 +21,7 @@ interface TextProps {
     center?: boolean;
     ellipsis?: boolean;
     style?: CSSProperties;
+    title?: string;
     handleClick?: SimpleCallback;
     mix?: string;
 }
@@ -36,6 +37,7 @@ const Text = ({
     center = false,
     ellipsis,
     handleClick,
+    title,
     mix,
     ...props
 }: TextProps) => {
@@ -44,9 +46,9 @@ const Text = ({
     const content = id ? intl.formatMessage({ id }, values) : children;
 
     if (tag === TEXT_TAG.LI) {
-        return <li className={className} onClick={handleClick} {...props}>{content}{id ? children : null}</li>;
+        return <li className={className} onClick={handleClick} title={title} {...props}>{content}{id ? children : null}</li>;
     }
-    return <span className={className} onClick={handleClick} {...props}>{content}{id ? children : null}</span>;
+    return <span className={className} onClick={handleClick} title={title} {...props}>{content}{id ? children : null}</span>;
 };
 
 Text.TAG = TEXT_TAG;
