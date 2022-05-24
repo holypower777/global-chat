@@ -26,7 +26,7 @@ const OverallStatsStats = () => {
                 weight={Text.WEIGHT.M}
             >
                 <span className={b('overall-stats', 'stats-value')}>
-                    {stats.totalMessages}
+                    {intl.formatNumber(stats.totalMessages)}
                 </span>
             </Text>
             <Text 
@@ -35,7 +35,7 @@ const OverallStatsStats = () => {
                 weight={Text.WEIGHT.M}
             >
                 <span className={b('overall-stats', 'stats-value')}>
-                    {stats.totalUsers}
+                    {intl.formatNumber(stats.totalUsers)}
                 </span>
             </Text>
             <Text 
@@ -44,7 +44,7 @@ const OverallStatsStats = () => {
                 weight={Text.WEIGHT.M}
             >
                 <span className={b('overall-stats', 'stats-value')}>
-                    {stats.totalChannels}
+                    {intl.formatNumber(stats.totalChannels)}
                 </span>
             </Text>
             <OverallStatsStatsUsernames 
