@@ -1,5 +1,6 @@
 import b from 'b_';
 import cx from 'classnames';
+import { TwitchUser } from 'platform-apis/types';
 import React, { useEffect, useState } from 'react';
 import { animated, useSpring } from 'react-spring';
 
@@ -12,29 +13,19 @@ import UserCardSettings from './__settings/user-card__settings';
 import './user-card.scss';
 
 interface UserCardProps {
-    userId: number;
-    displayName: string;
-    profileImageUrl: string;
-    messagesAmount: number;
-    createdAt: Date | null;
+    user: TwitchUser;
     heatmapDates: Array<Date>;
     mostActiveChannel: string;
-    wereInterested: number;
     updateSettings: (key: string, value: unknown) => void;
     mix?: string;
 }
 
 const UserCard = (props: UserCardProps) => {
     const {
-        displayName,
-        userId,
-        profileImageUrl,
-        messagesAmount,
-        createdAt,
+        user,
         heatmapDates,
         mix,
         mostActiveChannel,
-        wereInterested,
         updateSettings,
     } = props;
     const defaultHeight = 45;
@@ -56,20 +47,16 @@ const UserCard = (props: UserCardProps) => {
             <animated.div className={cx(b('user-card', { expanded: isContentExpanded || isSettingsExpanded }), mix)} style={expand}>
                 <div ref={ref}>
                     <UserCardHeader
-                        displayName={displayName}
+                        displayName={user.displayName}
                         isContentExpanded={isContentExpanded}
                         isSettingsExpanded={isSettingsExpanded}
                         setIsExpanded={setIsContentExpanded}
                         setIsSettingsExpanded={setIsSettingsExpanded}
                     />
                     {isContentExpanded && <UserCardContent
-                        createdAt={createdAt}
                         heatmapDates={heatmapDates}
-                        messagesAmount={messagesAmount}
                         mostActiveChannel={mostActiveChannel}
-                        profileImageUrl={profileImageUrl}
-                        userId={userId}
-                        wereInterested={wereInterested}
+                        user={user}
                         width={width}
                     />}
                     {isSettingsExpanded && <UserCardSettings

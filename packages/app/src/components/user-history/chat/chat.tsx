@@ -23,17 +23,12 @@ const Chat = React.memo(() => {
     return (
         <section className="chat">
             <UserCard
-                createdAt={user.createdAt}
-                displayName={user.displayName}
                 heatmapDates={messagesDates}
-                messagesAmount={user.messagesAmount!}
                 mostActiveChannel={mostActiveChannel}
-                profileImageUrl={user.profileImageUrl}
                 updateSettings={(key, value) => {
                     dispatch(updateSetting({ key, value }));
                 }}
-                userId={user.userId}
-                wereInterested={user.wereInterested}
+                user={user}
             />
             {selectedChannel && <Text id="chat.channelName" mix={b('chat', 'title')} size={Text.SIZE.XL}>
                 <Link 
