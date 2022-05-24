@@ -3,6 +3,10 @@ import { getDateFromString } from 'platform-components/src/utils';
 
 export type TwitchUserId = number;
 
+export interface TwitchUserMeta {
+    username_history?: Array<string>;
+}
+
 export interface TwitchUserAPI {
     user_id: TwitchUserId;
     login: string;
@@ -16,7 +20,7 @@ export interface TwitchUserAPI {
     created_at: string;
     were_interested: number;
     messages_amount: number;
-    meta: object
+    meta: TwitchUserMeta;
 }
 
 export interface TwitchUser {
@@ -32,7 +36,7 @@ export interface TwitchUser {
     createdAt: Date | null;
     wereInterested: number;
     messagesAmount: number;
-    meta: object
+    meta: TwitchUserMeta;
 }
 
 export const convertTwitchUserApi = (user: TwitchUserAPI): TwitchUser => {
