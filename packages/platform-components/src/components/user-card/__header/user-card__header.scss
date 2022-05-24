@@ -15,8 +15,20 @@
         {
             display: flex;
 
+            align-items: center;
+
             height: 15px;
             gap: 10px;
+        }
+
+        a
+        {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            width: 15px;
+            height: 15px;
         }
 
         .icon__arrow,
@@ -35,9 +47,20 @@
 
         .icon__twitch
         {
+            width: 15px;
+            height: 15px;
+
             &:hover
             {
                 fill: $Twitch;
+            }
+        }
+
+        .icon__twitchtracker
+        {
+            &:hover
+            {
+                fill: #18bc9c;
             }
         }
     }

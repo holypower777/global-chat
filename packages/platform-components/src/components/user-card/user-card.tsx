@@ -48,6 +48,7 @@ const UserCard = (props: UserCardProps) => {
                 <div ref={ref}>
                     <UserCardHeader
                         displayName={user.displayName}
+                        isBroadcaster={!!user.broadcasterType}
                         isContentExpanded={isContentExpanded}
                         isSettingsExpanded={isSettingsExpanded}
                         setIsExpanded={setIsContentExpanded}
