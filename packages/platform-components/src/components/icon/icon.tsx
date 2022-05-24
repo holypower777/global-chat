@@ -52,4 +52,5 @@ export { default as IconSquareTick } from './__square-tick/icon__square-tick';
 export { default as IconTime } from './__time/icon__time';
 export { default as IconTriangleExc } from './__triangle-exc/icon__triangle-exc';
 export { default as IconTwitch } from './__twitch/icon__twitch';
+export { default as IconTwitchtracker } from './__twitchtracker/icon__twitchtracker';
 export { default as IconUser } from './__user/icon__user';

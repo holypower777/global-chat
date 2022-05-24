@@ -2,7 +2,7 @@ import b from 'b_';
 import React, { Dispatch, SetStateAction } from 'react';
 import { useIntl } from 'react-intl';
 
-import { IconArrow, IconCog, IconTwitch } from '../../icon/icon';
+import { IconArrow, IconCog, IconTwitch, IconTwitchtracker } from '../../icon/icon';
 import Text from '../../text/text';
 
 import './user-card__header.scss';
@@ -10,12 +10,20 @@ import './user-card__header.scss';
 interface UserCardHeaderProps {
     isContentExpanded: boolean;
     isSettingsExpanded: boolean;
+    isBroadcaster: boolean;
     setIsExpanded: Dispatch<SetStateAction<boolean>>;
     setIsSettingsExpanded: Dispatch<SetStateAction<boolean>>;
     displayName: string;
 }
 
-const UserCardHeader = ({ isContentExpanded, isSettingsExpanded, setIsExpanded, setIsSettingsExpanded, displayName }: UserCardHeaderProps) => {
+const UserCardHeader = ({ 
+    isContentExpanded, 
+    isSettingsExpanded, 
+    isBroadcaster,
+    setIsExpanded, 
+    setIsSettingsExpanded, 
+    displayName,
+}: UserCardHeaderProps) => {
     const intl = useIntl();
 
     const arrowDirection = isContentExpanded ? IconArrow.DIREACTIONS.UP : IconArrow.DIREACTIONS.DOWN;
@@ -47,6 +55,14 @@ const UserCardHeader = ({ isContentExpanded, isSettingsExpanded, setIsExpanded, 
                     }}
                     title={intl.formatMessage({ id: 'chat.userCard.settings.title' })}
                 />
+                {isBroadcaster && <a
+                    href={`https://twitchtracker.com/${displayName}`}
+                    onClick={(e) => (e.stopPropagation())}
+                    target="_blank"
+                    title={intl.formatMessage({ id: 'chat.userCard.twitchtracker.title' })}
+                >
+                    <IconTwitchtracker />
+                </a>}
                 <a
                     href={`https://www.twitch.tv/${displayName}`}
                     onClick={(e) => (e.stopPropagation())}
