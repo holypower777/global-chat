@@ -33,6 +33,7 @@ const UserHistory = () => {
     const { data: randomUser, isFetching: isRandomUserFetching } = useGetRandomTwitchUserQuery(null, { skip: rSkip });
     const { width } = useWindowSize();
     const [notificationKey, setNotificationKey] = useState(0);
+    const audio = new Audio('https://www.myinstants.com/media/sounds/im-a-gnome-meme-sound-effect-woo.mp3');
 
     useEffect(() => {
         if (!searchParams.get(SEARCH_PARAMS.FROM)) {
@@ -75,6 +76,9 @@ const UserHistory = () => {
             dispatch(setChannels(data.channels));
             dispatch(setMessagesDates(data.messagesDates));
             setSkip(true);
+            if (data.user.userId === 115141884) {
+                audio.play();
+            }
         }
     }, [data]);
 
