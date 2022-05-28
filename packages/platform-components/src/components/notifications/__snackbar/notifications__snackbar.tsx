@@ -6,7 +6,7 @@ import { animated, SpringValue } from 'react-spring';
 
 import { SimpleCallback, Notification } from '../../../typings';
 import { SNACKBAR_TYPE } from '../../constants';
-import { IconBell, IconCircleExc, IconCross, IconSquareTick, IconTriangleExc } from '../../icon/icon';
+import { IconBell, IconCircleExc, IconCross, IconCircleTick, IconTriangleExc } from '../../icon/icon';
 import Spin from '../../spin/spin';
 
 import './notifications__snackbar.scss';
@@ -54,7 +54,7 @@ const NotificationsSnackbar = ({
             icon = <IconBell />;
             break;
         case SNACKBAR_TYPE.SUCCESS:
-            icon = <IconSquareTick />;
+            icon = <IconCircleTick />;
             break;
         default:
             icon = <IconCircleExc />;

@@ -19,6 +19,20 @@
         color: $Boulder;
     }
 
+    .icon__dots
+    {
+        fill: none;
+        stroke: $Silver;
+
+        transition: stroke .1s ease-in-out;
+
+        &:hover
+        {
+            fill: none;
+            stroke: $Boulder;
+        }
+    }
+
     @include media-breakpoint-down($desktopBp)
     {
         width: calc(100% - 40px);

@@ -136,8 +136,12 @@
 
         .icon
         {
-            fill: $White;
             stroke: $White;
+
+            path
+            {
+                stroke: $White;
+            }
 
             &__cross
             {
