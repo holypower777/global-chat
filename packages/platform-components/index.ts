@@ -18,7 +18,6 @@ export { default as Text } from './src/components/text/text';
 export { default as Tooltip } from './src/components/tooltip/tooltip';
 export { default as UserCard } from './src/components/user-card/user-card';
 export { default as Switcher } from './src/components/switcher/switcher';
-export { default as Possibilities } from './src/components/possibilities/possibilities';
 export { default as Skeleton } from './src/components/skeleton/skeleton';
 export { default as WithSkeleton } from './src/components/skeleton/with-skeleton';
 export { default as Chip } from './src/components/chip/chip';

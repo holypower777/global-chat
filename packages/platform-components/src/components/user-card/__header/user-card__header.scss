@@ -33,9 +33,10 @@
 
         .icon__arrow,
         .icon__cog,
-        .icon__twitch
+        .icon__twitch,
+        .icon__twitchtracker
         {
-            fill: $Mercury;
+            fill: $Silver;
 
             cursor: pointer;
 
@@ -60,7 +61,7 @@
         {
             &:hover
             {
-                fill: #18bc9c;
+                fill: $Twitchtracker;
             }
         }
     }
