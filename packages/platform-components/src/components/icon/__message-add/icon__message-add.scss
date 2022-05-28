@@ -1,13 +1,12 @@
 @import 'design/design';
 
-.icon__square-tick
+.icon__message-add
 {
     width: 24px;
     height: 24px;
 
-    fill: $Black;
-    fill-rule: evenodd;
-    clip-rule: evenodd;
+    fill: none;
+    stroke: $Black;
 
     svg
     {
