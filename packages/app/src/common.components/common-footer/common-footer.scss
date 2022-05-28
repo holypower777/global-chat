@@ -1,0 +1,61 @@
+@import 'design/design';
+
+.footer
+{
+    position: absolute;
+    bottom: 10px;
+
+    display: flex;
+
+    width: 100%;
+
+    gap: 20px;
+
+    justify-content: center;
+
+    color: $Boulder;
+
+    font-size: $fontSizeXS;
+    line-height: $lineHeightXS;
+
+    a
+    {
+        transition: $transitionColor01;
+
+        &:hover,
+        &:focus
+        {
+            color: $Black;
+        }
+    }
+
+    &__donate
+    {
+        color: $ChateauGreen;
+    }
+
+    &__watermark
+    {
+        color: $Silver;
+
+        a
+        {
+            color: $Boulder;
+        }
+    }
+
+    &__lang
+    {
+        cursor: pointer;
+    }
+
+    @include media-breakpoint-down($tabletBp)
+    {
+        &__bug,
+        &__idea,
+        &__watermark
+        {
+            display: none;
+        }
+    }
+}

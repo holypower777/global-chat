@@ -1,3 +1,5 @@
+@import 'design/design';
+
 .notifications
 {
     position: fixed;
@@ -36,6 +38,11 @@
             {
                 bottom: 24px;
                 left: 24px;
+
+                @include media-breakpoint-down($desktopBp)
+                {
+                    bottom: 34px;
+                }
             }
 
             &-center
