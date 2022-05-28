@@ -71,6 +71,11 @@
                 {
                     background-color: $ChateauGreen;
                 }
+
+                &_twitch
+                {
+                    background-color: $Twitch;
+                }
             }
         }
 
@@ -104,6 +109,11 @@
                 &_success
                 {
                     background-image: linear-gradient(130deg, $ChateauGreen, #81db98);
+                }
+
+                &_twitch
+                {
+                    background-image: linear-gradient(130deg, $Silver, #f5f5f5);
                 }
             }
         }

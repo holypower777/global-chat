@@ -62,6 +62,7 @@ export enum SNACKBAR_TYPE {
     ERROR = 'error',
     INFO = 'info',
     SUCCESS = 'success',
+    TWITCH = 'twitch',
 }
 
 export enum SNACKBAR_DIRECTION {

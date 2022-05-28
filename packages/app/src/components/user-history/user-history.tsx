@@ -42,7 +42,7 @@ const UserHistory = () => {
 
         if (searchParams.get(SEARCH_PARAMS.FROM) === FROM_PAGE.RANDOM_USER) {
             const key = addNotification({
-                type: SNACKBAR_TYPE.INFO,
+                type: SNACKBAR_TYPE.TWITCH,
                 id: 'notification.userHistory.nextRandom',
                 handleClick: () => (!isRandomUserFetching && setRSkip(false)),
                 clickable: true,
