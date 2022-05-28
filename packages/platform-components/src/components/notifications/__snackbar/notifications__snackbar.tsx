@@ -53,6 +53,9 @@ const NotificationsSnackbar = ({
         case SNACKBAR_TYPE.INFO:
             icon = <IconBell />;
             break;
+        case SNACKBAR_TYPE.TWITCH:
+            icon = <IconBell />;
+            break;
         case SNACKBAR_TYPE.SUCCESS:
             icon = <IconSquareTick />;
             break;
@@ -72,7 +75,7 @@ const NotificationsSnackbar = ({
                 ref={(ref: HTMLDivElement) => ref && setRef(ref)}
             >
                 {life && <animated.div className={b('notifications', 'snackbar-life', { type })} style={{ right: life }} />}
-                {isLoading ? <Spin size={Spin.SIZE.S} /> : icon}
+                {isLoading ? <Spin size={Spin.SIZE.S} theme={Spin.THEME.WHITE} /> : icon}
                 {content}{id ? children : null}
                 <div className={b('notifications', 'snackbar-buttons')}>
                     {!disableReloadButton && <button

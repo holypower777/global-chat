@@ -145,8 +145,7 @@
             "notification.liveChat.disconnectError": "Не удалось отключиться, проблема на стороне твича",
             "notification.liveChat.snapshotError": "Не удалось синхронизировать каналы",
             "notification.chat.sortChange": "Лучше не менять сортировку, когда подгружаются другие сообщения. Лучше перезагрузить страницу. Баг, который надо пофиксить...",
-            "notification.userHistory.nextRandom": "Найти другого пользователя",
-            "notification.userHistory.nextRandom.loading": "Ищем пользователя...",
+            "notification.userHistory.nextRandom": "Следующий рандомный юзер",
             "notification.copied": "Ссылка скопирована"
         }
     },
@@ -296,8 +295,7 @@
             "notification.liveChat.disconnectError": "Failed to disconnect, twitch API problem",
             "notification.liveChat.snapshotError": "Faild to sync channel with backend",
             "notification.chat.sortChange": "It's better not to change sorting when other messages are loaded. Please, reload the page. A bug that needs to be fixed...",
-            "notification.userHistory.nextRandom": "Find another user",
-            "notification.userHistory.nextRandom.loading": "Looking for user...",
+            "notification.userHistory.nextRandom": "Find next random user",
             "notification.copied": "Copied to clipboard"
         }
     }
