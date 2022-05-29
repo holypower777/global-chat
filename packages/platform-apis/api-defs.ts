@@ -34,6 +34,7 @@ export const getMessagesByUserIdAndChannelIdDef =
 export const getOverallStatsDef = () => 'stats/overall';
 export const getOverallStatsPlotsDef = 
     ({ dateFrom, dateTo }: GetOverallStatsPlotsQuery) => `stats/overall/plots?dateFrom=${dateFrom}&dateTo=${dateTo}`;
+export const getDailyStats = () => 'stats/daily';
 
 // badges def
 export const getSubscriberBadgesByChannelIdDef = 

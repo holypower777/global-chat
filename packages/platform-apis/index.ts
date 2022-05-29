@@ -15,4 +15,5 @@ export {
     overallStatsApi,
     useGetOverallStatsQuery,
     useGetOverallStatsPlotsQuery,
+    useGetDailyStatsQuery,
 } from './slices/overall-stats';
