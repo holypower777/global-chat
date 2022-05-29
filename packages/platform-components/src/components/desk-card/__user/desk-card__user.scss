@@ -1,0 +1,35 @@
+@import 'design/design';
+
+.desk-card
+{
+    &__user
+    {
+        flex-direction: column;
+        align-items: flex-start;
+
+        padding: 10px 0 10px 10px;
+
+        background-color: $WildSand;
+
+        img
+        {
+            width: 25px;
+            height: 25px;
+
+            margin-right: 10px;
+
+            border-radius: 50px;
+        }
+
+        &-container
+        {
+            display: flex;
+            align-items: center;
+
+            width: 100%;
+            height: 25px;
+
+            margin-bottom: 10px;
+        }
+    }
+}

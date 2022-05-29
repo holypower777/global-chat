@@ -1,0 +1,54 @@
+@import 'design/design';
+
+.desk-card
+{
+    width: 190px;
+
+    padding-right: 0;
+
+    &__stats
+    {
+        display: flex;
+        flex-direction: column;
+
+        padding: 10px 10px 10px 0;
+
+        align-items: flex-start;
+
+        &-value
+        {
+            margin: 10px 0 5px;
+
+            color: $Boulder;
+        }
+    }
+
+    &__dots
+    {
+        display: flex;
+
+        gap: 5px;
+
+        margin-bottom: 5px;
+    }
+
+    &__dot
+    {
+        width: 5px;
+        height: 5px;
+
+        border-radius: 50px;
+
+        background-color: $Silver;
+
+        &_active
+        {
+            background-color: $Black;
+        }
+    }
+
+    @include media-breakpoint-down($desktopBp)
+    {
+        width: calc(100% - 20px);
+    }
+}
