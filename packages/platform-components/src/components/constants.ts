@@ -83,6 +83,12 @@ export enum NOTIFICATIONS_DIRECTION {
     BOTTOM_RIGHT = 'bottom-right',
 }
 
+export enum DESK_CARD_TYPE {
+    OVERALL = 'overall',
+    LIVE_CHAT = 'live-chat',
+    DONATION = 'donation',
+}
+
 export enum SIZE {
     S = 's',
     M = 'm',

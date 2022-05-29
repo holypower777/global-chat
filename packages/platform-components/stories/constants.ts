@@ -2,6 +2,7 @@ export const STORY_GROUPS = {
     common: 'Platform Components/Common',
     icons: 'Platform Components/Icons',
     notifications: 'Platform Components/Notifications',
+    cards: 'Platform Components/Cards',
     chat: 'Platform Components/Chat',
     header: 'Platform Components/Header',
     smiles: 'Platform Components/Smiles',
