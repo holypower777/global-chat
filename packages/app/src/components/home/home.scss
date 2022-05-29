@@ -18,25 +18,23 @@
         align-items: center;
     }
 
-    &__input
-    {
-        margin: 40px 0 30px;
-    }
-
     &__search
     {
         display: flex;
+
         align-items: center;
+
+        width: 100%;
 
         gap: 40px;
 
-        margin-bottom: 20px;
+        margin: 40px 0 20px;
 
-        &-links
+        @include media-breakpoint-down($desktopSBp)
         {
-            display: flex;
+            flex-direction: column;
 
-            gap: 40px;
+            gap: 20px;
         }
     }
 
@@ -45,25 +43,71 @@
         color: $Silver;
     }
 
+    .icon__dots
+    {
+        fill: none;
+        stroke: $Silver;
+
+        transition: stroke .1s ease-in-out;
+
+        &:hover
+        {
+            fill: none;
+            stroke: $Boulder;
+        }
+    }
+
+    &__cards
+    {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+
+        display: flex;
+
+        flex-direction: column;
+
+        gap: 20px;
+    }
+
     @include media-breakpoint-down($desktopBp)
     {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+
+        padding: 20px;
+
         &__container
         {
             width: 80%;
+            height: 100%;
         }
 
+        &__search
+        {
+            gap: 20px;
+        }
+
+        &__cards
+        {
+            position: relative;
+            top: 0;
+            right: 0;
+
+            width: calc(100% + 32px);
+            height: 100%;
+        }
+    }
+
+    @include media-breakpoint-down($desktopSBp)
+    {
         &__search
         {
             flex-direction: column;
 
             gap: 20px;
-
-            &-links
-            {
-                flex-direction: column;
-                align-items: center;
-                gap: 20px;
-            }
         }
     }
 }

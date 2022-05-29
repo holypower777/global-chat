@@ -56,6 +56,22 @@ export interface OverallStatsPlot {
 
 export type OverallStatsPlots = Array<OverallStatsPlot>;
 
+interface DailyStatsAPI {
+    total_messages: number;
+    messages_per_day: number;
+    total_users: number;
+    users_per_day: number;
+    currenly_active_channels: number;
+}
+
+export interface DailyStats {
+    totalMessages: number;
+    messagesPerDay: number;
+    totalUsers: number;
+    usersPerDay: number;
+    currenlyActiveChannels: number;
+}
+
 export const convertOverallStatsApi = (stat: OverallStatsAPI): OverallStats => ({
     id: stat.id,
     totalMessages: stat.total_messages,
@@ -81,3 +97,11 @@ const convertOverallStatsPlotApi = (plot: OverallStatsPlotAPI): OverallStatsPlot
 
 export const convertOverallStatsPlotsApi = (stats: OverallStatsPlotsAPI): OverallStatsPlots =>
     stats.map(convertOverallStatsPlotApi);
+
+export const convertDailyStatsApi = (stats: DailyStatsAPI): DailyStats => ({
+    totalMessages: stats.total_messages,
+    messagesPerDay: stats.messages_per_day,
+    totalUsers: stats.total_users,
+    usersPerDay: stats.users_per_day,
+    currenlyActiveChannels: stats.currenly_active_channels,
+});

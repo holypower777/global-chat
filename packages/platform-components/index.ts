@@ -9,6 +9,7 @@ export { default as Heatmap } from './src/components/heatmap/heatmap';
 export * from './src/components/icon/icon';
 export * from './src/components/constants';
 export * from './src/components/desk-card/desk-card';
+export { default as DeskCard } from './src/components/desk-card/desk-card';
 export { default as Input } from './src/components/input/input';
 export { default as Logo } from './src/components/logo/logo';
 export { default as Rubricator } from './src/components/rubricator/rubricator';
