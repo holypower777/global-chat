@@ -40,4 +40,9 @@
     {
         background-color: rgba(147, 231, 162, 0.4);
     }
+
+    @include media-breakpoint-down($desktopBp)
+    {
+        width: calc(100% - 20px);
+    }
 }

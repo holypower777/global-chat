@@ -46,4 +46,9 @@
             background-color: $Black;
         }
     }
+
+    @include media-breakpoint-down($desktopBp)
+    {
+        width: calc(100% - 20px);
+    }
 }
