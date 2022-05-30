@@ -1,5 +1,6 @@
 import { 
     ChannelIdQuery, 
+    DisplayNameQuery, 
     GetOverallStatsPlotsQuery, 
     GetTwitchUserQuery, 
     GetTwitchUserWithChannelsQuery, 
@@ -22,6 +23,8 @@ export const getTwitchUserWereInterestedByUserIdDef =
     ({ userId }: UserIdQuery) => `twitch-user/${userId}/were-interested`;
 export const putTwitchUserWereInterestedByUserIdDef = 
     ({ userId }: UserIdQuery) => `twitch-user/${userId}/were-interested`;
+export const getDisplayNameSuggestionsDef =
+    ({ username }: DisplayNameQuery) => `twitch-user/${username}/suggestions`;
 
 // messages defs
 export const getMessagesByUserIdDef = 
@@ -34,7 +37,7 @@ export const getMessagesByUserIdAndChannelIdDef =
 export const getOverallStatsDef = () => 'stats/overall';
 export const getOverallStatsPlotsDef = 
     ({ dateFrom, dateTo }: GetOverallStatsPlotsQuery) => `stats/overall/plots?dateFrom=${dateFrom}&dateTo=${dateTo}`;
-export const getDailyStats = () => 'stats/daily';
+export const getDailyStatsDef = () => 'stats/daily';
 
 // badges def
 export const getSubscriberBadgesByChannelIdDef = 

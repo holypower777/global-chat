@@ -3,6 +3,7 @@ import cx from 'classnames';
 import React, { ReactNode, useState } from 'react';
 
 import { SIZE } from '../constants';
+import Spin from '../spin/spin';
 
 import './input.scss';
 
@@ -17,11 +18,14 @@ interface InputProps {
     required?: boolean;
     type?: string;
     value?: string;
+    isDropdownLoading?: boolean;
     size?: SIZE;
     handleChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
     handleKeyDown?: (e: React.KeyboardEvent) => void;
+    handleKeyUp?: (e: React.KeyboardEvent) => void;
     autoFocus?: boolean;
     settings?: ReactNode | Array<ReactNode>;
+    dropdownItems?: Array<ReactNode>;
 }
 
 const Input = (props: InputProps) => {
@@ -36,18 +40,21 @@ const Input = (props: InputProps) => {
         required = false,
         type = 'string',
         value,
+        isDropdownLoading = false,
         size = SIZE.L,
         handleChange,
         handleKeyDown,
+        handleKeyUp,
         autoFocus = false,
         settings,
+        dropdownItems = [],
     } = props;
     const [focus, setFocus] = useState(false);
 
     return (
         <div className={cx(b('input', 'container', { full: fullWidth, size, focus, disabled }), mix)}>
             {icon}
-            <input 
+            <input
                 autoFocus={autoFocus}
                 className={b('input', 'field', { disabled })}
                 disabled={disabled}
@@ -56,6 +63,7 @@ const Input = (props: InputProps) => {
                 onChange={handleChange}
                 onFocus={() => (setFocus(true))}
                 onKeyDown={handleKeyDown}
+                onKeyUp={handleKeyUp}
                 placeholder={placeholder}
                 readOnly={readOnly}
                 required={required}
@@ -64,6 +72,11 @@ const Input = (props: InputProps) => {
                 value={value}
             />
             {settings}
+            {(dropdownItems.length > 0 || isDropdownLoading) &&
+                <ul className={cx(b('input', 'dropdown'), 'custom-scroll')}>
+                    {isDropdownLoading && <Spin size={Spin.SIZE.S} />}
+                    {dropdownItems}
+                </ul>}
         </div>
     );
 };

@@ -18,13 +18,31 @@ interface HeaderProps {
     handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
     updateSettings: (key: string, value: unknown) => void;
     handleSubmit: SimpleCallback;
+    handleSelect: (e: string) => void;
+    handleKeyUp: (e: React.KeyboardEvent) => void;
+    handleKeyDown: (e: React.KeyboardEvent) => void;
+    suggestions: Array<string>;
     value: string;
     isLoading: boolean;
+    isSuggestionsLoading: boolean;
 }
 
-const Header = ({ handleChange, updateSettings, handleSubmit, value, isLoading }:  HeaderProps) => {
+const Header = ({
+    handleChange,
+    updateSettings,
+    handleSubmit,
+    handleSelect,
+    handleKeyUp,
+    handleKeyDown,
+    value,
+    isLoading,
+    isSuggestionsLoading,
+    suggestions = [],
+}: HeaderProps) => {
     const intl = useIntl();
-    const handleKeyDown = (e: React.KeyboardEvent) => {
+    const handleKeyDownCombined = (e: React.KeyboardEvent) => {
+        handleKeyDown(e);
+
         if (value.length && e.key === 'Enter') {
             handleSubmit();
         }
@@ -34,12 +52,18 @@ const Header = ({ handleChange, updateSettings, handleSubmit, value, isLoading }
         <header className="header">
             <Logo />
             <HeaderMenu />
-            <Input 
+            <Input
                 disabled={isLoading}
+                dropdownItems={suggestions.map((e) => (<li
+                    key={e}
+                    onClick={() => (handleSelect(e))}
+                >{e}</li>))}
                 fullWidth={true}
                 handleChange={handleChange}
-                handleKeyDown={handleKeyDown}
+                handleKeyDown={handleKeyDownCombined}
+                handleKeyUp={handleKeyUp}
                 icon={<IconSearch />}
+                isDropdownLoading={isSuggestionsLoading}
                 name="user-search"
                 placeholder={intl.formatMessage({ id: 'header.inputPlaceholder' })}
                 settings={<HeaderSettings updateSettings={updateSettings} />}
