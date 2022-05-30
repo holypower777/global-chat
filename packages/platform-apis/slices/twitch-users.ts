@@ -7,8 +7,9 @@ import {
     getTwitchUserWereInterestedByUserIdDef,
     putTwitchUserWereInterestedByUserIdDef,
     getRandomTwitchUser,
+    getDisplayNameSuggestionsDef,
 } from '../api-defs';
-import { GetTwitchUserQuery, UserIdQuery } from '../types/query';
+import { DisplayNameQuery, GetTwitchUserQuery, UserIdQuery } from '../types/query';
 import { convertTwitchUserApi, TwitchUser, TwitchUserAPI } from '../types/twitch-user';
 import { convertTwitchUserChannelsApi, TwitchUserChannels, TwitchUserChannelsAPI } from '../types/twitch-user-channel';
 
@@ -58,6 +59,10 @@ export const twitchUsersApi = createApi({
                     };
                 },
             }),
+        getDisplayNameSuggestions:
+            builder.query<Array<string>, DisplayNameQuery>({
+                query: getDisplayNameSuggestionsDef,
+            }),
         getTwitchUserWereInterestedByUserId:
             builder.query<TwitchUserWereInterestedResponseType, UserIdQuery>({
                 query: getTwitchUserWereInterestedByUserIdDef,
@@ -76,6 +81,7 @@ export const {
     useGetTwitchUserByUsernameQuery,
     useGetRandomTwitchUserQuery,
     useGetTwitchUserWithChannelsByUsernameQuery,
+    useGetDisplayNameSuggestionsQuery,
     useGetTwitchUserWereInterestedByUserIdQuery,
     usePutTwitchUserWereInterestedByUserIdQuery,
 } = twitchUsersApi;

@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
-import { baseUrl, getDailyStats, getOverallStatsDef, getOverallStatsPlotsDef } from '../api-defs';
+import { baseUrl, getDailyStatsDef, getOverallStatsDef, getOverallStatsPlotsDef } from '../api-defs';
 import { convertDailyStatsApi, convertOverallStatsApi, convertOverallStatsPlotsApi, DailyStats, OverallStats, OverallStatsPlots } from '../types/overall-stats';
 import { GetOverallStatsPlotsQuery } from '../types/query';
 
@@ -17,7 +17,7 @@ export const overallStatsApi = createApi({
             transformResponse: convertOverallStatsPlotsApi,
         }),
         getDailyStats: builder.query<DailyStats, void>({
-            query: getDailyStats,
+            query: getDailyStatsDef,
             transformResponse: convertDailyStatsApi,
         }),
     }),

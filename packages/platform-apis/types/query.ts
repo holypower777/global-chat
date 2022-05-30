@@ -5,6 +5,10 @@ export interface GetTwitchUserQuery {
     type: 'username' | 'user_id';
 }
 
+export interface DisplayNameQuery {
+    username: string;
+}
+
 export interface GetTwitchUserWithChannelsQuery {
     userId: TwitchUserId;
     channelId: TwitchUserId;

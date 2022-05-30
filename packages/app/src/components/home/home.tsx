@@ -1,6 +1,6 @@
 import b from 'b_';
 import { useGetDailyStatsQuery } from 'platform-apis';
-import { useGetRandomTwitchUserQuery } from 'platform-apis/slices/twitch-users';
+import { useGetDisplayNameSuggestionsQuery, useGetRandomTwitchUserQuery } from 'platform-apis/slices/twitch-users';
 import { Button, DeskCard, DeskCardStats, FROM_PAGE, HeaderSettings, IconSearch, Input, Logo, SEARCH_TYPE, SETTINGS, SNACKBAR_TYPE, Text } from 'platform-components';
 import { useWindowSize } from 'platform-components/src/hooks';
 import React, { useEffect, useState } from 'react';
@@ -8,7 +8,10 @@ import { useIntl } from 'react-intl';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
+import { clearChannelsState } from '../../store/slices/channels';
+import { clearMessages } from '../../store/slices/messages';
 import { getUserTypeSetting, updateSetting } from '../../store/slices/settings';
+import { clearUser } from '../../store/slices/twitch-user';
 import { addNotification, isValidSearchChange, isValidSearchSubmit } from '../../utils';
 
 import './home.scss';
@@ -17,11 +20,15 @@ const Home = () => {
     const intl = useIntl();
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const [typingTimer, setTypingTimer] = useState<NodeJS.Timeout | null>(null);
     const [username, setUsername] = useState('');
-    const [skip, setSkip] = useState(true);
+    const [randomSkip, setRandomSkip] = useState(true);
+    const [suggestions, setSuggestions] = useState<Array<string>>([]);
+    const [suggestionsSkip, setSuggestionsSkip] = useState(true);
     const userType = useSelector(getUserTypeSetting);
     const { width } = useWindowSize();
-    const { data, isFetching } = useGetRandomTwitchUserQuery(null, { skip });
+    const { data, isFetching } = useGetRandomTwitchUserQuery(null, { skip: randomSkip });
+    const { data: suggestionsData, isFetching: isSuggestionsLoading } = useGetDisplayNameSuggestionsQuery({ username }, { skip: suggestionsSkip });
     const { data: dailyData, isFetching: isDailyFetching } = useGetDailyStatsQuery();
 
     useEffect(() => {
@@ -29,8 +36,15 @@ const Home = () => {
     }, [userType]);
 
     useEffect(() => {
+        if (suggestionsData && suggestionsData.length) {
+            setSuggestions(suggestionsData);
+            setSuggestionsSkip(true);
+        }
+    }, [suggestionsData]);
+
+    useEffect(() => {
         if (data) {
-            setSkip(true);
+            setRandomSkip(true);
             dispatch(updateSetting({ key: SETTINGS.USER_TYPE, value: SEARCH_TYPE.USERNAME }));
             navigate(`messages/${data.displayName}?from=${FROM_PAGE.RANDOM_USER}`);
         }
@@ -40,20 +54,37 @@ const Home = () => {
         document.title = intl.formatMessage({ id: 'title.common' });
     }, []);
 
-    const handleSubmit = (e: React.KeyboardEvent) => {
-        if (e.key === 'Enter') {
-            if (!isValidSearchSubmit(userType, username)) {
-                addNotification({
-                    id: `notification.searchInput.${userType}.submit`,
-                    type: SNACKBAR_TYPE.ERROR,
-                    autoHideDuration: 4000,
-                }, dispatch);
-                return;
-            }
+    const handleRedirect = (displayName: string | null = null) => {
+        const searchName = displayName || username;
 
-            navigate(`messages/${username}`);
+        if (!isValidSearchSubmit(userType, searchName)) {
+            addNotification({
+                id: `notification.searchInput.${userType}.submit`,
+                type: SNACKBAR_TYPE.ERROR,
+                autoHideDuration: 4000,
+            }, dispatch);
+            return;
+        }
+
+        dispatch(clearUser());
+        dispatch(clearChannelsState());
+        dispatch(clearMessages());
+        setSuggestions([]);
+
+        navigate(`messages/${searchName}`);
+    };
+
+    const handleSubmit = (e: React.KeyboardEvent) => {
+        if (typingTimer) {
+            clearTimeout(typingTimer);
+        }
+
+        if (e.key === 'Enter') {
+            handleRedirect();
         }
     };
+
+    const handleSelect = (displayName: string) => (handleRedirect(displayName));
 
     return (
         <main className="home">
@@ -62,6 +93,10 @@ const Home = () => {
                 <section className={b('home', 'search')}>
                     <Input
                         disabled={false}
+                        dropdownItems={suggestions.map((e) => (<li
+                            key={e}
+                            onClick={() => (handleSelect(e))}
+                        >{e}</li>))}
                         fullWidth={true}
                         handleChange={(e) => {
                             if (!isValidSearchChange(userType, e.target.value)) {
@@ -72,17 +107,36 @@ const Home = () => {
                                 }, dispatch);
                                 return;
                             }
+
+                            if (e.target.value.length <= 2) {
+                                setSuggestions([]);
+                            }
+
                             setUsername(e.target.value);
                         }}
                         handleKeyDown={handleSubmit}
+                        handleKeyUp={() => {
+                            if (typingTimer) {
+                                clearTimeout(typingTimer);
+                            }
+                            const id = setTimeout(() => {
+                                if (username.length > 2) {
+                                    setSuggestionsSkip(false);
+                                    setSuggestions([]);
+                                }
+                            }, 500);
+
+                            setTypingTimer(id);
+                        }}
                         icon={<IconSearch />}
+                        isDropdownLoading={isSuggestionsLoading}
                         name="user-search"
                         placeholder={intl.formatMessage({ id: 'header.inputPlaceholder' })}
                         settings={<HeaderSettings updateSettings={(key, value) => dispatch(updateSetting({ key, value }))} />}
                         value={username}
                     />
                     <Button
-                        handleClick={() => setSkip(false)}
+                        handleClick={() => setRandomSkip(false)}
                         loading={isFetching}
                     >
                         {intl.formatMessage({ id: 'home.randomUser' })}
