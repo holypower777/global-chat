@@ -18,7 +18,7 @@ import {
     setIsMessagesFetching,
 } from '../../../../store/slices/messages';
 import { getSortByDateSetting } from '../../../../store/slices/settings';
-import { getUserId } from '../../../../store/slices/twitch-user';
+import { getTwitchUserId } from '../../../../store/slices/twitch-user';
 import { addNotification } from '../../../../utils';
 
 import InifiniteScrollWrapper from './infinite-scroll-wrapper';
@@ -35,7 +35,7 @@ const ChatMessages = () => {
     const selectedChannel = useSelector(getSelectedChannel);
     const sort = useSelector(getSortByDateSetting);
 
-    const userId = useSelector(getUserId);
+    const userId = useSelector(getTwitchUserId);
     const [offset, setOffset] = useState(0);
     const [limit, setLimit] = useState(100);
     const [highlitedMessage, setHighlitedMessage] = useState<REPLY_MESSAGE | null>(null);

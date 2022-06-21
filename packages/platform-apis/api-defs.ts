@@ -1,3 +1,5 @@
+/* eslint-disable camelcase */
+import { AuthBody, UserCommonBody } from './types/body';
 import { 
     ChannelIdQuery, 
     DisplayNameQuery, 
@@ -11,6 +13,7 @@ import {
 export const baseUrl = process.env.NODE_ENV === 'development'
     ? 'http://192.168.1.12:3000/v1/'
     : '/v1/';
+export const baseAuthUrl = process.env.NODE_ENV === 'development' ? 'http://192.168.1.12:3000/' : '/';
 export const baseBadgesUrl = 'https://badges.twitch.tv/';
 
 // user defs
@@ -38,6 +41,34 @@ export const getOverallStatsDef = () => 'stats/overall';
 export const getOverallStatsPlotsDef = 
     ({ dateFrom, dateTo }: GetOverallStatsPlotsQuery) => `stats/overall/plots?dateFrom=${dateFrom}&dateTo=${dateTo}`;
 export const getDailyStatsDef = () => 'stats/daily';
+
+// users defs
+export const getUserByIdDef = ({ userId }: UserIdQuery) => `users/${userId}`;
+export const postUserFavoriteDef = ({ userId, body }: UserIdQuery & UserCommonBody) => ({
+    url: `users/${userId}/favorites`,
+    method: 'POST',
+    body,
+});
+export const deleteUserFavoriteDef = ({ userId, body }: UserIdQuery & UserCommonBody) => ({
+    url: `users/${userId}/favorites`,
+    method: 'DELETE',
+    body,
+});
+export const postSearchHistoryDef = ({ userId, body }: UserIdQuery & UserCommonBody) => ({
+    url: `users/${userId}/search-history`,
+    method: 'POST',
+    body,
+});
+
+// auth defs
+export const authTwitchLogoutDef = ({ body }: AuthBody) => ({
+    url: 'auth/twitch/logout',
+    body: {
+        user_id: body.user_id,
+        refresh_token: body.refresh_token,
+    },
+});
+export const authRefreshTokenDef = () => 'auth/refresh';
 
 // badges def
 export const getSubscriberBadgesByChannelIdDef = 

@@ -17,3 +17,5 @@ export {
     useGetOverallStatsPlotsQuery,
     useGetDailyStatsQuery,
 } from './slices/overall-stats';
+export * from './slices/users';
+export * from './slices/auth';

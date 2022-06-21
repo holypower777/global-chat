@@ -1,16 +1,11 @@
 import { Notifications } from 'platform-components';
-import React, { ReactNode } from 'react';
+import { ChildrenProps } from 'platform-components/src/typings';
+import React from 'react';
 import { useSelector } from 'react-redux';
 
 import { getNotifications } from '../../store/slices/notifications';
 
-interface NotificationProviderProps {
-    children: ReactNode | Array<ReactNode>;
-}
-
-const NotificationProvider = ({
-    children,
-}: NotificationProviderProps) => {
+const NotificationProvider = ({ children }: ChildrenProps) => {
     const notifications = useSelector(getNotifications);
 
     return (

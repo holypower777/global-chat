@@ -12,7 +12,7 @@ import { setChannels, setSelectedChannel } from '../../store/slices/channels';
 import { setMessagesDates } from '../../store/slices/messages';
 import { removeNotification, updateNotificationLoadingState } from '../../store/slices/notifications';
 import { getUserTypeSetting, updateSetting } from '../../store/slices/settings';
-import { setIsUserWithChannelsFetching, setMostActiveChannel, setUser } from '../../store/slices/twitch-user';
+import { setIsUserWithChannelsFetching, setMostActiveChannel, setTwitchUser } from '../../store/slices/twitch-user';
 import { addNotification, findMostFrequestChannel } from '../../utils';
 
 import Channels from './channels/channels';
@@ -71,7 +71,7 @@ const UserHistory = () => {
 
     useEffect(() => {
         if (data) {
-            dispatch(setUser(data.user));
+            dispatch(setTwitchUser(data.user));
             dispatch(setMostActiveChannel(findMostFrequestChannel(data.channels)));
             dispatch(setChannels(data.channels));
             dispatch(setMessagesDates(data.messagesDates));

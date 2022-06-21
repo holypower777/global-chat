@@ -1,6 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { setupListeners } from '@reduxjs/toolkit/dist/query';
-import { messagesApi, twitchUsersApi, overallStatsApi, subscriberBadgesApi } from 'platform-apis';
+import {
+    messagesApi,
+    twitchUsersApi,
+    overallStatsApi,
+    subscriberBadgesApi,
+    usersApi,
+    authApi,
+} from 'platform-apis';
 
 import rtkQueryErrorMiddleware from './middlewares/errors';
 import settingsMiddleware from './middlewares/settings';
@@ -11,6 +18,7 @@ import notificationsSlice from './slices/notifications';
 import overallStatsSlice from './slices/overall-stats';
 import settingsSlice from './slices/settings';
 import twitchUserSlice from './slices/twitch-user';
+import userSlice from './slices/user';
 
 export const store = configureStore({
     reducer: {
@@ -18,6 +26,8 @@ export const store = configureStore({
         [twitchUsersApi.reducerPath]: twitchUsersApi.reducer,
         [overallStatsApi.reducerPath]: overallStatsApi.reducer,
         [subscriberBadgesApi.reducerPath]: subscriberBadgesApi.reducer,
+        [usersApi.reducerPath]: usersApi.reducer,
+        [authApi.reducerPath]: authApi.reducer,
         messages: messagesSlice,
         notifications: notificationsSlice,
         channels: channelsSlice,
@@ -25,6 +35,7 @@ export const store = configureStore({
         twitchUser: twitchUserSlice,
         settings: settingsSlice,
         overallStats: overallStatsSlice,
+        user: userSlice,
     },
 
     middleware: (getDefaultMiddleware) =>
@@ -33,6 +44,8 @@ export const store = configureStore({
             twitchUsersApi.middleware,
             overallStatsApi.middleware,
             subscriberBadgesApi.middleware,
+            usersApi.middleware,
+            authApi.middleware,
             settingsMiddleware,
             rtkQueryErrorMiddleware,
         ),

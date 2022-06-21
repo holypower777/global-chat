@@ -7,7 +7,7 @@ import { VariableSizeList as List } from 'react-window';
 import InfiniteLoader from 'react-window-infinite-loader';
 
 import { getShowBadgesSetting, getShowMessageTimeSetting } from '../../../../store/slices/settings';
-import { getUser } from '../../../../store/slices/twitch-user';
+import { getTwitchUser } from '../../../../store/slices/twitch-user';
 
 import ChatMessage from './chat__message';
 
@@ -30,7 +30,7 @@ const InfiniteScrollWrapper = ({
 }: InfiniteScrollWrapperProps) => {
     const showBadges = useSelector(getShowBadgesSetting);
     const showMessageTime = useSelector(getShowMessageTimeSetting);
-    const user = useSelector(getUser);
+    const user = useSelector(getTwitchUser);
 
     const itemCount = hasNextPage ? items.length + 1 : items.length;
     // eslint-disable-next-line @typescript-eslint/no-empty-function

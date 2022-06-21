@@ -9,6 +9,7 @@ import { Routes, Route, BrowserRouter, Navigate } from 'react-router-dom';
 import CommonFooter from './common.components/common-footer/common-footer';
 import LanguageProvider from './containers/language-provider/language-provider';
 import NotificationProvider from './containers/notification-provider/notification-provider';
+import UserProvider from './containers/user-provider/user-provider';
 import { store } from './store/store';
 
 const rootContainerId = 'root';
@@ -34,24 +35,26 @@ const App = () => {
         >
             <ReduxProvider store={store}>
                 <LanguageProvider>
-                    <NotificationProvider>
-                        <Suspense fallback={<Spin center />}>
-                            <BrowserRouter>
-                                <Routes>
-                                    <Route path="/">
-                                        <Route element={<Home />} index />
-                                        <Route element={<LiveChat />} path="live-chat" />
-                                        <Route element={<UserHistory />} path="messages">
-                                            <Route element={<UserHistory />} path=":username" />
+                    <UserProvider>
+                        <NotificationProvider>
+                            <Suspense fallback={<Spin center />}>
+                                <BrowserRouter>
+                                    <Routes>
+                                        <Route path="/">
+                                            <Route element={<Home />} index />
+                                            <Route element={<LiveChat />} path="live-chat" />
+                                            <Route element={<UserHistory />} path="messages">
+                                                <Route element={<UserHistory />} path=":username" />
+                                            </Route>
+                                            <Route element={<OverallStats />} path="overall-stats" />
+                                            <Route element={<Navigate to="/" />} path="*" />
                                         </Route>
-                                        <Route element={<OverallStats />} path="overall-stats" />
-                                        <Route element={<Navigate to="/" />} path="*" />
-                                    </Route>
-                                </Routes>
-                                <CommonFooter />
-                            </BrowserRouter>
-                        </Suspense>
-                    </NotificationProvider>
+                                    </Routes>
+                                    <CommonFooter />
+                                </BrowserRouter>
+                            </Suspense>
+                        </NotificationProvider>
+                    </UserProvider>
                 </LanguageProvider>
             </ReduxProvider>
         </FlagsmithProvider>
