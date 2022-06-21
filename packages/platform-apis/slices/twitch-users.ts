@@ -1,7 +1,6 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { createApi } from '@reduxjs/toolkit/query/react';
 
 import {
-    baseUrl,
     getTwitchUserByUsernameDef,
     getTwitchUserWithChannelsByUsernameDef,
     getTwitchUserWereInterestedByUserIdDef,
@@ -12,6 +11,7 @@ import {
 import { DisplayNameQuery, GetTwitchUserQuery, UserIdQuery } from '../types/query';
 import { convertTwitchUserApi, TwitchUser, TwitchUserAPI } from '../types/twitch-user';
 import { convertTwitchUserChannelsApi, TwitchUserChannels, TwitchUserChannelsAPI } from '../types/twitch-user-channel';
+import authFetchBase from '../utils/authFetchBase';
 
 interface TwitchUserWithChannelsResponseTypeRaw {
     user: TwitchUserAPI;
@@ -37,7 +37,7 @@ type TwitchUserResponseType = TwitchUser;
 
 export const twitchUsersApi = createApi({
     reducerPath: 'twitchUsersApi',
-    baseQuery: fetchBaseQuery({ baseUrl }),
+    baseQuery: authFetchBase,
     endpoints: (builder) => ({
         getTwitchUserByUsername: builder.query<TwitchUserResponseType, GetTwitchUserQuery>({
             query: getTwitchUserByUsernameDef,

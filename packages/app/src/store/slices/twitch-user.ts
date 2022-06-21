@@ -33,7 +33,7 @@ export const twitchUserSlice = createSlice({
     name: 'twitchUser',
     initialState,
     reducers: {
-        setUser: (state, action: PayloadAction<TwitchUser>) => {
+        setTwitchUser: (state, action: PayloadAction<TwitchUser>) => {
             state.user = action.payload;
         },
         setMostActiveChannel: (state, action: PayloadAction<string>) => {
@@ -42,7 +42,7 @@ export const twitchUserSlice = createSlice({
         setIsUserWithChannelsFetching: (state, action: PayloadAction<boolean>) => {
             state.isFetching = action.payload;
         },
-        clearUser: (state) => {
+        clearTwitchUser: (state) => {
             state.user.userId = 0;
             state.user.login = '';
             state.user.displayName = '';
@@ -62,31 +62,31 @@ export const twitchUserSlice = createSlice({
 });
 
 export const {
-    setUser,
+    setTwitchUser,
     setMostActiveChannel,
     setIsUserWithChannelsFetching,
-    clearUser,
+    clearTwitchUser,
 } = twitchUserSlice.actions;
 
-const getRootUser = (state: RootState) => state.twitchUser;
-export const getUser = createSelector(
-    getRootUser,
+const getRootTwitchUser = (state: RootState) => state.twitchUser;
+export const getTwitchUser = createSelector(
+    getRootTwitchUser,
     (rootUser) => rootUser.user,
 );
 export const getMostActiveChannel = createSelector(
-    getRootUser,
+    getRootTwitchUser,
     (user) => user.mostActiveChannel,
 );
 export const getDisplayName = createSelector(
-    getUser,
+    getTwitchUser,
     (user) => user.displayName,
 );
-export const getUserId = createSelector(
-    getUser,
+export const getTwitchUserId = createSelector(
+    getTwitchUser,
     (user) => user.userId,
 );
 export const getIsUserFetching = createSelector(
-    getRootUser,
+    getRootTwitchUser,
     (rootUser) => rootUser.isFetching,
 );
 

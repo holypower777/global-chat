@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 import { getSelectedChannel } from '../../../store/slices/channels';
 import { getMessagesDates } from '../../../store/slices/messages';
 import { updateSetting } from '../../../store/slices/settings';
-import { getMostActiveChannel, getUser } from '../../../store/slices/twitch-user';
+import { getMostActiveChannel, getTwitchUser } from '../../../store/slices/twitch-user';
 
 import ChatMessages from './__messages/chat__messages';
 
@@ -15,7 +15,7 @@ import './chat.scss';
 
 const Chat = React.memo(() => {
     const dispatch = useDispatch();
-    const user = useSelector(getUser);
+    const user = useSelector(getTwitchUser);
     const mostActiveChannel = useSelector(getMostActiveChannel);
     const messagesDates = useSelector(getMessagesDates);
     const selectedChannel = useSelector(getSelectedChannel);

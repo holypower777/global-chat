@@ -1,4 +1,5 @@
 import { createSelector, createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { decode } from 'jws';
 import { LANGUAGES, SEARCH_TYPE, SETTINGS, SORT_ORDER } from 'platform-components/src/components/constants';
 import { getLocalStorageValue } from 'platform-components/src/hooks';
 import { getDefaultLanguage } from 'platform-components/src/utils';
@@ -14,6 +15,8 @@ interface SettingsState {
     liveChatShowMessageTime: boolean;
     liveChatUseChatColors: boolean;
     language: LANGUAGES;
+    at: string | null;
+    rt: string | null;
 }
 
 interface UpdateSetting {
@@ -33,6 +36,8 @@ const initialState = (): SettingsState => {
         liveChatShowMessageTime: getLocalStorageValue(SETTINGS.LIVE_CHAT_SHOW_MESSAGE_TIME, true),
         liveChatUseChatColors: getLocalStorageValue(SETTINGS.LIVE_CHAT_USE_CHAT_COLORS, true),
         language: getLocalStorageValue(SETTINGS.LANGUAGE, defaultLanguage),
+        at: getLocalStorageValue(SETTINGS.ACCESS_TOKEN, null),
+        rt: getLocalStorageValue(SETTINGS.REFRESH_TOKEN, null),
     };
 };
 
@@ -80,6 +85,25 @@ export const getLiveChatUseChatColors = createSelector(
 export const getLanguage = createSelector(
     getSettings,
     (settings) => settings.language,
+);
+export const getAT = createSelector(
+    getSettings,
+    (settings) => settings.at,  
+);
+export const getRT = createSelector(
+    getSettings,
+    (settings) => settings.rt,  
+);
+export const getUserIdFromAT = createSelector(
+    getAT,
+    (at) => {
+        if (at) {
+            const { payload } = decode(at);
+            return payload.user_id;
+        }
+
+        return 0;
+    }
 );
 
 export default settingsSlice.reducer;

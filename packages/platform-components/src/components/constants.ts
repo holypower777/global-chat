@@ -83,6 +83,12 @@ export enum NOTIFICATIONS_DIRECTION {
     BOTTOM_RIGHT = 'bottom-right',
 }
 
+export enum NOTIFICATIONS_DURATION {
+    S = 4000,
+    M = 6000,
+    L = 8000,
+}
+
 export enum DESK_CARD_TYPE {
     OVERALL = 'overall',
     LIVE_CHAT = 'live-chat',
@@ -114,6 +120,8 @@ export enum SETTINGS {
     LIVE_CHAT_SHOW_MESSAGE_TIME = 'liveChatShowMessageTime',
     LIVE_CHAT_USE_CHAT_COLORS = 'liveChatUseChatColors',
     LANGUAGE = 'language',
+    ACCESS_TOKEN = 'at',
+    REFRESH_TOKEN = 'rt',
 }
 
 export enum SORT_ORDER {
@@ -133,6 +141,8 @@ export enum FROM_PAGE {
 export enum SEARCH_PARAMS {
     FROM = 'from',
     REPLY = 'reply',
+    ACCESS_TOKEN = 'at',
+    REFRESH_TOKEN = 'rt',
 }
 
 export interface REPLY_MESSAGE {

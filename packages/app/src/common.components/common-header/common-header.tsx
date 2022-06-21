@@ -7,7 +7,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { clearChannelsState } from '../../store/slices/channels';
 import { clearMessages } from '../../store/slices/messages';
 import { getUserTypeSetting, updateSetting } from '../../store/slices/settings';
-import { clearUser, getIsUserFetching } from '../../store/slices/twitch-user';
+import { clearTwitchUser, getIsUserFetching } from '../../store/slices/twitch-user';
 import { addNotification, isValidSearchChange, isValidSearchSubmit } from '../../utils';
 
 const CommonHeader = () => {
@@ -62,7 +62,7 @@ const CommonHeader = () => {
             return;
         }
 
-        dispatch(clearUser());
+        dispatch(clearTwitchUser());
         dispatch(clearChannelsState());
         dispatch(clearMessages());
         setSuggestions([]);

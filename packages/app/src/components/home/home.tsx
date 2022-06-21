@@ -1,17 +1,17 @@
 import b from 'b_';
 import { useGetDailyStatsQuery } from 'platform-apis';
 import { useGetDisplayNameSuggestionsQuery, useGetRandomTwitchUserQuery } from 'platform-apis/slices/twitch-users';
-import { Button, DeskCard, DeskCardStats, FROM_PAGE, HeaderSettings, IconSearch, Input, Logo, SEARCH_TYPE, SETTINGS, SNACKBAR_TYPE, Text } from 'platform-components';
+import { Button, DeskCard, DeskCardStats, FROM_PAGE, HeaderSettings, IconSearch, Input, Logo, SEARCH_PARAMS, SEARCH_TYPE, SETTINGS, SNACKBAR_TYPE, Text } from 'platform-components';
 import { useWindowSize } from 'platform-components/src/hooks';
 import React, { useEffect, useState } from 'react';
 import { useIntl } from 'react-intl';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 
 import { clearChannelsState } from '../../store/slices/channels';
 import { clearMessages } from '../../store/slices/messages';
 import { getUserTypeSetting, updateSetting } from '../../store/slices/settings';
-import { clearUser } from '../../store/slices/twitch-user';
+import { clearTwitchUser } from '../../store/slices/twitch-user';
 import { addNotification, isValidSearchChange, isValidSearchSubmit } from '../../utils';
 
 import './home.scss';
@@ -20,6 +20,7 @@ const Home = () => {
     const intl = useIntl();
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const [searchParams] = useSearchParams();
     const [typingTimer, setTypingTimer] = useState<NodeJS.Timeout | null>(null);
     const [username, setUsername] = useState('');
     const [randomSkip, setRandomSkip] = useState(true);
@@ -41,6 +42,24 @@ const Home = () => {
             setSuggestionsSkip(true);
         }
     }, [suggestionsData]);
+
+    useEffect(() => {
+        if (searchParams.get(SEARCH_PARAMS.ACCESS_TOKEN)) {
+            dispatch(updateSetting({
+                key: SETTINGS.ACCESS_TOKEN,
+                value: searchParams.get(SEARCH_PARAMS.ACCESS_TOKEN),
+            }));
+        }
+
+        if (searchParams.get(SEARCH_PARAMS.REFRESH_TOKEN)) {
+            dispatch(updateSetting({
+                key: SETTINGS.REFRESH_TOKEN,
+                value: searchParams.get(SEARCH_PARAMS.REFRESH_TOKEN),
+            }));
+        }
+
+        navigate('/');
+    }, [searchParams]);
 
     useEffect(() => {
         if (data) {
@@ -66,7 +85,7 @@ const Home = () => {
             return;
         }
 
-        dispatch(clearUser());
+        dispatch(clearTwitchUser());
         dispatch(clearChannelsState());
         dispatch(clearMessages());
         setSuggestions([]);
@@ -160,6 +179,7 @@ const Home = () => {
                     mix={b('home', 'info')}
                     size={Text.SIZE.S}
                 />}
+                <a href="http://localhost:3000/auth/twitch/login">Login</a>
             </section>
         </main>
     );
