@@ -150,6 +150,20 @@
             "backendError.emptyChannelId": "Айди канала не может быть пустым",
             "backendError.badChannelId": "Айди канала может содержать только цифры от 1 до 20 символов",
             "backendError.internalServer": "Случилось что-то неладное",
+            "backendError.unauthorized": "Вы не авторизированы!",
+            "backendError.bodyParseError": "Неверное тело запроса",
+            "backendError.authTwitchUser": "Не удалось авторизироваться через Твич",
+            "backendError.failedToCreateUser": "Не удалось создать пользователя, попробуйте еще раз!",
+            "backendError.tooMuchRefreshTokens": "Ваш токен устарел, пожалуйста, залогиньтесь через Твич еще раз!",
+            "backendError.updatingUserRefreshToken": "Ваш токен устарел, пожалуйста, залогиньтесь через Твич еще раз!",
+            "backendError.refreshTokenNotFound": "Ваш токен устарел, пожалуйста, залогиньтесь через Твич еще раз!",
+            "backendError.refreshTokenExpired": "Ваш токен устарел, пожалуйста, залогиньтесь через Твич еще раз!",
+            "backendError.tokenExpired": "Ваш токен устарел, пожалуйста, залогиньтесь через Твич еще раз!",
+            "backendError.invalidRefreshToken": "Ваш токен устарел, пожалуйста, залогиньтесь через Твич еще раз!",
+            "backendError.noLimits": "На сегодня лимиты запросов закончились, приходите позже!",
+            "backendError.forbidden": "Недостаточный уровень допуска",
+            "backendError.addFavoriteUser": "Не удалось добавить пользователя в избранные",
+            "backendError.userHidden": "Пользователь спрятан!",
             "notification.searchInput.username": "Доступные символы: A-z, 0-9, нижнее подчеркнивание. Максимальная длина 25 символов",
             "notification.searchInput.user_id": "Доступны только цифры. Максимальная длина 20 символов",
             "notification.searchInput.username.submit": "Доступные символы: A-z, 0-9, нижнее подчеркнивание. Максимальная длина 25 символов. Минимальная длина 3 символа",
@@ -161,7 +175,8 @@
             "notification.chat.sortChange": "Лучше не менять сортировку, когда подгружаются другие сообщения. Лучше перезагрузить страницу. Баг, который надо пофиксить...",
             "notification.userHistory.nextRandom": "Следующий рандомный юзер",
             "notification.copied": "Ссылка скопирована",
-            "notification.logout": "Вы вышли из аккаунта!"
+            "notification.logout": "Вы вышли из аккаунта!",
+            "notification.oneRequestLeft": "Only one request for the user left!"
         }
     },
     "en-US": {
@@ -315,6 +330,20 @@
             "backendError.emptyChannelId": "Channel id can not be empty",
             "backendError.badChannelId": "Channel id can contain only numbers, between 1 and 20 characters",
             "backendError.internalServer": "Something wrong happend",
+            "backendError.unauthorized": "You're not authorized!",
+            "backendError.bodyParseError": "Bad request body!",
+            "backendError.authTwitchUser": "Failed to log you in using Twitch",
+            "backendError.failedToCreateUser": "Failed to create user, please try again!",
+            "backendError.tooMuchRefreshTokens": "Your auth token is expired, please relogin using Twitch",
+            "backendError.updatingUserRefreshToken": "Your auth token is expired, please relogin using Twitch",
+            "backendError.refreshTokenNotFound": "Your auth token is expired, please relogin using Twitch",
+            "backendError.refreshTokenExpired": "Your auth token is expired, please relogin using Twitch",
+            "backendError.tokenExpired": "Your auth token is expired, please relogin using Twitch",
+            "backendError.invalidRefreshToken": "Your auth token is expired, please relogin using Twitch",
+            "backendError.noLimits": "No limits left for today, come back later!",
+            "backendError.forbidden": "You're not allowed!",
+            "backendError.addFavoriteUser": "Failed to add new favorite user",
+            "backendError.userHidden": "User is hidden!",
             "notification.searchInput.username": "Allowed characters: A-z, 0-9, underscore. Max length is 25 characters",
             "notification.searchInput.user_id": "Only numbers allowed. Max length is 20 characters",
             "notification.searchInput.username.submit": "Allowed characters: A-z, 0-9, underscore. Max length is 25 characters. Min length is 3 characters",
@@ -326,7 +355,8 @@
             "notification.chat.sortChange": "It's better not to change sorting when other messages are loaded. Please, reload the page. A bug that needs to be fixed...",
             "notification.userHistory.nextRandom": "Find next random user",
             "notification.copied": "Copied to clipboard",
-            "notification.logout": "You have been logged out!"
+            "notification.logout": "You have been logged out!",
+            "notification.oneRequestLeft": "Only one request for the user left!"
         }
     }
 }
