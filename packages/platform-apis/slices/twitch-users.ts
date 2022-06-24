@@ -1,4 +1,6 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
+import { NOTIFICATIONS_DURATION, SNACKBAR_TYPE } from 'platform-components';
+import { addNotification } from 'twitch-chat/src/utils';
 
 import {
     getTwitchUserByUsernameDef,
@@ -57,6 +59,18 @@ export const twitchUsersApi = createApi({
                         channels: convertTwitchUserChannelsApi(response.channels),
                         messagesDates: response.messages_dates ? response.messages_dates.map((e) => new Date(e)) : [],
                     };
+                },
+                onQueryStarted: async (id, { dispatch, queryFulfilled }) => {
+                    const { meta } = await queryFulfilled;
+                    const responsesLeft = meta.response.headers.get('Ratelimit-Remaining');
+                    
+                    if (responsesLeft === 1) {
+                        addNotification({
+                            id: 'notification.oneRequestLeft',
+                            type: SNACKBAR_TYPE.WARNING,
+                            autoHideDuration: NOTIFICATIONS_DURATION.M,
+                        }, dispatch);
+                    }
                 },
             }),
         getDisplayNameSuggestions:
