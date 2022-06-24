@@ -11,6 +11,11 @@
             "link.liveChat": "Лайв чат",
             "link.home": "Главная",
             "link.messages": "Сообщения",
+            "user-panel.login": "Войти",
+            "user-panel.logout": "Выйти",
+            "user-panel.user.messages": "Мои сообщения",
+            "user-panel.user.favorites": "Избранные",
+            "user-panel.user.search": "Моя история поиска",
             "desk-card.overallStats": "Общая стата",
             "desk-card.donation": "Донатик",
             "desk-card.live-chat": "Лайв чат",
@@ -155,7 +160,8 @@
             "notification.liveChat.snapshotError": "Не удалось синхронизировать каналы",
             "notification.chat.sortChange": "Лучше не менять сортировку, когда подгружаются другие сообщения. Лучше перезагрузить страницу. Баг, который надо пофиксить...",
             "notification.userHistory.nextRandom": "Следующий рандомный юзер",
-            "notification.copied": "Ссылка скопирована"
+            "notification.copied": "Ссылка скопирована",
+            "notification.logout": "Вы вышли из аккаунта!"
         }
     },
     "en-US": {
@@ -170,6 +176,11 @@
             "link.liveChat": "Live chat",
             "link.home": "Home",
             "link.messages": "Messages",
+            "user-panel.login": "Login",
+            "user-panel.logout": "Logout",
+            "user-panel.user.messages": "Open my chat history",
+            "user-panel.user.favorites": "Favorites",
+            "user-panel.user.search": "My latest searches",
             "desk-card.overallStats": "Overall stats",
             "desk-card.donation": "Donation",
             "desk-card.live-chat": "Live chat",
@@ -314,7 +325,8 @@
             "notification.liveChat.snapshotError": "Faild to sync channel with backend",
             "notification.chat.sortChange": "It's better not to change sorting when other messages are loaded. Please, reload the page. A bug that needs to be fixed...",
             "notification.userHistory.nextRandom": "Find next random user",
-            "notification.copied": "Copied to clipboard"
+            "notification.copied": "Copied to clipboard",
+            "notification.logout": "You have been logged out!"
         }
     }
 }

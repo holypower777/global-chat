@@ -1,7 +1,7 @@
 import b from 'b_';
-import { useGetDailyStatsQuery } from 'platform-apis';
+import { useAuthLogoutMutation, useDeleteUserFavoriteMutation, useGetDailyStatsQuery } from 'platform-apis';
 import { useGetDisplayNameSuggestionsQuery, useGetRandomTwitchUserQuery } from 'platform-apis/slices/twitch-users';
-import { Button, DeskCard, DeskCardStats, FROM_PAGE, HeaderSettings, IconSearch, Input, Logo, SEARCH_PARAMS, SEARCH_TYPE, SETTINGS, SNACKBAR_TYPE, Text } from 'platform-components';
+import { Button, DeskCard, DeskCardStats, DeskCardUser, FROM_PAGE, HeaderSettings, IconSearch, Input, Logo, SEARCH_PARAMS, SEARCH_TYPE, SETTINGS, SNACKBAR_TYPE, Text } from 'platform-components';
 import { useWindowSize } from 'platform-components/src/hooks';
 import React, { useEffect, useState } from 'react';
 import { useIntl } from 'react-intl';
@@ -10,8 +10,9 @@ import { useNavigate, useSearchParams } from 'react-router-dom';
 
 import { clearChannelsState } from '../../store/slices/channels';
 import { clearMessages } from '../../store/slices/messages';
-import { getUserTypeSetting, updateSetting } from '../../store/slices/settings';
+import { getRT, getUserTypeSetting, updateSetting } from '../../store/slices/settings';
 import { clearTwitchUser } from '../../store/slices/twitch-user';
+import { getIsAuth, getUser } from '../../store/slices/user';
 import { addNotification, isValidSearchChange, isValidSearchSubmit } from '../../utils';
 
 import './home.scss';
@@ -26,11 +27,16 @@ const Home = () => {
     const [randomSkip, setRandomSkip] = useState(true);
     const [suggestions, setSuggestions] = useState<Array<string>>([]);
     const [suggestionsSkip, setSuggestionsSkip] = useState(true);
+    const user = useSelector(getUser);
+    const isAuth = useSelector(getIsAuth);
     const userType = useSelector(getUserTypeSetting);
+    const refreshToken = useSelector(getRT);
     const { width } = useWindowSize();
     const { data, isFetching } = useGetRandomTwitchUserQuery(null, { skip: randomSkip });
     const { data: suggestionsData, isFetching: isSuggestionsLoading } = useGetDisplayNameSuggestionsQuery({ username }, { skip: suggestionsSkip });
     const { data: dailyData, isFetching: isDailyFetching } = useGetDailyStatsQuery();
+    const [logout] = useAuthLogoutMutation();
+    const [deleteFavorite] = useDeleteUserFavoriteMutation();
 
     useEffect(() => {
         setUsername('');
@@ -162,6 +168,24 @@ const Home = () => {
                     </Button>
                 </section>
                 {!isDailyFetching && dailyData && <section className={b('home', 'cards')}>
+                    <DeskCardUser
+                        avatar={user.profileImageUrl}
+                        displayName={user.displayName}
+                        handleLogout={() => logout({
+                            body: { // eslint-disable-next-line camelcase
+                                user_id: user.userId, // eslint-disable-next-line camelcase
+                                refresh_token: refreshToken || '',
+                            },
+                        })}
+                        handleRemoveFavorite={(e) => {
+                            deleteFavorite({
+                                userId: user.userId,
+                                body: e,
+                            });
+                        }}
+                        isAuth={isAuth}
+                        user={user}
+                    />
                     {width && width > 1280 && <DeskCardStats
                         messagesAmount={dailyData.totalMessages}
                         messagesPerDay={dailyData.messagesPerDay}
@@ -179,7 +203,6 @@ const Home = () => {
                     mix={b('home', 'info')}
                     size={Text.SIZE.S}
                 />}
-                <a href="http://localhost:3000/auth/twitch/login">Login</a>
             </section>
         </main>
     );

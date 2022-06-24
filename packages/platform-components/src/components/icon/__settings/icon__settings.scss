@@ -1,20 +1,14 @@
 @import 'design/design';
 
-.icon__star
+.icon__settings
 {
     width: 15px;
     height: 15px;
 
+    transition: transform 0.2s ease-in-out, fill 0.2s ease-in-out;
+
     fill: none;
     stroke: $Black;
-
-    transition: stroke 0.2s ease-in-out;
-
-    &_filled
-    {
-        fill: $ChateauGreen;
-        stroke: $ChateauGreen;
-    }
 
     svg
     {

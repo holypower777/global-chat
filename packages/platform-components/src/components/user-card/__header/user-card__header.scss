@@ -34,7 +34,7 @@
         .icon__arrow,
         .icon__cog,
         .icon__twitch,
-        .icon__twitchtracker
+        .icon__twitchtracker,
         {
             fill: $Silver;
 
@@ -43,6 +43,23 @@
             &:hover
             {
                 fill: $Boulder;
+            }
+        }
+
+        .icon__star
+        {
+            stroke: $Silver;
+
+            &_filled
+            {
+                stroke: $ChateauGreen;
+            }
+
+            cursor: pointer;
+
+            &:hover
+            {
+                stroke: $Boulder;
             }
         }
 

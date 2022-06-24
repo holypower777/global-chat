@@ -1,0 +1,31 @@
+@import 'design/design';
+
+.header
+{
+    &__user-panel
+    {
+        position: relative;
+
+        .icon__user
+        {
+            z-index: 12;
+
+            width: 20px;
+            height: 20px;
+
+            cursor: pointer;
+
+            fill: $Boulder;
+
+            &:hover
+            {
+                fill: $Black;
+            }
+        }
+
+        .icon__settings
+        {
+            stroke: $White;
+        }
+    }
+}

@@ -10,6 +10,8 @@ export {
     useGetTwitchUserWereInterestedByUserIdQuery,
     useGetTwitchUserWithChannelsByUsernameQuery,
     usePutTwitchUserWereInterestedByUserIdQuery,
+    useGetDisplayNameSuggestionsQuery,
+    useGetRandomTwitchUserQuery,
 } from './slices/twitch-users';
 export {
     overallStatsApi,

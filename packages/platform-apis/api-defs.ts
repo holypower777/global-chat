@@ -6,6 +6,7 @@ import {
     GetOverallStatsPlotsQuery, 
     GetTwitchUserQuery, 
     GetTwitchUserWithChannelsQuery, 
+    TokenQuery, 
     UserIdQuery, 
 } from './types/query';
 
@@ -43,7 +44,12 @@ export const getOverallStatsPlotsDef =
 export const getDailyStatsDef = () => 'stats/daily';
 
 // users defs
-export const getUserByIdDef = ({ userId }: UserIdQuery) => `users/${userId}`;
+export const getUserByIdDef = ({ userId, token }: UserIdQuery & TokenQuery) => ({
+    url: `users/${userId}`,
+    headers: {
+        Authorization: token,
+    },
+});
 export const postUserFavoriteDef = ({ userId, body }: UserIdQuery & UserCommonBody) => ({
     url: `users/${userId}/favorites`,
     method: 'POST',
@@ -63,6 +69,7 @@ export const postSearchHistoryDef = ({ userId, body }: UserIdQuery & UserCommonB
 // auth defs
 export const authTwitchLogoutDef = ({ body }: AuthBody) => ({
     url: 'auth/twitch/logout',
+    method: 'POST',
     body: {
         user_id: body.user_id,
         refresh_token: body.refresh_token,

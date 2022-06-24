@@ -1,7 +1,7 @@
-import { UserCommon } from './user';
+import { UserCommonAPI } from './user';
 
 export interface UserCommonBody {
-    body: UserCommon;
+    body: UserCommonAPI;
 }
 
 export interface AuthBody {

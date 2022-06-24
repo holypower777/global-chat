@@ -11,6 +11,7 @@ import {
 
 import rtkQueryErrorMiddleware from './middlewares/errors';
 import settingsMiddleware from './middlewares/settings';
+import usersMiddleware from './middlewares/users';
 import channelsSlice from './slices/channels';
 import liveChatSlice from './slices/live-chat';
 import messagesSlice from './slices/messages';
@@ -48,6 +49,7 @@ export const store = configureStore({
             authApi.middleware,
             settingsMiddleware,
             rtkQueryErrorMiddleware,
+            usersMiddleware,
         ),
     devTools: process.env.NODE_ENV === 'production' ? false : true,
 });

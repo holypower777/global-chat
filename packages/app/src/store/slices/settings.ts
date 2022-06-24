@@ -19,7 +19,7 @@ interface SettingsState {
     rt: string | null;
 }
 
-interface UpdateSetting {
+export interface UpdateSetting {
     key: string;
     value: unknown;
 }

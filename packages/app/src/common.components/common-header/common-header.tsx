@@ -1,4 +1,4 @@
-import { useGetDisplayNameSuggestionsQuery } from 'platform-apis/slices/twitch-users';
+import { useAuthLogoutMutation, useDeleteUserFavoriteMutation, useGetDisplayNameSuggestionsQuery } from 'platform-apis';
 import { Header, SNACKBAR_TYPE } from 'platform-components';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -6,8 +6,9 @@ import { useNavigate, useParams } from 'react-router-dom';
 
 import { clearChannelsState } from '../../store/slices/channels';
 import { clearMessages } from '../../store/slices/messages';
-import { getUserTypeSetting, updateSetting } from '../../store/slices/settings';
+import { getRT, getUserTypeSetting, updateSetting } from '../../store/slices/settings';
 import { clearTwitchUser, getIsUserFetching } from '../../store/slices/twitch-user';
+import { getUser } from '../../store/slices/user';
 import { addNotification, isValidSearchChange, isValidSearchSubmit } from '../../utils';
 
 const CommonHeader = () => {
@@ -19,8 +20,12 @@ const CommonHeader = () => {
     const [suggestions, setSuggestions] = useState<Array<string>>([]);
     const isUserFetching = useSelector(getIsUserFetching);
     const userType = useSelector(getUserTypeSetting);
+    const user = useSelector(getUser);
+    const refreshToken = useSelector(getRT);
     const [skip, setSkip] = useState(true);
     const { data, isFetching } = useGetDisplayNameSuggestionsQuery({ username }, { skip });
+    const [logout] = useAuthLogoutMutation();
+    const [deleteFavorite] = useDeleteUserFavoriteMutation();
 
     useEffect(() => {
         if (data && data.length) {
@@ -113,12 +118,25 @@ const CommonHeader = () => {
 
                 setTypingTimer(id);
             }}
+            handleLogout={() => logout({
+                body: { // eslint-disable-next-line camelcase
+                    user_id: user.userId, // eslint-disable-next-line camelcase
+                    refresh_token: refreshToken || '',
+                },
+            })}
+            handleRemoveFavorite={(e) => {
+                deleteFavorite({
+                    userId: user.userId,
+                    body: e,
+                });
+            }}
             handleSelect={handleSelect}
             handleSubmit={handleSubmit}
             isLoading={isUserFetching}
             isSuggestionsLoading={isFetching}
             suggestions={suggestions}
             updateSettings={(key, value) => dispatch(updateSetting({ key, value }))}
+            user={user}
             value={username}
         />
     );

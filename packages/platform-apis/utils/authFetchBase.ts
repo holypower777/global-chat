@@ -7,10 +7,11 @@ import { RootState } from 'twitch-chat/src/store/store';
 import { addNotification } from 'twitch-chat/src/utils';
 
 import { authRefreshTokenDef, baseAuthUrl, baseUrl } from '../api-defs';
-import { ErrorResponse } from '../types/error';
+import { BackendErrorResponse } from '../types/error';
 
 const prepareHeaders = (headers: Headers, { getState }: { getState: () => unknown }) => {
     const token = (getState() as RootState).settings.at;
+
     if (token) {
         headers.set('Authorization', token);
     }
@@ -71,7 +72,7 @@ const authFetchBase: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQueryErro
 
             if (error) {
                 addNotification({
-                    id: (error.data as ErrorResponse).error.intlId,
+                    id: (error.data as BackendErrorResponse).error.intlId,
                     autoHideDuration: NOTIFICATIONS_DURATION.S,
                 }, api.dispatch);
             }
