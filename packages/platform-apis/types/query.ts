@@ -31,3 +31,7 @@ export interface UserIdQuery {
 export interface ChannelIdQuery {
     channelId: TwitchUserId;
 }
+
+export interface TokenQuery {
+    token: string;
+}

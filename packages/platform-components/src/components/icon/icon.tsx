@@ -48,6 +48,7 @@ export { default as IconMessageText } from './__message-text/icon__message-text'
 export { default as IconPause } from './__pause/icon__pause';
 export { default as IconReply } from './__reply/icon__reply';
 export { default as IconSearch } from './__search/icon__search';
+export { default as IconSettings } from './__settings/icon__settings';
 export { default as IconStar } from './__star/icon__star';
 export { default as IconTime } from './__time/icon__time';
 export { default as IconTriangleExc } from './__triangle-exc/icon__triangle-exc';

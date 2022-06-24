@@ -4,7 +4,21 @@ import Icon, { SingleIconProps } from '../icon';
 
 import './icon__star.scss';
 
-const IconStar = (props: SingleIconProps) => {
+interface IconStarProps extends SingleIconProps {
+    filled?: boolean;
+}
+
+const IconStar = ({ filled = false, ...props }: IconStarProps) => {
+    if (filled) {
+        return (
+            <Icon ico="star" mods={{ filled }} {...props}>
+                <svg viewBox="0 0 15 15">
+                    <path d="M8.58107 2.19374L9.68107 4.39374C9.83107 4.69999 10.2311 4.99374 10.5686 5.04999L12.5623 5.38124C13.8373 5.59374 14.1373 6.51874 13.2186 7.43124L11.6686 8.98124C11.4061 9.24374 11.2623 9.74999 11.3436 10.1125L11.7873 12.0312C12.1373 13.55 11.3311 14.1375 9.98732 13.3437L8.11857 12.2375C7.78107 12.0375 7.22482 12.0375 6.88107 12.2375L5.01232 13.3437C3.67482 14.1375 2.86232 13.5437 3.21232 12.0312L3.65607 10.1125C3.73732 9.74999 3.59357 9.24374 3.33107 8.98124L1.78107 7.43124C0.868571 6.51874 1.16232 5.59374 2.43732 5.38124L4.43107 5.04999C4.76232 4.99374 5.16232 4.69999 5.31232 4.39374L6.41232 2.19374C7.01232 0.999994 7.98732 0.999994 8.58107 2.19374Z" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+            </Icon>
+        );
+    }
+
     return (
         <Icon ico="star" {...props}>
             <svg viewBox="0 0 15 15">

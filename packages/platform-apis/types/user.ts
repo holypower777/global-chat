@@ -1,8 +1,9 @@
+/* eslint-disable camelcase */
 import { getDateFromString } from 'platform-components/src/utils';
 
 import { TwitchUserId } from './twitch-user';
 
-interface UserCommonAPI {
+export interface UserCommonAPI {
     user_id: TwitchUserId;
     display_name: string;
     profile_image_url: string;
@@ -55,4 +56,10 @@ export const convertUserApi = (user: UserAPI): User => ({
     donationExp: getDateFromString(user.donation_exp),
     isHiddenFromSearch: user.is_hidden_from_search,
     meta: user.meta,
+});
+
+export const convertCommonUserToAPI = (user: UserCommon): UserCommonAPI => ({
+    user_id: user.userId,
+    display_name: user.displayName,
+    profile_image_url: user.profileImageUrl,
 });

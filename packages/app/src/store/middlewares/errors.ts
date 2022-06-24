@@ -1,5 +1,5 @@
 import { Action, AnyAction, Dispatch, isRejectedWithValue, Middleware, MiddlewareAPI } from '@reduxjs/toolkit';
-import { SNACKBAR_TYPE } from 'platform-components';
+import { NOTIFICATIONS_DURATION, SNACKBAR_TYPE } from 'platform-components';
 
 import { addNotification } from '../../utils';
 
@@ -28,7 +28,7 @@ const rtkQueryErrorMiddleware: Middleware = (api: MiddlewareAPI) => (next: Dispa
             addNotification({
                 id,
                 children,
-                autoHideDuration: 6000,
+                autoHideDuration: NOTIFICATIONS_DURATION.M,
                 type: SNACKBAR_TYPE.ERROR,
             }, api.dispatch, uniqueKey);
         }

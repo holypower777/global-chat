@@ -1,4 +1,5 @@
 import b from 'b_';
+import { User, UserCommonAPI } from 'platform-apis/types';
 import { SimpleCallback } from 'platform-components/src/typings';
 import React from 'react';
 import { useIntl } from 'react-intl';
@@ -11,6 +12,7 @@ import Text from '../text/text';
 
 import HeaderMenu from './__menu/header__menu';
 import HeaderSettings from './__settings/header__settings';
+import HeaderUserPanel from './__user-panel/header__user-panel';
 
 import './header.scss';
 
@@ -18,6 +20,8 @@ interface HeaderProps {
     handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
     updateSettings: (key: string, value: unknown) => void;
     handleSubmit: SimpleCallback;
+    handleLogout: SimpleCallback;
+    handleRemoveFavorite: (user: UserCommonAPI) => void;
     handleSelect: (e: string) => void;
     handleKeyUp: (e: React.KeyboardEvent) => void;
     handleKeyDown: (e: React.KeyboardEvent) => void;
@@ -25,12 +29,15 @@ interface HeaderProps {
     value: string;
     isLoading: boolean;
     isSuggestionsLoading: boolean;
+    user: User;
 }
 
 const Header = ({
     handleChange,
     updateSettings,
     handleSubmit,
+    handleLogout,
+    handleRemoveFavorite,
     handleSelect,
     handleKeyUp,
     handleKeyDown,
@@ -38,6 +45,7 @@ const Header = ({
     isLoading,
     isSuggestionsLoading,
     suggestions = [],
+    user,
 }: HeaderProps) => {
     const intl = useIntl();
     const handleKeyDownCombined = (e: React.KeyboardEvent) => {
@@ -75,6 +83,11 @@ const Header = ({
             <Link className={b('header', 'link')} to="/live-chat">
                 <Text id="link.liveChat" weight={Text.WEIGHT.M} />
             </Link>
+            <HeaderUserPanel
+                handleLogout={handleLogout}
+                handleRemoveFavorite={handleRemoveFavorite}
+                user={user}
+            />
         </header>
     );
 };

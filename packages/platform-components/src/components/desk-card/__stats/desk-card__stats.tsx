@@ -48,7 +48,7 @@ const DeskCardStats = ({
                         </Text>
                         <div>
                             <Text size={Text.SIZE.S} weight={Text.WEIGHT.M}>+{intl.formatNumber(messagesPerDay)} </Text>
-                            <Text id="desk-card.stats.users.perDay" />
+                            <Text id="desk-card.stats.messages.perDay" />
                         </div>
                     </div>
                 ),

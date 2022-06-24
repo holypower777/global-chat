@@ -4,11 +4,6 @@
 {
     &__user
     {
-        flex-direction: column;
-        align-items: flex-start;
-
-        padding: 10px 0 10px 10px;
-
         background-color: $WildSand;
 
         img
@@ -26,10 +21,7 @@
             display: flex;
             align-items: center;
 
-            width: 100%;
-            height: 25px;
-
-            margin-bottom: 10px;
+            cursor: pointer;
         }
     }
 }

@@ -1,4 +1,4 @@
-import { date, number, select, text, withKnobs } from '@storybook/addon-knobs';
+import { boolean, date, number, select, text, withKnobs } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/react';
 import { TwitchUser } from 'platform-apis/types';
 import React from 'react';
@@ -26,10 +26,13 @@ const StoryUserCard = () => {
 
     return (
         <UserCard
+            handleFavorite={() => ({})}
             heatmapDates={values}
+            isAuth={boolean('isAuth', false)}
+            isFavorite={boolean('isFavorite', false)}
             mostActiveChannel={text('most active channel', 'Klean')}
+            twitchUser={user}
             updateSettings={() => ({})}
-            user={user}
         />
     );
 };

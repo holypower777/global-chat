@@ -21,10 +21,15 @@
 
     .icon
     {
-        width: 20px;
-        height: 20px;
+        &__chart,
+        &__donation,
+        &__message-text
+        {
+            width: 20px;
+            height: 20px;
 
-        margin-right: 10px;
+            margin-right: 10px;
+        }
 
         &__chart
         {

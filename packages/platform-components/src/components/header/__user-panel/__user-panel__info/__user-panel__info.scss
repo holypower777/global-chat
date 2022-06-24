@@ -1,0 +1,130 @@
+@import 'design/design';
+
+.header
+{
+    &__user-panel
+    {
+        &__info
+        {
+            position: fixed;
+
+            z-index: 10;
+
+            top: 0;
+
+            display: flex;
+            flex-direction: column;
+
+            width: 320px;
+            height: 100vh;
+
+            color: $White;
+            background-color: $Boulder;
+
+            &_name
+            {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+
+                height: 90px;
+
+                padding: 0 15px;
+
+                .icon__cross
+                {
+                    stroke: $White;
+
+                    width: 14px;
+                    height: 14px;
+
+                    cursor: pointer;
+
+                    transition: stroke .1s ease-in-out;
+
+                    &:hover
+                    {
+                        stroke: $Silver;
+                    }
+                }
+            }
+
+            &_collapse,
+            &_messages,
+            &_logout
+            {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+
+                height: 50px;
+                padding: 0 15px;
+
+                cursor: pointer;
+
+                transition: $transitionColor01;
+
+                &:hover:not(.header__user-panel__info_messages)
+                {
+                    color: $Silver;
+                }
+            }
+
+            &_messages
+            {
+                color: $SmithApple;
+            }
+
+            &_logout
+            {
+                margin-top: auto;
+
+                background-color: $Bittersweet;
+            }
+
+            &_list
+            {
+                display: flex;
+
+                overflow-y: auto;
+                flex-direction: column;
+                gap: 5px;
+
+                padding: 5px 15px 0 25px;
+
+                color: $AthensGray;
+
+                li
+                {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+
+                    .text
+                    {
+                        transition: $transitionColor01;
+
+                        &:hover
+                        {
+                            color: $SmithApple;
+                        }
+                    }
+
+                    .icon__cross
+                    {
+                        stroke: $White;
+
+                        cursor: pointer;
+
+                        transition: stroke 0.1s ease-in-out;
+
+                        &:hover
+                        {
+                            stroke: $Silver;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

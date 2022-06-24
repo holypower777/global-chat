@@ -93,6 +93,7 @@ export enum DESK_CARD_TYPE {
     OVERALL = 'overall',
     LIVE_CHAT = 'live-chat',
     DONATION = 'donation',
+    USER = 'user',
 }
 
 export enum SIZE {

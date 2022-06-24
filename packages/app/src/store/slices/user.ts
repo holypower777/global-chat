@@ -1,5 +1,5 @@
 import { createSelector, createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { User } from 'platform-apis/types';
+import { User, UserCommons } from 'platform-apis/types';
 
 import { RootState } from '../store';
 
@@ -43,18 +43,38 @@ export const userSlice = createSlice({
             state.isHiddenFromSearch = false;
             state.meta = {};
         },
+        updateUserFavorites: (state, action: PayloadAction<UserCommons>) => {
+            state.favorites = action.payload;
+        },
+        updateUserHistory: (state, action: PayloadAction<UserCommons>) => {
+            state.searchHistory = action.payload;
+        },
     },
 });
 
 export const {
     setUser,
     clearUser,
+    updateUserFavorites,
+    updateUserHistory,
 } = userSlice.actions;
 
 export const getUser = (state: RootState) => state.user;
 export const getUserId = createSelector(
     getUser,
     (user) => user.userId,
+);
+export const getUserFavorites = createSelector(
+    getUser,
+    (user) => user.favorites,
+);
+export const getIsFavorite = createSelector(
+    [getUserFavorites, (_, userId: number) => userId],
+    (favorites, userId) => favorites.some((e) => e.userId === userId),
+);
+export const getIsAuth = createSelector(
+    getUserId,
+    (userId) => userId !== 0,
 );
 
 export default userSlice.reducer;

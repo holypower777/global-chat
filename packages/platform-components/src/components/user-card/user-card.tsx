@@ -1,6 +1,6 @@
 import b from 'b_';
 import cx from 'classnames';
-import { TwitchUser } from 'platform-apis/types';
+import { TwitchUser, UserCommonAPI } from 'platform-apis/types';
 import React, { useEffect, useState } from 'react';
 import { animated, useSpring } from 'react-spring';
 
@@ -13,19 +13,25 @@ import UserCardSettings from './__settings/user-card__settings';
 import './user-card.scss';
 
 interface UserCardProps {
-    user: TwitchUser;
+    twitchUser: TwitchUser;
     heatmapDates: Array<Date>;
     mostActiveChannel: string;
     updateSettings: (key: string, value: unknown) => void;
+    isAuth: boolean;
+    isFavorite: boolean;
+    handleFavorite?: (user: UserCommonAPI) => void;
     mix?: string;
 }
 
 const UserCard = (props: UserCardProps) => {
     const {
-        user,
+        twitchUser,
         heatmapDates,
         mix,
         mostActiveChannel,
+        isAuth,
+        isFavorite,
+        handleFavorite,
         updateSettings,
     } = props;
     const defaultHeight = 45;
@@ -47,17 +53,20 @@ const UserCard = (props: UserCardProps) => {
             <animated.div className={cx(b('user-card', { expanded: isContentExpanded || isSettingsExpanded }), mix)} style={expand}>
                 <div ref={ref}>
                     <UserCardHeader
-                        displayName={user.displayName}
-                        isBroadcaster={!!user.broadcasterType}
+                        handleFavorite={handleFavorite}
+                        isAuth={isAuth}
+                        isBroadcaster={!!twitchUser.broadcasterType}
                         isContentExpanded={isContentExpanded}
+                        isFavorite={isFavorite}
                         isSettingsExpanded={isSettingsExpanded}
                         setIsExpanded={setIsContentExpanded}
                         setIsSettingsExpanded={setIsSettingsExpanded}
+                        twitchUser={twitchUser}
                     />
                     {isContentExpanded && <UserCardContent
                         heatmapDates={heatmapDates}
                         mostActiveChannel={mostActiveChannel}
-                        user={user}
+                        user={twitchUser}
                         width={width}
                     />}
                     {isSettingsExpanded && <UserCardSettings
