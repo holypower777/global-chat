@@ -1,7 +1,7 @@
 import { useGetTwitchUserWithChannelsByUsernameQuery, usePostSearchHistoryMutation } from 'platform-apis';
 import { useGetRandomTwitchUserQuery } from 'platform-apis/slices/twitch-users';
 import { convertCommonUserToAPI } from 'platform-apis/types';
-import { FROM_PAGE, SEARCH_PARAMS, SEARCH_TYPE, SETTINGS, SNACKBAR_TYPE, Spin, Tab, Tabs } from 'platform-components';
+import { FROM_PAGE, LINKS, SEARCH_PARAMS, SEARCH_TYPE, SETTINGS, SNACKBAR_TYPE, Spin, Tab, Tabs } from 'platform-components';
 import { useWindowSize } from 'platform-components/src/hooks';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -68,7 +68,7 @@ const UserHistory = () => {
     useEffect(() => {
         if (randomUser) {
             dispatch(updateSetting({ key: SETTINGS.USER_TYPE, value: SEARCH_TYPE.USERNAME }));
-            navigate(`/messages/${randomUser.displayName}?from=${FROM_PAGE.RANDOM_USER}`);
+            navigate(`${LINKS.MESSAGES}/${randomUser.displayName}?from=${FROM_PAGE.RANDOM_USER}`);
             setRSkip(true);
         }
     }, [randomUser]);

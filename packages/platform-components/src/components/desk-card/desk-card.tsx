@@ -2,7 +2,7 @@ import b from 'b_';
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import { DESK_CARD_TYPE } from '../constants';
+import { DESK_CARD_TYPE, LINKS } from '../constants';
 import { IconChart, IconDonate, IconMessageText } from '../icon/icon';
 
 import DeskCardDense from './__dense/desk-card__dense';
@@ -17,13 +17,13 @@ const DeskCard = ({ type }: DeskCardProps) => {
     switch (type) {
         case DESK_CARD_TYPE.OVERALL:
             return (
-                <Link to="/overall-stats">
+                <Link to={LINKS.OVERALL_STATS}>
                     <DeskCardDense icon={<IconChart />} id="desk-card.overallStats" />
                 </Link>
             );
         case DESK_CARD_TYPE.DONATION:
             return (
-                <a href="https://boosty.to/holypower77" target="_blank">
+                <a href={LINKS.BOOSTY} target="_blank">
                     <DeskCardDense
                         icon={<IconDonate />}
                         id="desk-card.donation"
@@ -33,7 +33,7 @@ const DeskCard = ({ type }: DeskCardProps) => {
             );
         default:
             return (
-                <Link to="/live-chat">
+                <Link to={LINKS.LIVE_CHAT}>
                     <DeskCardDense icon={<IconMessageText />} id="desk-card.live-chat" />
                 </Link>
             );

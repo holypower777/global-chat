@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import { animated, useSpring } from 'react-spring';
 
 import { useOnClickOutside } from '../../../../hooks';
+import { LINKS } from '../../../constants';
 import { IconCross } from '../../../icon/icon';
 import Text from '../../../text/text';
 import { UserPanelProps } from '../header__user-panel';
@@ -54,7 +55,7 @@ const UserPanelInfo = ({
                 </Text>
                 <IconCross handleClick={() => setIsPanelOpen(false)} />
             </div>
-            <Link to={`/messages/${user.displayName}`}>
+            <Link to={`${LINKS.MESSAGES}/${user.displayName}`}>
                 <Text
                     id="user-panel.user.messages"
                     mix={b(rootClass, 'info_messages')}
@@ -71,7 +72,7 @@ const UserPanelInfo = ({
             />
             {isSearchOpen && <ul className={cx(b(rootClass, 'info_list'), 'custom-scroll')}>
                 {user.searchHistory.map((e) => (
-                    <Link key={e.userId} to={`/messages/${e.displayName}`}>
+                    <Link key={e.userId} to={`${LINKS.MESSAGES}/${e.displayName}`}>
                         <Text tag={Text.TAG.LI}>{e.displayName}</Text>
                     </Link>
                 ))}
@@ -89,7 +90,7 @@ const UserPanelInfo = ({
             {isFavoritesOpen && <ul className={cx(b(rootClass, 'info_list'), 'custom-scroll')}>
                 {user.favorites.map((e) => (
                     <li key={e.userId}>
-                        <Link to={`/messages/${e.displayName}`}>
+                        <Link to={`${LINKS.MESSAGES}/${e.displayName}`}>
                             <Text>{e.displayName}</Text>
                         </Link>
                         <IconCross handleClick={() => handleRemoveFavorite(convertCommonUserToAPI(e))} />

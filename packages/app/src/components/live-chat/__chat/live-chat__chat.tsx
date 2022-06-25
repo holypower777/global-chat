@@ -1,7 +1,7 @@
 import b from 'b_';
 import cx from 'classnames';
 import { ChatMessage } from 'platform-components';
-import { SEARCH_TYPE, SETTINGS } from 'platform-components/src/components/constants';
+import { LINKS, SEARCH_TYPE, SETTINGS } from 'platform-components/src/components/constants';
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
@@ -136,7 +136,7 @@ class LiveChatChat extends React.Component<LiveChatChatProps, LiveChatChatState>
                                 badges={message.badges}
                                 channelName={<Link
                                     onClick={() => this.props.updateSetting({ key: SETTINGS.USER_TYPE, value: SEARCH_TYPE.USERNAME })} 
-                                    to={`/messages/${channelName}`}
+                                    to={`${LINKS.MESSAGES}/${channelName}`}
                                 >
                                     {channelName}
                                 </Link>}
@@ -149,7 +149,7 @@ class LiveChatChat extends React.Component<LiveChatChatProps, LiveChatChatState>
                                 useColors={this.props.useChatColors}
                                 username={<Link 
                                     onClick={() => this.props.updateSetting({ key: SETTINGS.USER_TYPE, value: SEARCH_TYPE.USERNAME })} 
-                                    to={`/messages/${message.displayName}`}
+                                    to={`${LINKS.MESSAGES}/${message.displayName}`}
                                 >
                                     {message.displayName}
                                 </Link>}

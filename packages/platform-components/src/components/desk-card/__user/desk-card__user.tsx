@@ -2,6 +2,7 @@ import b from 'b_';
 import cx from 'classnames';
 import React, { useState } from 'react';
 
+import { LINKS } from '../../constants';
 import UserPanelInfo from '../../header/__user-panel/__user-panel__info/__user-panel__info';
 import { UserPanelProps } from '../../header/__user-panel/header__user-panel';
 import Text from '../../text/text';
@@ -25,15 +26,13 @@ const DeskCardUser = ({
     const [isPanelOpen, setIsPanelOpen] = useState(false);
 
     if (!isAuth) {
-        const link = process.env.NODE_ENV === 'development'
-            ? (<a className={cx('desk-card', b('desk-card', 'user'))} href="http://localhost:3000/auth/twitch/login">
-                <Text id="user-panel.login" />
-            </a>)
-            : (<a className={cx('desk-card', b('desk-card', 'user'))} href="https://global-chat.ru/auth/twitch/login">
-                <Text id="user-panel.login" />
-            </a>);
+        const link = process.env.NODE_ENV === 'development' ? LINKS.AUTH_DEV : LINKS.AUTH;
 
-        return link;
+        return (
+            <a className={cx('desk-card', b('desk-card', 'user'))} href={link}>
+                <Text id="user-panel.login" />
+            </a>
+        );
     }
 
     return (

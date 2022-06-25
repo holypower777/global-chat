@@ -1,7 +1,7 @@
 import b from 'b_';
 import { TwitchUser } from 'platform-apis/types';
 import { IconTwitch, Text } from 'platform-components';
-import { SEARCH_TYPE, SETTINGS } from 'platform-components/src/components/constants';
+import { LINKS, SEARCH_TYPE, SETTINGS } from 'platform-components/src/components/constants';
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
@@ -31,7 +31,7 @@ const OverallStatsStatsUsernames = ({ users, id, renderMessagesAmount = false }:
                     <Link 
                         className={b('overall-stats', 'stats-value')} 
                         onClick={() => dispatch(updateSetting({ key: SETTINGS.USER_TYPE, value: SEARCH_TYPE.USERNAME }))}
-                        to={`/messages/${user.displayName}`}
+                        to={`${LINKS.MESSAGES}/${user.displayName}`}
                     >
                         <Text weight={Text.WEIGHT.M}>{user.displayName}{renderMessagesAmount && ` (${user.messagesAmount})`}</Text>
                     </Link>

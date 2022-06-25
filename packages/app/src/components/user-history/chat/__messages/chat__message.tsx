@@ -1,5 +1,5 @@
 import { Message, TwitchUser } from 'platform-apis/types';
-import { ChatDate, ChatMessage, SEARCH_PARAMS, Skeleton, SNACKBAR_TYPE } from 'platform-components';
+import { ChatDate, ChatMessage, LINKS, SEARCH_PARAMS, Skeleton, SNACKBAR_TYPE } from 'platform-components';
 import React, { useEffect, useRef } from 'react';
 import { useDispatch } from 'react-redux';
 
@@ -63,7 +63,7 @@ const ChatMessageRow = ({
                         index: index,
                     };
 
-                    navigator.clipboard.writeText(`${window.location.origin}/messages/${user.displayName}?${SEARCH_PARAMS.REPLY}=${window.btoa(JSON.stringify(reply))}`);
+                    navigator.clipboard.writeText(`${window.location.origin}${LINKS.MESSAGES}/${user.displayName}?${SEARCH_PARAMS.REPLY}=${window.btoa(JSON.stringify(reply))}`);
                 }}
                 highlited={highlitedMessage === message.messageId}
                 message={message.message}

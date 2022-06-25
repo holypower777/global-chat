@@ -1,5 +1,5 @@
 import { useAuthLogoutMutation, useDeleteUserFavoriteMutation, useGetDisplayNameSuggestionsQuery } from 'platform-apis';
-import { Header, SNACKBAR_TYPE } from 'platform-components';
+import { Header, LINKS, SNACKBAR_TYPE } from 'platform-components';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -72,7 +72,7 @@ const CommonHeader = () => {
         dispatch(clearMessages());
         setSuggestions([]);
 
-        navigate(`/messages/${searchName}`);
+        navigate(`${LINKS.MESSAGES}/${searchName}`);
     };
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {

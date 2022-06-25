@@ -5,6 +5,7 @@ import React from 'react';
 import { useIntl } from 'react-intl';
 import { Link } from 'react-router-dom';
 
+import { LINKS } from '../constants';
 import { IconSearch } from '../icon/icon';
 import Input from '../input/input';
 import Logo from '../logo/logo';
@@ -77,10 +78,10 @@ const Header = ({
                 settings={<HeaderSettings updateSettings={updateSettings} />}
                 value={value}
             />
-            <Link className={b('header', 'link')} to="/overall-stats">
+            <Link className={b('header', 'link')} to={LINKS.OVERALL_STATS}>
                 <Text id="link.overallStats" weight={Text.WEIGHT.M} />
             </Link>
-            <Link className={b('header', 'link')} to="/live-chat">
+            <Link className={b('header', 'link')} to={LINKS.LIVE_CHAT}>
                 <Text id="link.liveChat" weight={Text.WEIGHT.M} />
             </Link>
             <HeaderUserPanel

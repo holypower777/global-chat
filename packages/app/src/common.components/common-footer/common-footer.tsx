@@ -1,5 +1,5 @@
 import b from 'b_';
-import { LANGUAGES, SETTINGS, Text } from 'platform-components';
+import { LANGUAGES, LINKS, SETTINGS, Text } from 'platform-components';
 import { getLocalStorageValue } from 'platform-components/src/hooks';
 import { getDefaultLanguage } from 'platform-components/src/utils';
 import React, { useState } from 'react';
@@ -18,28 +18,28 @@ const CommonFooter = () => {
         <footer className="footer">
             <a
                 className={b('footer', 'donate')}
-                href="https://boosty.to/holypower77"
+                href={LINKS.BOOSTY}
                 target="_blank"
             >
                 <Text id="footer.donate" size={Text.SIZE.XS} />
             </a>
             <a
                 className={b('footer', 'github')}
-                href="https://github.com/holypower777/global-chat"
+                href={LINKS.GITHUB}
                 target="_blank"
             >
                 <Text id="footer.github" size={Text.SIZE.XS} />
             </a>
             <a
                 className={b('footer', 'bug')}
-                href="https://github.com/holypower777/global-chat/issues/new/choose"
+                href={LINKS.BUG_REPORT}
                 target="_blank"
             >
                 <Text id="footer.bug" size={Text.SIZE.XS} />
             </a>
             <a
                 className={b('footer', 'idea')}
-                href="https://github.com/holypower777/global-chat/discussions"
+                href={LINKS.IDEAS}
                 target="_blank"
             >
                 <Text id="footer.idea" size={Text.SIZE.XS} />
@@ -56,7 +56,7 @@ const CommonFooter = () => {
             />
             <div className={b('footer', 'watermark')}>
                 <Text id="common.watermark" size={Text.SIZE.XS} />
-                <a href="https://www.twitch.tv/kosti4eg" target="_blank">kosti4eg</a>
+                <a href={LINKS.KOSTI4EG_TWITCH} target="_blank">kosti4eg</a>
             </div>
         </footer>
     );

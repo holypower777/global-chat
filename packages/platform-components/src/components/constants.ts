@@ -89,6 +89,21 @@ export enum NOTIFICATIONS_DURATION {
     L = 8000,
 }
 
+export enum LINKS {
+    LIVE_CHAT = '/live-chat',
+    OVERALL_STATS = '/overall-stats',
+    MESSAGES = '/messages',
+    HOME = '/',
+    BOOSTY = 'https://boosty.to/holypower77',
+    GITHUB = 'https://github.com/holypower777/global-chat',
+    BUG_REPORT = 'https://github.com/holypower777/global-chat/issues/new/choose',
+    IDEAS = 'https://github.com/holypower777/global-chat/discussions',
+    KOSTI4EG_TWITCH = 'https://www.twitch.tv/kosti4eg',
+    AUTH = 'https://global-chat.ru/auth/twitch/login',
+    AUTH_DEV = 'http://localhost:3000/auth/twitch/login',
+    
+}
+
 export enum DESK_CARD_TYPE {
     OVERALL = 'overall',
     LIVE_CHAT = 'live-chat',

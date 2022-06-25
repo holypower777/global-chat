@@ -1,7 +1,7 @@
 import b from 'b_';
 import { useDeleteUserFavoriteMutation, usePostUserFavoriteMutation } from 'platform-apis';
 import { UserCommonAPI } from 'platform-apis/types';
-import { UserCard, Text, SETTINGS, SEARCH_TYPE } from 'platform-components';
+import { UserCard, Text, SETTINGS, SEARCH_TYPE, LINKS } from 'platform-components';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
@@ -55,7 +55,7 @@ const Chat = React.memo(() => {
             {selectedChannel && <Text id="chat.channelName" mix={b('chat', 'title')} size={Text.SIZE.XL}>
                 <Link 
                     onClick={() => dispatch(updateSetting({ key: SETTINGS.USER_TYPE, value: SEARCH_TYPE.USERNAME }))}
-                    to={`/messages/${selectedChannel.displayName}`}
+                    to={`${LINKS.MESSAGES}/${selectedChannel.displayName}`}
                 >
                     <Text mix={b('chat', 'title-channel')} size={Text.SIZE.XL}>{selectedChannel.displayName}</Text>
                 </Link>

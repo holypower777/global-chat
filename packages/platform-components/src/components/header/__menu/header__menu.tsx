@@ -4,6 +4,7 @@ import { useIntl } from 'react-intl';
 import { Link } from 'react-router-dom';
 
 import useOnClickOutside from '../../../hooks/useOnClickOutside';
+import { LINKS } from '../../constants';
 import { IconCategory } from '../../icon/icon';
 
 import './header__menu.scss';
@@ -22,13 +23,13 @@ const HeaderMenu = () => {
                     <Link to="/">{intl.formatMessage({ id: 'link.home' })}</Link>
                 </li>
                 <li className={b('header', 'menu_links_link')}>
-                    <Link to="/messages">{intl.formatMessage({ id: 'link.messages' })}</Link>
+                    <Link to={LINKS.MESSAGES}>{intl.formatMessage({ id: 'link.messages' })}</Link>
                 </li>
                 <li className={b('header', 'menu_links_link')}>
-                    <Link to="/overall-stats">{intl.formatMessage({ id: 'link.overallStats' })}</Link>
+                    <Link to={LINKS.OVERALL_STATS}>{intl.formatMessage({ id: 'link.overallStats' })}</Link>
                 </li>
                 <li className={b('header', 'menu_links_link')}>
-                    <Link to="/live-chat">{intl.formatMessage({ id: 'link.liveChat' })}</Link>
+                    <Link to={LINKS.LIVE_CHAT}>{intl.formatMessage({ id: 'link.liveChat' })}</Link>
                 </li>
             </ul>}
         </nav>
