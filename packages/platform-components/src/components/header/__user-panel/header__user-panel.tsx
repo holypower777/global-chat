@@ -1,7 +1,6 @@
 import b from 'b_';
 import { User, UserCommonAPI } from 'platform-apis/types';
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
 
 import { SimpleCallback } from '../../../typings';
 import { IconUser } from '../../icon/icon';
@@ -23,9 +22,9 @@ const HeaderUserPanel = ({ user, handleLogout, handleRemoveFavorite }: UserPanel
         ? (<a className={b('header', 'link')} href="http://localhost:3000/auth/twitch/login">
             <Text id="user-panel.login" weight={Text.WEIGHT.M} />
         </a>)
-        : (<Link className={b('header', 'link')} to="/auth/twitch/login">
+        : (<a className={b('header', 'link')} href="https://global-chat.ru/auth/twitch/login">
             <Text id="user-panel.login" weight={Text.WEIGHT.M} />
-        </Link>);
+        </a>);
 
     return (
         <div className={b('header', 'user-panel', { open: isPanelOpen })}>

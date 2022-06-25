@@ -1,7 +1,6 @@
 import b from 'b_';
 import cx from 'classnames';
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
 
 import UserPanelInfo from '../../header/__user-panel/__user-panel__info/__user-panel__info';
 import { UserPanelProps } from '../../header/__user-panel/header__user-panel';
@@ -30,9 +29,9 @@ const DeskCardUser = ({
             ? (<a className={cx('desk-card', b('desk-card', 'user'))} href="http://localhost:3000/auth/twitch/login">
                 <Text id="user-panel.login" />
             </a>)
-            : (<Link className={cx('desk-card', b('desk-card', 'user'))} to="/auth/twitch/login">
+            : (<a className={cx('desk-card', b('desk-card', 'user'))} href="https://global-chat.ru/auth/twitch/login">
                 <Text id="user-panel.login" />
-            </Link>);
+            </a>);
 
         return link;
     }
