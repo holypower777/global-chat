@@ -1,5 +1,5 @@
 import b from 'b_';
-import { TwitchUserMeta } from 'platform-apis/types/twitch-user';
+import { TwitchUserMeta } from 'platform-apis/types';
 import React from 'react';
 
 import Text from '../../text/text';

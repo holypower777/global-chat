@@ -24,39 +24,27 @@ export const usersApi = createApi({
             query: postUserFavoriteDef,
             transformResponse: convertCommonUsersApi,
             onQueryStarted: async (id, { dispatch, queryFulfilled }) => {
-                try {
-                    const { data } = await queryFulfilled;
+                const { data } = await queryFulfilled;
 
-                    dispatch(updateUserFavorites(data));
-                } catch (error) {
-                    //TODO: notification
-                }
+                dispatch(updateUserFavorites(data));
             },
         }),
         deleteUserFavorite: builder.mutation<UserCommons, UserIdQuery & UserCommonBody>({
             query: deleteUserFavoriteDef,
             transformResponse: convertCommonUsersApi,
             onQueryStarted: async (id, { dispatch, queryFulfilled }) => {
-                try {
-                    const { data } = await queryFulfilled;
+                const { data } = await queryFulfilled;
 
-                    dispatch(updateUserFavorites(data));
-                } catch (error) {
-                    //TODO: notification
-                }
+                dispatch(updateUserFavorites(data));
             },
         }),
         postSearchHistory: builder.mutation<UserCommons, UserIdQuery & UserCommonBody>({
             query: postSearchHistoryDef,
             transformResponse: convertCommonUsersApi,
             onQueryStarted: async (id, { dispatch, queryFulfilled }) => {
-                try {
-                    const { data } = await queryFulfilled;
+                const { data } = await queryFulfilled;
 
-                    dispatch(updateUserHistory(data));
-                } catch (error) {
-                    //TODO: notification
-                }
+                dispatch(updateUserHistory(data));
             },
         }),
     }),
@@ -66,5 +54,4 @@ export const {
     useLazyGetUserByIdQuery,
     usePostUserFavoriteMutation,
     useDeleteUserFavoriteMutation,
-    usePostSearchHistoryMutation,
 } = usersApi;

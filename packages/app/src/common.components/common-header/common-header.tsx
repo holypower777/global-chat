@@ -1,13 +1,13 @@
-import { useAuthLogoutMutation, useDeleteUserFavoriteMutation, useGetDisplayNameSuggestionsQuery } from 'platform-apis';
-import { Header, LINKS, SNACKBAR_TYPE } from 'platform-components';
-import React, { useEffect, useState } from 'react';
+import { useAuthLogoutMutation, useDeleteUserFavoriteMutation, useLazyGetDisplayNameSuggestionsQuery } from 'platform-apis';
+import { Header, LINKS, NOTIFICATIONS_DURATION, SNACKBAR_TYPE } from 'platform-components';
+import React, { ReactNode, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 
 import { clearChannelsState } from '../../store/slices/channels';
 import { clearMessages } from '../../store/slices/messages';
 import { getRT, getUserTypeSetting, updateSetting } from '../../store/slices/settings';
-import { clearTwitchUser, getIsUserFetching } from '../../store/slices/twitch-user';
+import { clearSuggestions, clearTwitchUser, getIsSuggestionsLoading, getIsTwitchUserFetching, getSuggestions } from '../../store/slices/twitch-user';
 import { getUser } from '../../store/slices/user';
 import { addNotification, isValidSearchChange, isValidSearchSubmit } from '../../utils';
 
@@ -15,24 +15,20 @@ const CommonHeader = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const { username: usernameParam } = useParams();
-    const [typingTimer, setTypingTimer] = useState<NodeJS.Timeout | null>(null);
-    const [username, setUsername] = useState(usernameParam || '');
-    const [suggestions, setSuggestions] = useState<Array<string>>([]);
-    const isUserFetching = useSelector(getIsUserFetching);
+    
+    const suggestions = useSelector(getSuggestions);
+    const isSuggestionsLoading = useSelector(getIsSuggestionsLoading);
+    const isUserFetching = useSelector(getIsTwitchUserFetching);
     const userType = useSelector(getUserTypeSetting);
     const user = useSelector(getUser);
     const refreshToken = useSelector(getRT);
-    const [skip, setSkip] = useState(true);
-    const { data, isFetching } = useGetDisplayNameSuggestionsQuery({ username }, { skip });
+
+    const [typingTimer, setTypingTimer] = useState<NodeJS.Timeout | null>(null);
+    const [username, setUsername] = useState(usernameParam || '');
+
+    const [fetchSuggestions] = useLazyGetDisplayNameSuggestionsQuery();
     const [logout] = useAuthLogoutMutation();
     const [deleteFavorite] = useDeleteUserFavoriteMutation();
-
-    useEffect(() => {
-        if (data && data.length) {
-            setSuggestions(data);
-            setSkip(true);
-        }
-    }, [data]);
 
     useEffect(() => {
         if (!isValidSearchSubmit(userType, username)) {
@@ -57,7 +53,7 @@ const CommonHeader = () => {
             addNotification({
                 id: `notification.searchInput.${userType}.submit`,
                 type: SNACKBAR_TYPE.ERROR,
-                autoHideDuration: 4000,
+                autoHideDuration: NOTIFICATIONS_DURATION.S,
             }, dispatch);
             return;
         }
@@ -70,7 +66,7 @@ const CommonHeader = () => {
         dispatch(clearTwitchUser());
         dispatch(clearChannelsState());
         dispatch(clearMessages());
-        setSuggestions([]);
+        dispatch(clearSuggestions());
 
         navigate(`${LINKS.MESSAGES}/${searchName}`);
     };
@@ -80,13 +76,13 @@ const CommonHeader = () => {
             addNotification({
                 id: `notification.searchInput.${userType}`,
                 type: SNACKBAR_TYPE.WARNING,
-                autoHideDuration: 4000,
+                autoHideDuration: NOTIFICATIONS_DURATION.S,
             }, dispatch);
             return;
         }
 
         if (e.target.value.length <= 2) {
-            setSuggestions([]);
+            dispatch(clearSuggestions());
         }
 
         setUsername(e.target.value);
@@ -94,7 +90,7 @@ const CommonHeader = () => {
 
     const handleSelect = (displayName: string) => {
         handleSubmit(displayName);
-        setSuggestions([]);
+        dispatch(clearSuggestions());
     };
 
     return (
@@ -111,8 +107,7 @@ const CommonHeader = () => {
                 }
                 const id = setTimeout(() => {
                     if (username.length > 2) {
-                        setSkip(false);
-                        setSuggestions([]);
+                        fetchSuggestions({ username });
                     }
                 }, 500);
 
@@ -133,7 +128,7 @@ const CommonHeader = () => {
             handleSelect={handleSelect}
             handleSubmit={handleSubmit}
             isLoading={isUserFetching}
-            isSuggestionsLoading={isFetching}
+            isSuggestionsLoading={isSuggestionsLoading}
             suggestions={suggestions}
             updateSettings={(key, value) => dispatch(updateSetting({ key, value }))}
             user={user}
@@ -142,4 +137,13 @@ const CommonHeader = () => {
     );
 };
 
-export default CommonHeader;
+const withHeader = (component: ReactNode | Array<ReactNode>) => {
+    return (
+        <>
+            <CommonHeader />
+            {component}
+        </>
+    );
+};
+
+export default withHeader;

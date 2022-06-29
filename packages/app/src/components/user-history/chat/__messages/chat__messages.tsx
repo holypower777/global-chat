@@ -1,22 +1,16 @@
 import b from 'b_';
 import {
-    useGetMessagesByUserIdAndChannelIdQuery,
-    useGetSubscriberBadgesByChannelIdQuery,
+    useLazyGetMessagesByUserIdAndChannelIdQuery,
+    useLazyGetSubscriberBadgesByChannelIdQuery,
 } from 'platform-apis';
-import { REPLY_MESSAGE, SEARCH_PARAMS, Skeleton, SNACKBAR_TYPE } from 'platform-components';
+import { NOTIFICATIONS_DURATION, REPLY_MESSAGE, SEARCH_PARAMS, Skeleton, SNACKBAR_TYPE } from 'platform-components';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useSearchParams } from 'react-router-dom';
 
 import ErrorBoundary from '../../../../containers/error-boundary/error-boundary';
 import { getChannels, getSelectedChannel, setSelectedChannel } from '../../../../store/slices/channels';
-import {
-    clearMessages,
-    getIsMessagesFetching,
-    getMessages,
-    pushMessages,
-    setIsMessagesFetching,
-} from '../../../../store/slices/messages';
+import { getIsMessagesFetching, getMessages } from '../../../../store/slices/messages';
 import { getSortByDateSetting } from '../../../../store/slices/settings';
 import { getTwitchUserId } from '../../../../store/slices/twitch-user';
 import { addNotification } from '../../../../utils';
@@ -28,42 +22,24 @@ import './chat__messages.scss';
 const ChatMessages = () => {
     const dispatch = useDispatch();
     const [searchParams] = useSearchParams();
-    const channels = useSelector(getChannels);
 
+    const channels = useSelector(getChannels);
     const messages = useSelector(getMessages);
     const isMessagesFetching = useSelector(getIsMessagesFetching);
     const selectedChannel = useSelector(getSelectedChannel);
     const sort = useSelector(getSortByDateSetting);
-
     const userId = useSelector(getTwitchUserId);
-    const [offset, setOffset] = useState(0);
+
     const [limit, setLimit] = useState(100);
     const [highlitedMessage, setHighlitedMessage] = useState<REPLY_MESSAGE | null>(null);
-    const [skipMessages, setSkipMessages] = useState(true);
-    const [skipBadges, setSkipBadges] = useState(true);
     const [hasNextPage, setHasNextPage] = useState(true);
-    const { data: badgesData, isFetching: isBadgesFetching } =
-        useGetSubscriberBadgesByChannelIdQuery({ channelId: selectedChannel ? selectedChannel.userId : 0 }, { skip: skipBadges });
-    const { data, error, isFetching } = useGetMessagesByUserIdAndChannelIdQuery({
-        userId,
-        channelId: selectedChannel?.userId || 0,
-        offset,
-        sort,
-        limit,
-    }, { skip: skipMessages });
+    
+    const [fetchBadges, { data: badgesData, isFetching: isBadgesFetching }] = useLazyGetSubscriberBadgesByChannelIdQuery();
+    const [fetchMessages, { data, error }] = useLazyGetMessagesByUserIdAndChannelIdQuery();
 
-    const loadNextPage = (startIndex: number) => {
-        setOffset(startIndex);
-        if (selectedChannel) {
-            setSkipMessages(false);
-        }
+    const loadNextPage = (offset: number) => {
+        fetchMessages({ userId, channelId: selectedChannel!.userId, offset, sort, limit });
     };
-
-    useEffect(() => {
-        if (badgesData) {
-            setSkipBadges(true);
-        }
-    }, [badgesData]);
 
     useEffect(() => {
         if (searchParams.get(SEARCH_PARAMS.REPLY) && channels.length > 0) {
@@ -76,12 +52,11 @@ const ChatMessages = () => {
 
     useEffect(() => {
         if (selectedChannel) {
-            dispatch(clearMessages());
             loadNextPage(0);
             if (isMessagesFetching) {
                 addNotification({
                     id: 'notification.chat.sortChange',
-                    autoHideDuration: 7000,
+                    autoHideDuration: NOTIFICATIONS_DURATION.L,
                     type: SNACKBAR_TYPE.WARNING,
                     disableReloadButton: false,
                 }, dispatch);
@@ -90,13 +65,8 @@ const ChatMessages = () => {
     }, [sort]);
 
     useEffect(() => {
-        dispatch(setIsMessagesFetching(isFetching));
-    }, [isFetching]);
-
-    useEffect(() => {
         if (selectedChannel) {
-            dispatch(clearMessages());
-            setSkipBadges(false);
+            fetchBadges({ channelId: selectedChannel.userId });
             setHasNextPage(true);
             loadNextPage(0);
         }
@@ -104,9 +74,7 @@ const ChatMessages = () => {
 
     useEffect(() => {
         if (data) {
-            setSkipMessages(true);
             setLimit(100);
-            dispatch(pushMessages(data.items));
             if (data && messages.length + data.items.length >= data.total) {
                 setHasNextPage(false);
             }
@@ -122,7 +90,7 @@ const ChatMessages = () => {
                         src="https://cdn.betterttv.net/emote/600f61ebf1cfbf65dbe0c078/3x"
                     />
                 </div>}
-                {isMessagesFetching && offset === 0 && <Skeleton variant={Skeleton.SKELETON_VARIANT.MESSAGE} />}
+                {isMessagesFetching && messages.length === 0 && <Skeleton variant={Skeleton.SKELETON_VARIANT.MESSAGE} />}
                 <InifiniteScrollWrapper
                     badgesData={badgesData || {}}
                     hasNextPage={hasNextPage}

@@ -1,5 +1,6 @@
 /* eslint-disable camelcase */
 import { BaseQueryFn, FetchArgs, fetchBaseQuery, FetchBaseQueryError } from '@reduxjs/toolkit/dist/query';
+import { Mutex } from 'async-mutex';
 import { decode } from 'jws';
 import { NOTIFICATIONS_DURATION, SETTINGS } from 'platform-components';
 import { updateSetting } from 'twitch-chat/src/store/slices/settings';
@@ -27,7 +28,11 @@ const baseAuthQuery = fetchBaseQuery({
     prepareHeaders,
 });
 
+const mutex = new Mutex();
+
 const authFetchBase: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQueryError> = async (args, api, extraOptions) => {
+    await mutex.waitForUnlock();
+    
     const access_token = (api.getState() as RootState).settings.at;
     const refresh_token = (api.getState() as RootState).settings.rt;
 
@@ -38,49 +43,57 @@ const authFetchBase: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQueryErro
     const { payload: { exp, user_id } } = decode(access_token || '');
 
     if (access_token && exp < Math.floor(Date.now() / 1000)) {
-        try {
-            const { data, error } = await baseAuthQuery(
-                {
-                    url: authRefreshTokenDef(),
-                    method: 'POST',
-                    body: {
-                        user_id,
-                        refresh_token,
-                    },
-                },
-                api,
-                extraOptions,
-            );
-    
-            if (data) {
-                api.dispatch(updateSetting({
-                    key: SETTINGS.ACCESS_TOKEN, //@ts-ignore
-                    value: data.access_token,
-                }));
-                api.dispatch(updateSetting({
-                    key: SETTINGS.REFRESH_TOKEN, //@ts-ignore
-                    value: data.refresh_token,
-                }));
-            }
+        if (!mutex.isLocked()) {
+            const release = await mutex.acquire();
 
-            if (!data && !error) {
+            try {
+                const { data, error } = await baseAuthQuery(
+                    {
+                        url: authRefreshTokenDef(),
+                        method: 'POST',
+                        body: {
+                            user_id,
+                            refresh_token,
+                        },
+                    },
+                    api,
+                    extraOptions,
+                );
+        
+                if (data) {
+                    api.dispatch(updateSetting({
+                        key: SETTINGS.ACCESS_TOKEN, //@ts-ignore
+                        value: data.access_token,
+                    }));
+                    api.dispatch(updateSetting({
+                        key: SETTINGS.REFRESH_TOKEN, //@ts-ignore
+                        value: data.refresh_token,
+                    }));
+                }
+    
+                if (!data && !error) {
+                    addNotification({
+                        id: 'notification.commonError',
+                        autoHideDuration: NOTIFICATIONS_DURATION.S,
+                    }, api.dispatch);
+                }
+    
+                if (error) {
+                    addNotification({
+                        id: (error.data as BackendErrorResponse).error.intlId,
+                        autoHideDuration: NOTIFICATIONS_DURATION.S,
+                    }, api.dispatch);
+                }
+            } catch (error) {
                 addNotification({
                     id: 'notification.commonError',
                     autoHideDuration: NOTIFICATIONS_DURATION.S,
                 }, api.dispatch);
+            } finally {
+                release();
             }
-
-            if (error) {
-                addNotification({
-                    id: (error.data as BackendErrorResponse).error.intlId,
-                    autoHideDuration: NOTIFICATIONS_DURATION.S,
-                }, api.dispatch);
-            }
-        } catch (error) {
-            addNotification({
-                id: 'notification.commonError',
-                autoHideDuration: NOTIFICATIONS_DURATION.S,
-            }, api.dispatch);
+        } else {
+            await mutex.waitForUnlock();
         }
     }
 

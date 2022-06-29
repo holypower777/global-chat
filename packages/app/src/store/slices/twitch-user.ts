@@ -1,12 +1,14 @@
 import { createSelector, createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { TwitchUser } from 'platform-apis/types/twitch-user';
+import { TwitchUser } from 'platform-apis/types';
 
 import { RootState } from '../store';
 
 interface TwitchUserState {
     user: TwitchUser;
     isFetching: boolean;
-    mostActiveChannel: string,
+    mostActiveChannel: string;
+    suggestions: Array<string>;
+    isSuggestionsLoading: boolean;
 }
 
 const initialState: TwitchUserState = {
@@ -27,6 +29,8 @@ const initialState: TwitchUserState = {
     },
     isFetching: false,
     mostActiveChannel: '',
+    suggestions: [],
+    isSuggestionsLoading: false,
 };
 
 export const twitchUserSlice = createSlice({
@@ -58,6 +62,15 @@ export const twitchUserSlice = createSlice({
             state.user.meta = {};
             state.mostActiveChannel = '';
         },
+        setSuggestions: (state, action: PayloadAction<Array<string>>) => {
+            state.suggestions = action.payload;
+        },
+        clearSuggestions: (state) => {
+            state.suggestions = [];
+        },
+        setIsSuggestionsLoading: (state, action: PayloadAction<boolean>) => {
+            state.isSuggestionsLoading = action.payload;
+        },
     },
 });
 
@@ -66,6 +79,9 @@ export const {
     setMostActiveChannel,
     setIsUserWithChannelsFetching,
     clearTwitchUser,
+    setSuggestions,
+    clearSuggestions,
+    setIsSuggestionsLoading,
 } = twitchUserSlice.actions;
 
 const getRootTwitchUser = (state: RootState) => state.twitchUser;
@@ -77,17 +93,21 @@ export const getMostActiveChannel = createSelector(
     getRootTwitchUser,
     (user) => user.mostActiveChannel,
 );
-export const getDisplayName = createSelector(
-    getTwitchUser,
-    (user) => user.displayName,
-);
 export const getTwitchUserId = createSelector(
     getTwitchUser,
     (user) => user.userId,
 );
-export const getIsUserFetching = createSelector(
+export const getIsTwitchUserFetching = createSelector(
     getRootTwitchUser,
     (rootUser) => rootUser.isFetching,
+);
+export const getSuggestions = createSelector(
+    getRootTwitchUser,
+    (rootUser) => rootUser.suggestions,
+);
+export const getIsSuggestionsLoading = createSelector(
+    getRootTwitchUser,
+    (rootUser) => rootUser.isSuggestionsLoading,
 );
 
 export default twitchUserSlice.reducer;

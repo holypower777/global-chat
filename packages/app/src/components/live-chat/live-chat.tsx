@@ -2,14 +2,12 @@
 import b from 'b_';
 import { DocumentData, DocumentSnapshot, Unsubscribe } from 'firebase/firestore';
 import { useFlags } from 'flagsmith/react';
-import { SNACKBAR_TYPE, Tab, Tabs, WithSkeleton, Text } from 'platform-components';
+import { SNACKBAR_TYPE, Tab, Tabs, WithSkeleton, Text, NOTIFICATIONS_DURATION } from 'platform-components';
 import { useWindowSize } from 'platform-components/src/hooks';
 import React, { useEffect, useState } from 'react';
-import { useIntl } from 'react-intl';
 import { useDispatch, useSelector } from 'react-redux';
 import SwipeableViews from 'react-swipeable-views';
 
-import { CommonHeader } from '../../common.components';
 import { streamActualChannels } from '../../services/firestore';
 import { getClient, hasActualChannels, setActualChannels } from '../../store/slices/live-chat';
 import { addNotification } from '../../utils';
@@ -21,7 +19,6 @@ import LiveChatChat from './__chat/live-chat__chat';
 import './live-chat.scss';
 
 const LiveChat = () => {
-    const intl = useIntl();
     const dispatch = useDispatch();
     const client = useSelector(getClient);
     const hasChannels = useSelector(hasActualChannels);
@@ -45,7 +42,7 @@ const LiveChat = () => {
 
         addNotification({
             id: 'notification.liveChat.snapshotError',
-            autoHideDuration: 6000,
+            autoHideDuration: NOTIFICATIONS_DURATION.M,
             type: SNACKBAR_TYPE.ERROR,
         }, dispatch);
     };
@@ -59,10 +56,6 @@ const LiveChat = () => {
     };
 
     useEffect(() => {
-        document.title = intl.formatMessage({ id: 'title.liveChat' });
-    }, []);
-
-    useEffect(() => {
         let unsub: Unsubscribe;
 
         client.connect()
@@ -73,7 +66,7 @@ const LiveChat = () => {
             .catch((err) => {
                 addNotification({
                     id: 'notification.liveChat.connectError',
-                    autoHideDuration: 6000,
+                    autoHideDuration: NOTIFICATIONS_DURATION.M,
                     type: SNACKBAR_TYPE.ERROR,
                 }, dispatch);
                 console.error('connecting ', err);
@@ -84,7 +77,7 @@ const LiveChat = () => {
             client.disconnect().catch((err) => {
                 addNotification({
                     id: 'notification.liveChat.disconnectError',
-                    autoHideDuration: 6000,
+                    autoHideDuration: NOTIFICATIONS_DURATION.M,
                     type: SNACKBAR_TYPE.ERROR,
                 }, dispatch);
                 console.error('disconnetig ', err);
@@ -100,49 +93,40 @@ const LiveChat = () => {
 
     if (width && width < 769) {
         return (
-            <>
-                <CommonHeader />
-                <main className="live-chat">
-                    <Text id="live-chat.mobile" mix={b('live-chat', 'mobile')} />
-                </main>
-            </>
+            <main className="live-chat">
+                <Text id="live-chat.mobile" mix={b('live-chat', 'mobile')} />
+            </main>
         );
     }
 
     if (width && width < 1281) {
         return (
-            <>
-                <CommonHeader />
-                <main className="live-chat">
-                    <Tabs activeTab={activeTab} setActiveTab={(index: number) => (setActiveTab(index))}>
-                        <Tab label="Channels" />
-                        <Tab label="Live chat" />
-                    </Tabs>
-                    <WithSkeleton isLoading={isLoading} variant={WithSkeleton.SKELETON_VARIANT.LIVE_CHAT}>
-                        <SwipeableViews
-                            containerStyle={{ height: 'calc(100vh - 160px)' }}
-                            index={activeTab}
-                            onChangeIndex={handleChangeTab}
-                        >
-                            <LiveChatChannels />
-                            <LiveChatChat isActiveTab={activeTab === 1} />
-                        </SwipeableViews>
-                    </WithSkeleton>
-                </main>
-            </>
+            <main className="live-chat">
+                <Tabs activeTab={activeTab} setActiveTab={(index: number) => (setActiveTab(index))}>
+                    <Tab label="Channels" />
+                    <Tab label="Live chat" />
+                </Tabs>
+                <WithSkeleton isLoading={isLoading} variant={WithSkeleton.SKELETON_VARIANT.LIVE_CHAT}>
+                    <SwipeableViews
+                        containerStyle={{ height: 'calc(100vh - 160px)' }}
+                        index={activeTab}
+                        onChangeIndex={handleChangeTab}
+                    >
+                        <LiveChatChannels />
+                        <LiveChatChat isActiveTab={activeTab === 1} />
+                    </SwipeableViews>
+                </WithSkeleton>
+            </main>
         );
     }
 
     return (
-        <>
-            <CommonHeader />
-            <main className="live-chat">
-                <WithSkeleton isLoading={isLoading} variant={WithSkeleton.SKELETON_VARIANT.LIVE_CHAT}>
-                    <LiveChatChannels />
-                    <LiveChatChat isActiveTab={true} />
-                </WithSkeleton>
-            </main>
-        </>
+        <main className="live-chat">
+            <WithSkeleton isLoading={isLoading} variant={WithSkeleton.SKELETON_VARIANT.LIVE_CHAT}>
+                <LiveChatChannels />
+                <LiveChatChat isActiveTab={true} />
+            </WithSkeleton>
+        </main>
     );
 };
 

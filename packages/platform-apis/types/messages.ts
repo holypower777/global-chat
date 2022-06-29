@@ -3,7 +3,7 @@ import { getDateFromString } from 'platform-components/src/utils';
 
 import { TwitchUserId } from './twitch-user';
 
-export interface MessageAPI {
+interface MessageAPI {
     message_id: string;
     user_id: TwitchUserId;
     channel_id: TwitchUserId;

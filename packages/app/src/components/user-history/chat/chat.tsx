@@ -11,7 +11,6 @@ import { getMessagesDates } from '../../../store/slices/messages';
 import { updateSetting } from '../../../store/slices/settings';
 import { getMostActiveChannel, getTwitchUser } from '../../../store/slices/twitch-user';
 import { getIsAuth, getIsFavorite, getUserId } from '../../../store/slices/user';
-import { RootState } from '../../../store/store';
 
 import ChatMessages from './__messages/chat__messages';
 
@@ -19,13 +18,15 @@ import './chat.scss';
 
 const Chat = React.memo(() => {
     const dispatch = useDispatch();
+
     const isAuth = useSelector(getIsAuth);
     const twitchUser = useSelector(getTwitchUser);
     const mostActiveChannel = useSelector(getMostActiveChannel);
     const messagesDates = useSelector(getMessagesDates);
     const selectedChannel = useSelector(getSelectedChannel);
-    const isFavorite = useSelector((state: RootState) => (getIsFavorite(state, twitchUser.userId)));
+    const isFavorite = useSelector(getIsFavorite);
     const userId = useSelector(getUserId);
+    
     const [postFavorite] = usePostUserFavoriteMutation();
     const [deleteFavorite] = useDeleteUserFavoriteMutation();
 
