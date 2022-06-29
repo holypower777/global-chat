@@ -25,4 +25,4 @@ export const subscriberBadgesApi = createApi({
     }),
 });
 
-export const { useGetSubscriberBadgesByChannelIdQuery } = subscriberBadgesApi;
+export const { useLazyGetSubscriberBadgesByChannelIdQuery } = subscriberBadgesApi;

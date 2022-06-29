@@ -14,7 +14,7 @@ const UserProvider = ({ children }: ChildrenProps) => {
         if (accessToken) {
             getUser({ userId: tokenUserId, token: accessToken! });
         }
-    }, []);
+    }, [accessToken]);
 
     return <>{children}</>;
 };

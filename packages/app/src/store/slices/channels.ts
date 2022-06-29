@@ -30,7 +30,11 @@ export const channelsSlice = createSlice({
     },
 });
 
-export const { setChannels, setSelectedChannel, clearChannelsState } = channelsSlice.actions;
+export const {
+    setChannels,
+    setSelectedChannel,
+    clearChannelsState,
+} = channelsSlice.actions;
 const getRootChannels = (state: RootState) => state.channels;
 export const getChannels = createSelector(
     getRootChannels,

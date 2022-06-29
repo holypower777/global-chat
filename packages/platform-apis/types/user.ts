@@ -20,7 +20,7 @@ interface UserAPI extends UserCommonAPI {
     meta: object;
 }
 
-export interface UserCommon {
+interface UserCommon {
     userId: TwitchUserId;
     displayName: string;
     profileImageUrl: string;

@@ -1,20 +1,30 @@
 import { createSelector, createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { OverallStats, OverallStatsPlots } from 'platform-apis/types';
+import { DailyStats, OverallStats, OverallStatsPlots } from 'platform-apis/types';
 
 import { RootState } from '../store';
 
 interface OverallStatsState {
     isPlotsFetching: boolean;
     isStatsFetching: boolean;
+    isDailyStatsFetching: boolean;
     stats: OverallStats | null;
     plots: OverallStatsPlots;
+    dailyStats: DailyStats;
 }
 
 const initialState: OverallStatsState = {
     isPlotsFetching: false,
     isStatsFetching: false,
+    isDailyStatsFetching: false,
     stats: null,
     plots: [],
+    dailyStats: {
+        totalMessages: 0,
+        messagesPerDay: 0,
+        totalUsers: 0,
+        usersPerDay: 0,
+        currenlyActiveChannels: 0,
+    },
 };
 
 export const overallStatsSlice = createSlice({
@@ -27,11 +37,17 @@ export const overallStatsSlice = createSlice({
         setOverallPlots: (state, action: PayloadAction<OverallStatsPlots>) => {
             state.plots = action.payload;
         },
+        setDailyStats: (state, action: PayloadAction<DailyStats>) => {
+            state.dailyStats = action.payload;
+        },
         setIsStatsFetching: (state, action: PayloadAction<boolean>) => {
             state.isStatsFetching = action.payload;
         },
         setIsPlotsFetching: (state, action: PayloadAction<boolean>) => {
             state.isPlotsFetching = action.payload;
+        },
+        setIsDailyStatsFetching: (state, action: PayloadAction<boolean>) => {
+            state.isDailyStatsFetching = action.payload;
         },
     },
 });
@@ -39,8 +55,10 @@ export const overallStatsSlice = createSlice({
 export const {
     setOverallStats,
     setOverallPlots,
+    setDailyStats,
     setIsStatsFetching,
     setIsPlotsFetching,
+    setIsDailyStatsFetching,
 } = overallStatsSlice.actions;
 
 const getRootStats = (state: RootState) => state.overallStats;
@@ -51,6 +69,14 @@ export const getIsStatsFetching = createSelector(
 export const getIsPlotsFetching = createSelector(
     getRootStats,
     (rootStats) => rootStats.isPlotsFetching,
+);
+export const getIsDailyStatsFetching = createSelector(
+    getRootStats,
+    (rootState) => rootState.isDailyStatsFetching,
+);
+export const getDailyStats = createSelector(
+    getRootStats,
+    (rootState) => rootState.dailyStats,
 );
 export const getOverallStats = createSelector(
     getRootStats,

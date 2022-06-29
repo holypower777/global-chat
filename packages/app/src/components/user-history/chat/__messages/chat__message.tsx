@@ -1,5 +1,5 @@
 import { Message, TwitchUser } from 'platform-apis/types';
-import { ChatDate, ChatMessage, LINKS, SEARCH_PARAMS, Skeleton, SNACKBAR_TYPE } from 'platform-components';
+import { ChatDate, ChatMessage, LINKS, NOTIFICATIONS_DURATION, SEARCH_PARAMS, Skeleton, SNACKBAR_TYPE } from 'platform-components';
 import React, { useEffect, useRef } from 'react';
 import { useDispatch } from 'react-redux';
 
@@ -54,7 +54,7 @@ const ChatMessageRow = ({
                     addNotification({
                         id: 'notification.copied',
                         type: SNACKBAR_TYPE.SUCCESS,
-                        autoHideDuration: 4000,
+                        autoHideDuration: NOTIFICATIONS_DURATION.S,
                     }, dispatch, true);
 
                     const reply = { 

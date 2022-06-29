@@ -3,6 +3,8 @@ import { User, UserCommons } from 'platform-apis/types';
 
 import { RootState } from '../store';
 
+import { getTwitchUserId } from './twitch-user';
+
 interface UserState extends User {}
 
 const initialState: UserState = {
@@ -64,12 +66,12 @@ export const getUserId = createSelector(
     getUser,
     (user) => user.userId,
 );
-export const getUserFavorites = createSelector(
+const getUserFavorites = createSelector(
     getUser,
     (user) => user.favorites,
 );
 export const getIsFavorite = createSelector(
-    [getUserFavorites, (_, userId: number) => userId],
+    [getUserFavorites, getTwitchUserId],
     (favorites, userId) => favorites.some((e) => e.userId === userId),
 );
 export const getIsAuth = createSelector(

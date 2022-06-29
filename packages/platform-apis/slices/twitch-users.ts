@@ -1,19 +1,24 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
-import { NOTIFICATIONS_DURATION, SNACKBAR_TYPE } from 'platform-components';
-import { addNotification } from 'twitch-chat/src/utils';
+import { NOTIFICATIONS_DURATION, SEARCH_TYPE, SETTINGS, SNACKBAR_TYPE } from 'platform-components';
+import { setChannels, setSelectedChannel } from 'twitch-chat/src/store/slices/channels';
+import { setMessagesDates } from 'twitch-chat/src/store/slices/messages';
+import { updateSetting } from 'twitch-chat/src/store/slices/settings';
+import { clearSuggestions, setIsSuggestionsLoading, setIsUserWithChannelsFetching, setMostActiveChannel, setSuggestions, setTwitchUser } from 'twitch-chat/src/store/slices/twitch-user';
+import { RootState } from 'twitch-chat/src/store/store';
+import { addNotification, findMostFrequestChannel } from 'twitch-chat/src/utils';
 
 import {
-    getTwitchUserByUsernameDef,
     getTwitchUserWithChannelsByUsernameDef,
-    getTwitchUserWereInterestedByUserIdDef,
-    putTwitchUserWereInterestedByUserIdDef,
     getRandomTwitchUser,
     getDisplayNameSuggestionsDef,
 } from '../api-defs';
-import { DisplayNameQuery, GetTwitchUserQuery, UserIdQuery } from '../types/query';
+import { convertCommonUserToAPI } from '../types';
+import { DisplayNameQuery, GetTwitchUserQuery } from '../types/query';
 import { convertTwitchUserApi, TwitchUser, TwitchUserAPI } from '../types/twitch-user';
 import { convertTwitchUserChannelsApi, TwitchUserChannels, TwitchUserChannelsAPI } from '../types/twitch-user-channel';
 import authFetchBase from '../utils/authFetchBase';
+
+import { usersApi } from './users';
 
 interface TwitchUserWithChannelsResponseTypeRaw {
     user: TwitchUserAPI;
@@ -27,28 +32,20 @@ interface TwitchUserWithChannelsResponseType {
     messagesDates: Array<Date>;
 }
 
-interface TwitchUserWereInterestedResponseTypeRaw {
-    were_interested: number;
-}
-
-interface TwitchUserWereInterestedResponseType {
-    wereInterested: number;
-}
-
 type TwitchUserResponseType = TwitchUser;
 
 export const twitchUsersApi = createApi({
     reducerPath: 'twitchUsersApi',
     baseQuery: authFetchBase,
     endpoints: (builder) => ({
-        getTwitchUserByUsername: builder.query<TwitchUserResponseType, GetTwitchUserQuery>({
-            query: getTwitchUserByUsernameDef,
-            transformResponse: convertTwitchUserApi,
-        }),
-        getRandomTwitchUser: builder.query<TwitchUserResponseType, null>({
+        getRandomTwitchUser: builder.query<TwitchUserResponseType, void>({
             query: getRandomTwitchUser,
             keepUnusedDataFor: 0,
             transformResponse: convertTwitchUserApi,
+            onQueryStarted: async (id, { dispatch, queryFulfilled }) => {
+                await queryFulfilled;
+                dispatch(updateSetting({ key: SETTINGS.USER_TYPE, value: SEARCH_TYPE.USERNAME }));
+            },
         }),
         getTwitchUserWithChannelsByUsername:
             builder.query<TwitchUserWithChannelsResponseType, GetTwitchUserQuery>({
@@ -60,8 +57,12 @@ export const twitchUsersApi = createApi({
                         messagesDates: response.messages_dates ? response.messages_dates.map((e) => new Date(e)) : [],
                     };
                 },
-                onQueryStarted: async (id, { dispatch, queryFulfilled }) => {
-                    const { meta } = await queryFulfilled;
+                onQueryStarted: async (id, { dispatch, getState, queryFulfilled }) => {
+                    dispatch(setIsUserWithChannelsFetching(true));
+                    dispatch(setSelectedChannel(null));
+
+                    const { meta, data } = await queryFulfilled;
+                    //@ts-ignore
                     const responsesLeft = meta.response.headers.get('Ratelimit-Remaining');
                     
                     if (responsesLeft === 1) {
@@ -71,31 +72,45 @@ export const twitchUsersApi = createApi({
                             autoHideDuration: NOTIFICATIONS_DURATION.M,
                         }, dispatch);
                     }
+
+                    dispatch(setTwitchUser(data.user));
+                    dispatch(setMostActiveChannel(findMostFrequestChannel(data.channels)));
+                    dispatch(setChannels(data.channels));
+                    dispatch(setMessagesDates(data.messagesDates));
+
+                    const userId = (getState() as RootState).user.userId;
+
+                    if (userId !== 0) {
+                        dispatch(usersApi.endpoints.postSearchHistory.initiate({
+                            userId,
+                            body: convertCommonUserToAPI({
+                                userId: data.user.userId,
+                                displayName: data.user.displayName,
+                                profileImageUrl: data.user.profileImageUrl,
+                            }),
+                        }));
+                    }
+
+                    dispatch(setIsUserWithChannelsFetching(false));
                 },
             }),
         getDisplayNameSuggestions:
             builder.query<Array<string>, DisplayNameQuery>({
                 query: getDisplayNameSuggestionsDef,
-            }),
-        getTwitchUserWereInterestedByUserId:
-            builder.query<TwitchUserWereInterestedResponseType, UserIdQuery>({
-                query: getTwitchUserWereInterestedByUserIdDef,
-                transformResponse: (response: TwitchUserWereInterestedResponseTypeRaw) => ({
-                    wereInterested: response.were_interested,
-                }),
-            }),
-        putTwitchUserWereInterestedByUserId:
-            builder.query<void, UserIdQuery>({
-                query: putTwitchUserWereInterestedByUserIdDef,
+                onQueryStarted: async (id, { dispatch, queryFulfilled }) => {
+                    dispatch(setIsSuggestionsLoading(true));
+                    dispatch(clearSuggestions());
+                    const { data } = await queryFulfilled;
+
+                    dispatch(setSuggestions(data));
+                    dispatch(setIsSuggestionsLoading(false));
+                },
             }),
     }),
 });
 
 export const {
-    useGetTwitchUserByUsernameQuery,
-    useGetRandomTwitchUserQuery,
-    useGetTwitchUserWithChannelsByUsernameQuery,
-    useGetDisplayNameSuggestionsQuery,
-    useGetTwitchUserWereInterestedByUserIdQuery,
-    usePutTwitchUserWereInterestedByUserIdQuery,
+    useLazyGetTwitchUserWithChannelsByUsernameQuery,
+    useLazyGetRandomTwitchUserQuery,
+    useLazyGetDisplayNameSuggestionsQuery,
 } = twitchUsersApi;

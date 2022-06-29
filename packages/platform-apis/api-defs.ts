@@ -18,21 +18,13 @@ export const baseAuthUrl = process.env.NODE_ENV === 'development' ? 'http://192.
 export const baseBadgesUrl = 'https://badges.twitch.tv/';
 
 // user defs
-export const getTwitchUserByUsernameDef = 
-    ({ username, type }: GetTwitchUserQuery) => `twitch-user/${username}?type=${type}`;
 export const getTwitchUserWithChannelsByUsernameDef = 
     ({ username, type }: GetTwitchUserQuery) => `twitch-user/${username}/user-with-channels?type=${type}`;
 export const getRandomTwitchUser = () => 'twitch-user/random';
-export const getTwitchUserWereInterestedByUserIdDef = 
-    ({ userId }: UserIdQuery) => `twitch-user/${userId}/were-interested`;
-export const putTwitchUserWereInterestedByUserIdDef = 
-    ({ userId }: UserIdQuery) => `twitch-user/${userId}/were-interested`;
 export const getDisplayNameSuggestionsDef =
     ({ username }: DisplayNameQuery) => `twitch-user/${username}/suggestions`;
 
 // messages defs
-export const getMessagesByUserIdDef = 
-    ({ userId }: UserIdQuery) => `messages/${userId}`;
 export const getMessagesByUserIdAndChannelIdDef = 
     ({ userId, channelId, limit = 200, offset = 0, sort = 'desc', dateFrom, dateTo }: GetTwitchUserWithChannelsQuery) =>
         `messages/${userId}/${channelId}?limit=${limit}&offset=${offset}&sort=${sort}&dateFrom=${dateFrom}&dateTo=${dateTo}`;

@@ -3,7 +3,7 @@ import { getDateFromString } from 'platform-components/src/utils';
 import { TwitchUserId } from './twitch-user';
 
 /* eslint-disable camelcase */
-export interface TwitchUserChannelAPI {
+interface TwitchUserChannelAPI {
     user_id: TwitchUserId;
     login: string;
     display_name: string;

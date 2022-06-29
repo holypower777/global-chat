@@ -3,7 +3,7 @@ import { getDateFromString } from 'platform-components/src/utils';
 import { convertTwitchUserApi, TwitchUser, TwitchUserAPI } from './twitch-user';
 
 /* eslint-disable camelcase */
-export interface OverallStatsAPI {
+interface OverallStatsAPI {
     id: number;
     total_messages: number;
     total_channels: number;
@@ -16,7 +16,7 @@ export interface OverallStatsAPI {
     time: string;
 }
 
-export interface OverallStatsPlotAPI {
+interface OverallStatsPlotAPI {
     id: number;
     total_messages: number;
     total_channels: number;
@@ -29,7 +29,7 @@ export interface OverallStatsPlotAPI {
     time: string;
 }
 
-export type OverallStatsPlotsAPI = Array<OverallStatsPlotAPI>;
+type OverallStatsPlotsAPI = Array<OverallStatsPlotAPI>;
 
 export interface OverallStats {
     id: number;
@@ -44,7 +44,7 @@ export interface OverallStats {
     time: Date | null;
 }
 
-export interface OverallStatsPlot {
+interface OverallStatsPlot {
     id: number;
     totalMessages: number;
     totalChannels: number;

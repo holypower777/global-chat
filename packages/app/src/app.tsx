@@ -6,8 +6,9 @@ import ReactDOM from 'react-dom';
 import { Provider as ReduxProvider } from 'react-redux';
 import { Routes, Route, BrowserRouter, Navigate } from 'react-router-dom';
 
-import CommonFooter from './common.components/common-footer/common-footer';
+import { withHeader, CommonFooter } from './common.components';
 import LanguageProvider from './containers/language-provider/language-provider';
+import LocationProvider from './containers/location-provider/location-provider';
 import NotificationProvider from './containers/notification-provider/notification-provider';
 import UserProvider from './containers/user-provider/user-provider';
 import { store } from './store/store';
@@ -39,18 +40,20 @@ const App = () => {
                         <NotificationProvider>
                             <Suspense fallback={<Spin center />}>
                                 <BrowserRouter>
-                                    <Routes>
-                                        <Route path="/">
-                                            <Route element={<Home />} index />
-                                            <Route element={<LiveChat />} path="live-chat" />
-                                            <Route element={<UserHistory />} path="messages">
-                                                <Route element={<UserHistory />} path=":username" />
+                                    <LocationProvider>
+                                        <Routes>
+                                            <Route path="/">
+                                                <Route element={<Home />} index />
+                                                <Route element={withHeader(<LiveChat />)} path="live-chat" />
+                                                <Route element={withHeader(<UserHistory />)} path="messages">
+                                                    <Route element={withHeader(<UserHistory />)} path=":username" />
+                                                </Route>
+                                                <Route element={withHeader(<OverallStats />)} path="overall-stats" />
+                                                <Route element={<Navigate to="/" />} path="*" />
                                             </Route>
-                                            <Route element={<OverallStats />} path="overall-stats" />
-                                            <Route element={<Navigate to="/" />} path="*" />
-                                        </Route>
-                                    </Routes>
-                                    <CommonFooter />
+                                        </Routes>
+                                        <CommonFooter />
+                                    </LocationProvider>
                                 </BrowserRouter>
                             </Suspense>
                         </NotificationProvider>

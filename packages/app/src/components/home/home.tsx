@@ -1,7 +1,12 @@
 import b from 'b_';
-import { useAuthLogoutMutation, useDeleteUserFavoriteMutation, useGetDailyStatsQuery } from 'platform-apis';
-import { useGetDisplayNameSuggestionsQuery, useGetRandomTwitchUserQuery } from 'platform-apis/slices/twitch-users';
-import { Button, DeskCard, DeskCardStats, DeskCardUser, FROM_PAGE, HeaderSettings, IconSearch, Input, Logo, SEARCH_PARAMS, SEARCH_TYPE, SETTINGS, SNACKBAR_TYPE, Text } from 'platform-components';
+import { 
+    useAuthLogoutMutation, 
+    useDeleteUserFavoriteMutation, 
+    useGetDailyStatsQuery,
+    useLazyGetDisplayNameSuggestionsQuery,
+    useLazyGetRandomTwitchUserQuery,
+} from 'platform-apis';
+import { Button, DeskCard, DeskCardStats, DeskCardUser, FROM_PAGE, HeaderSettings, IconSearch, Input, Logo, NOTIFICATIONS_DURATION, SEARCH_PARAMS, SETTINGS, SNACKBAR_TYPE, Text } from 'platform-components';
 import { useWindowSize } from 'platform-components/src/hooks';
 import React, { useEffect, useState } from 'react';
 import { useIntl } from 'react-intl';
@@ -10,8 +15,9 @@ import { useNavigate, useSearchParams } from 'react-router-dom';
 
 import { clearChannelsState } from '../../store/slices/channels';
 import { clearMessages } from '../../store/slices/messages';
+import { getDailyStats, getIsDailyStatsFetching } from '../../store/slices/overall-stats';
 import { getRT, getUserTypeSetting, updateSetting } from '../../store/slices/settings';
-import { clearTwitchUser } from '../../store/slices/twitch-user';
+import { clearSuggestions, clearTwitchUser, getIsSuggestionsLoading, getSuggestions } from '../../store/slices/twitch-user';
 import { getIsAuth, getUser } from '../../store/slices/user';
 import { addNotification, isValidSearchChange, isValidSearchSubmit } from '../../utils';
 
@@ -22,32 +28,29 @@ const Home = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const [searchParams] = useSearchParams();
-    const [typingTimer, setTypingTimer] = useState<NodeJS.Timeout | null>(null);
-    const [username, setUsername] = useState('');
-    const [randomSkip, setRandomSkip] = useState(true);
-    const [suggestions, setSuggestions] = useState<Array<string>>([]);
-    const [suggestionsSkip, setSuggestionsSkip] = useState(true);
+    const { width } = useWindowSize();
+    
     const user = useSelector(getUser);
     const isAuth = useSelector(getIsAuth);
     const userType = useSelector(getUserTypeSetting);
+    const dailyStats = useSelector(getDailyStats);
     const refreshToken = useSelector(getRT);
-    const { width } = useWindowSize();
-    const { data, isFetching } = useGetRandomTwitchUserQuery(null, { skip: randomSkip });
-    const { data: suggestionsData, isFetching: isSuggestionsLoading } = useGetDisplayNameSuggestionsQuery({ username }, { skip: suggestionsSkip });
-    const { data: dailyData, isFetching: isDailyFetching } = useGetDailyStatsQuery();
+    const suggestions = useSelector(getSuggestions);
+    const isDailyFetching = useSelector(getIsDailyStatsFetching);
+    const isSuggestionsLoading = useSelector(getIsSuggestionsLoading);
+
+    const [typingTimer, setTypingTimer] = useState<NodeJS.Timeout | null>(null);
+    const [username, setUsername] = useState('');
+
+    const [fetchSuggestions] = useLazyGetDisplayNameSuggestionsQuery();
+    const [fetchRandomUser, { isFetching, data }] = useLazyGetRandomTwitchUserQuery();
     const [logout] = useAuthLogoutMutation();
     const [deleteFavorite] = useDeleteUserFavoriteMutation();
+    useGetDailyStatsQuery();
 
     useEffect(() => {
         setUsername('');
     }, [userType]);
-
-    useEffect(() => {
-        if (suggestionsData && suggestionsData.length) {
-            setSuggestions(suggestionsData);
-            setSuggestionsSkip(true);
-        }
-    }, [suggestionsData]);
 
     useEffect(() => {
         if (searchParams.get(SEARCH_PARAMS.ACCESS_TOKEN)) {
@@ -69,15 +72,9 @@ const Home = () => {
 
     useEffect(() => {
         if (data) {
-            setRandomSkip(true);
-            dispatch(updateSetting({ key: SETTINGS.USER_TYPE, value: SEARCH_TYPE.USERNAME }));
             navigate(`messages/${data.displayName}?from=${FROM_PAGE.RANDOM_USER}`);
         }
     }, [data]);
-
-    useEffect(() => {
-        document.title = intl.formatMessage({ id: 'title.common' });
-    }, []);
 
     const handleRedirect = (displayName: string | null = null) => {
         const searchName = displayName || username;
@@ -86,7 +83,7 @@ const Home = () => {
             addNotification({
                 id: `notification.searchInput.${userType}.submit`,
                 type: SNACKBAR_TYPE.ERROR,
-                autoHideDuration: 4000,
+                autoHideDuration: NOTIFICATIONS_DURATION.S,
             }, dispatch);
             return;
         }
@@ -94,7 +91,7 @@ const Home = () => {
         dispatch(clearTwitchUser());
         dispatch(clearChannelsState());
         dispatch(clearMessages());
-        setSuggestions([]);
+        dispatch(clearSuggestions());
 
         navigate(`messages/${searchName}`);
     };
@@ -128,13 +125,13 @@ const Home = () => {
                                 addNotification({
                                     id: `notification.searchInput.${userType}`,
                                     type: SNACKBAR_TYPE.WARNING,
-                                    autoHideDuration: 4000,
+                                    autoHideDuration: NOTIFICATIONS_DURATION.S,
                                 }, dispatch);
                                 return;
                             }
 
                             if (e.target.value.length <= 2) {
-                                setSuggestions([]);
+                                dispatch(clearSuggestions());
                             }
 
                             setUsername(e.target.value);
@@ -146,8 +143,7 @@ const Home = () => {
                             }
                             const id = setTimeout(() => {
                                 if (username.length > 2) {
-                                    setSuggestionsSkip(false);
-                                    setSuggestions([]);
+                                    fetchSuggestions({ username });
                                 }
                             }, 500);
 
@@ -161,13 +157,13 @@ const Home = () => {
                         value={username}
                     />
                     <Button
-                        handleClick={() => setRandomSkip(false)}
+                        handleClick={() => fetchRandomUser()}
                         loading={isFetching}
                     >
                         {intl.formatMessage({ id: 'home.randomUser' })}
                     </Button>
                 </section>
-                {!isDailyFetching && dailyData && <section className={b('home', 'cards')}>
+                {!isDailyFetching && dailyStats && <section className={b('home', 'cards')}>
                     <DeskCardUser
                         avatar={user.profileImageUrl}
                         displayName={user.displayName}
@@ -177,21 +173,16 @@ const Home = () => {
                                 refresh_token: refreshToken || '',
                             },
                         })}
-                        handleRemoveFavorite={(e) => {
-                            deleteFavorite({
-                                userId: user.userId,
-                                body: e,
-                            });
-                        }}
+                        handleRemoveFavorite={(e) => deleteFavorite({ userId: user.userId, body: e })}
                         isAuth={isAuth}
                         user={user}
                     />
                     {width && width > 1280 && <DeskCardStats
-                        messagesAmount={dailyData.totalMessages}
-                        messagesPerDay={dailyData.messagesPerDay}
-                        parsedChannels={dailyData.currenlyActiveChannels}
-                        usersAmount={dailyData.totalUsers}
-                        usersPerDay={dailyData.usersPerDay}
+                        messagesAmount={dailyStats.totalMessages}
+                        messagesPerDay={dailyStats.messagesPerDay}
+                        parsedChannels={dailyStats.currenlyActiveChannels}
+                        usersAmount={dailyStats.totalUsers}
+                        usersPerDay={dailyStats.usersPerDay}
                     />}
                     <DeskCard type={DeskCard.TYPE.OVERALL} />
                     <DeskCard type={DeskCard.TYPE.LIVE_CHAT} />

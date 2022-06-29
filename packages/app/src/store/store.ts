@@ -9,6 +9,7 @@ import {
     authApi,
 } from 'platform-apis';
 
+import channelsMiddleware from './middlewares/channels';
 import rtkQueryErrorMiddleware from './middlewares/errors';
 import settingsMiddleware from './middlewares/settings';
 import usersMiddleware from './middlewares/users';
@@ -48,6 +49,7 @@ export const store = configureStore({
             usersApi.middleware,
             authApi.middleware,
             settingsMiddleware,
+            channelsMiddleware,
             rtkQueryErrorMiddleware,
             usersMiddleware,
         ),
