@@ -26,10 +26,8 @@ const DeskCardUser = ({
     const [isPanelOpen, setIsPanelOpen] = useState(false);
 
     if (!isAuth) {
-        const link = process.env.NODE_ENV === 'development' ? LINKS.AUTH_DEV : LINKS.AUTH;
-
         return (
-            <a className={cx('desk-card', b('desk-card', 'user'))} href={link}>
+            <a className={cx('desk-card', b('desk-card', 'user'))} href={LINKS.AUTH}>
                 <Text id="user-panel.login" />
             </a>
         );

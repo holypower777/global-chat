@@ -89,19 +89,24 @@ export enum NOTIFICATIONS_DURATION {
     L = 8000,
 }
 
-export enum LINKS {
-    LIVE_CHAT = '/live-chat',
-    OVERALL_STATS = '/overall-stats',
-    MESSAGES = '/messages',
-    HOME = '/',
-    BOOSTY = 'https://boosty.to/holypower77',
-    GITHUB = 'https://github.com/holypower777/global-chat',
-    BUG_REPORT = 'https://github.com/holypower777/global-chat/issues/new/choose',
-    IDEAS = 'https://github.com/holypower777/global-chat/discussions',
-    KOSTI4EG_TWITCH = 'https://www.twitch.tv/kosti4eg',
-    AUTH = 'https://global-chat.ru/auth/twitch/login',
-    AUTH_DEV = 'http://localhost:3000/auth/twitch/login',
-    
+export const LINKS = {
+    LIVE_CHAT: '/live-chat',
+    OVERALL_STATS: '/overall-stats',
+    MESSAGES: '/messages',
+    HOME: '/',
+    BOOSTY: 'https://boosty.to/holypower77',
+    GITHUB: 'https://github.com/holypower777/global-chat',
+    BUG_REPORT: 'https://github.com/holypower777/global-chat/issues/new/choose',
+    IDEAS: 'https://github.com/holypower777/global-chat/discussions',
+    KOSTI4EG_TWITCH: 'https://www.twitch.tv/kosti4eg',
+    AUTH: process.env.NODE_ENV === 'development' ? 'http://localhost:3000/auth/twitch/login' : 'https://global-chat.ru/auth/twitch/login',
+    NO_LIMITS: '/no-limits',
+};
+
+export enum PLUG_TYPE {
+    DONATION = 'donation plug',
+    STATS = 'stats plug',
+    LIMITS = 'out of limits',
 }
 
 export enum DESK_CARD_TYPE {
@@ -109,6 +114,13 @@ export enum DESK_CARD_TYPE {
     LIVE_CHAT = 'live-chat',
     DONATION = 'donation',
     USER = 'user',
+}
+
+export enum BACKEND_ERROR {
+    MESSAGES_OF_THAT_CHANNEL_ID = 'backendError.messagesOfThatChannelIdNotFound',
+    USER_NOT_FOUND = 'backendError.userNotFound',
+    USER_HIDDEN = 'backendError.userHidden',
+    NO_LIMITS = 'backendError.noLimits',
 }
 
 export enum SIZE {
@@ -138,6 +150,7 @@ export enum SETTINGS {
     LANGUAGE = 'language',
     ACCESS_TOKEN = 'at',
     REFRESH_TOKEN = 'rt',
+    FIRST_REQUEST = 'firstRequest',
 }
 
 export enum SORT_ORDER {

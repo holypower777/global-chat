@@ -17,6 +17,7 @@ interface SettingsState {
     language: LANGUAGES;
     at: string | null;
     rt: string | null;
+    firstRequest: number;
 }
 
 export interface UpdateSetting {
@@ -38,6 +39,7 @@ const initialState = (): SettingsState => {
         language: getLocalStorageValue(SETTINGS.LANGUAGE, defaultLanguage),
         at: getLocalStorageValue(SETTINGS.ACCESS_TOKEN, null),
         rt: getLocalStorageValue(SETTINGS.REFRESH_TOKEN, null),
+        firstRequest: getLocalStorageValue(SETTINGS.FIRST_REQUEST, 0),
     };
 };
 
@@ -104,6 +106,14 @@ export const getUserIdFromAT = createSelector(
 
         return 0;
     }
+);
+const getFirstRequest = createSelector(
+    getSettings,
+    (settings) => new Date(settings.firstRequest * 1000)
+);
+export const getLimitsExpiryTimestamp = createSelector(
+    getFirstRequest,
+    (firstRequest) => new Date(firstRequest.getTime() + 60 * 60 * 24 * 1000),
 );
 
 export default settingsSlice.reducer;

@@ -61,37 +61,43 @@ export const twitchUsersApi = createApi({
                     dispatch(setIsUserWithChannelsFetching(true));
                     dispatch(setSelectedChannel(null));
 
-                    const { meta, data } = await queryFulfilled;
-                    //@ts-ignore
-                    const responsesLeft = meta.response.headers.get('Ratelimit-Remaining');
-                    
-                    if (responsesLeft === 1) {
-                        addNotification({
-                            id: 'notification.oneRequestLeft',
-                            type: SNACKBAR_TYPE.WARNING,
-                            autoHideDuration: NOTIFICATIONS_DURATION.M,
-                        }, dispatch);
+                    try {
+                        const { meta, data } = await queryFulfilled; //@ts-ignore
+                        const responsesLeft = meta.response.headers.get('Ratelimit-Remaining'); //@ts-ignore
+                        const firstRequest = meta.response.headers.get('First-Request') || 0;
+
+                        dispatch(updateSetting({ key: SETTINGS.FIRST_REQUEST, value: Number(firstRequest) }));
+
+                        if (Number(responsesLeft) === 1) {
+                            addNotification({
+                                id: 'notification.oneRequestLeft',
+                                type: SNACKBAR_TYPE.WARNING,
+                                autoHideDuration: NOTIFICATIONS_DURATION.M,
+                            }, dispatch);
+                        }
+
+                        dispatch(setTwitchUser(data.user));
+                        dispatch(setMostActiveChannel(findMostFrequestChannel(data.channels)));
+                        dispatch(setChannels(data.channels));
+                        dispatch(setMessagesDates(data.messagesDates));
+
+                        const userId = (getState() as RootState).user.userId;
+
+                        if (userId !== 0) {
+                            dispatch(usersApi.endpoints.postSearchHistory.initiate({
+                                userId,
+                                body: convertCommonUserToAPI({
+                                    userId: data.user.userId,
+                                    displayName: data.user.displayName,
+                                    profileImageUrl: data.user.profileImageUrl,
+                                }),
+                            }));
+                        }
+
+                        dispatch(setIsUserWithChannelsFetching(false));
+                    } catch (error) {
+                        dispatch(setIsUserWithChannelsFetching(false));
                     }
-
-                    dispatch(setTwitchUser(data.user));
-                    dispatch(setMostActiveChannel(findMostFrequestChannel(data.channels)));
-                    dispatch(setChannels(data.channels));
-                    dispatch(setMessagesDates(data.messagesDates));
-
-                    const userId = (getState() as RootState).user.userId;
-
-                    if (userId !== 0) {
-                        dispatch(usersApi.endpoints.postSearchHistory.initiate({
-                            userId,
-                            body: convertCommonUserToAPI({
-                                userId: data.user.userId,
-                                displayName: data.user.displayName,
-                                profileImageUrl: data.user.profileImageUrl,
-                            }),
-                        }));
-                    }
-
-                    dispatch(setIsUserWithChannelsFetching(false));
                 },
             }),
         getDisplayNameSuggestions:

@@ -5,13 +5,22 @@
     position: relative;
 
     display: flex;
-    // grid-template-columns: 1fr 470px;
-    // grid-template-rows: auto;
+
     width: calc(100% - 80px);
     height: calc(100vh - 170px);
     justify-content: space-between;
 
     gap: 20px;
+
+    &__error
+    {
+        display: flex;
+
+        height: calc(100vh - 170px);
+
+        align-items: center;
+        justify-content: center;
+    }
 
     @include media-breakpoint-down($desktopBp)
     {

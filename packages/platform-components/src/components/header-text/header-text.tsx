@@ -3,6 +3,7 @@ import cx from 'classnames';
 import React, { ReactNode } from 'react';
 import { useIntl } from 'react-intl';
 
+import { MessageFormatPrimitiveValue } from '../../typings';
 import { HEADER_TEXT_SIZE, TEXT_WEIGHT } from '../constants';
 
 import './header-text.scss';
@@ -22,6 +23,7 @@ interface HeaderProps {
     id?: string;
     size?: HEADER_TEXT_SIZE;
     weight?: TEXT_WEIGHT;
+    values?: Record<string, MessageFormatPrimitiveValue>;
     uppercase?: boolean;
     ellipsis?: boolean;
     mix?: string;
@@ -45,13 +47,14 @@ const HeaderText = ({
     size,
     weight = TEXT_WEIGHT.S,
     uppercase,
+    values = {},
     ellipsis,
     mix,
 }: HeaderProps) => {
     const intl = useIntl();
     const headerSize = size || mapTagToSize(tag);
     const className = cx(b('header-text', { uppercase, ellipsis, size: headerSize, tag, weight }), mix);
-    const content = id ? intl.formatMessage({ id }) : children;
+    const content = id ? intl.formatMessage({ id }, values) : children;
 
     return React.createElement(tag, { className }, content);
 };

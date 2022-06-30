@@ -7,3 +7,5 @@ export interface UpdateSettingsProps {
 export interface ChildrenProps {
     children: ReactNode | Array<ReactNode>;
 }
+
+export type MessageFormatPrimitiveValue = string | number | boolean | null | undefined;
