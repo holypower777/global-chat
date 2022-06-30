@@ -67,6 +67,13 @@ const Home = () => {
             }));
         }
 
+        if (searchParams.get(SEARCH_PARAMS.AUTH_ERROR)) {
+            addNotification({
+                id: searchParams.get(SEARCH_PARAMS.AUTH_ERROR),
+                autoHideDuration: NOTIFICATIONS_DURATION.S,
+            }, dispatch);
+        }
+
         navigate('/');
     }, [searchParams]);
 

@@ -172,6 +172,7 @@ export enum SEARCH_PARAMS {
     REPLY = 'reply',
     ACCESS_TOKEN = 'at',
     REFRESH_TOKEN = 'rt',
+    AUTH_ERROR = 'authError',
 }
 
 export interface REPLY_MESSAGE {
