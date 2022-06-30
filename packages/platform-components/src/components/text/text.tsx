@@ -1,14 +1,12 @@
 import b from 'b_';
 import cx from 'classnames';
-import { SimpleCallback } from 'platform-components/src/typings';
+import { MessageFormatPrimitiveValue, SimpleCallback } from 'platform-components/src/typings';
 import React, { CSSProperties, ReactNode } from 'react';
 import { useIntl } from 'react-intl';
 
 import { TEXT_SIZE, TEXT_TAG, TEXT_WEIGHT } from '../constants';
 
 import './text.scss';
-
-type MessageFormatPrimitiveValue = string | number | boolean | null | undefined
 
 interface TextProps {
     children?: ReactNode | Array<ReactNode>;

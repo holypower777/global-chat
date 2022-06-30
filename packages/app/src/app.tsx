@@ -7,6 +7,7 @@ import { Provider as ReduxProvider } from 'react-redux';
 import { Routes, Route, BrowserRouter, Navigate } from 'react-router-dom';
 
 import { withHeader, CommonFooter } from './common.components';
+import NoLimits from './components/no-limits/no-limits';
 import LanguageProvider from './containers/language-provider/language-provider';
 import LocationProvider from './containers/location-provider/location-provider';
 import NotificationProvider from './containers/notification-provider/notification-provider';
@@ -49,6 +50,7 @@ const App = () => {
                                                     <Route element={withHeader(<UserHistory />)} path=":username" />
                                                 </Route>
                                                 <Route element={withHeader(<OverallStats />)} path="overall-stats" />
+                                                <Route element={withHeader(<NoLimits />)} path="no-limits" />
                                                 <Route element={<Navigate to="/" />} path="*" />
                                             </Route>
                                         </Routes>

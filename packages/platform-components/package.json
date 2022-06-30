@@ -11,7 +11,8 @@
     "react-intl": "^5.20.12",
     "react-router-dom": "^6.2.1",
     "react-spring": "^9.4.3",
-    "react-spring-carousel": "^2.0.19"
+    "react-spring-carousel": "^2.0.19",
+    "react-timer-hook": "^3.0.5"
   },
   "peerDependencies": {
     "react": "^17.0.2",

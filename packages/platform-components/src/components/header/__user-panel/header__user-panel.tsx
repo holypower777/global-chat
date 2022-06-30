@@ -19,13 +19,11 @@ export interface UserPanelProps {
 const HeaderUserPanel = ({ user, handleLogout, handleRemoveFavorite }: UserPanelProps) => {
     const [isPanelOpen, setIsPanelOpen] = useState(false);
 
-    const link = process.env.NODE_ENV === 'development' ? LINKS.AUTH_DEV : LINKS.AUTH;
-
     return (
         <div className={b('header', 'user-panel', { open: isPanelOpen })}>
             {user.userId !== 0
                 ? <IconUser handleClick={() => setIsPanelOpen(true)} />
-                : <a className={b('header', 'link')} href={link}>
+                : <a className={b('header', 'link')} href={LINKS.AUTH}>
                     <Text id="user-panel.login" weight={Text.WEIGHT.M} />
                 </a>
             }

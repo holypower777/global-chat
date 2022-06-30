@@ -1,0 +1,17 @@
+@import 'design/design';
+
+.icon__lock
+{
+    width: 15px;
+    height: 15px;
+
+    fill: none;
+    stroke: $Black;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+
+    svg
+    {
+        height: 100%;
+    }
+}

@@ -25,3 +25,4 @@ export { default as WithSkeleton } from './src/components/skeleton/with-skeleton
 export { default as Chip } from './src/components/chip/chip';
 export { default as Popup } from './src/components/popup/popup';
 export { default as Notifications } from './src/components/notifications/notifications';
+export { default as Plug } from './src/components/plug/plug';

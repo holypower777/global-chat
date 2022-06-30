@@ -8,6 +8,7 @@ export const STORY_GROUPS = {
     smiles: 'Platform Components/Smiles',
     rubricator: 'Platform Components/Rubricator',
     skeleton: 'Platform Components/Skeleton',
+    plug: 'Platform Components/Plug',
     other: 'Platform Components/Other',
     uiKit: 'Platform Components/UI-Kit',
 };

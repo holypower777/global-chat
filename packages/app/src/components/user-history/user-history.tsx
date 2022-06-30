@@ -1,5 +1,6 @@
 import { useLazyGetRandomTwitchUserQuery, useLazyGetTwitchUserWithChannelsByUsernameQuery } from 'platform-apis';
-import { FROM_PAGE, LINKS, SEARCH_PARAMS, SNACKBAR_TYPE, Spin, Tab, Tabs } from 'platform-components';
+import { BackendErrorResponse } from 'platform-apis/types';
+import { BACKEND_ERROR, FROM_PAGE, LINKS, Plug, SEARCH_PARAMS, SNACKBAR_TYPE, Spin, Tab, Tabs } from 'platform-components';
 import { useWindowSize } from 'platform-components/src/hooks';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -28,8 +29,8 @@ const UserHistory = () => {
 
     const [activeTab, setActiveTab] = useState(0);
     const [notificationKey, setNotificationKey] = useState(0);
-
-    const [fetchTwitchUser] = useLazyGetTwitchUserWithChannelsByUsernameQuery();
+    
+    const [fetchTwitchUser, { error }] = useLazyGetTwitchUserWithChannelsByUsernameQuery();
     const [fetchRandomUser, { data: randomUser, isFetching: isRandomUserFetching }] = useLazyGetRandomTwitchUserQuery();
 
     useEffect(() => {
@@ -71,6 +72,19 @@ const UserHistory = () => {
     }, [username]);
 
     const handleChangeTab = (index: number) => (setActiveTab(index));
+
+    if (error) {
+        //@ts-ignore
+        const intlId = (error.data as BackendErrorResponse).error.intlId;
+
+        if (intlId === BACKEND_ERROR.USER_HIDDEN) {
+            return (
+                <main className="user-history__error">
+                    <Plug type={Plug.TYPE.DONATION} />
+                </main>
+            );
+        }
+    }
 
     if (width && width < 769) {
         return (

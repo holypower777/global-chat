@@ -1,0 +1,42 @@
+@import 'design/design';
+
+.plug
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+
+    max-width: 500px;
+
+    text-align: center;
+
+    color: $Boulder;
+
+    .icon
+    {
+        width: 70px;
+        height: 70px;
+
+        stroke-width: 0.5;
+    }
+
+    .header-text
+    {
+        color: $Black;
+    }
+
+    &__link
+    {
+        transition: $transitionColor01;
+
+        color: $ChateauGreen;
+
+        font-weight: $fontWeightMedium;
+
+        &:hover
+        {
+            color: $SeaGreen;
+        }
+    }
+}

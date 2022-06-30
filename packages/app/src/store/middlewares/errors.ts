@@ -1,5 +1,5 @@
 import { Action, AnyAction, Dispatch, isRejectedWithValue, Middleware, MiddlewareAPI } from '@reduxjs/toolkit';
-import { NOTIFICATIONS_DURATION, SNACKBAR_TYPE } from 'platform-components';
+import { BACKEND_ERROR, LINKS, NOTIFICATIONS_DURATION, SNACKBAR_TYPE } from 'platform-components';
 
 import { addNotification } from '../../utils';
 
@@ -19,8 +19,20 @@ const rtkQueryErrorMiddleware: Middleware = (api: MiddlewareAPI) => (next: Dispa
             }
 
             if (
-                id === 'backendError.messagesOfThatChannelIdNotFound'
-                || id === 'backendError.userNotFound'
+                id === BACKEND_ERROR.USER_HIDDEN
+            ) {
+                return next(action);
+            }
+
+            if (id === BACKEND_ERROR.NO_LIMITS) {
+                window.location.href = LINKS.NO_LIMITS;
+                return next(action);
+            }
+
+            if (
+                id === BACKEND_ERROR.MESSAGES_OF_THAT_CHANNEL_ID
+                || id === BACKEND_ERROR.USER_NOT_FOUND
+                || id === BACKEND_ERROR.NO_LIMITS
             ) {
                 uniqueKey = true;
             }
