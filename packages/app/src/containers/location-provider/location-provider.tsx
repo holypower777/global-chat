@@ -8,6 +8,10 @@ const LocationProvider = ({ children }: ChildrenProps) => {
     const intl = useIntl();
     const loc = useLocation();
 
+    if (window.location.origin === 'https://twitch-global-chat.herokuapp.com' || window.location.origin === 'http://global-chat.ru') {
+        window.location.href = `https://global-chat.ru${window.location.pathname}${window.location.search}`;
+    }
+
     useEffect(() => {
         if (matchPath(`${LINKS.MESSAGES}/:username`, loc.pathname)) {
             document.title = loc.pathname.slice(10);
