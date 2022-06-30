@@ -9,8 +9,8 @@ import { useSelector } from 'react-redux';
 import { 
     getOnlineParsedChannels,
     getPeriodActivityPlots, 
-    getTotalMessagesPlots,
-    getTotalUsersPlots,
+    // getTotalMessagesPlots,
+    // getTotalUsersPlots,
 } from '../../../store/slices/overall-stats';
 
 import './overall-stats__plots.scss';
@@ -29,22 +29,22 @@ const commonConfig = {
 
 const OverallStatsPlots = () => {
     const intl = useIntl();
-    const totalMessages = useSelector(getTotalMessagesPlots);
-    const totalUsers = useSelector(getTotalUsersPlots);
+    // const totalMessages = useSelector(getTotalMessagesPlots);
+    // const totalUsers = useSelector(getTotalUsersPlots);
     const periodActivity = useSelector(getPeriodActivityPlots);
     const onlineParsedChannels = useSelector(getOnlineParsedChannels);
 
-    const messagesConfig = {
-        colors: { y: '#4d93e8' },
-        names: { y: intl.formatMessage({ id: 'overall-stats.plots.messages' }) },
-        ...commonConfig,
-    };
+    // const messagesConfig = {
+    //     colors: { y: '#4d93e8' },
+    //     names: { y: intl.formatMessage({ id: 'overall-stats.plots.messages' }) },
+    //     ...commonConfig,
+    // };
     
-    const usersConfig = {
-        colors: { y: '#4d93e8' },
-        names: { y: intl.formatMessage({ id: 'overall-stats.plots.users' }) },
-        ...commonConfig,
-    };
+    // const usersConfig = {
+    //     colors: { y: '#4d93e8' },
+    //     names: { y: intl.formatMessage({ id: 'overall-stats.plots.users' }) },
+    //     ...commonConfig,
+    // };
 
     const periodActivityConfig = {
         ...commonConfig,
@@ -115,7 +115,7 @@ const OverallStatsPlots = () => {
                 type="bar"
                 xAxisType="date"
             />}
-            {totalMessages.x.length > 0 && <Charty
+            {/* {totalMessages.x.length > 0 && <Charty
                 colors={{ y: '#2373DB' }}
                 data={splitDataByDay(totalMessages)}
                 names={{ y: intl.formatMessage({ id: 'overall-stats.plots.messages' }) }}
@@ -132,7 +132,7 @@ const OverallStatsPlots = () => {
                 rangeTextType="longDate"
                 title={intl.formatMessage({ id: 'overall-stats.plots.totalUsers' })}
                 xAxisType="date"
-            />}
+            />} */}
         </div>
     );
 };

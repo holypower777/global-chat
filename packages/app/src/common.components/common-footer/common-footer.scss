@@ -4,10 +4,13 @@
 {
     position: absolute;
     bottom: 10px;
+    left: 50%;
 
     display: flex;
 
-    width: 100%;
+    width: fit-content;
+
+    transform: translate(-50%, 0);
 
     gap: 20px;
 
