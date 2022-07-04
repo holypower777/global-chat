@@ -183,7 +183,7 @@
             "notification.userHistory.nextRandom": "Следующий рандомный юзер",
             "notification.copied": "Ссылка скопирована",
             "notification.logout": "Вы вышли из аккаунта!",
-            "notification.oneRequestLeft": "Only one request for the user left!"
+            "notification.oneRequestLeft": "У Вас остался только один запрос по сообщениям пользователя!"
         }
     },
     "en-US": {
