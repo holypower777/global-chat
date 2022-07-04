@@ -23,10 +23,14 @@
         position: absolute;
         top: 2px;
         right: 4px;
-        stroke: $Mercury;
-        fill: $Mercury;
+        stroke: $Boulder;
 
         cursor: pointer;
+
+        &:hover
+        {
+            stroke: $Black;
+        }
     }
 
     &__time,
