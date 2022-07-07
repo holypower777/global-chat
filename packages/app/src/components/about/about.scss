@@ -1,0 +1,62 @@
+@import 'design/design';
+
+.about
+{
+    display: flex;
+    flex-direction: column;
+
+    width: 1000px;
+
+    margin: 0 auto;
+
+    gap: 40px;
+
+    &__block
+    {
+        &_table
+        {
+            table-layout: fixed;
+
+            border: none;
+            border-collapse: collapse;
+
+            thead
+            {
+                tr
+                {
+                    background-color: $AthensGray;
+                }
+
+                th
+                {
+                    text-align: start;
+                }
+            }
+
+            tbody
+            {
+                tr:nth-child(odd)
+                {
+                    background-color: $WildSand;
+                }
+
+                tr:nth-child(even)
+                {
+                    background-color: $AthensGray;
+                }
+            }
+
+            td,
+            th
+            {
+                padding: 5px 10px;
+            }
+
+        }
+    }
+
+    @include media-breakpoint-down($desktopBp)
+    {
+        width: calc(100% - 40px);
+    }
+}
