@@ -60,7 +60,7 @@ const Header = ({
     return (
         <header className="header">
             <Logo />
-            <HeaderMenu />
+            <HeaderMenu isAuth={user.userId !== 0} />
             <Input
                 disabled={isLoading}
                 dropdownItems={suggestions.map((e) => (<li

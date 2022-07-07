@@ -28,6 +28,7 @@ const LiveChat = lazy(() => import('./components/live-chat/live-chat'));
 const OverallStats = lazy(() => import('./components/overall-stats/overall-stats'));
 const Home = lazy(() => import('./components/home/home'));
 const UserHistory = lazy(() => import('./components/user-history/user-history'));
+const About = lazy(() => import('./components/about/about'));
 
 const App = () => {
     return (
@@ -51,6 +52,7 @@ const App = () => {
                                                 </Route>
                                                 <Route element={withHeader(<OverallStats />)} path="overall-stats" />
                                                 <Route element={withHeader(<NoLimits />)} path="no-limits" />
+                                                <Route element={withHeader(<About />)} path="about" />
                                                 <Route element={<Navigate to="/" />} path="*" />
                                             </Route>
                                         </Routes>

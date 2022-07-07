@@ -94,6 +94,7 @@ export const LINKS = {
     OVERALL_STATS: '/overall-stats',
     MESSAGES: '/messages',
     HOME: '/',
+    ABOUT: '/about',
     BOOSTY: 'https://boosty.to/holypower77',
     GITHUB: 'https://github.com/holypower777/global-chat',
     BUG_REPORT: 'https://github.com/holypower777/global-chat/issues/new/choose',
