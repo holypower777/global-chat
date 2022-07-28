@@ -103,6 +103,7 @@ export const twitchUsersApi = createApi({
         getDisplayNameSuggestions:
             builder.query<Array<string>, DisplayNameQuery>({
                 query: getDisplayNameSuggestionsDef,
+                transformResponse: (response: Array<string> | null) => response && response.length > 0 ? response : [],
                 onQueryStarted: async (id, { dispatch, queryFulfilled }) => {
                     dispatch(setIsSuggestionsLoading(true));
                     dispatch(clearSuggestions());
