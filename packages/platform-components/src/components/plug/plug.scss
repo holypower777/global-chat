@@ -28,6 +28,8 @@
 
     &__link
     {
+        cursor: pointer;
+
         transition: $transitionColor01;
 
         color: $ChateauGreen;

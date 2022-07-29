@@ -20,6 +20,7 @@ const rtkQueryErrorMiddleware: Middleware = (api: MiddlewareAPI) => (next: Dispa
 
             if (
                 id === BACKEND_ERROR.USER_HIDDEN
+                || BACKEND_ERROR.USER_NOT_FOUND
             ) {
                 return next(action);
             }
@@ -31,7 +32,6 @@ const rtkQueryErrorMiddleware: Middleware = (api: MiddlewareAPI) => (next: Dispa
 
             if (
                 id === BACKEND_ERROR.MESSAGES_OF_THAT_CHANNEL_ID
-                || id === BACKEND_ERROR.USER_NOT_FOUND
                 || id === BACKEND_ERROR.NO_LIMITS
             ) {
                 uniqueKey = true;

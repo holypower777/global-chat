@@ -108,6 +108,9 @@ export enum PLUG_TYPE {
     DONATION = 'donation plug',
     STATS = 'stats plug',
     LIMITS = 'out of limits',
+    USER_NOT_FOUND = 'user not found',
+    NO_CHAT_ACTIVITY = 'no chat activity',
+    INTERNAL_ERROR = 'internal error',
 }
 
 export enum DESK_CARD_TYPE {
@@ -122,6 +125,7 @@ export enum BACKEND_ERROR {
     USER_NOT_FOUND = 'backendError.userNotFound',
     USER_HIDDEN = 'backendError.userHidden',
     NO_LIMITS = 'backendError.noLimits',
+    NO_CHAT_ACTIVITY = 'backendError.noChatActivity',
 }
 
 export enum SIZE {

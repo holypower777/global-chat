@@ -4,15 +4,6 @@ import { BrowserRouter as Router } from 'react-router-dom';
 
 const messages = require(`../global-chat.json`);
 
-const withThemeProvider = (Story, context) => {
-    const theme = getTheme(context.globals.theme);
-    return (
-        <ThemeProvider theme={theme}>
-            <Story {...context} />
-        </ThemeProvider>
-    )
-}
-
 export const decorators = [
     (Story, context) => {
         const locale = context.globals.locale;

@@ -76,14 +76,27 @@ const UserHistory = () => {
     if (error) {
         //@ts-ignore
         const intlId = (error.data as BackendErrorResponse).error.intlId;
+        let plugType;
 
-        if (intlId === BACKEND_ERROR.USER_HIDDEN) {
-            return (
-                <main className="user-history__error">
-                    <Plug type={Plug.TYPE.DONATION} />
-                </main>
-            );
+        switch (intlId) {
+            case BACKEND_ERROR.USER_HIDDEN:
+                plugType = Plug.TYPE.DONATION;
+                break;
+            case BACKEND_ERROR.USER_NOT_FOUND:
+                plugType = Plug.TYPE.USER_NOT_FOUND;
+                break;
+            case BACKEND_ERROR.NO_CHAT_ACTIVITY:
+                plugType = Plug.TYPE.NO_CHAT_ACTIVITY;
+                break;
+            default:
+                plugType = Plug.TYPE.INTERNAL_ERROR;
         }
+
+        return (
+            <main className="user-history__error">
+                <Plug type={plugType} />
+            </main>
+        );
     }
 
     if (width && width < 769) {
