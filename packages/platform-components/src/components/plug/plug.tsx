@@ -4,7 +4,7 @@ import { useTimer } from 'react-timer-hook';
 
 import { LINKS, PLUG_TYPE, TEXT_WEIGHT } from '../constants';
 import { H3 } from '../header-text/header-text';
-import { IconEyeSlash, IconLock } from '../icon/icon';
+import { IconEyeSlash, IconHierarchy, IconLock, IconMessageRemove, IconSearchZoomOut } from '../icon/icon';
 import Text from '../text/text';
 
 interface PlugProps {
@@ -67,6 +67,38 @@ const Plug = ({ type, isAuth, expiryTimestamp = new Date(new Date().getTime() + 
                         <IconLock />
                     </div>}
                 </>
+            );
+        case PLUG_TYPE.USER_NOT_FOUND:
+            return (
+                <div className="plug">
+                    <H3 id="plug.userNotFound.header" weight={TEXT_WEIGHT.M} />
+                    <Text id="plug.userNotFound" />
+                    <IconSearchZoomOut />
+                </div>
+            );
+        case PLUG_TYPE.NO_CHAT_ACTIVITY:
+            return (
+                <div className="plug">
+                    <H3 id="plug.noChatActivity.header" weight={TEXT_WEIGHT.M} />
+                    <Text id="plug.noChatActivity" />
+                    <IconMessageRemove />
+                </div>
+            );
+        case PLUG_TYPE.INTERNAL_ERROR:
+            return (
+                <div className="plug">
+                    <H3 id="plug.internalError.header" weight={TEXT_WEIGHT.M} />
+                    <Text
+                        id="plug.internalError"
+                        values={{ //@ts-ignore
+                            reload: (val) =>
+                                (<span className={b('plug', 'link')} onClick={() => window.location.reload()}>{val}</span>), //@ts-ignore
+                            bug: (val) =>
+                                (<a className={b('plug', 'link')} href={LINKS.BUG_REPORT} target="_blank">{val}</a>),
+                        }}
+                    />
+                    <IconHierarchy />
+                </div>
             );
         default:
             return null;
