@@ -1,7 +1,7 @@
 import b from 'b_';
-import { 
-    useAuthLogoutMutation, 
-    useDeleteUserFavoriteMutation, 
+import {
+    useAuthLogoutMutation,
+    useDeleteUserFavoriteMutation,
     useGetDailyStatsQuery,
     useLazyGetDisplayNameSuggestionsQuery,
     useLazyGetRandomTwitchUserQuery,
@@ -9,6 +9,7 @@ import {
 import { Button, DeskCard, DeskCardStats, DeskCardUser, FROM_PAGE, HeaderSettings, IconSearch, Input, Logo, NOTIFICATIONS_DURATION, SEARCH_PARAMS, SETTINGS, SNACKBAR_TYPE, Text } from 'platform-components';
 import { useWindowSize } from 'platform-components/src/hooks';
 import React, { useEffect, useState } from 'react';
+import { Helmet } from 'react-helmet';
 import { useIntl } from 'react-intl';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useSearchParams } from 'react-router-dom';
@@ -29,7 +30,7 @@ const Home = () => {
     const navigate = useNavigate();
     const [searchParams] = useSearchParams();
     const { width } = useWindowSize();
-    
+
     const user = useSelector(getUser);
     const isAuth = useSelector(getIsAuth);
     const userType = useSelector(getUserTypeSetting);
@@ -117,6 +118,10 @@ const Home = () => {
 
     return (
         <main className="home">
+            <Helmet defaultTitle={intl.formatMessage({ id: 'title.common' })}>
+                <meta content={intl.formatMessage({ id: 'meta.desc.home' })} name="description" />
+                <title>{intl.formatMessage({ id: 'title.common' })}</title>
+            </Helmet>
             <section className={b('home', 'container')}>
                 <Logo alwaysFull />
                 <section className={b('home', 'search')}>

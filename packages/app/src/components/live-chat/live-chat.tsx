@@ -15,6 +15,7 @@ import DevPage from '../dev-page/dev-page';
 
 import LiveChatChannels from './__channels/live-chat__channels';
 import LiveChatChat from './__chat/live-chat__chat';
+import LiveChatHelmet from './live-chat.helmet';
 
 import './live-chat.scss';
 
@@ -94,6 +95,7 @@ const LiveChat = () => {
     if (width && width < 769) {
         return (
             <main className="live-chat">
+                <LiveChatHelmet />
                 <Text id="live-chat.mobile" mix={b('live-chat', 'mobile')} />
             </main>
         );
@@ -102,6 +104,7 @@ const LiveChat = () => {
     if (width && width < 1281) {
         return (
             <main className="live-chat">
+                <LiveChatHelmet />
                 <Tabs activeTab={activeTab} setActiveTab={(index: number) => (setActiveTab(index))}>
                     <Tab label="Channels" />
                     <Tab label="Live chat" />
@@ -122,6 +125,7 @@ const LiveChat = () => {
 
     return (
         <main className="live-chat">
+            <LiveChatHelmet />
             <WithSkeleton isLoading={isLoading} variant={WithSkeleton.SKELETON_VARIANT.LIVE_CHAT}>
                 <LiveChatChannels />
                 <LiveChatChat isActiveTab={true} />

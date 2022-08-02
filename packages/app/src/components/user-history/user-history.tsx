@@ -14,6 +14,7 @@ import { addNotification } from '../../utils';
 
 import Channels from './channels/channels';
 import Chat from './chat/chat';
+import UserHistoryHelmet from './user-history.helmet';
 
 import './user-history.scss';
 
@@ -94,6 +95,7 @@ const UserHistory = () => {
 
         return (
             <main className="user-history__error">
+                <UserHistoryHelmet isFound={false} />
                 <Plug type={plugType} />
             </main>
         );
@@ -102,6 +104,7 @@ const UserHistory = () => {
     if (width && width < 769) {
         return (
             <main className="user-history">
+                <UserHistoryHelmet />
                 {isTwitchUserFetching && <Spin center size={Spin.SIZE.L} />}
                 {!isTwitchUserFetching && <>
                     <Tabs activeTab={activeTab} setActiveTab={handleChangeTab}>
@@ -124,6 +127,7 @@ const UserHistory = () => {
 
     return (
         <main className="user-history">
+            <UserHistoryHelmet />
             {isTwitchUserFetching && <Spin center size={Spin.SIZE.L} />}
             {!isTwitchUserFetching && <>
                 <Channels />

@@ -1,9 +1,15 @@
 {
     "ru-RU": {
         "common": {
+            "meta.desc.home": "Twitch Global chat - сервис использующий сообщения пользователей для построения графиков и ведения статистики чата. Статистика собирается только для Ру сегмента чата Твича.",
+            "meta.desc.about": "Twitch Global Chat аналитический сервис, предоставляющий всестороннее представление об оценки чата на основе сообщений всех каналов Ру сегмента на платформе Twitch.",
+            "meta.desc.liveChat": "Демонстрирует общую скорость чатов Ру сегмента Твича, кол-во активных каналов и среднее количество сообщений/секунду на текущий момент.",
+            "meta.desc.overallStats": "Графики, аналитика и статистика о Ру сегменте чата Твича. Динамические графики дают представление об активности пользователей.",
+            "meta.desc.userHistory": "Активность пользователя - {username}, каналы на которых он писал, сами сообщения и некоторая статистика",
             "title.common": "Global chat",
             "title.liveChat": "Лайв чат",
             "title.overallStats": "Общая стата",
+            "title.userHistory.notFound": "Юзер не найден",
             "info.home": "Этот сервис использует сообщения пользователей для построения графиков, статистики, это не общедоступная база данных. Статистика ведется исключительно для российского сегмента Twitch. Есть как глобальная статистика, так и по каждому пользователю в отдельности. Поиск осуществляется нажатием Enter. Будьте благосклонны к скорости сервиса, т.к. я использую бесплатные хостинги либо самые дешевые их варианты. Количество запросов ограничено: три запроса в день для неавторизированных пользователей, 10 для авторизированных и безлимитные за платную подписку.",
             "info.dev-page": "Страница в разработке. Приходи позже, чтобы увидеть что тут будет!",
             "info.maintenance": "Потерпите пожалуйста, эта страница временно на обслуживании. Приходите позже",
@@ -217,9 +223,15 @@
     },
     "en-US": {
         "common": {
+            "meta.desc.home": "Twitch Global chat is a service that uses user messages to plot graphs, statistics. Statistics are kept for the Russian segment of Twitch.",
+            "meta.desc.about": "Twitch Global Chat is an analytics service that provides a comprehensive insight into the chat analytics by parsed messages of all RU segment channels on the Twitch.",
+            "meta.desc.liveChat": "Twitch RU segment live chat representation. Shows the speed of the overall chat, amount of active channels and amount of messages per second",
+            "meta.desc.overallStats": "Plots, analytics and statistics about Twitch RU Segment Chat. Dynamic graphs represents users activity.",
+            "meta.desc.userHistory": "{username} activity, the channels he wrote on, messages itself and statistics",
             "title.common": "Global chat",
             "title.liveChat": "Live chat",
             "title.overallStats": "Overall stats",
+            "title.userHistory.notFound": "User not found",
             "info.home": "This service uses user messages to plot graphs, statistics, this is not a public database. Statistics are kept for the Russian segment of Twitch. There are both global statistics and for each user individually. The search is carried out by pressing Enter. Please be patient to the speed of the service, because i use free hosting or their cheapest options. Request limits are restricted: three requests per day for unauthorized users, 10 for authorized and unlimited for the donation subscription.",
             "info.dev-page": "This page is currently under development. Come back later to see some changes.",
             "info.maintenance": "Please be patient, this page is currently under maintenance. Come back later.",
