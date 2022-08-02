@@ -11,6 +11,7 @@ import { getIsAuth } from '../../store/slices/user';
 
 import OverallStatsPlots from './__plots/overall-stats__plots';
 import OverallStatsStats from './__stats/overall-stats__stats';
+import OverallStatsHelmet from './overall-stats.helmet';
 
 import './overall-stats.scss';
 
@@ -27,6 +28,7 @@ const OverallStats = () => {
     if (!isAuth) {
         return (
             <main className="overall-stats center">
+                <OverallStatsHelmet />
                 <Plug type={Plug.TYPE.STATS} />
             </main>
         );
@@ -34,6 +36,7 @@ const OverallStats = () => {
 
     return (
         <ErrorBoundary>
+            <OverallStatsHelmet />
             <main className="overall-stats">
                 <H1 id="overall-stats.header" />
                 <WithSkeleton
