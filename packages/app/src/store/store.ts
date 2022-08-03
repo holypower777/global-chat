@@ -14,6 +14,7 @@ import rtkQueryErrorMiddleware from './middlewares/errors';
 import settingsMiddleware from './middlewares/settings';
 import usersMiddleware from './middlewares/users';
 import channelsSlice from './slices/channels';
+import commonSlice from './slices/common';
 import liveChatSlice from './slices/live-chat';
 import messagesSlice from './slices/messages';
 import notificationsSlice from './slices/notifications';
@@ -38,6 +39,7 @@ export const store = configureStore({
         settings: settingsSlice,
         overallStats: overallStatsSlice,
         user: userSlice,
+        common: commonSlice,
     },
 
     middleware: (getDefaultMiddleware) =>
