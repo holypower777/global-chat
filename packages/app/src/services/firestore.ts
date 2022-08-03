@@ -23,3 +23,7 @@ const db = getFirestore(app);
 export const streamActualChannels = (handle: (doc: DocumentSnapshot<DocumentData>) => void) => {
     return onSnapshot(doc(db, 'channels', 'parsed'), handle);
 };
+
+export const streamLastSearches = (handle: (doc: DocumentSnapshot<DocumentData>) => void) => {
+    return onSnapshot(doc(db, 'common', 'lastSearches'), handle);
+};

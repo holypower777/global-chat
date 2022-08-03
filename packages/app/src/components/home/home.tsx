@@ -22,6 +22,8 @@ import { clearSuggestions, clearTwitchUser, getIsSuggestionsLoading, getSuggesti
 import { getIsAuth, getUser } from '../../store/slices/user';
 import { addNotification, isValidSearchChange, isValidSearchSubmit } from '../../utils';
 
+import HomeSearches from './__searches/home__searches';
+
 import './home.scss';
 
 const Home = () => {
@@ -175,6 +177,7 @@ const Home = () => {
                         {intl.formatMessage({ id: 'home.randomUser' })}
                     </Button>
                 </section>
+                {width && width > 1280 && <HomeSearches />}
                 {!isDailyFetching && dailyStats && <section className={b('home', 'cards')}>
                     <DeskCardUser
                         avatar={user.profileImageUrl}
