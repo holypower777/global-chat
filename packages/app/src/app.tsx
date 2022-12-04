@@ -2,7 +2,7 @@ import flagsmith from 'flagsmith';
 import { FlagsmithProvider } from 'flagsmith/react';
 import { Spin } from 'platform-components';
 import React, { lazy, Suspense } from 'react';
-import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import { Provider as ReduxProvider } from 'react-redux';
 import { Routes, Route, BrowserRouter, Navigate } from 'react-router-dom';
 
@@ -23,6 +23,7 @@ function createContainer(targetParent: Element) {
 }
 
 const container = document.getElementById(rootContainerId) ?? createContainer(document.body);
+const root = createRoot(container);
 
 const LiveChat = lazy(() => import('./components/live-chat/live-chat'));
 const OverallStats = lazy(() => import('./components/overall-stats/overall-stats'));
@@ -40,23 +41,23 @@ const App = () => {
                 <LanguageProvider>
                     <UserProvider>
                         <NotificationProvider>
-                            <Suspense fallback={<Spin center />}>
+                            <Suspense fallback={<Spin center/>}>
                                 <BrowserRouter>
                                     <LocationProvider>
                                         <Routes>
                                             <Route path="/">
-                                                <Route element={<Home />} index />
-                                                <Route element={withHeader(<LiveChat />)} path="live-chat" />
-                                                <Route element={withHeader(<UserHistory />)} path="messages">
-                                                    <Route element={withHeader(<UserHistory />)} path=":username" />
+                                                <Route element={<Home/>} index/>
+                                                <Route element={withHeader(<LiveChat/>)} path="live-chat"/>
+                                                <Route element={withHeader(<UserHistory/>)} path="messages">
+                                                    <Route element={withHeader(<UserHistory/>)} path=":username"/>
                                                 </Route>
-                                                <Route element={withHeader(<OverallStats />)} path="overall-stats" />
-                                                <Route element={withHeader(<NoLimits />)} path="no-limits" />
-                                                <Route element={withHeader(<About />)} path="about" />
-                                                <Route element={<Navigate to="/" />} path="*" />
+                                                <Route element={withHeader(<OverallStats/>)} path="overall-stats"/>
+                                                <Route element={withHeader(<NoLimits/>)} path="no-limits"/>
+                                                <Route element={withHeader(<About/>)} path="about"/>
+                                                <Route element={<Navigate to="/"/>} path="*"/>
                                             </Route>
                                         </Routes>
-                                        <CommonFooter />
+                                        <CommonFooter/>
                                     </LocationProvider>
                                 </BrowserRouter>
                             </Suspense>
@@ -68,4 +69,4 @@ const App = () => {
     );
 };
 
-ReactDOM.render(<App />, container);
+root.render(<App/>);
