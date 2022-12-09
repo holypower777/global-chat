@@ -1,15 +1,5 @@
-@import 'design/design';
-
 .icon__message
 {
-    width: 15px;
-    height: 15px;
-
     fill: none;
-    stroke: $Black;
-
-    svg
-    {
-        height: 100%;
-    }
+    stroke: #000000;
 }

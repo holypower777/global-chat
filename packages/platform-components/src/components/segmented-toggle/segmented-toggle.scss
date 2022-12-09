@@ -1,0 +1,19 @@
+@import 'design/colors';
+
+.segmented-toggle
+{
+    display: flex;
+    flex-direction: column;
+
+    &__buttons
+    {
+        display: flex;
+
+        box-sizing: border-box;
+        width: fit-content;
+
+        border-radius: 4px;
+        outline: 0;
+        box-shadow: 0 0 0 1px $Mercury;
+    }
+}

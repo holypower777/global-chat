@@ -32,7 +32,7 @@ const StoryChatMessage = () => {
             showMessageTime={boolean('show message time', true)}
             showReplyIcon={boolean('show reply icon', true)}
             subBadges={{}}
-            time={new Date(date('time', new Date()))}
+            time={new Date(date('time', new Date('1995-12-17T03:24:00')))}
             username={text('username', 'Mariam58')}
         />
     );

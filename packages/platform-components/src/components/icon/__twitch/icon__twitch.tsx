@@ -1,23 +1,16 @@
-import { SimpleCallback } from 'platform-components/src/typings';
 import React from 'react';
 
-import Icon from '../icon';
+import Icon, { SingleIconProps } from '../icon';
 
 import './icon__twitch.scss';
 
-interface IconTwitchProps {
-    handleClick?: SimpleCallback;
-}
-
-const IconTwitch = (props: IconTwitchProps) => {
-    return (
-        <Icon ico="twitch" {...props}>
-            <svg viewBox="0 0 108 108">
-                <path clipRule="evenodd" d="M76.5 90H58.5L45 103.5H31.5V90H9V29.8665L24.138 9H99V67.5L76.5 90ZM90 58.5V18H27V72H40.5V85.5L54 72H76.5L90 58.5Z" fillRule="evenodd" />
-                <path d="M72 31.5H81V54H72V31.5ZM49.5 31.5H58.5V54H49.5V31.5Z" />
-            </svg>
-        </Icon>
-    );
-};
+const IconTwitch = (props: SingleIconProps) => (
+    <Icon ico="twitch" {...props}>
+        <svg data-testid="icon__twitch" viewBox="0 0 12 12">
+            <path clipRule="evenodd" d="M8.5 10H6.5L5 11.5H3.5V10H1V3.3185L2.682 1H11V7.5L8.5 10ZM10 6.5V2H3V8H4.5V9.5L6 8H8.5L10 6.5Z" fillRule="evenodd" />
+            <path d="M8 3.5H9V6H8V3.5ZM5.5 3.5H6.5V6H5.5V3.5Z" />
+        </svg>
+    </Icon>
+);
 
 export default IconTwitch;

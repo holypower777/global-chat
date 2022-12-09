@@ -1,0 +1,49 @@
+@import 'design/colors';
+
+.tabs__tab
+{
+    z-index: 1;
+
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    padding-bottom: 4px;
+
+    cursor: pointer;
+
+    transition: border-bottom .2s ease-in-out, color .2s ease-in-out;
+
+    color: $Silver;
+
+    border-bottom: 1px solid $Silver;
+
+    .icon
+    {
+        stroke: $Silver;
+    }
+
+    &_active
+    {
+        color: $Black;
+
+        border-bottom: 1px solid $Black;
+
+        .icon
+        {
+            stroke: $Black;
+        }
+    }
+
+    &:hover:not(&_active)
+    {
+        color: $Boulder;
+
+        border-bottom: 1px solid $Boulder;
+
+        .icon
+        {
+            stroke: $Boulder;
+        }
+    }
+}

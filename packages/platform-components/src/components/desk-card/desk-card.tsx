@@ -31,12 +31,14 @@ const DeskCard = ({ type }: DeskCardProps) => {
                     />
                 </a>
             );
-        default:
+        case DESK_CARD_TYPE.LIVE_CHAT:
             return (
                 <Link to={LINKS.LIVE_CHAT}>
                     <DeskCardDense icon={<IconMessageText />} id="desk-card.live-chat" />
                 </Link>
             );
+        default:
+            return null;
     }
 };
 

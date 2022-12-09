@@ -1,17 +1,5 @@
-@import 'design/design';
-
 .icon__circle-tick
 {
-    width: 24px;
-    height: 24px;
-
     fill: none;
-    fill-rule: evenodd;
-    clip-rule: evenodd;
-    stroke: $Black;
-
-    svg
-    {
-        height: 100%;
-    }
+    stroke: #000000;
 }

@@ -27,6 +27,14 @@ import HomeSearches from './__searches/home__searches';
 import './home.scss';
 
 const Home = () => {
+
+    return (
+        <div>
+            Fuck gg
+            <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen frameBorder="0" src="https://www.youtube.com/embed/dNyWGa-YTLs" style={{ height: '100%' }} title="FUCK GG/ФАК ГГ" />
+        </div>
+    );
+
     const intl = useIntl();
     const dispatch = useDispatch();
     const navigate = useNavigate();

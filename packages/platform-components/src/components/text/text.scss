@@ -1,4 +1,5 @@
-@import 'design/design';
+@import 'design/fonts';
+@import 'design/typography';
 
 .text
 {
@@ -72,6 +73,10 @@
 
     &_center
     {
+        display: inline-block;
+
+        width: 100%;
+
         text-align: center;
     }
 }

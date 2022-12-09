@@ -1,23 +1,13 @@
-@import 'design/design';
+@import 'design/colors';
 
 .icon__star
 {
-    width: 15px;
-    height: 15px;
-
     fill: none;
-    stroke: $Black;
-
-    transition: stroke 0.2s ease-in-out;
+    stroke: #000000;
 
     &_filled
     {
         fill: $ChateauGreen;
         stroke: $ChateauGreen;
-    }
-
-    svg
-    {
-        height: 100%;
     }
 }

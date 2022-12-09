@@ -1,70 +1,48 @@
-@import 'design/design';
-
-$largeLogoImageWidth: 28px;
-$largeLogoImageHeight: 28px;
-$mediumLogoImageWidth: 24px;
-$mediumLogoImageHeight: 24px;
-$smallLogoImageWidth: 20px;
-$smallLogoImageHeight: 20px;
+@import 'design/colors';
+@import 'design/mixins';
+@import 'design/breakpoints';
 
 .logo
 {
     display: flex;
     align-items: baseline;
-
-    color: $Black;
-
-    &_size
-    {
-        &_l
-        {
-            .icon__ez img
-            {
-                width: $largeLogoImageWidth;
-                height: $largeLogoImageHeight;
-            }
-        }
-
-        &_m
-        {
-            .icon__ez img
-            {
-                width: $mediumLogoImageWidth;
-                height: $mediumLogoImageHeight;
-            }
-        }
-
-        &_s
-        {
-            .icon__ez img
-            {
-                width: $smallLogoImageWidth;
-                height: $smallLogoImageHeight;
-            }
-        }
-    }
+    gap: 10px;
 
     &__text
     {
-        margin-right: 10px;
-
-        white-space: nowrap;
-
-        &-first
+        &_twitch
         {
             color: $Twitch;
         }
+
+        &_mobile
+        {
+            display: none;
+        }
+    }
+
+    &__smile
+    {
+        position: relative;
+
+        width: 28px;
+        height: 28px;
     }
 
     &_adaptive
     {
         @include media-breakpoint-down($desktopBp)
         {
-            .logo
+            .logo__text
             {
-                &__text
+                &_desktop
                 {
                     display: none;
+                }
+
+                &_mobile
+                {
+                    display: flex;
                 }
             }
         }

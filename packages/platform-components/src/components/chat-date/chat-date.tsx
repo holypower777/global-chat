@@ -1,20 +1,16 @@
-import { formatDate } from 'platform-components/src/utils/format-date';
 import React from 'react';
 
+import { formatDate } from '../../utils';
 import Text from '../text/text';
 
 import './chat-date.scss';
 
-interface ChatProps {
-    date: Date
+export interface ChatProps {
+    /** The date to be shown */
+    date: Date;
 }
 
-const ChatDate = ({ date }: ChatProps) => {
-    return (
-        <div className="chat-date">
-            <Text>{formatDate(date)}</Text>
-        </div>
-    );
-};
+const ChatDate = ({ date }: ChatProps) => 
+    <Text data-testid="chat-date" mix="chat-date">{formatDate(date)}</Text>;
 
 export default ChatDate;

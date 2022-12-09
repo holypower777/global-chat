@@ -1,30 +1,52 @@
 import b from 'b_';
 import cx from 'classnames';
-import { SimpleCallback } from 'platform-components/src/typings';
 import React from 'react';
+
+import { MixProps, SimpleCallback } from '../../typings';
+import { SIZE } from '../constants';
 
 import './switcher.scss';
 
-interface SwitcherProps {
-    isOn: boolean;
-    handleToggle: SimpleCallback;
+export interface SwitcherProps extends MixProps {
+    /** Whether toggle is checked */
+    checked: boolean;
+    /** Whether toggle is disabled */
     disabled?: boolean;
-    mix?: string;
+    /** The size of the toggle */
+    size?: SIZE;
+    /** Set the handler to handle toggle state changes */
+    handleToggle?: SimpleCallback;
 }
 
-const Switcher = ({ isOn, handleToggle, disabled = false, mix }: SwitcherProps) => {
-    return (
-        <label className={cx(b('switch', 'label', { on: isOn, disabled }), mix)}>
-            <input
-                checked={isOn}
-                className="switch"
+const Switcher = ({
+    checked = false,
+    disabled = false,
+    size = SIZE.M,
+    handleToggle,
+    mix,
+}: SwitcherProps) => {
+    return(
+        <label
+            className={cx(b('switcher', { disabled, size, checked: checked && size }), mix)}
+            data-testid="switcher"
+        >
+            <input 
+                checked={checked}
+                className={b('switcher', 'input')}
+                data-testid={b('switcher', 'input')}
                 disabled={disabled}
-                onChange={handleToggle}
+                onChange={() => {
+                    if (handleToggle && !disabled) {
+                        handleToggle();
+                    }
+                }}
                 type="checkbox"
             />
-            <span className={b('switch', 'button')} />
+            <span className={b('switcher', 'button')} />
         </label>
     );
 };
+
+Switcher.SIZE = SIZE;
 
 export default Switcher;

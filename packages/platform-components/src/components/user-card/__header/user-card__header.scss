@@ -1,49 +1,27 @@
-@import 'design/design';
+@import 'design/colors';
 
 .user-card
 {
     &__header
     {
         display: flex;
-
-        height: 45px;
-
         justify-content: space-between;
         align-items: center;
 
-        &_icons
-        {
-            display: flex;
+        height: 44px;
+    }
 
-            align-items: center;
+    &__icons
+    {
+        display: flex;
+        align-items: center;
+        gap: 10px;
 
-            height: 15px;
-            gap: 10px;
-        }
-
-        a
-        {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-
-            width: 15px;
-            height: 15px;
-        }
-
-        .icon__arrow,
         .icon__cog,
         .icon__twitch,
-        .icon__twitchtracker,
+        .icon__twitchtracker
         {
             fill: $Scorpion;
-
-            cursor: pointer;
-
-            &:hover
-            {
-                fill: $Black;
-            }
         }
 
         .icon__star
@@ -55,31 +33,30 @@
                 stroke: $ChateauGreen;
             }
 
-            cursor: pointer;
-
             &:hover
             {
-                stroke: $Boulder;
+                stroke: $Black;
             }
         }
 
-        .icon__twitch
+        .icon__cog:hover
         {
-            width: 15px;
-            height: 15px;
-
-            &:hover
-            {
-                fill: $Twitch;
-            }
+            fill: $Black;
         }
 
-        .icon__twitchtracker
+        .icon__twitchtracker:hover
         {
-            &:hover
-            {
-                fill: $Twitchtracker;
-            }
+            fill: $Twitchtracker;
+        }
+
+        .icon__twitch:hover
+        {
+            fill: $Twitch;
+        }
+
+        a
+        {
+            display: flex;
         }
     }
 }

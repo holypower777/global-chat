@@ -1,73 +1,33 @@
-@import '../../src/design/design';
+@import 'design/colors';
 
 .ui-kit
 {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    gap: 50px;
-    align-items: flex-start;
-
-    padding: 40px;
-
-    &__unit
+    &__shadow
     {
-        display: grid;
-        grid-template-columns: 1fr;
-        gap: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
 
-        &_type
-        {
-            &_color
-            {
-                text-transform: capitalize;
-            }
-        }
-    }
+        width: 140px;
+        height: 140px;
 
-    &__group
-    {
-        display: grid;
-        grid-template-columns: 1fr;
+        border-radius: 10px;
+
+        background-color: $WildSand;
     }
 
     &__color
     {
-        color: $Black;
-
-        &-sample
-        {
-            display: block;
-
-            height: 18px;
-        }
-
-        &-title
-        {
-            margin: 0 0 6px;
-
-            font-weight: $fontWeightBold;
-        }
-
-        &-value
-        {
-            text-transform: none;
-
-            font-style: italic;
-        }
-    }
-
-    &__shadow
-    {
         display: flex;
-        justify-content: center;
-        align-items: center;
+        flex-direction: column;
+        gap: 5px;
 
-        box-sizing: border-box;
+        &-block
+        {
+            width: 100px;
+            height: 100px;
 
-        width: 100%;
-        min-height: 100px;
-        padding: 20px;
-
-        border-radius: 10px;
+            border-radius: 10px;
+        }
     }
 }

@@ -55,8 +55,12 @@
             "home.lastSearches": "Последние поиски пользователей:",
             "logo.icon.imageSrc": "https://cdn.betterttv.net/emote/5590b223b344e2c42a9e28e3/1x",
             "logo.icon.imageAlt": "EZ",
-            "logo.text.firstWord": "Twitch",
-            "logo.text.restWords": "Global Chat",
+            "logo.text": "{platform} Global Chat",
+            "logo.text.small": "{platform}GC",
+            "logo.ez.imageSrc": "https://cdn.betterttv.net/emote/5590b223b344e2c42a9e28e3/1x",
+            "logo.ez.imageAlt": "EZ",
+            "logo.feelsOkayMan.imageSrc": "https://cdn.betterttv.net/emote/5e978e20d023b362f638339d/1x",
+            "logo.feelsOkayMan.imageAlt": "FeelsOkayMan", 
             "rubricator.item.title.messages": "Сообщений: {amount}",
             "rubricator.item.title.firstMessage": "Первое сообщение: {date}",
             "rubricator.item.title.lastMessage": "Последнее сообщение: {date}",
@@ -123,7 +127,6 @@
             "plug.stats.header": "Статистика доступна только после авторизации",
             "plug.stats": "Войти через твич",
             "plug.limits.header": "Вы исчерпали количество запросов на следующие: {time}",
-            "plug.limits.notAuth": "Вы можете получить больше запросов <login>войдя через Твич</login> или <boosty>купить подписку</boosty> с безлимитным количеством запросов",
             "plug.limits": "Вы можете получить безлимитные запросы <boosty>купив подписку</boosty>",
             "plug.userNotFound.header": "Пользователь не найден",
             "plug.userNotFound": "Пользователь не найден. Это может быть по двум причинам: пользователь никогда не писал в чат или Вы неправильно ввели юзернейм (поиск чувствителен к регистру).",
@@ -220,6 +223,10 @@
             "notification.copied": "Ссылка скопирована",
             "notification.logout": "Вы вышли из аккаунта!",
             "notification.oneRequestLeft": "У Вас остался только один запрос по сообщениям пользователя!"
+        },
+        "tests": {
+            "simpleText": "Lorem ipsum dolor sit amet",
+            "textWithValues": "Lorem {name} dolor sit amet"
         }
     },
     "en-US": {
@@ -278,8 +285,12 @@
             "home.lastSearches": "Users last searches:",
             "logo.icon.imageSrc": "https://cdn.betterttv.net/emote/5590b223b344e2c42a9e28e3/1x",
             "logo.icon.imageAlt": "EZ",
-            "logo.text.firstWord": "Twitch",
-            "logo.text.restWords": "Global Chat",
+            "logo.text": "{platform} Global Chat",
+            "logo.text.small": "{platform}GC",
+            "logo.ez.imageSrc": "https://cdn.betterttv.net/emote/5590b223b344e2c42a9e28e3/1x",
+            "logo.ez.imageAlt": "EZ",
+            "logo.feelsOkayMan.imageSrc": "https://cdn.betterttv.net/emote/5803757f3d506fea7ee35267/1x",
+            "logo.feelsOkayMan.imageAlt": "FeelsOkayMan", 
             "rubricator.item.title.messages": "Messages: {amount}",
             "rubricator.item.title.firstMessage": "First message: {date}",
             "rubricator.item.title.lastMessage": "Last message: {date}",
@@ -346,8 +357,7 @@
             "plug.stats.header": "Stats are available only for authorized users",
             "plug.stats": "Login with Twitch",
             "plug.limits.header": "You are out of limits for the following: {time}",
-            "plug.limits.notAuth": "You can obtaine more requests through <login>Twitch login</login> or get access to unlimited requests by a <boosty>paid subscription</boosty>.",
-            "plug.limits": "You can obtaine unlimited requests by a <boosty>paid subscription</boosty>.",
+            "plug.limits": "You can obtaine access to unlimited requests by a <boosty>paid subscription</boosty>.",
             "plug.userNotFound.header": "User not found",
             "plug.userNotFound": "User you’re looking for not found. There are two reasons why: user never wrote to the chat or you typed the username wrongly (search is case-sensitive).",
             "plug.noChatActivity.header": "User has no chat activity",
@@ -443,6 +453,10 @@
             "notification.copied": "Copied to clipboard",
             "notification.logout": "You have been logged out!",
             "notification.oneRequestLeft": "Only one request for the user left!"
+        },
+        "tests": {
+            "simpleText": "Lorem ipsum dolor sit amet",
+            "textWithValues": "Lorem {name} dolor sit amet"
         }
     }
 }

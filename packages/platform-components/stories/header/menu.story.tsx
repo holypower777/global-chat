@@ -13,4 +13,4 @@ const StoryHeaderMenu = () => {
 
 storiesOf(STORY_GROUPS.header, module)
     .addDecorator(withKnobs)
-    .add('Header menu', StoryHeaderMenu);
+    .add('Header menu.DontTest', StoryHeaderMenu);

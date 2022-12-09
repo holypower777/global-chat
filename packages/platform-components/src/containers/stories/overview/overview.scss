@@ -1,0 +1,142 @@
+@import 'design/colors';
+@import 'design/transitions';
+@import 'design/mixins';
+@import 'design/breakpoints';
+
+.story-overview
+{
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+
+    padding: 40px 120px;
+
+    @include media-breakpoint-down($desktopBp)
+    {
+        gap: 32px;
+
+        padding: 24px 16px;
+    }
+
+    &__header
+    {
+        display: flex;
+        align-items: center;
+        gap: 52px;
+
+        .text
+        {
+            transition: $transitionColor01;
+
+            color: $Twitch;
+
+            &:hover
+            {
+                color: $Scorpion;
+            }
+        }
+    }
+
+    &__wrapper
+    {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    &__block
+    {
+        position: relative;
+
+        padding: 20px;
+
+        border: 1px solid $Silver;
+        border-radius: 8px;
+        background-color: $AthensGray;
+
+        &_clickable
+        {
+            cursor: pointer;
+        }
+    }
+
+    &__usage
+    {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+
+        @include media-breakpoint-down($desktopBp)
+        {
+            display: flex;
+            flex-direction: column;
+        }
+
+        &-list
+        {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+
+            padding: 20px;
+
+            background-color: $WildSand;
+
+            li
+            {
+                display: flex;
+                align-items: flex-start;
+                gap: 10px;
+            }
+
+            &_ok
+            {
+                border-top: 4px solid $SeaGreen;
+
+                .text:first-child
+                {
+                    color: $SeaGreen;
+                }
+
+                .icon
+                {
+                    stroke: $SeaGreen;
+                }
+            }
+
+            &_notOk
+            {
+                border-top: 4px solid $Bittersweet;
+
+                .text:first-child
+                {
+                    color: $Bittersweet;
+                }
+
+                .icon
+                {
+                    stroke: $Bittersweet;
+                }
+            }
+        }
+    }
+
+    &__import
+    {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+
+        .text
+        {
+            cursor: pointer;
+
+            color: $Twitch;
+
+            &:hover
+            {
+                color: $Scorpion;
+            }
+        }
+    }
+}

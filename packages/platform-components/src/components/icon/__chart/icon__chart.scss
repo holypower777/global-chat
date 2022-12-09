@@ -1,15 +1,5 @@
-@import 'design/design';
-
 .icon__chart
 {
-    width: 20px;
-    height: 20px;
-
     fill: none;
-    stroke: $Black;
-
-    svg
-    {
-        height: 100%;
-    }
+    stroke: #000000;
 }

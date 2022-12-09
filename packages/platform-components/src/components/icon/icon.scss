@@ -1,14 +1,52 @@
 .icon
 {
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
 
-    text-align: center;
+    transition: transform .2s ease-in-out, fill .2s ease-in-out, stroke .2s ease-in-out;
 
-    background: 50% no-repeat;
-    background-size: contain;
-
-    &_hidden
+    &_size
     {
-        display: none;
+        &_xs
+        {
+            width: 12px;
+            height: 12px;
+        }
+
+        &_s
+        {
+            width: 16px;
+            height: 16px;
+        }
+
+        &_m
+        {
+            width: 20px;
+            height: 20px;
+        }
+
+        &_l
+        {
+            width: 24px;
+            height: 24px;
+        }
+
+        &_xl
+        {
+            width: 28px;
+            height: 28px;
+        }
+    }
+
+    &_clickable
+    {
+        cursor: pointer;
+    }
+
+    svg
+    {
+        width: 100%;
+        height: 100%;
     }
 }

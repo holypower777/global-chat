@@ -4,20 +4,18 @@ import Icon, { SingleIconProps } from '../icon';
 
 import './icon__eye-slash.scss';
 
-const IconEyeSlash = (props: SingleIconProps) => {
-    return (
-        <Icon ico="eye-slash" {...props}>
-            <svg viewBox="0 0 15 16">
-                <path d="M9.0812 6.41876L5.9187 9.58126C5.51245 9.17501 5.26245 8.61876 5.26245 8.00001C5.26245 6.76251 6.26245 5.76251 7.49995 5.76251C8.1187 5.76251 8.67495 6.01251 9.0812 6.41876Z" />
-                <path d="M3.4999 11.6C2.8749 11.0625 2.30615 10.4 1.80615 9.61874C1.24365 8.73749 1.24365 7.25624 1.80615 6.37499C2.54365 5.21874 3.44365 4.31249 4.4499 3.70624" />
-                <path d="M11.1375 4.10624C10.0437 3.28124 8.79375 2.83124 7.5 2.83124" />
-                <path d="M5.26245 12.7062C5.97495 13.0062 6.7312 13.1687 7.49995 13.1687C9.7062 13.1687 11.7625 11.8687 13.1937 9.61874C13.7562 8.73749 13.7562 7.25624 13.1937 6.37499C12.9875 6.04999 12.7624 5.74374 12.5312 5.45624" />
-                <path d="M9.69365 8.4375C9.53115 9.31875 8.8124 10.0375 7.93115 10.2" />
-                <path d="M5.91875 9.58124L1.25 14.25" />
-                <path d="M13.75 1.75L9.0813 6.41875" />
-            </svg>
-        </Icon>
-    );
-};
+const IconEyeSlash = (props: SingleIconProps) => (
+    <Icon ico="eye-slash" {...props}>
+        <svg data-testid="icon__eye-slash" viewBox="0 0 12 12">
+            <path d="M7.26496 4.73502L4.73496 7.26502C4.40996 6.94002 4.20996 6.49502 4.20996 6.00002C4.20996 5.01002 5.00996 4.21002 5.99996 4.21002C6.49496 4.21002 6.93996 4.41002 7.26496 4.73502Z" strokeLinecap="round" strokeLinejoin="round" />
+            <path d="M2.79992 8.88C2.29992 8.45 1.84492 7.92 1.44492 7.295C0.994922 6.59 0.994922 5.405 1.44492 4.7C2.03492 3.775 2.75492 3.05 3.55992 2.565" strokeLinecap="round" strokeLinejoin="round" />
+            <path d="M8.91 2.88499C8.035 2.22499 7.035 1.86499 6 1.86499" strokeLinecap="round" strokeLinejoin="round" />
+            <path d="M4.20996 9.76503C4.77996 10.005 5.38496 10.135 5.99996 10.135C7.76496 10.135 9.40996 9.09503 10.555 7.29503C11.005 6.59003 11.005 5.40503 10.555 4.70003C10.39 4.44003 10.21 4.19503 10.025 3.96503" strokeLinecap="round" strokeLinejoin="round" />
+            <path d="M7.75497 6.34998C7.62497 7.05498 7.04997 7.62998 6.34497 7.75998" strokeLinecap="round" strokeLinejoin="round" />
+            <path d="M4.735 7.26501L1 11" strokeLinecap="round" strokeLinejoin="round" />
+            <path d="M10.9999 1L7.26489 4.735" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
+    </Icon>
+);
 
 export default IconEyeSlash;

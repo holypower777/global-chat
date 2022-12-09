@@ -1,15 +1,5 @@
-@import 'design/design';
-
 .icon__bell
 {
-    width: 24px;
-    height: 24px;
-
-    fill: $Black;
-    fill-rule: evenodd;
-
-    svg
-    {
-        height: 100%;
-    }
+    fill: none;
+    stroke: #000000;
 }
