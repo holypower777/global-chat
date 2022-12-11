@@ -1,105 +1,136 @@
-@import 'design/design';
+@import 'design/colors';
+@import 'design/typography';
+@import 'design/transitions';
+@import 'design/mixins';
 
 .button
 {
     position: relative;
 
     display: flex;
+    align-items: center;
+
+    height: fit-content;
+    margin: 0;
 
     cursor: pointer;
 
-    white-space: nowrap;
+    transition: $transitionBackgroundColor01;
 
     border: none;
 
-    font-weight: $fontWeightMedium;
-
-    align-items: center;
-
     &_size
     {
-        &_l
+        &_s
         {
-            height: 50px;
+            padding: 8px 32px;
+            gap: 8px;
 
-            padding: 0 60px;
+            font-size: $fontSizeS;
+            line-height: $lineHeightS;
+
+            .icon
+            {
+                width: 12px;
+                height: 12px;
+            }
         }
 
         &_m
         {
-            height: 40px;
-
-            padding: 10px 40px;
-        }
-
-        &_s
-        {
-            height: 28px;
-
-            padding: 5px 25px;
-
-            font-size: $fontSizeXS;
+            padding: 12px 48px;
+            gap: 12px;
 
             .icon
             {
-                width: 10px;
-                height: 10px;
+                width: 16px;
+                height: 16px;
             }
+        }
+
+        &_l
+        {
+            padding: 16px 64px;
+            gap: 16px;
+
+            .icon
+            {
+                width: 20px;
+                height: 20px;
+            }
+        }
+
+        &_m,
+        &_l
+        {
+            font-weight: $fontWeightMedium;
         }
     }
 
     &_theme
     {
-        transition: border-bottom-color 0.1s ease-in-out;
-
-        &_dark
+        &_light
         {
-            color: $WildSand;
+            background-color: $WildSand;
 
-            border-bottom: 1px solid $WildSand;
-
-            background-color: $Boulder;
-
-            &:hover:not(:disabled),
-            &:focus:not(:disabled)
+            &:hover
             {
-                border-bottom-color: $Twitch;
-            }
-
-            .icon
-            {
-                fill: $WildSand;
+                background-color: $Alto;
             }
         }
 
-        &_light
+        &_dark
         {
-            color: $Boulder;
+            color: $White;
+            background-color: $Boulder;
 
-            border-bottom: 1px solid $Mercury;
-
-            background-color: $WildSand;
-
-            &:hover:not(:disabled),
-            &:focus:not(:disabled)
+            &:hover
             {
-                border-bottom-color: $Boulder;
+                background-color: $Scorpion;
             }
+        }
 
-            .icon
+        &_twitch
+        {
+            color: $White;
+            background-color: $Twitch;
+
+            &:hover
             {
-                fill: $Boulder;
+                background-color: $DaisyBash;
             }
         }
     }
 
+    &_icon
+    {
+        &_s
+        {
+            padding: 8px;
+        }
+
+        &_m
+        {
+            padding: 12px;
+        }
+
+        &_l
+        {
+            padding: 16px;
+        }
+    }
+
+    &_block
+    {
+        width: 100%;
+        justify-content: center;
+    }
+
     &_disabled
     {
-        cursor: default;
+        cursor: not-allowed;
 
-        color: $Silver;
-
-        border-bottom: 1px solid $Mercury;
+        color: $Boulder;
 
         background-color: $AthensGray;
 
@@ -109,15 +140,80 @@
         }
     }
 
-    .spin
+    &_loading
     {
-        position: absolute;
+        &_light,
+        &_dark,
+        &_twitch
+        {
+            overflow: hidden;
 
-        left: 25px;
+            cursor: wait;
+
+            &:before
+            {
+                position: absolute;
+                top: 0;
+                left: 0;
+
+                width: 150%;
+                height: 100%;
+
+                content: '';
+                animation: button-loading 1s infinite linear;
+            }
+        }
+
+        &_light
+        {
+            &:before
+            {
+                background: repeating-linear-gradient(60deg, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0) 0.75rem, rgba($Alto, 0.7) 0.75rem, rgba($Alto, 0.7) 1.5rem);
+            }
+
+            &:hover
+            {
+                background-color: $WildSand;
+            }
+        }
+
+        &_dark
+        {
+            &:before
+            {
+                background: repeating-linear-gradient(60deg, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0) 0.75rem, rgba($Scorpion, 0.7) 0.75rem, rgba($Scorpion, 0.7) 1.5rem);
+            }
+
+            &:hover
+            {
+                background-color: $Boulder;
+            }
+        }
+
+        &_twitch
+        {
+            &:before
+            {
+                background: repeating-linear-gradient(60deg, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0) 0.75rem, rgba($DaisyBash, 0.7) 0.75rem, rgba($DaisyBash, 0.7) 1.5rem);
+            }
+
+            &:hover
+            {
+                background-color: $Twitch;
+            }
+        }
+    }
+}
+
+@keyframes button-loading
+{
+    from
+    {
+        transform: translateX(0);
     }
 
-    .icon
+    to
     {
-        margin-left: 10px;
+        transform: translateX(-1.75rem);
     }
 }

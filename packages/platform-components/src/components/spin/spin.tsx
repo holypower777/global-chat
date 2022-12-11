@@ -2,21 +2,31 @@ import b from 'b_';
 import cx from 'classnames';
 import React from 'react';
 
-import { SPIN_SIZES, SPIN_THEMES } from '../constants';
+import { MixProps } from '../../typings';
+import { SIZE, THEME_EXTENDED } from '../constants';
 
 import './spin.scss';
 
-interface SpinProps {
+export interface SpinProps extends MixProps {
+    /** Whether the spin is must be centered */
     center?: boolean;
+    /** Whether the spin is hidden */
     hidden?: boolean;
-    mix?: string;
-    size?: SPIN_SIZES;
-    theme?: SPIN_THEMES;
+    /** The size of the spin. */
+    size?: SIZE;
+    /** The weight of the spin. */
+    theme?: THEME_EXTENDED;
 }
 
-const Spin = ({ center, hidden, size = SPIN_SIZES.M, theme = SPIN_THEMES.TWITCH, mix }: SpinProps) => {
+const Spin = ({
+    center = false, 
+    hidden = false, 
+    size = SIZE.M, 
+    theme = THEME_EXTENDED.TWITCH, 
+    mix,
+}: SpinProps) => {
     return (
-        <div className={cx(b('spin', { center, hidden, size }), mix)}>
+        <div className={cx(b('spin', { center, hidden, size }), mix)} data-testid="spin">
             <div className={b('spin', 'cube', { first: true, theme })} />
             <div className={b('spin', 'cube', { second: true, theme })} />
             <div className={b('spin', 'cube', { fourth: true, theme })} />
@@ -25,7 +35,7 @@ const Spin = ({ center, hidden, size = SPIN_SIZES.M, theme = SPIN_THEMES.TWITCH,
     );
 };
 
-Spin.SIZE = SPIN_SIZES;
-Spin.THEME = SPIN_THEMES;
+Spin.SIZE = SIZE;
+Spin.THEME = THEME_EXTENDED;
 
 export default Spin;

@@ -4,16 +4,14 @@ import Icon, { SingleIconProps } from '../icon';
 
 import './icon__dots.scss';
 
-const IconDots = (props: SingleIconProps) => {
-    return (
-        <Icon ico="dots" {...props}>
-            <svg viewBox="0 0 20 20">
-                <path d="M8.33325 15.8333C8.33325 16.75 9.08325 17.5 9.99992 17.5C10.9166 17.5 11.6666 16.75 11.6666 15.8333C11.6666 14.9167 10.9166 14.1667 9.99992 14.1667C9.08325 14.1667 8.33325 14.9167 8.33325 15.8333Z" />
-                <path d="M8.33325 4.16665C8.33325 5.08331 9.08325 5.83331 9.99992 5.83331C10.9166 5.83331 11.6666 5.08331 11.6666 4.16665C11.6666 3.24998 10.9166 2.49998 9.99992 2.49998C9.08325 2.49998 8.33325 3.24998 8.33325 4.16665Z" />
-                <path d="M9.99992 11.6667C10.9166 11.6667 11.6666 10.9167 11.6666 10C11.6666 9.08335 10.9166 8.33335 9.99992 8.33335C9.08325 8.33335 8.33325 9.08335 8.33325 10" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-        </Icon>
-    );
-};
+const IconDots = (props: SingleIconProps) => (
+    <Icon ico="dots" {...props}>
+        <svg data-testid="icon__dots" viewBox="0 0 12 12">
+            <path d="M5 9.5C5 10.05 5.45 10.5 6 10.5C6.55 10.5 7 10.05 7 9.5C7 8.95 6.55 8.5 6 8.5C5.45 8.5 5 8.95 5 9.5Z" />
+            <path d="M5 2.5C5 3.05 5.45 3.5 6 3.5C6.55 3.5 7 3.05 7 2.5C7 1.95 6.55 1.5 6 1.5C5.45 1.5 5 1.95 5 2.5Z" />
+            <path d="M6 7C6.55 7 7 6.55 7 6C7 5.45 6.55 5 6 5C5.45 5 5 5.45 5 6" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
+    </Icon>
+);
 
 export default IconDots;

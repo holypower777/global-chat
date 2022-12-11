@@ -98,7 +98,7 @@ module.exports = {
             },
         },
         {
-            'files': '**/*.story.js',
+            'files': ['**/*.story.js', '**/*.stories.@(ts|tsx)'],
             'rules': {
                 'react/no-multi-comp': 0,
             },

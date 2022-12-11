@@ -1,17 +1,5 @@
-@import 'design/design';
-
 .icon__search
 {
-    width: 24px;
-    height: 24px;
-
-    transition: transform 0.2s ease-in-out, fill 0.2s ease-in-out;
-
-    fill: $Black;
-    fill-rule: evenodd;
-
-    svg
-    {
-        height: 100%;
-    }
+    fill: none;
+    stroke: #000000;
 }

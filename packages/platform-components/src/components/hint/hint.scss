@@ -1,0 +1,85 @@
+@import 'design/colors';
+@import 'design/shadows';
+
+.hint
+{
+    position: absolute;
+    z-index: 100;
+
+    display: flex;
+    align-items: center;
+
+    color: $White;
+    border-radius: 8px;
+    background-color: $Twitch;
+    box-shadow: $shadow300;
+
+    &__close
+    {
+        margin-left: auto;
+
+        svg
+        {
+            stroke: $White;
+        }
+    }
+
+    &_direction
+    {
+        &_right,
+        &_left,
+        &_bottom,
+        &_top
+        {
+            &:before
+            {
+                position: absolute;
+
+                content: '';
+
+                border-width: 8px;
+                border-style: solid;
+            }
+        }
+
+        &_right:before
+        {
+            top: 50%;
+            right: 100%;
+
+            margin-top: -8px;
+
+            border-color: rgba(0, 0, 0, 0) $Twitch rgba(0, 0, 0, 0) rgba(0, 0, 0, 0);
+        }
+
+        &_left:before
+        {
+            top: 50%;
+            left: 100%;
+
+            margin-top: -8px;
+
+            border-color: rgba(0, 0, 0, 0) rgba(0, 0, 0, 0) rgba(0, 0, 0, 0) $Twitch;
+        }
+
+        &_top:before
+        {
+            top: 100%;
+            right: 50%;
+
+            margin-left: -8px;
+
+            border-color: $Twitch rgba(0, 0, 0, 0) rgba(0, 0, 0, 0) rgba(0, 0, 0, 0);
+        }
+
+        &_bottom:before
+        {
+            right: 50%;
+            bottom: 100%;
+
+            margin-top: -8px;
+
+            border-color: rgba(0, 0, 0, 0) rgba(0, 0, 0, 0) $Twitch rgba(0, 0, 0, 0);
+        }
+    }
+}

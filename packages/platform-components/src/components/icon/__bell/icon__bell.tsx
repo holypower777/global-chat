@@ -4,15 +4,14 @@ import Icon, { SingleIconProps } from '../icon';
 
 import './icon__bell.scss';
 
-const IconBell = (props: SingleIconProps) => {
-    return (
-        <Icon ico="bell" {...props}>
-            <svg fill="none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path d="M12 6.44v3.33m8.59 5.4c.73 1.22.15 2.8-1.2 3.25a23.34 23.34 0 0 1-14.73 0c-1.44-.48-1.99-1.94-1.2-3.25l1.27-2.12c.35-.58.63-1.61.63-2.28v-2.1A6.66 6.66 0 0 1 12.02 2c3.66 0 6.66 3 6.66 6.66v2.1c0 .18.02.38.05.59" stroke="#000" strokeLinecap="round" strokeMiterlimit="10" />
-                <path d="M15.33 18.82c0 1.83-1.5 3.33-3.33 3.33-.91 0-1.75-.38-2.35-.98-.6-.6-.98-1.44-.98-2.35" stroke="#000" strokeMiterlimit="10" />
-            </svg>
-        </Icon>
-    );
-};
+const IconBell = (props: SingleIconProps) => (
+    <Icon ico="bell" {...props}>
+        <svg data-testid="icon__bell" viewBox="0 0 12 12">
+            <path d="M6 3.21997V4.88497" strokeLinecap="round" strokeMiterlimit="10" />
+            <path d="M10.295 7.585C10.66 8.195 10.37 8.985 9.69497 9.21C7.30497 10.005 4.71997 10.005 2.32997 9.21C1.60997 8.97 1.33497 8.24 1.72997 7.585L2.36497 6.525C2.53997 6.235 2.67997 5.72 2.67997 5.385V4.335C2.67997 2.49 4.16997 1 6.00997 1C7.83997 1 9.33997 2.5 9.33997 4.33V5.38C9.33997 5.47 9.34997 5.57 9.36497 5.675" strokeLinecap="round" strokeMiterlimit="10" />
+            <path d="M7.66496 9.40997C7.66496 10.325 6.91496 11.075 5.99996 11.075C5.54496 11.075 5.12496 10.885 4.82496 10.585C4.52496 10.285 4.33496 9.86497 4.33496 9.40997" strokeMiterlimit="10" />
+        </svg>
+    </Icon>
+);
 
 export default IconBell;

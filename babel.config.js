@@ -10,10 +10,10 @@ module.exports = function (api) {
                 targets,
             },
         ],
-        '@babel/preset-react',
+        ['@babel/preset-react', { runtime: 'automatic' }],
         '@babel/preset-typescript',
     ];
-    const plugins = ['@babel/plugin-transform-runtime'];
+    const plugins = ['@babel/plugin-transform-runtime', 'react-docgen'];
     const ignore = ['node_modules'];
 
     return {

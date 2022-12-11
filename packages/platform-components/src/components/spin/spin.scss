@@ -1,4 +1,4 @@
-@import 'design/design';
+@import 'design/colors';
 
 @mixin poisitionCenter($spinSize) { // stylelint-disable-line block-opening-brace-newline-before
     top: calc(50% - #{$spinSize / 2});
@@ -42,19 +42,19 @@ $sizeL: 40px;
                 }
             }
 
-            &_black
+            &_dark
             {
                 &:before
                 {
-                    background-color: $Black;
+                    background-color: $Boulder;
                 }
             }
 
-            &_white
+            &_light
             {
                 &:before
                 {
-                    background-color: $White;
+                    background-color: $WildSand;
                 }
             }
         }

@@ -1,9 +1,24 @@
-@import 'design/design';
+@import 'design/colors';
 
 .tabs
 {
-    display: flex;
+    position: relative;
 
-    width: 100%;
-    height: 30px;
+    display: flex;
+    gap: 40px;
+
+    width: fit-content;
+
+    &:after
+    {
+        position: absolute;
+        bottom: 0;
+
+        width: 100%;
+        height: 1px;
+
+        content: '';
+
+        background: $Silver;
+    }
 }

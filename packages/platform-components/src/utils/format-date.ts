@@ -23,14 +23,14 @@ export const formatDate = (d: Date | null, withMonthName = false) => {
     }
     
     const year = d.getFullYear();
-    const date = addBackwordZero(d.getDate());
+    const day = addBackwordZero(d.getDate());
     const month = addBackwordZero(d.getMonth() + 1);
 
     if (withMonthName) {
         const monthName: string = months[month];
-        return `${date} ${monthName} ${year}`;
+        return `${day} ${monthName} ${year}`;
     }
-    return `${date}.${month}.${year}`;
+    return `${day}.${month}.${year}`;
 };
 
 export const getHoursAndMinutes = (d: Date | null, withSeconds = false) => {

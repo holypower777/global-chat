@@ -1,4 +1,10 @@
-export enum TEXT_SIZE {
+export enum SIZE {
+    S = 's',
+    M = 'm',
+    L = 'l',
+}
+
+export enum SIZE_EXTENDED {
     XS = 'xs',
     S = 's',
     M = 'm',
@@ -6,20 +12,27 @@ export enum TEXT_SIZE {
     XL = 'xl',
 }
 
-export enum TEXT_WEIGHT {
-    S = 's',
-    M = 'm',
-    L = 'l',
+export enum THEME {
+    light = 'light',
+    dark = 'dark',
+}
+
+export enum THEME_EXTENDED {
+    LIGHT = 'light',
+    DARK = 'dark',
+    TWITCH = 'twitch',
+}
+
+export enum DIRECTIONS {
+    LEFT = 'left',
+    RIGHT = 'right',
+    BOTTOM = 'bottom',
+    TOP = 'top',
 }
 
 export enum TEXT_TAG {
     LI = 'li',
     SPAN = 'span',
-}
-
-export enum CHIP_TAG {
-    LI = 'li',
-    DIV = 'div',
 }
 
 export enum HEADER_TEXT_SIZE {
@@ -32,12 +45,6 @@ export enum SPIN_THEMES {
     TWITCH = 'twitch',
     BLACK = 'black',
     WHITE = 'white',
-}
-
-export enum SPIN_SIZES {
-    S = 's',
-    M = 'm',
-    L = 'l',
 }
 
 export enum TOOLTIP_DIRECTION {
@@ -104,15 +111,6 @@ export const LINKS = {
     NO_LIMITS: '/no-limits',
 };
 
-export enum PLUG_TYPE {
-    DONATION = 'donation plug',
-    STATS = 'stats plug',
-    LIMITS = 'out of limits',
-    USER_NOT_FOUND = 'user not found',
-    NO_CHAT_ACTIVITY = 'no chat activity',
-    INTERNAL_ERROR = 'internal error',
-}
-
 export enum DESK_CARD_TYPE {
     OVERALL = 'overall',
     LIVE_CHAT = 'live-chat',
@@ -126,17 +124,6 @@ export enum BACKEND_ERROR {
     USER_HIDDEN = 'backendError.userHidden',
     NO_LIMITS = 'backendError.noLimits',
     NO_CHAT_ACTIVITY = 'backendError.noChatActivity',
-}
-
-export enum SIZE {
-    S = 's',
-    M = 'm',
-    L = 'l',
-}
-
-export enum THEME {
-    light = 'light',
-    dark = 'dark',
 }
 
 export enum SEARCH_TYPE {
@@ -178,6 +165,16 @@ export enum SEARCH_PARAMS {
     ACCESS_TOKEN = 'at',
     REFRESH_TOKEN = 'rt',
     AUTH_ERROR = 'authError',
+}
+
+export enum STORIES {
+    pcCommon = 'Platform Components/Common',
+    pcChat = 'Platform Components/Chat',
+    pcIcons = 'Platform Components/Icons',
+    pcTypography = 'Platform Components/Typography',
+    pcPlugs = 'Platform Components/Plugs',
+    pcUIKit = 'Platform Components/UI-kit',
+    pcOverlays = 'Platform Components/Overlays',
 }
 
 export interface REPLY_MESSAGE {

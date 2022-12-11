@@ -1,19 +1,5 @@
-@import 'design/design';
-
 .icon__hierarchy
 {
-    width: 15px;
-    height: 15px;
-
-    transition: transform 0.2s ease-in-out, stroke 0.2s ease-in-out;
-
     fill: none;
-    stroke: $Black;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-
-    svg
-    {
-        height: 100%;
-    }
+    stroke: #000000;
 }

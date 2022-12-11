@@ -7,7 +7,7 @@ import { STORY_GROUPS } from '../constants';
 
 const StoryChatDate = () => (
     <ChatDate
-        date={new Date(date('date', new Date()))}
+        date={new Date(date('date', new Date('1995-12-17T03:24:00')))}
     />
 );
 

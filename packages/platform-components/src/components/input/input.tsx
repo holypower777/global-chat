@@ -2,81 +2,85 @@ import b from 'b_';
 import cx from 'classnames';
 import React, { ReactNode, useState } from 'react';
 
+import { MixProps, SimpleCallback } from '../../typings';
 import { SIZE } from '../constants';
-import Spin from '../spin/spin';
 
 import './input.scss';
 
-interface InputProps {
-    mix?: string;
-    icon?: JSX.Element;
-    placeholder?: string;
-    disabled?: boolean;
-    fullWidth?: boolean;
-    name?: string;
-    readOnly?: boolean;
-    required?: boolean;
-    type?: string;
-    value?: string;
-    isDropdownLoading?: boolean;
-    size?: SIZE;
-    handleChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
-    handleKeyDown?: (e: React.KeyboardEvent) => void;
-    handleKeyUp?: (e: React.KeyboardEvent) => void;
+export interface InputProps extends MixProps {
+    /** Whether the input must be in focus initially */
     autoFocus?: boolean;
-    settings?: ReactNode | Array<ReactNode>;
-    dropdownItems?: Array<ReactNode>;
+    /** Whether the input is disabled */
+    disabled?: boolean;
+    /** The input placeholder value */
+    placeholder?: string;
+    /** The prefix icon for the Input */
+    prefix?: ReactNode;
+    /** The size of the input box */
+    size?: SIZE;
+    /** The prefix icon for the Input */
+    suffix?: ReactNode;
+    /** The type of input, see: https://developer.mozilla.org/ru/docs/Web/HTML/Element/input#Form_%3Cinput%3E_types */
+    type?: 'email' | 'hidden' | 'number' | 'password' | 'search' | 'tel' | 'text';
+    /** The input content value */
+    value?: string;
+    /** Callback when user input */
+    handleChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+    /** The callback function that is triggered when Enter key is pressed. Note: input value must not be empty */
+    handleEnterPress?: SimpleCallback;
+    /** The input name value */
+    name?: string;
+    /** Whether the input is readOnly */
+    readonly?: boolean;
+    /** Whether the input is required */
+    required?: boolean;
 }
 
-const Input = (props: InputProps) => {
-    const {
-        mix,
-        icon = null,
-        placeholder,
-        disabled = false,
-        fullWidth = false,
-        name,
-        readOnly = false,
-        required = false,
-        type = 'string',
-        value,
-        isDropdownLoading = false,
-        size = SIZE.L,
-        handleChange,
-        handleKeyDown,
-        handleKeyUp,
-        autoFocus = false,
-        settings,
-        dropdownItems = [],
-    } = props;
+const Input = ({
+    autoFocus = false,
+    disabled = false,
+    mix,
+    placeholder,
+    prefix,
+    size = SIZE.M,
+    suffix,
+    type = 'text',
+    value,
+    handleChange,
+    handleEnterPress,
+    name,
+    readonly = false,
+    required = false,
+}: InputProps) => {
     const [focus, setFocus] = useState(false);
 
+    const handleKeyDown = (e: React.KeyboardEvent) => {
+        if (handleEnterPress && value && e.key === 'Enter') {
+            handleEnterPress();
+        }
+    };
+
     return (
-        <div className={cx(b('input', 'container', { full: fullWidth, size, focus, disabled }), mix)}>
-            {icon}
+        <div className={cx(b('input', { disabled, readonly, size, focus }), mix)} data-testid="input">
+            {prefix && <div className={b('input', 'prefix', { size, disabled })}>{prefix}</div>}
             <input
                 autoFocus={autoFocus}
-                className={b('input', 'field', { disabled })}
+                className={b('input', 'field', { size, disabled })}
+                data-testid={b('input', 'field')}
                 disabled={disabled}
                 name={name}
                 onBlur={() => (setFocus(false))}
                 onChange={handleChange}
                 onFocus={() => (setFocus(true))}
                 onKeyDown={handleKeyDown}
-                onKeyUp={handleKeyUp}
                 placeholder={placeholder}
-                readOnly={readOnly}
+                readOnly={readonly}
                 required={required}
                 spellCheck={false}
                 type={type}
                 value={value}
             />
-            {settings}
-            {(dropdownItems.length > 0 || isDropdownLoading) &&
-                <ul className={cx(b('input', 'dropdown'), 'custom-scroll')}>
-                    {isDropdownLoading && <Spin size={Spin.SIZE.S} />}
-                    {dropdownItems}
-                </ul>}
+            {suffix && <div className={b('input', 'suffix', { size, disabled })}>{suffix}</div>}
         </div>
     );
 };

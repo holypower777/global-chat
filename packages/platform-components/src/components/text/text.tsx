@@ -1,56 +1,64 @@
 import b from 'b_';
 import cx from 'classnames';
-import { MessageFormatPrimitiveValue, SimpleCallback } from 'platform-components/src/typings';
-import React, { CSSProperties, ReactNode } from 'react';
+import { MessageFormatPrimitiveValue, MixProps, OptionalChildrenProps, SimpleCallback } from 'platform-components/src/typings';
+import React, { CSSProperties } from 'react';
 import { useIntl } from 'react-intl';
 
-import { TEXT_SIZE, TEXT_TAG, TEXT_WEIGHT } from '../constants';
+import { SIZE, SIZE_EXTENDED, TEXT_TAG } from '../constants';
 
 import './text.scss';
 
-interface TextProps {
-    children?: ReactNode | Array<ReactNode>;
+export interface TextProps extends OptionalChildrenProps, MixProps {
+    /** Intl id. Note: children are NOT ommited when id is used */
     id?: string;
+    /** Intl values field. Note: doesn't work sans id */
     values?: Record<string, MessageFormatPrimitiveValue>;
+    /** The tag of the text content: either span (default) or li */
     tag?: TEXT_TAG;
-    size?: TEXT_SIZE;
-    weight?: TEXT_WEIGHT;
+    /** The size of the text. */
+    size?: SIZE_EXTENDED;
+    /** The weight of the text. */
+    weight?: SIZE;
+    /** Whether the text is must be uppercase */
     uppercase?: boolean;
+    /** Whether the text is must be centered */
     center?: boolean;
+    /** Whether the text is clipped if there is not enough space. */
     ellipsis?: boolean;
+    /** React style prop */
     style?: CSSProperties;
+    /** The title prop specifies extra information about an element. */
     title?: string;
+    /** Set the handler to handle click event */
     handleClick?: SimpleCallback;
-    mix?: string;
 }
 
 const Text = ({
     id,
     values = {},
-    size = TEXT_SIZE.M,
-    weight = TEXT_WEIGHT.S,
+    size = SIZE_EXTENDED.M,
+    weight = SIZE.S,
     tag = TEXT_TAG.SPAN,
     children,
-    uppercase,
+    uppercase = false,
     center = false,
-    ellipsis,
+    ellipsis = false,
     handleClick,
-    title,
     mix,
     ...props
 }: TextProps) => {
     const intl = useIntl();
     const className = cx(b('text', { ellipsis, size, weight, uppercase, center }), mix);
-    const content = id ? intl.formatMessage({ id }, values) : children;
+    const content = id ? intl.formatMessage({ id, defaultMessage: id }, values) : children;
 
     if (tag === TEXT_TAG.LI) {
-        return <li className={className} onClick={handleClick} title={title} {...props}>{content}{id ? children : null}</li>;
+        return <li className={className} data-testid="text" onClick={handleClick} {...props}>{content}{id ? children : null}</li>;
     }
-    return <span className={className} onClick={handleClick} title={title} {...props}>{content}{id ? children : null}</span>;
+    return <span className={className} data-testid="text" onClick={handleClick} {...props}>{content}{id ? children : null}</span>;
 };
 
 Text.TAG = TEXT_TAG;
-Text.SIZE = TEXT_SIZE;
-Text.WEIGHT = TEXT_WEIGHT;
+Text.SIZE = SIZE_EXTENDED;
+Text.WEIGHT = SIZE;
 
 export default Text;

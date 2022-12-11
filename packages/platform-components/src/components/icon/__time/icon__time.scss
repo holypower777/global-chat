@@ -1,15 +1,5 @@
-@import 'design/design';
-
 .icon__time
 {
-    width: 15px;
-    height: 15px;
-
-    fill: $Black;
-    fill-rule: evenodd;
-
-    svg
-    {
-        height: 100%;
-    }
+    fill: none;
+    stroke: #000000;
 }

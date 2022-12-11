@@ -1,99 +1,69 @@
 import b from 'b_';
-import { convertCommonUserToAPI, TwitchUser, UserCommonAPI } from 'platform-apis/types';
-import React, { Dispatch, SetStateAction } from 'react';
+import React from 'react';
 import { useIntl } from 'react-intl';
 
-import { IconArrow, IconCog, IconStar, IconTwitch, IconTwitchtracker } from '../../icon/icon';
+import { SimpleCallback } from '../../../typings';
+import { IconCog, IconStar, IconTwitch, IconTwitchtracker } from '../../icon/icon';
 import Text from '../../text/text';
 
 import './user-card__header.scss';
 
 interface UserCardHeaderProps {
-    isContentExpanded: boolean;
-    isSettingsExpanded: boolean;
-    isBroadcaster: boolean;
-    setIsExpanded: Dispatch<SetStateAction<boolean>>;
-    setIsSettingsExpanded: Dispatch<SetStateAction<boolean>>;
-    isAuth: boolean;
+    displayName: string;
     isFavorite: boolean;
-    handleFavorite?: (user: UserCommonAPI) => void;
-    twitchUser: TwitchUser;
+    isBroadcaster: boolean;
+    handleStarClick: SimpleCallback;
+    handleToggle: SimpleCallback;
 }
 
-const UserCardHeader = ({ 
-    isContentExpanded, 
-    isSettingsExpanded, 
-    isBroadcaster,
-    isAuth,
+const UserCardHeader = ({
+    displayName,
     isFavorite,
-    handleFavorite,
-    setIsExpanded, 
-    setIsSettingsExpanded, 
-    twitchUser,
+    isBroadcaster,
+    handleStarClick,
+    handleToggle,
 }: UserCardHeaderProps) => {
     const intl = useIntl();
 
-    const arrowDirection = isContentExpanded ? IconArrow.DIREACTIONS.UP : IconArrow.DIREACTIONS.DOWN;
-    const handleHeaderClick = () => {
-        if (isContentExpanded || isSettingsExpanded) {
-            setIsExpanded(false);
-            setIsSettingsExpanded(false);
-            return;
-        }
-
-        setIsExpanded(!isContentExpanded);
-    };
-
     return (
-        <div className={b('user-card', 'header')} onClick={handleHeaderClick}>
-            <Text size={Text.SIZE.XL}>{twitchUser.displayName}</Text>
-            <div className={b('user-card', 'header_icons')}>
-                <IconArrow
-                    direction={arrowDirection}
-                    handleClick={(e) => {
+        <div
+            className={b('user-card', 'header')}
+            data-testid={b('user-card', 'header')}
+            onClick={handleToggle}
+        >
+            <Text size={Text.SIZE.XL}>{displayName}</Text>
+            <div className={b('user-card', 'icons')} data-testid={b('user-card', 'icons')}>
+                <IconStar
+                    clickable
+                    filled={isFavorite}
+                    handleClick={(e: React.MouseEvent<HTMLElement>) => {
                         e.stopPropagation();
-                        setIsExpanded(!isContentExpanded);
+                        handleStarClick();
                     }}
                 />
-                {isAuth && <IconStar 
-                    filled={isFavorite}
-                    handleClick={(e) => {
-                        e.stopPropagation();
-                        if (handleFavorite) {
-                            handleFavorite(convertCommonUserToAPI({
-                                userId: twitchUser.userId,
-                                displayName: twitchUser.displayName,
-                                profileImageUrl: twitchUser.profileImageUrl,
-                            }));
-                        }
-                    }}
-                />}
                 <IconCog
-                    handleClick={(e) => {
-                        e.stopPropagation();
-                        setIsSettingsExpanded(!isSettingsExpanded);
-                    }}
+                    clickable
                     title={intl.formatMessage({ id: 'chat.userCard.settings.title' })}
                 />
                 {isBroadcaster && <a
-                    href={`https://twitchtracker.com/${twitchUser.displayName}`}
+                    href={`https://twitchtracker.com/${displayName}`}
                     onClick={(e) => (e.stopPropagation())}
                     target="_blank"
                     title={intl.formatMessage({ id: 'chat.userCard.twitchtracker.title' })}
                 >
-                    <IconTwitchtracker />
+                    <IconTwitchtracker clickable />
                 </a>}
                 <a
-                    href={`https://www.twitch.tv/${twitchUser.displayName}`}
+                    href={`https://www.twitch.tv/${displayName}`}
                     onClick={(e) => (e.stopPropagation())}
                     target="_blank"
                     title={intl.formatMessage({ id: 'chat.userCard.twitch.title' })}
                 >
-                    <IconTwitch />
+                    <IconTwitch clickable />
                 </a>
             </div>
         </div>
     );
 };
 
-export default React.memo(UserCardHeader);
+export default UserCardHeader;

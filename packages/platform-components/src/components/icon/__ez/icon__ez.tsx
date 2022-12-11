@@ -1,21 +1,19 @@
 import React from 'react';
-import { useIntl } from 'react-intl';
 
 import Icon, { SingleIconProps } from '../icon';
 
-import './icon__ez.scss';
-
-const IconEz = (props: SingleIconProps) => {
-    const intl = useIntl();
-
-    return (
-        <Icon ico="ez" {...props}>
-            <img 
-                alt={intl.formatMessage({ id: 'logo.icon.imageAlt' })} 
-                src={intl.formatMessage({ id: 'logo.icon.imageSrc' })}
-            />
-        </Icon>
-    );
-};
+const IconEz = (props: SingleIconProps) => (
+    <Icon ico="ez" {...props}>
+        <svg data-testid="icon__ez" viewBox="0 0 12 12">
+            <rect fill="url(#ez)" height="12" width="12" />
+            <defs>
+                <pattern height="1" id="ez" patternContentUnits="objectBoundingBox" width="1">
+                    <use transform="scale(0.0357143)" xlinkHref="#image0_787_2788" />
+                </pattern>
+                <image height="28" id="image0_787_2788" width="28" xlinkHref="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAYAAAByDd+UAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyBpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNSBXaW5kb3dzIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOjRDOTUzNjlFMUUwOTExRTU4M0Q5OTBENDFBRENEMDVBIiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOjRDOTUzNjlGMUUwOTExRTU4M0Q5OTBENDFBRENEMDVBIj4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6NEM5NTM2OUMxRTA5MTFFNTgzRDk5MEQ0MUFEQ0QwNUEiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6NEM5NTM2OUQxRTA5MTFFNTgzRDk5MEQ0MUFEQ0QwNUEiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz6Cm5b1AAAHdUlEQVR42rxWW2wcVxn+zpwzMzt7t7fry/qSS21K0jQOpIUkSvrQVi30FuAF8RJVVYVKKZUQ8MADEJCohOCRIlWCFwg8tAhFaREQIYqgVCjkXudux47txLF3vRd7d3Zu5wz/maRVURKkvuTYZz17PPN////9///9w+I4xt1cBu7yuuuA4tdv/+FWLwyOixdOY3l5CVY6/eRauPhkNuMMet1gGQH/W7vh/TGX73X7SyNYql+BaVn3VdeWxk2DoZyrTK40WrOff/xpKKXAGAPnHK16C4cP/RmCJTGyZOt86ivOBaDYaFPO/NwQ3WeQ8eEjAiwTCMwXDSN3NOimfthqL0vPvv5Kx2rutjLI6mcXO0vXbWv4OzJSB8BiApVJEDKKbkQYtGQCpBDATNsJ4NVrc0NX2kcOGYPNCYObMCKBMBSQsaLoI5jltQeDtdW35twA6UEDRkxPxQIxZUhk/IFgdfZXZ6dPzJaK/e/WalX0FvqwdHk+sZ0Aggx1/Aay/QUoGfNzC/98PczVJ3hswWtGCH1NM0VOH6E00GEKtklOxgairgUmFV0rsiMJ0gAX0pqvTr5cv1Z9NyY6NWD0QYSaUtO0cWbyMoqrRayK6pd8Z/kpYRoIOhFREsEpOQQmiOoIuokcxQjIQLumEPkxMj0anOIzdFqI9S5DoGpPEK3fzovhA5Si6zqXNwDpwtDu0/fOUmdgxZ7/lj1GBsl77lAkRLPOhQwjuC0FzwsQR4yYiMBNE9LzYXKListK/hd6EUVDzlms6PLqT8OO+9VGY/A507Te0zgiCAJEoeSXpi7+eGZ5ap/XbQ1miync/2gF2WEHgR9Bugxuw4cRCDiiBEuYKA+W4Ssf1dp1NOY6CeWGiGCnTCi6r9100ddXRGC542em3nujqIa+53ndE/wzD38W9Va1r4bzB4Y+nSuNPdSPwJU4dXgO4SpxoGy0rvko8j5sqWzH9TN1TP7rIoqsjKHsCM4dm6Y9g8WpKhoLHaTjXnTnJS6fmIcjiwibwIVTF/Knj5/aO3n6ZJn95BevYX5l8rsNZ/LVdlsik3NgOQz+isR/3ppGc6aLwYEByh/lrN1Fs96Arul2pw3f9ykTlDf62f/9H+H48eM4efIEOm4naYfV1VXIm22hl2U5bwou2MhKNPNNcIl0nlOlRUnSeV5hz777cPR3VzBFUXT9Lj1yq+5qsEJvEZ979nHYlo1Dbx+8g8YwPP/C137Dtz489nKTzz6jm52BfWgGkr5xEoI0MH1iESqUtzVjpWzs2juBS40jQLZL1emhWetQ9aoPreXzPQvPfvErX9+5c/fv2b4fPHVFFlqjcWzcVmaFxdCY8XD+HwtYnmsk+dXl72Qd5IoZbNxVwcDmFCKqWskDZNJ5BLUI9WUXqsO9ohw5HK4Y3xjbvGVu3bpRqlKrPaqb8dYppZLPMGDoWZ/Cng2b0KUWCNdihB0DTMRIUQpELk4USPoWAVFryS61koFcyUaI9F8+Nb7rC7OTM2QtSrZQulk/oPF/KKfSIJUg8UCkYgRxAIPEwHAkqYyEIKOMk8KELOlhM0UtUTLhuyEsm9ixFIQIH5lePPvCJ7Y98EtJAtKJW2TDFHcYUgLWlS6G3/eRvuRDkqRp58wU2creeEBpNSPH6BeMnFIihF2ka1vROTmXDnKBPfuqiuJKSmRgcwfGub9ehSlITfhH08cg2xE2z0k86MbYUWNYN+mCVRVCyrWkexUNDh0hYxLMIGSmS85I9FWHbBhS+wzXdMv1lYXdW4bHsWloI/jiVH0/SIpGNt2DmCZBrG7WKellaTlCgTS37kYYIoRyK0CqEcKgZlYuh6T8Mi1zMUdETiryOlZENdGsXANWlWFgvo1MIxg3nf7fuo1GoAcfTh4+D6/tY/veDUjlOPwwJB01cKliQlyNMZzmWAtdCCqWSoejX9CYYh4IC11OIiEkjUnSXxrcOlgzipEOqXDiEE6c8url8juykA0MdaNVYtz8ky9lMf7QEMZ3V5AuCT1yEdZD9M55GG4ZcOjAlHoyEOtKUxmD0yw0iJaQaWM0E2N9zpJ7FF037MokNmx9oDS8LsFgt5OP3D1ZjN7fj8qmXvSMpCGyegjT+KFx5awxpDwPhVUGK4xhEaAldeHEoLugiTVsBpuS60qz0chvfG34kzv2R4GXAN0W8KPNn86laN6lMLC+F4WRPHppgjgFqhgSBEmAXINFeis6ohiFhcblDkSz/LrvhT/btm37VMwzuHdsDOl0WtcR7qh92hd3zU12da6enOqpn+3J4NGXJpAdJNopV5Q6amgL3brC9LElvP/3S4g848uFfO5e5uTfTGd6/tQ/um4Btoz/D+DtA5eUeOHwBLhT0ySENC85Th2awrWpZfikRjdXsV7rPnbw4BuPlfsGZ7ZOTDxdKOTPfuz3Uh331j3rkS9QJZK8MY/j6DEfs51eekswbwq2kfSkXgODwxd27njkeWFaUyFVv/jYL7KUh/NVE9UjktRHYpHmZjNMwRjLwqrkEV04h7BWS+rRNE3vxZdeeW612f13RGB6/VeAAQDowpCWEzLhRQAAAABJRU5ErkJggg==" />
+            </defs>
+        </svg>
+    </Icon>
+);
 
 export default IconEz;

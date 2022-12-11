@@ -4,14 +4,12 @@ import Icon, { SingleIconProps } from '../icon';
 
 import './icon__cross.scss';
 
-const IconCross = (props: SingleIconProps) => {
-    return (
-        <Icon ico="cross" {...props}>
-            <svg viewBox="0 0 14 14">
-                <path d="M13 13L7 7M13 1L1 13L13 1ZM1.00004 1L4 4L1.00004 1Z" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-        </Icon>
-    );
-};
+const IconCross = (props: SingleIconProps) => (
+    <Icon ico="cross" {...props}>
+        <svg data-testid="icon__cross" viewBox="0 0 12 12">
+            <path d="M10 10L6 6M10 2L2 10L10 2ZM2.00003 2L4 4L2.00003 2Z" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
+    </Icon>
+);
 
 export default IconCross;

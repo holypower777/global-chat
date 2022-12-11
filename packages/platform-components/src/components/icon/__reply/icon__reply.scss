@@ -1,16 +1,5 @@
-@import 'design/design';
-
 .icon__reply
 {
-    width: 14px;
-    height: 9px;
-
-    stroke: $Black;
-
-    transition: stroke 0.2s ease-in-out;
-
-    svg
-    {
-        height: 100%;
-    }
+    fill: none;
+    stroke: #000000;
 }

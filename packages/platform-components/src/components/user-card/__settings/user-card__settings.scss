@@ -5,35 +5,20 @@
     &__settings
     {
         display: flex;
-
         flex-direction: column;
-
-        margin-top: 10px;
-
         gap: 5px;
+    }
 
-        color: $Black;
+    &__tuning
+    {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 10px;
+    }
 
-        &_title
-        {
-            color: $Boulder;
-        }
-
-        &-option
-        {
-            display: flex;
-
-            justify-content: space-between;
-            align-items: center;
-
-            gap: 10px;
-        }
-
-        select
-        {
-            border: none;
-
-            background-color: none;
-        }
+    &__title
+    {
+        color: $Boulder;
     }
 }

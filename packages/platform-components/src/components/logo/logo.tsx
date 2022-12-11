@@ -1,35 +1,68 @@
 import b from 'b_';
-import React from 'react';
-import { useIntl } from 'react-intl';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { animated, config, useTransition } from 'react-spring';
 
-import { HEADER_TEXT_SIZE, TEXT_WEIGHT } from '../constants';
+import { LINKS } from '../constants';
 import { H1 } from '../header-text/header-text';
-import { IconEz } from '../icon/icon';
+import Icon, { IconEz, IconFeelsOkayMan } from '../icon/icon';
 
 import './logo.scss';
 
 interface LogoProps {
-    alwaysFull?: boolean;
-    size?: HEADER_TEXT_SIZE;
+    /** Whether the logo is always full size */
+    full?: boolean;
 }
 
-const Logo = ({ alwaysFull = false, size = HEADER_TEXT_SIZE.L }: LogoProps) => {
-    const intl = useIntl();
+const Logo = ({ full = false }: LogoProps) => {
+    const [toggle, setToggle] = useState(false);
+    const transitions = useTransition(toggle, {
+        from: { position: 'absolute', opacity: 0 },
+        enter: { opacity: 1 },
+        leave: { opacity: 0 },
+        reverse: toggle,
+        delay: 400,
+        config: config.molasses,
+        onRest: () => setToggle(!toggle),
+    });
 
     return (
-        <Link className={b('logo', 'link')} to="/">
-            <div className={b('logo', { adaptive: !alwaysFull, size })}>
-                <H1 mix={b('logo', 'text')} size={size} weight={TEXT_WEIGHT.L}>
-                    <span className={b('logo', 'text-first')}>{intl.formatMessage({ id: 'logo.text.firstWord' })} </span>
-                    {intl.formatMessage({ id: 'logo.text.restWords' })}
-                </H1>
-                <IconEz />
+        <Link className={b('logo', { adaptive: !full })} data-testid="logo" to={LINKS.HOME}>
+            <H1
+                id="logo.text"
+                mix={b('logo', 'text', { desktop: true })}
+                values={{ platform: <span className={b('logo', 'text', { twitch: true })}>Twitch</span> }}
+            />
+            {!full && <H1
+                id="logo.text.small"
+                mix={b('logo', 'text', { mobile: true })}
+                values={{ platform: <span className={b('logo', 'text', { twitch: true })}>T</span> }}
+            />}
+            <div className={b('logo', 'smile')}>
+                {transitions(({ opacity }, item) =>
+                    item ? (
+                        <animated.div
+                            style={{
+                                position: 'absolute',
+                                opacity: opacity.to({ range: [1.0, 0.0], output: [1, 0] }),
+                            }}
+                        >
+                            <IconEz size={Icon.SIZE.XL} />
+                        </animated.div>
+                    ) : (
+                        <animated.div
+                            style={{
+                                position: 'absolute',
+                                opacity: opacity.to({ range: [1.0, 0.0], output: [1, 0] }),
+                            }}
+                        >
+                            <IconFeelsOkayMan size={Icon.SIZE.XL} />
+                        </animated.div>
+                    )
+                )}
             </div>
         </Link>
     );
 };
-
-Logo.SIZE = HEADER_TEXT_SIZE;
 
 export default Logo;

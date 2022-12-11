@@ -18,4 +18,4 @@ const StorySpin = () => {
 
 storiesOf(STORY_GROUPS.common, module)
     .addDecorator(withKnobs)
-    .add('Spin', StorySpin);
+    .add('Spin.DontTest', StorySpin);

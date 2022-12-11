@@ -1,66 +1,241 @@
-@import 'design/design';
+@import 'design/colors';
 
-.switch
+.switcher
 {
-    visibility: hidden;
+    position: relative;
 
-    width: 0;
-    height: 0;
+    display: block;
 
-    &__label
+    cursor: pointer;
+
+    transition: background .2s ease-in-out 50ms;
+
+    border-radius: 50px;
+    background: $Boulder;
+
+    &_size
     {
-        position: relative;
-
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-
-        width: 30px;
-        height: 16px;
-
-        cursor: pointer;
-
-        transition: background-color .2s;
-
-        border-radius: 100px;
-
-        background-color: $Boulder;
-
-        &_on
+        &_s
         {
-            background-color: $ChateauGreen;
+            width: 30px;
+            height: 16px;
+
+            .switcher__button
+            {
+                width: 12px;
+                height: 12px;
+
+                &:before
+                {
+                    top: calc(50% - 4px);
+                    left: calc(50% - 0.5px);
+
+                    width: 1px;
+                    height: 8px;
+                }
+
+                &:after
+                {
+                    top: calc(50% - 0.5px);
+                    left: calc(50% - 4px);
+
+                    width: 8px;
+                    height: 1px;
+                }
+            }
         }
 
-        &_disabled
+        &_m
         {
-            background-color: $WildSand;
+            width: 36px;
+            height: 20px;
+
+            .switcher__button
+            {
+                width: 16px;
+                height: 16px;
+
+                &:before
+                {
+                    top: calc(50% - 6px);
+                    left: calc(50% - 0.5px);
+
+                    width: 1px;
+                    height: 12px;
+                }
+
+                &:after
+                {
+                    top: calc(50% - 0.5px);
+                    left: calc(50% - 6px);
+
+                    width: 12px;
+                    height: 1px;
+                }
+            }
         }
+
+        &_l
+        {
+            width: 48px;
+            height: 24px;
+
+            .switcher__button
+            {
+                width: 20px;
+                height: 20px;
+
+                &:before
+                {
+                    top: calc(50% - 7.5px);
+                    left: calc(50% - 1px);
+
+                    width: 1px;
+                    height: 14px;
+                }
+
+                &:after
+                {
+                    top: calc(50% - 1px);
+                    left: calc(50% - 7.5px);
+
+                    width: 14px;
+                    height: 1px;
+                }
+            }
+        }
+    }
+
+    &_checked
+    {
+        &_s,
+        &_m,
+        &_l
+        {
+            transform: rotate(360deg);
+
+            background: $ChateauGreen;
+        }
+
+        &_s
+        {
+            .switcher__button
+            {
+                left: 16px;
+
+                &:before
+                {
+                    top: calc(55% - 4px);
+                    left: calc(60% - 0.5px);
+
+                    height: 7px;
+                }
+
+                &:after
+                {
+                    top: calc(95% - 4.5px);
+                    left: calc(22.5% - 0.5px);
+
+                    width: 3.5px;
+                }
+            }
+        }
+
+        &_m
+        {
+            .switcher__button
+            {
+                left: 18px;
+
+                &:before
+                {
+                    top: calc(55% - 5px);
+                    left: calc(60% - 1px);
+
+                    height: 10px;
+                }
+
+                &:after
+                {
+                    top: calc(95% - 5px);
+                    left: calc(22.5% - 1px);
+
+                    width: 4px;
+                }
+            }
+        }
+
+        &_l
+        {
+            .switcher__button
+            {
+                left: 26px;
+
+                &:before
+                {
+                    top: calc(55% - 6px);
+                    left: calc(60% - 1px);
+
+                    height: 11px;
+                }
+
+                &:after
+                {
+                    top: calc(95% - 7px);
+                    left: calc(22.5% - 0.5px);
+
+                    width: 5px;
+                }
+            }
+        }
+    }
+
+    &_disabled
+    {
+        cursor: not-allowed;
+
+        background: $AthensGray;
+
+        .switcher__button
+        {
+            background: $Boulder;
+
+            &:before,
+            &:after
+            {
+                background: $AthensGray;
+            }
+        }
+    }
+
+    &__input
+    {
+        display: none;
     }
 
     &__button
     {
         position: absolute;
-
         top: 2px;
         left: 2px;
 
-        width: 12px;
-        height: 12px;
+        transition: left .2s ease-in-out 50ms, transform .2s ease-in-out 50ms;
 
-        content: '';
+        border-radius: 50%;
+        background: $White;
 
-        transition: transform .2s ease-in-out, left .2s ease-in-out;
+        &:before,
+        &:after
+        {
+            position: absolute;
 
-        border-radius: 45px;
+            content: '';
 
-        background-color: $White;
-        box-shadow: 0 0 2px 0 rgba(10, 10, 10, 0.29);
-    }
+            transition: .2s all ease-in-out 50ms;
+            transform: rotate(45deg);
 
-    &:checked ~ &__button
-    {
-        left: calc(100% - 2px);
-
-        transform: translateX(-100%);
+            border-radius: 5px;
+            background: $Boulder;
+        }
     }
 }

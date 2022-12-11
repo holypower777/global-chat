@@ -1,0 +1,32 @@
+.spacer
+{
+    display: flex;
+    flex-wrap: wrap;
+
+    &_direction
+    {
+        &_column
+        {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+    }
+
+    &_gap
+    {
+        &_s
+        {
+            gap: 12px;
+        }
+
+        &_m
+        {
+            gap: 24px;
+        }
+
+        &_l
+        {
+            gap: 36px;
+        }
+    }
+}

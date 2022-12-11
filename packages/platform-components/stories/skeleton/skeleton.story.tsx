@@ -13,4 +13,4 @@ const StorySkeleton = () => (
 
 storiesOf(STORY_GROUPS.skeleton, module)
     .addDecorator(withKnobs)
-    .add('Skeleton', StorySkeleton);
+    .add('Skeleton.DontTest', StorySkeleton);

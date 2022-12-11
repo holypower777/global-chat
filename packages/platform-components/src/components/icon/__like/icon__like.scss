@@ -1,15 +1,5 @@
-@import 'design/design';
-
 .icon__like
 {
-    width: 12px;
-    height: 12px;
-
     fill: none;
-    stroke: $Black;
-
-    svg
-    {
-        height: 100%;
-    }
+    stroke: #000000;
 }

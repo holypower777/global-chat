@@ -18,13 +18,13 @@ const UserCardSettings = ({ updateSettings }: UserCardSettingsProps) => {
     const [sortValue, setSortValue] = useState(getLocalStorageValue(SETTINGS.SORT_BY_DATE, SORT_ORDER.DESC));
     const [showBadges, setShowBadges] = useState(getLocalStorageValue(SETTINGS.SHOW_BADGES, true));
     const [showMessageTime, setShowMessageTime] = useState(getLocalStorageValue(SETTINGS.SHOW_MESSAGE_TIME, true));
-    const mix = b('user-card', 'settings_title');
+    const titleMix = b('user-card', 'title');    
 
     return (
-        <div className={b('user-card', 'settings')}>
+        <div className={b('user-card', 'settings')} data-testid={b('user-card', 'settings')}>
             <Text center id="chat.userCard.settings" />
-            <div className={b('user-card', 'settings-option')}>
-                <Text id="chat.userCard.settings.sort" mix={mix} />
+            <div className={b('user-card', 'tuning')}>
+                <Text id="chat.userCard.settings.sort" mix={titleMix} />
                 <select
                     onChange={(e) => {
                         updateSettings(SETTINGS.SORT_BY_DATE, e.target.value);
@@ -36,20 +36,24 @@ const UserCardSettings = ({ updateSettings }: UserCardSettingsProps) => {
                     <option value="asc">{intl.formatMessage({ id: 'chat.userCard.settings.sort.asc' })}</option>
                 </select>
             </div>
-            <div className={b('user-card', 'settings-option')}>
-                <Text id="chat.userCard.settings.showBadges" mix={mix} />
-                <Switcher handleToggle={() => {
-                    updateSettings(SETTINGS.SHOW_BADGES, !showBadges);
-                    setShowBadges(!showBadges);
-                }} isOn={showBadges}
+            <div className={b('user-card', 'tuning')}>
+                <Text id="chat.userCard.settings.showBadges" mix={titleMix} />
+                <Switcher
+                    checked={showBadges}
+                    handleToggle={() => {
+                        updateSettings(SETTINGS.SHOW_BADGES, !showBadges);
+                        setShowBadges(!showBadges);
+                    }}
                 />
             </div>
-            <div className={b('user-card', 'settings-option')}>
-                <Text id="chat.userCard.settings.showMessageTime" mix={mix} />
-                <Switcher handleToggle={() => {
-                    updateSettings(SETTINGS.SHOW_MESSAGE_TIME, !showMessageTime);
-                    setShowMessageTime(!showMessageTime);
-                }} isOn={showMessageTime}
+            <div className={b('user-card', 'tuning')}>
+                <Text id="chat.userCard.settings.showMessageTime" mix={titleMix} />
+                <Switcher 
+                    checked={showMessageTime}
+                    handleToggle={() => {
+                        updateSettings(SETTINGS.SHOW_MESSAGE_TIME, !showMessageTime);
+                        setShowMessageTime(!showMessageTime);
+                    }}
                 />
             </div>
         </div>

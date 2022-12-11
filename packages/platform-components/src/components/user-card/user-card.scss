@@ -1,24 +1,17 @@
-@import 'design/design';
+@import 'design/colors';
 
 .user-card
 {
     overflow: hidden;
 
-    max-width: 450px;
-    height: 45px;
-
+    width: calc(100% - 20px);
+    height: 44px;
     padding: 0 10px;
 
     background: $WildSand;
 
-    &_expanded
+    &_open
     {
-        height: auto;
         padding-bottom: 10px;
-    }
-
-    @include media-breakpoint-down($tabletBp)
-    {
-        max-width: 100%;
     }
 }

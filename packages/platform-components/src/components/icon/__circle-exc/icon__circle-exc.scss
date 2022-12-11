@@ -1,16 +1,5 @@
-@import 'design/design';
-
 .icon__circle-exc
 {
-    width: 24px;
-    height: 24px;
-
     fill: none;
-    fill-rule: evenodd;
-    clip-rule: evenodd;
-
-    svg
-    {
-        height: 100%;
-    }
+    stroke: #000000;
 }
