@@ -18,7 +18,7 @@ export const Overview: ComponentStory<typeof SegmentedToggle> = (args) => {
 
     return (
         <StoryOverview
-            componentName="SegmentedToggle"
+            componentName="Segmented-Toggle"
             notOkList={[
                 'Don’t use it to distribute content within a page. Use <Tabs/> instead.',
                 'Don’t use it to select multiple options at once.',

@@ -7,6 +7,7 @@
   "license": "UNLICENSED",
   "private": true,
   "scripts": {
+    "start:app": "yarn --cwd packages/app start",
     "clean-dist": "rm -rf .storybook/dist && mkdir .storybook/dist",
     "lint:js": "eslint --ext .js,.jsx,.ts,.tsx packages",
     "lint:js:fix": "yarn run lint:js --fix",
