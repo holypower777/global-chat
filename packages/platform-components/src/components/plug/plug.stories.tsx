@@ -1,18 +1,17 @@
-import { ComponentMeta, ComponentStory } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react';
 import React from 'react';
 
 import { disableControls } from '../../../stories/__helpers__';
 import { Spacer, StoryOverview } from '../../containers/stories';
-import { STORIES } from '../constants';
 
 import * as Plugs from './plug';
 
 export default {
-    title: `${STORIES.pcPlugs}/Plug`,
+    title: 'Platform Components/Plugs/Plug',
     component: Plugs.default,
-} as ComponentMeta<typeof Plugs.default>;
+} as Meta<typeof Plugs.default>;
 
-export const Overview: ComponentStory<typeof Plugs.default> = (args) => (
+export const Overview: StoryFn<typeof Plugs.default> = (args) => (
     <StoryOverview
         componentName="Plug"
     >
@@ -20,7 +19,7 @@ export const Overview: ComponentStory<typeof Plugs.default> = (args) => (
     </StoryOverview>
 );
 
-export const Variants: ComponentStory<typeof Plugs.default> = () => (
+export const Variants: StoryFn<typeof Plugs.default> = () => (
     <Spacer>
         <Plugs.PlugDonation />
         <Plugs.PlugInternalError />

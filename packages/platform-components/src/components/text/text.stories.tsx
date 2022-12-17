@@ -1,18 +1,17 @@
-import { ComponentMeta, ComponentStory } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react';
 import React from 'react';
 
 import { disableControls, selectControls } from '../../../stories/__helpers__';
 import { Spacer, StoryOverview } from '../../containers/stories';
-import { STORIES } from '../constants';
 
 import Text from './text';
 
 export default {
-    title: `${STORIES.pcTypography}/Text`,
+    title: 'Platform Components/Typography/Text',
     component: Text,
-} as ComponentMeta<typeof Text>;
+} as Meta<typeof Text>;
 
-export const Overview: ComponentStory<typeof Text> = (args) => (
+export const Overview: StoryFn<typeof Text> = (args) => (
     <StoryOverview
         componentName="Text"
         notOkList={[
@@ -43,7 +42,7 @@ Overview.argTypes = {
     tag: selectControls(Object.values(Text.TAG)),
 };
 
-export const Sizes: ComponentStory<typeof Text> = () => (
+export const Sizes: StoryFn<typeof Text> = () => (
     <Spacer>
         <Text size={Text.SIZE.XS}>Text size XS</Text>
         <Text size={Text.SIZE.S}>Text size S</Text>
@@ -54,7 +53,7 @@ export const Sizes: ComponentStory<typeof Text> = () => (
 );
 Sizes.parameters = { ...disableControls() };
 
-export const Variants: ComponentStory<typeof Text> = () => (
+export const Variants: StoryFn<typeof Text> = () => (
     <Spacer>
         <Spacer direction="row">
             <Text weight={Text.WEIGHT.S}>Text weight S</Text>

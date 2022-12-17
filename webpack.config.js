@@ -20,17 +20,6 @@ module.exports = {
                 },
                 exclude: /node_modules/,
             },
-            // {
-            //     test: /\.(scss|css)$/,
-            //     use: ['style-loader', 'css-loader', {
-            //         loader: 'sass-loader',
-            //         options: {
-            //             sassOptions: {
-            //                 includePaths: [path.resolve(__dirname, './packages/platform-components/src')],
-            //             },
-            //         },
-            //     }],
-            // },
             {
                 test: /\.(s(a|c)ss)$/,
                 use: [MiniCssExtractPlugin.loader, 'css-loader', {
@@ -41,18 +30,6 @@ module.exports = {
                         },
                     },
                 }],
-            },
-            {
-                test: /(design\/[\w\-]+|constants)\.(scss|sass)$/,
-                loader: 'sass-variable-loader',
-            },
-            {
-                test: /\.svg$/,
-                use: ['url-loader'],
-            },
-            {
-                test: /\.(jpg|gif|png|eot|otf|woff|woff2|ttf)$/,
-                loader: 'file-loader',
             },
         ],
     },

@@ -4,7 +4,7 @@ import { getLocalStorageValue } from 'platform-components/src/hooks';
 import { getDefaultLanguage } from 'platform-components/src/utils';
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link } from 'wouter';
 
 import { updateSetting } from '../../store/slices/settings';
 
@@ -24,7 +24,7 @@ const CommonFooter = () => {
             >
                 <Text id="footer.donate" size={Text.SIZE.XS} />
             </a>
-            <Link className={b('footer', 'about')} to={LINKS.ABOUT}>
+            <Link className={b('footer', 'about')} href={LINKS.ABOUT}>
                 <Text id="footer.about" size={Text.SIZE.XS} />
             </Link>
             <a

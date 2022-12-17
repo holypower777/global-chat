@@ -1,18 +1,17 @@
-import { ComponentMeta, ComponentStory } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react';
 import React, { useState } from 'react';
 
 import { disableControls, sizeProps } from '../../../stories/__helpers__';
 import { Spacer, StoryOverview } from '../../containers/stories';
-import { STORIES } from '../constants';
 
 import Switcher from './switcher';
 
 export default {
-    title: `${STORIES.pcCommon}/Switcher`,
+    title: 'Platform Components/Common/Switcher',
     component: Switcher,
-} as ComponentMeta<typeof Switcher>;
+} as Meta<typeof Switcher>;
 
-export const Overview: ComponentStory<typeof Switcher> = (args) => {
+export const Overview: StoryFn<typeof Switcher> = (args) => {
     const [checked, setChecked] = useState(false);
 
     return (
@@ -47,7 +46,7 @@ Overview.argTypes = {
     ...sizeProps(),
 };
 
-export const Sizes: ComponentStory<typeof Switcher> = () => (
+export const Sizes: StoryFn<typeof Switcher> = () => (
     <Spacer>
         <Spacer direction="row">
             <Switcher checked={false} size={Switcher.SIZE.L} />
@@ -63,7 +62,7 @@ export const Sizes: ComponentStory<typeof Switcher> = () => (
 );
 Sizes.parameters = { ...disableControls() };
 
-export const Variants: ComponentStory<typeof Switcher> = () => (
+export const Variants: StoryFn<typeof Switcher> = () => (
     <Spacer>
         <Switcher checked={false} />
         <Switcher checked />

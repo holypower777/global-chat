@@ -1,7 +1,6 @@
 import { render } from '@testing-library/react';
 import React from 'react';
 import { IntlProvider } from 'react-intl';
-import { BrowserRouter as Router } from 'react-router-dom';
 
 import messages from '../../../../global-chat.json';
 import { RComp } from '../typings';
@@ -14,16 +13,4 @@ export const renderWithIntl = (component: RComp) => {
     >
         {component}
     </IntlProvider>);
-};
-
-export const renderWithRouter = (component: RComp) => {
-    return render(<Router>
-        {component}
-    </Router>);
-};
-
-export const renderWithIntlAndRouter = (component: RComp) => {
-    return renderWithIntl(<Router>
-        {component}
-    </Router>);
 };

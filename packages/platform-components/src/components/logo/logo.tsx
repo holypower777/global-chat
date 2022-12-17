@@ -1,7 +1,7 @@
 import b from 'b_';
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
 import { animated, config, useTransition } from 'react-spring';
+import { Link } from 'wouter';
 
 import { LINKS } from '../constants';
 import { H1 } from '../header-text/header-text';

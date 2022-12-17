@@ -22,7 +22,7 @@
     font-size: $fontSizeM;
     line-height: $lineHeightM;
 
-    &:first-child:not(&_active)
+    &:first-of-type:not(&_active)
     {
         border-radius: 4px 0 0 4px;
     }

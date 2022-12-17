@@ -1,6 +1,6 @@
 import b from 'b_';
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link } from 'wouter';
 
 import { DESK_CARD_TYPE, LINKS } from '../constants';
 import { IconChart, IconDonate, IconMessageText } from '../icon/icon';

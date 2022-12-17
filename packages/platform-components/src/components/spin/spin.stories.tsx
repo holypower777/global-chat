@@ -1,18 +1,17 @@
-import { ComponentMeta, ComponentStory } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react';
 import React from 'react';
 
 import { disableControls, selectControls, sizeProps } from '../../../stories/__helpers__';
 import { Spacer, StoryOverview } from '../../containers/stories';
-import { STORIES } from '../constants';
 
 import Spin from './spin';
 
 export default {
-    title: `${STORIES.pcCommon}/Spin`,
+    title: 'Platform Components/Common/Spin',
     component: Spin,
-} as ComponentMeta<typeof Spin>;
+} as Meta<typeof Spin>;
 
-export const Overview: ComponentStory<typeof Spin> = (args) => (
+export const Overview: StoryFn<typeof Spin> = (args) => (
     <StoryOverview componentName="Spin">
         <Spin {...args} />
     </StoryOverview>
@@ -28,7 +27,7 @@ Overview.argTypes = {
     theme: selectControls(Object.values(Spin.THEME)),
 };
 
-export const Sizes: ComponentStory<typeof Spin> = () => (
+export const Sizes: StoryFn<typeof Spin> = () => (
     <Spacer>
         <Spin size={Spin.SIZE.L} />
         <Spin size={Spin.SIZE.M} />
@@ -37,7 +36,7 @@ export const Sizes: ComponentStory<typeof Spin> = () => (
 );
 Sizes.parameters = { ...disableControls() };
 
-export const Themes: ComponentStory<typeof Spin> = () => (
+export const Themes: StoryFn<typeof Spin> = () => (
     <Spacer>
         <Spin theme={Spin.THEME.DARK} />
         <Spin theme={Spin.THEME.LIGHT} />

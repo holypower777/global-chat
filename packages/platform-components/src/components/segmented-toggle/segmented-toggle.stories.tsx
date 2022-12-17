@@ -1,19 +1,18 @@
-import { ComponentMeta, ComponentStory } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react';
 import React, { useState } from 'react';
 
 import { disableControls } from '../../../stories/__helpers__';
 import { Spacer, StoryOverview } from '../../containers/stories';
-import { STORIES } from '../constants';
 import { IconChart, IconUser } from '../icon/icon';
 
 import SegmentedToggle from './segmented-toggle';
 
 export default {
-    title: `${STORIES.pcCommon}/SegmentedToggle`,
+    title: 'Platform Components/Common/SegmentedToggle',
     component: SegmentedToggle,
-} as ComponentMeta<typeof SegmentedToggle>;
+} as Meta<typeof SegmentedToggle>;
 
-export const Overview: ComponentStory<typeof SegmentedToggle> = (args) => {
+export const Overview: StoryFn<typeof SegmentedToggle> = (args) => {
     const [selected, setSelected] = useState('value1');
 
     return (
@@ -46,7 +45,7 @@ Overview.args = {
     labelId: 'Label',
 };
 
-export const Variants: ComponentStory<typeof SegmentedToggle> = () => (
+export const Variants: StoryFn<typeof SegmentedToggle> = () => (
     <Spacer>
         <SegmentedToggle
             handleClick={() => ({})}

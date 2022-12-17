@@ -3,7 +3,7 @@ import { User, UserCommonAPI } from 'platform-apis/types';
 import { SimpleCallback } from 'platform-components/src/typings';
 import React from 'react';
 import { useIntl } from 'react-intl';
-import { Link } from 'react-router-dom';
+import { Link } from 'wouter';
 
 import { LINKS } from '../constants';
 import { IconSearch } from '../icon/icon';

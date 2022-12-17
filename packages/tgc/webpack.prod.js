@@ -14,10 +14,10 @@ module.exports = {
     ...rootWebpackConfig,
     mode: 'production',
     entry: {
-        app: require.resolve('./src/app.tsx'),
+        tgc: require.resolve('./src/app.tsx'),
     },
     output: {
-        publicPath: '',
+        publicPath: '/',
         path: path.join(__dirname, 'dist'),
         filename: '[name].[chunkhash].js',
         clean: true,

@@ -1,19 +1,18 @@
-import { ComponentMeta, ComponentStory } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react';
 import React from 'react';
 
 import { disableControls, selectControls } from '../../../stories/__helpers__';
 import { Spacer, StoryOverview } from '../../containers/stories';
-import { STORIES } from '../constants';
 import Text from '../text/text';
 
 import Hint from './hint';
 
 export default {
-    title: `${STORIES.pcOverlays}/Hint`,
+    title: 'Platform Components/Overlays/Hint',
     component: Hint,
-} as ComponentMeta<typeof Hint>;
+} as Meta<typeof Hint>;
 
-export const Overview: ComponentStory<typeof Hint> = (args) => (
+export const Overview: StoryFn<typeof Hint> = (args) => (
     <StoryOverview
         componentName="Hint"
         notOkList={[
@@ -37,7 +36,7 @@ Overview.argTypes = {
     direction: selectControls(Object.values(Hint.DIRECTION)),
 };
 
-export const Variants: ComponentStory<typeof Hint> = () => (
+export const Variants: StoryFn<typeof Hint> = () => (
     <Spacer gapSize={Spacer.GAP.L} style={{ alignItems: 'center' }}>
         <div style={{ marginTop: 100 }}>
             <Hint direction={Hint.DIRECTION.TOP} show textId="title.common">

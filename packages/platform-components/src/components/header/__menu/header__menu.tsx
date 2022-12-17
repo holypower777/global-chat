@@ -1,7 +1,7 @@
 import b from 'b_';
 import React, { useRef, useState } from 'react';
 import { useIntl } from 'react-intl';
-import { Link } from 'react-router-dom';
+import { Link } from 'wouter';
 
 import useOnClickOutside from '../../../hooks/useOnClickOutside';
 import { LINKS } from '../../constants';

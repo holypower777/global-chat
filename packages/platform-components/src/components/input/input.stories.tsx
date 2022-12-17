@@ -1,19 +1,18 @@
-import { ComponentStory, ComponentMeta } from '@storybook/react';
+import { StoryFn, Meta } from '@storybook/react';
 import React, { useState } from 'react';
 
 import { disableControls, sizeProps } from '../../../stories/__helpers__';
 import { Spacer, StoryOverview } from '../../containers/stories';
-import { STORIES } from '../constants';
 import { IconDots, IconSearch } from '../icon/icon';
 
 import Input, { InputProps } from './input';
 
 export default {
-    title: `${STORIES.pcCommon}/Input`,
+    title: 'Platform Components/Common/Input',
     component: Input,
-} as ComponentMeta<typeof Input>;
+} as Meta<typeof Input>;
 
-const Template: ComponentStory<typeof Input> = (args: InputProps) => {
+const Template: StoryFn<typeof Input> = (args: InputProps) => {
     const [value, setValue] = useState('');
     
     return (
@@ -51,7 +50,7 @@ Overview.argTypes = {
     ...sizeProps(),
 };
 
-export const Sizes: ComponentStory<typeof Input> = () => (
+export const Sizes: StoryFn<typeof Input> = () => (
     <Spacer>
         <Input placeholder="Size S" size={Input.SIZE.S} />
         <Input placeholder="Size M" size={Input.SIZE.M} />
@@ -60,7 +59,7 @@ export const Sizes: ComponentStory<typeof Input> = () => (
 );
 Sizes.parameters = { ...disableControls() };
 
-export const Variants: ComponentStory<typeof Input> = () => (
+export const Variants: StoryFn<typeof Input> = () => (
     <Spacer>
         <Input
             placeholder="Input with prefix and suffix"

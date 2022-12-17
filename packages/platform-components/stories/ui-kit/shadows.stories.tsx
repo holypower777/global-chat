@@ -2,7 +2,6 @@ import b from 'b_';
 import React from 'react';
 
 import { disableControls } from '../__helpers__';
-import { STORIES } from '../../src/components/constants';
 import { Spacer } from '../../src/containers/stories';
 
 import './ui-kit.scss';
@@ -20,7 +19,7 @@ const SHADOWS = {
 };
 
 export default {
-    title: `${STORIES.pcUIKit}/Shadows`,
+    title: 'Platform Components/UI-kit/Shadows',
 };
 
 export const Overview = () => (

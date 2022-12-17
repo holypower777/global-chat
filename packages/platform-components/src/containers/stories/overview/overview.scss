@@ -93,7 +93,7 @@
             {
                 border-top: 4px solid $SeaGreen;
 
-                .text:first-child
+                .text:first-of-type
                 {
                     color: $SeaGreen;
                 }
@@ -108,7 +108,7 @@
             {
                 border-top: 4px solid $Bittersweet;
 
-                .text:first-child
+                .text:first-of-type
                 {
                     color: $Bittersweet;
                 }

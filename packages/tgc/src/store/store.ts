@@ -15,7 +15,7 @@ import settingsMiddleware from './middlewares/settings';
 import usersMiddleware from './middlewares/users';
 import channelsSlice from './slices/channels';
 import commonSlice from './slices/common';
-import liveChatSlice from './slices/live-chat';
+// import liveChatSlice from './slices/live-chat';
 import messagesSlice from './slices/messages';
 import notificationsSlice from './slices/notifications';
 import overallStatsSlice from './slices/overall-stats';
@@ -34,7 +34,7 @@ export const store = configureStore({
         messages: messagesSlice,
         notifications: notificationsSlice,
         channels: channelsSlice,
-        liveChat: liveChatSlice,
+        // liveChat: liveChatSlice,
         twitchUser: twitchUserSlice,
         settings: settingsSlice,
         overallStats: overallStatsSlice,

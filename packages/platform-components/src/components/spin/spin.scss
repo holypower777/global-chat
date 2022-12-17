@@ -1,10 +1,10 @@
 @import 'design/colors';
 
 @mixin poisitionCenter($spinSize) { // stylelint-disable-line block-opening-brace-newline-before
-    top: calc(50% - #{$spinSize / 2});
-    right: calc(50% - #{$spinSize / 2});
-    bottom: calc(50% - #{$spinSize / 2});
-    left: calc(50% - #{$spinSize / 2});
+    top: calc(50% - $spinSize / 2);
+    right: calc(50% - $spinSize / 2);
+    bottom: calc(50% - $spinSize / 2);
+    left: calc(50% - $spinSize / 2);
 }
 
 $sizeS: 16px;

@@ -1,19 +1,18 @@
-import { ComponentMeta, ComponentStory } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react';
 import React from 'react';
 
 import { disableControls, selectControls } from '../../../stories/__helpers__';
 import { Spacer, StoryOverview } from '../../containers/stories';
-import { STORIES } from '../constants';
 import Text from '../text/text';
 
 import * as Icons from './icon';
 
 export default {
-    title: `${STORIES.pcIcons}/Icons`,
+    title: 'Platform Components/Icons/Icons',
     component: Icons.default,
-} as ComponentMeta<typeof Icons.default>;
+} as Meta<typeof Icons.default>;
 
-export const Overview: ComponentStory<typeof Icons.default> = (args) => (
+export const Overview: StoryFn<typeof Icons.default> = (args) => (
     <StoryOverview
         componentName="Icon"
     >
@@ -29,7 +28,7 @@ Overview.argTypes = {
     size: selectControls(Object.values(Icons.default.SIZE)),
 };
 
-export const Sizes: ComponentStory<typeof Icons.default> = () => (
+export const Sizes: StoryFn<typeof Icons.default> = () => (
     <Spacer>
         {Object.keys(Icons).map((iconName) => {
             if (iconName !== 'default') {

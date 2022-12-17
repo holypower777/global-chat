@@ -1,24 +1,23 @@
-import { ComponentMeta, ComponentStory } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react';
 import { fireEvent, screen } from '@testing-library/react';
 import React from 'react';
 
 import { disableControls } from '../../../stories/__helpers__';
 import { Spacer, StoryOverview } from '../../containers/stories';
-import { STORIES } from '../constants';
 
 import UserCard from './user-card';
 
 export default {
-    title: `${STORIES.pcChat}/UserCard`,
+    title: 'Platform Components/Chat/UserCard',
     component: UserCard,
-} as ComponentMeta<typeof UserCard>;
+} as Meta<typeof UserCard>;
 
 const commonArgs = {
     handleStarClick: () => ({}),
     handleSettingsUpdate: () => ({}),
 };
 
-export const Overview: ComponentStory<typeof UserCard> = (args) => (
+export const Overview: StoryFn<typeof UserCard> = (args) => (
     <StoryOverview
         componentName="UserCard"
         notOkList={[
@@ -40,7 +39,7 @@ Overview.args = {
     ...commonArgs,
 };
 
-export const Variants: ComponentStory<typeof UserCard> = () => (
+export const Variants: StoryFn<typeof UserCard> = () => (
     <Spacer>
         <UserCard displayName="Expanded" isBroadcaster isFavorite {...commonArgs} />
         <UserCard displayName="Gazely" isBroadcaster={false} isFavorite {...commonArgs} />

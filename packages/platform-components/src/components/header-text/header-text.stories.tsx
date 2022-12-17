@@ -1,18 +1,17 @@
-import { ComponentMeta, ComponentStory } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react';
 import React from 'react';
 
 import { disableControls, selectControls, sizeProps } from '../../../stories/__helpers__';
 import { Spacer, StoryOverview } from '../../containers/stories';
-import { STORIES } from '../constants';
 
 import HeaderText, { H1, H2, H3, H4, H5, H6 } from './header-text';
 
 export default {
-    title: `${STORIES.pcTypography}/Heading`,
+    title: 'Platform Components/Typography/Heading',
     component: HeaderText,
-} as ComponentMeta<typeof HeaderText>;
+} as Meta<typeof HeaderText>;
 
-export const Overview: ComponentStory<typeof HeaderText> = (args) => (
+export const Overview: StoryFn<typeof HeaderText> = (args) => (
     <StoryOverview
         componentName="HeaderText"
         notOkList={[
@@ -42,7 +41,7 @@ Overview.argTypes = {
     weight: selectControls(Object.values(HeaderText.WEIGHT)),
 };
 
-export const Sizes: ComponentStory<typeof HeaderText> = () => (
+export const Sizes: StoryFn<typeof HeaderText> = () => (
     <Spacer>
         <H1>Heading level one</H1>
         <H2>Heading level two</H2>
@@ -54,7 +53,7 @@ export const Sizes: ComponentStory<typeof HeaderText> = () => (
 );
 Sizes.parameters = { ...disableControls() };
 
-export const Variants: ComponentStory<typeof HeaderText> = () => (
+export const Variants: StoryFn<typeof HeaderText> = () => (
     <Spacer>
         <H1 uppercase>Uppercase</H1>
         <H1 capitalize>capitalized</H1>

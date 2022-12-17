@@ -30,6 +30,13 @@ module.exports = {
         'react-hooks',
     ],
 
+    ignorePatterns: [
+        'static/build',
+        'build',
+        'dist',
+        '.storybook',
+    ],
+
     overrides: [
         {
             'files': ['**/*.test.js', 'test/**/*.js', '__mocks__/**/*'],

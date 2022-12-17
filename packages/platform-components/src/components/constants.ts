@@ -167,16 +167,6 @@ export enum SEARCH_PARAMS {
     AUTH_ERROR = 'authError',
 }
 
-export enum STORIES {
-    pcCommon = 'Platform Components/Common',
-    pcChat = 'Platform Components/Chat',
-    pcIcons = 'Platform Components/Icons',
-    pcTypography = 'Platform Components/Typography',
-    pcPlugs = 'Platform Components/Plugs',
-    pcUIKit = 'Platform Components/UI-kit',
-    pcOverlays = 'Platform Components/Overlays',
-}
-
 export interface REPLY_MESSAGE {
     channelId: number;
     messageId: string;

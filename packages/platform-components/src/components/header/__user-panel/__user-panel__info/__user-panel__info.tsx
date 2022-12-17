@@ -2,8 +2,8 @@ import b from 'b_';
 import cx from 'classnames';
 import { convertCommonUserToAPI } from 'platform-apis/types';
 import React, { useRef, useState } from 'react';
-import { Link } from 'react-router-dom';
 import { animated, useSpring } from 'react-spring';
+import { Link } from 'wouter';
 
 import { useOnClickOutside } from '../../../../hooks';
 import { LINKS } from '../../../constants';

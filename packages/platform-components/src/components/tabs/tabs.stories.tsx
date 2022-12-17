@@ -1,19 +1,18 @@
-import { ComponentMeta, ComponentStory } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react';
 import React, { useState } from 'react';
 
 import { disableControls } from '../../../stories/__helpers__';
 import { Spacer, StoryOverview } from '../../containers/stories';
-import { STORIES } from '../constants';
 import Icon, { IconChart, IconMessage, IconUser } from '../icon/icon';
 
 import Tabs from './tabs';
 
 export default {
-    title: `${STORIES.pcCommon}/Tabs`,
+    title: 'Platform Components/Common/Tabs',
     component: Tabs,
-} as ComponentMeta<typeof Tabs>;
+} as Meta<typeof Tabs>;
 
-export const Overview: ComponentStory<typeof Tabs> = (args) => {
+export const Overview: StoryFn<typeof Tabs> = (args) => {
     const [activeTab, setActiveTab] = useState(0);
 
     return (
@@ -37,7 +36,7 @@ Overview.args = {
     ],
 };
 
-export const Variants: ComponentStory<typeof Tabs> = () => (
+export const Variants: StoryFn<typeof Tabs> = () => (
     <Spacer>
         <Tabs 
             activeId={0}

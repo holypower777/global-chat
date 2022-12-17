@@ -2,7 +2,7 @@ import { useAuthLogoutMutation, useDeleteUserFavoriteMutation, useLazyGetDisplay
 import { Header, LINKS, NOTIFICATIONS_DURATION, SNACKBAR_TYPE } from 'platform-components';
 import React, { ReactNode, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useLocation } from 'wouter';
 
 import { clearChannelsState } from '../../store/slices/channels';
 import { clearMessages } from '../../store/slices/messages';
@@ -12,9 +12,9 @@ import { getUser } from '../../store/slices/user';
 import { addNotification, isValidSearchChange, isValidSearchSubmit } from '../../utils';
 
 const CommonHeader = () => {
-    const navigate = useNavigate();
+    const [location, navigate] = useLocation();
     const dispatch = useDispatch();
-    const { username: usernameParam } = useParams();
+    const [usernameParam] = useState('');
     
     const suggestions = useSelector(getSuggestions);
     const isSuggestionsLoading = useSelector(getIsSuggestionsLoading);

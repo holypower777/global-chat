@@ -1,8 +1,7 @@
 import React from 'react';
 import { IntlProvider } from 'react-intl';
-import { BrowserRouter as Router } from 'react-router-dom';
 
-const messages = require(`../global-chat.json`);
+import messages from '../global-chat.json';
 
 export const parameters = {
     controls: {
@@ -13,25 +12,6 @@ export const parameters = {
         sort: 'requiredFirst',
     },
 };
-
-export const decorators = [
-    (Story: React.FC, context: any) => {
-        const locale = context.globals.locale;
-        const defaultLocale = context.parameters.globalTypes.locale.defaultValue
-
-        return (
-            <IntlProvider
-                locale={context.globals.locale}
-                defaultLocale={defaultLocale}
-                messages={messages[locale]['common']}
-            >
-                <Router>
-                    <Story />
-                </Router>
-            </IntlProvider>
-        )
-    },
-];
 
 export const globalTypes = {
     locale: {
@@ -46,3 +26,19 @@ export const globalTypes = {
         },
     },
 };
+
+export const decorators = [
+    (Story: React.FC, context: any) => {
+        const locale = context.globals.locale;
+
+        return (
+            <IntlProvider
+                locale={locale}
+                defaultLocale={locale}
+                messages={messages[locale]['common']}
+            >
+                <Story />
+            </IntlProvider>
+        )
+    },
+];

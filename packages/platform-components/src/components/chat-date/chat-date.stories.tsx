@@ -1,17 +1,16 @@
-import { ComponentMeta, ComponentStory } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react';
 import React from 'react';
 
 import { StoryOverview } from '../../containers/stories';
-import { STORIES } from '../constants';
 
 import ChatDate from './chat-date';
 
 export default {
-    title: `${STORIES.pcChat}/Chat-date`,
+    title: 'Platform Components/Chat/Chat-date',
     component: ChatDate,
-} as ComponentMeta<typeof ChatDate>;
+} as Meta<typeof ChatDate>;
 
-export const Overview: ComponentStory<typeof ChatDate> = (args) => (
+export const Overview: StoryFn<typeof ChatDate> = (args) => (
     <StoryOverview
         componentName="Chat-date"
     >

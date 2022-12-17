@@ -1,19 +1,18 @@
-import { ComponentMeta, ComponentStory } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react';
 import React from 'react';
 
 import { disableControls, selectControls, sizeProps } from '../../../stories/__helpers__';
 import { Spacer, StoryOverview } from '../../containers/stories';
-import { STORIES } from '../constants';
 import { IconChart } from '../icon/icon';
 
 import Button from './button';
 
 export default {
-    title: `${STORIES.pcCommon}/Button`,
+    title: 'Platform Components/Common/Button',
     component: Button,
-} as ComponentMeta<typeof Button>;
+} as Meta<typeof Button>;
 
-export const Overview: ComponentStory<typeof Button> = (args) => (
+export const Overview: StoryFn<typeof Button> = (args) => (
     <StoryOverview
         componentName="Button"
         notOkList={[
@@ -41,7 +40,7 @@ Overview.argTypes = {
     theme: selectControls(Object.values(Button.THEME)),
 };
 
-export const Sizes: ComponentStory<typeof Button> = () => (
+export const Sizes: StoryFn<typeof Button> = () => (
     <Spacer>
         <Button block size={Button.SIZE.M}>Size M block width</Button>
         <Spacer direction="row">
@@ -58,7 +57,7 @@ export const Sizes: ComponentStory<typeof Button> = () => (
 );
 Sizes.parameters = { ...disableControls() };
 
-export const Themes: ComponentStory<typeof Button> = () => (
+export const Themes: StoryFn<typeof Button> = () => (
     <Spacer direction="row">
         <Button theme={Button.THEME.LIGHT}>Light theme</Button>
         <Button theme={Button.THEME.DARK}>Dark theme</Button>
@@ -67,7 +66,7 @@ export const Themes: ComponentStory<typeof Button> = () => (
 );
 Themes.parameters = { ...disableControls() };
 
-export const Variants: ComponentStory<typeof Button> = () => (
+export const Variants: StoryFn<typeof Button> = () => (
     <Spacer>
         <Button disabled>Disabled</Button>
         <Spacer direction="row">

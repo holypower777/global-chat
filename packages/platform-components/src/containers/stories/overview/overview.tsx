@@ -8,7 +8,7 @@ import './overview.scss';
 
 interface StoryOverviewProps extends ChildrenProps {
     componentName: string;
-    packet?: 'platform-components' | 'app';
+    packet?: 'platform-components' | 'tgc';
     usage?: string;
     okList?: Array<string>;
     notOkList?: Array<string>;
@@ -24,8 +24,8 @@ const StoryOverview = ({
     okList = [],
     notOkList = [],
 }: StoryOverviewProps) => {
-    const importFrom = `import { ${componentName} } from '${packet}';`;
     const [isCopied, setIsCopied] = useState(false);
+    const importFrom = `import { ${componentName} } from '${packet}';`;
     const handleCopy = () => {
         navigator.clipboard.writeText(importFrom);
         setIsCopied(true);

@@ -2,7 +2,6 @@ import b from 'b_';
 import React from 'react';
 
 import { disableControls } from '../__helpers__';
-import { STORIES } from '../../src/components/constants';
 import Text from '../../src/components/text/text';
 import { Spacer } from '../../src/containers/stories';
 
@@ -29,7 +28,7 @@ const COLORS: Record<string, string> = {
 };
 
 export default {
-    title: `${STORIES.pcUIKit}/Colors`,
+    title: 'Platform Components/UI-kit/Colors',
 };
 
 export const Overview = () => (
