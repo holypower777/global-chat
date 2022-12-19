@@ -28,6 +28,10 @@ export interface InputProps extends MixProps {
     handleChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
     /** The callback function that is triggered when Enter key is pressed. Note: input value must not be empty */
     handleEnterPress?: SimpleCallback;
+    /** The callback function that is triggered when key is presssed */
+    handleKeyUp?: SimpleCallback;
+    /** The callback function that is triggered when key is released */
+    handleKeyDown?: SimpleCallback;
     /** The input name value */
     name?: string;
     /** Whether the input is readOnly */
@@ -48,15 +52,22 @@ const Input = ({
     value,
     handleChange,
     handleEnterPress,
+    handleKeyUp,
+    handleKeyDown,
     name,
     readonly = false,
     required = false,
 }: InputProps) => {
     const [focus, setFocus] = useState(false);
 
-    const handleKeyDown = (e: React.KeyboardEvent) => {
+    const keyDownHandler = (e: React.KeyboardEvent) => {
         if (handleEnterPress && value && e.key === 'Enter') {
             handleEnterPress();
+            return;
+        }
+
+        if (handleKeyDown) {
+            handleKeyDown();
         }
     };
 
@@ -72,7 +83,8 @@ const Input = ({
                 onBlur={() => (setFocus(false))}
                 onChange={handleChange}
                 onFocus={() => (setFocus(true))}
-                onKeyDown={handleKeyDown}
+                onKeyDown={keyDownHandler}
+                onKeyUp={handleKeyUp}
                 placeholder={placeholder}
                 readOnly={readonly}
                 required={required}

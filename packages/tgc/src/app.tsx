@@ -22,6 +22,7 @@ function createContainer(targetParent: Element) {
     return targetParent.appendChild(newContainer);
 }
 
+2;
 const container = document.getElementById(rootContainerId) ?? createContainer(document.body);
 const root = createRoot(container);
 
@@ -35,7 +36,7 @@ const App = () => {
     return (
         <FlagsmithProvider
             flagsmith={flagsmith}
-            options={{ 
+            options={{
                 environmentID: process.env.FLAGSMITH_API_KEY || '',
                 angularHttpClient: false,
             }}
@@ -45,21 +46,21 @@ const App = () => {
                     <UserProvider>
                         <NotificationProvider>
                             <Suspense fallback={<Spin center/>}>
-                                    <LocationProvider>
-                                            <Switch>
-                                                <Route component={Home} path="/" />
-                                                <Route component={About} path="/about" />
-                                                {/* <Route element={withHeader(<LiveChat/>)} path="live-chat"/>
-                                                <Route element={withHeader(<UserHistory/>)} path="messages">
-                                                    <Route element={withHeader(<UserHistory/>)} path=":username"/>
-                                                </Route>
-                                                <Route element={withHeader(<OverallStats/>)} path="overall-stats"/>
-                                                <Route element={withHeader(<NoLimits/>)} path="no-limits"/>
-                                                <Route element={withHeader(<About/>)} path="about"/>
-                                                <Route element={<Navigate to="/"/>} path="*"/> */}
-                                            </Switch>
-                                        <CommonFooter/>
-                                    </LocationProvider>
+                                <LocationProvider>
+                                    <Switch>
+                                        <Route component={Home} path="/"/>
+                                        <Route component={About} path="/about"/>
+                                        {/*<Route element={withHeader(<LiveChat/>)} path="live-chat"/>*/}
+                                        {/*<Route element={withHeader(<UserHistory/>)} path="messages">*/}
+                                        {/*    <Route element={withHeader(<UserHistory/>)} path=":username"/>*/}
+                                        {/*</Route>*/}
+                                        {/*<Route element={withHeader(<OverallStats/>)} path="overall-stats"/>*/}
+                                        {/*<Route component={withHeader(<NoLimits/>)} path="no-limits"/>*/}
+                                        {/*<Route component={withHeader(<About/>)} path="about"/>*/}
+                                        {/*<Route element={<Navigate to="/"/>} path="*"/>*/}
+                                    </Switch>
+                                    <CommonFooter/>
+                                </LocationProvider>
                             </Suspense>
                         </NotificationProvider>
                     </UserProvider>
