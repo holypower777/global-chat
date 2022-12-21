@@ -1,10 +1,11 @@
 import flagsmith from 'flagsmith';
 import { FlagsmithProvider } from 'flagsmith/react';
-import { Spin } from 'platform-components';
 import React, { lazy, Suspense } from 'react';
 import { createRoot } from 'react-dom/client';
 import { Provider as ReduxProvider } from 'react-redux';
 import { Route, Switch } from 'wouter';
+
+import { Spin } from 'platform-components';
 
 import { withHeader, CommonFooter } from './common.components';
 import NoLimits from './components/no-limits/no-limits';
@@ -44,21 +45,21 @@ const App = () => {
                 <LanguageProvider>
                     <UserProvider>
                         <NotificationProvider>
-                            <Suspense fallback={<Spin center/>}>
+                            <Suspense fallback={<Spin center />}>
                                 <LocationProvider>
                                     <Switch>
-                                        <Route component={Home} path="/"/>
-                                        <Route component={About} path="/about"/>
-                                        {/*<Route element={withHeader(<LiveChat/>)} path="live-chat"/>*/}
-                                        {/*<Route element={withHeader(<UserHistory/>)} path="messages">*/}
-                                        {/*    <Route element={withHeader(<UserHistory/>)} path=":username"/>*/}
-                                        {/*</Route>*/}
-                                        {/*<Route element={withHeader(<OverallStats/>)} path="overall-stats"/>*/}
-                                        {/*<Route component={withHeader(<NoLimits/>)} path="no-limits"/>*/}
-                                        {/*<Route component={withHeader(<About/>)} path="about"/>*/}
-                                        {/*<Route element={<Navigate to="/"/>} path="*"/>*/}
+                                        <Route component={Home} path="/" />
+                                        <Route component={About} path="/about" />
+                                        {/* <Route element={withHeader(<LiveChat/>)} path="live-chat"/>
+                                                <Route element={withHeader(<UserHistory/>)} path="messages">
+                                                    <Route element={withHeader(<UserHistory/>)} path=":username"/>
+                                                </Route>
+                                                <Route element={withHeader(<OverallStats/>)} path="overall-stats"/>
+                                                <Route element={withHeader(<NoLimits/>)} path="no-limits"/>
+                                                <Route element={withHeader(<About/>)} path="about"/>
+                                                <Route element={<Navigate to="/"/>} path="*"/> */}
                                     </Switch>
-                                    <CommonFooter/>
+                                    <CommonFooter />
                                 </LocationProvider>
                             </Suspense>
                         </NotificationProvider>
@@ -69,4 +70,4 @@ const App = () => {
     );
 };
 
-root.render(<App/>);
+root.render(<App />);

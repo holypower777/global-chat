@@ -1,22 +1,29 @@
-import { TwitchUserId } from './twitch-user';
-
 export interface GetTwitchUserQuery {
     username: string;
     type: 'username' | 'user_id';
 }
 
 export interface DisplayNameQuery {
-    username: string;
+    displayName: string;
 }
 
-export interface GetTwitchUserWithChannelsQuery {
-    userId: TwitchUserId;
-    channelId: TwitchUserId;
+export interface GetMessagesByUserAndChannelIdQuery {
+    userId: number;
+    channelId: number;
     limit?: number;
     offset?: number;
     sort?: 'desc' | 'asc';
     dateFrom?: Date;
     dateTo?: Date;
+}
+
+export interface GetMessagesByChannelIdQuery {
+    channelId: number;
+    dateFrom: Date;
+    dateTo: Date;
+    limit?: number;
+    offset?: number;
+    sort?: 'desc' | 'asc';
 }
 
 export interface GetOverallStatsPlotsQuery {
@@ -25,11 +32,11 @@ export interface GetOverallStatsPlotsQuery {
 }
 
 export interface UserIdQuery {
-    userId: TwitchUserId;
+    userId: number;
 }
 
 export interface ChannelIdQuery {
-    channelId: TwitchUserId;
+    channelId: number;
 }
 
 export interface TokenQuery {

@@ -31,7 +31,7 @@ const SearchInput = ({ displayName: propsDisplayName = '' }:SearchInputProps) =>
 
     const isAuth = useSelector(getIsAuth);
 
-    const [_, navigate] = useLocation();
+    const [_dwq, navigate] = useLocation();
 
     const suggestions = useSelector(getSuggestions);
     const isSuggestionsLoading = useSelector(getIsSuggestionsLoading);

@@ -1,12 +1,10 @@
-import { UserCommonAPI } from './user';
+import { TwitchUserCommon } from './twitch-user';
 
 export interface UserCommonBody {
-    body: UserCommonAPI;
+    body: TwitchUserCommon;
 }
 
 export interface AuthBody {
-    body: {
-        user_id: number;
-        refresh_token: string;
-    }
+    userId: number;
+    refreshToken: string;
 }
