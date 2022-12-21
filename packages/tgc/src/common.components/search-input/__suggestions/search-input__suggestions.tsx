@@ -3,23 +3,24 @@ import cx from 'classnames';
 import { Spin, Text } from 'platform-components';
 import React from 'react';
 
-export interface DropdownProps {
-    items: Array<string>;
-    isDropdownLoading: boolean;
+export interface SuggestionProps {
+    suggestions: Array<string>;
+    isSuggestionsLoading: boolean;
     handleOnClick: (item: string) => void;
 }
 
-const SearchInputSuggestions = ({ items, isDropdownLoading, handleOnClick } : DropdownProps) => {
+const SearchInputSuggestions = ({ suggestions, isSuggestionsLoading, handleOnClick }: SuggestionProps) => {
+    if (!suggestions.length || !isSuggestionsLoading) {
+        return null;
+    }
 
     return (
-        <div>
-            {(items.length > 0 || isDropdownLoading) &&
-            <ul className={cx(b('input', 'dropdown'), 'custom-scroll')}>
-                {isDropdownLoading && <Spin size={Spin.SIZE.S} />}
-                {items.map(item => <Text handleClick={() => handleOnClick(item)} tag={Text.TAG.LI}>{item}</Text>)}
-            </ul>}
-        </div>
-    );
+        <ul className={cx(b('search-input', 'suggestions'), 'custom-scroll')}>
+            {isSuggestionsLoading && <Spin size={Spin.SIZE.S}/>}
+            {suggestions.map(suggestion => (<Text handleClick={() => handleOnClick(suggestion)}
+                tag={Text.TAG.LI}
+            >{suggestion}</Text>))}
+        </ul>);
 };
 
 export default SearchInputSuggestions;

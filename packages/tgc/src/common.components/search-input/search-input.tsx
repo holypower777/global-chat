@@ -1,13 +1,12 @@
 import { useLazyGetDisplayNameSuggestionsQuery } from 'platform-apis';
 import { IconSearch, Input, LINKS, NOTIFICATIONS_DURATION, SNACKBAR_TYPE } from 'platform-components';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useIntl } from 'react-intl';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation } from 'wouter';
 
 import { clearChannelsState } from '../../store/slices/channels';
 import { clearMessages } from '../../store/slices/messages';
-import { getUserTypeSetting } from '../../store/slices/settings';
 import {
     clearSuggestions, clearTwitchUser,
     getIsSuggestionsLoading,
@@ -19,13 +18,16 @@ import { addNotification, isValidSearchChange, isValidSearchSubmit } from '../..
 
 import SearchInputSuggestions from './__suggestions/search-input__suggestions';
 
-const SearchInput = () => {
+interface SearchInputProps {
+    displayName?: string
+}
+const SearchInput = ({ displayName: propsDisplayName = '' }:SearchInputProps) => {
+    const intl = useIntl();
     const dispatch = useDispatch();
-    const [usernameParam] = useState('');
+
     const isAuth = useSelector(getIsAuth);
 
-    const intl = useIntl();
-    const [location, navigate] = useLocation();
+    const [_, navigate] = useLocation();
 
     const suggestions = useSelector(getSuggestions);
     const isSuggestionsLoading = useSelector(getIsSuggestionsLoading);
@@ -33,31 +35,17 @@ const SearchInput = () => {
     const isSearchingUser = useSelector(getIsTwitchUserFetching);
 
     const [typingTimer, setTypingTimer] = useState<NodeJS.Timeout | null>(null);
-    const [username, setUsername] = useState(usernameParam || '');
-    const userType = useSelector(getUserTypeSetting);
+    const [displayName, setDisplayName] = useState(propsDisplayName);
 
     const [fetchSuggestions] = useLazyGetDisplayNameSuggestionsQuery();
 
-    useEffect(() => {
-        if (!isValidSearchSubmit(userType, username)) {
-            setUsername('');
-        }
-    }, [userType]);
-
-    useEffect(() => {
-        if (usernameParam) {
-            setUsername(usernameParam);
-        }
-    }, [usernameParam]);
-
-    const handleSubmit = (displayName: string | null = null) => {
-        const searchName = displayName || username;
+    const handleSubmit = () => {
 
         if (typingTimer) {
             clearTimeout(typingTimer);
         }
 
-        if (!isValidSearchSubmit(userType, searchName)) {
+        if (!isValidSearchSubmit(userType, displayName)) {
             addNotification({
                 id: `notification.searchInput.${userType}.submit`,
                 type: SNACKBAR_TYPE.ERROR,
@@ -66,17 +54,12 @@ const SearchInput = () => {
             return;
         }
 
-        if (searchName === usernameParam) {
-            setUsername(searchName);
-            return;
-        }
-
         dispatch(clearTwitchUser());
         dispatch(clearChannelsState());
         dispatch(clearMessages());
         dispatch(clearSuggestions());
 
-        navigate(`${LINKS.MESSAGES}/${searchName}`);
+        navigate(`${LINKS.MESSAGES}/${displayName}`);
     };
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         if (!isValidSearchChange(userType, e.target.value)) {
@@ -92,10 +75,11 @@ const SearchInput = () => {
             dispatch(clearSuggestions());
         }
 
-        setUsername(e.target.value);
+        setDisplayName(e.target.value);
     };
 
-    const handleSelect = (displayName: string) => {
+    const handleSelect = () => {
+        setDisplayName(displayName);
         handleSubmit(displayName);
         dispatch(clearSuggestions());
     };
@@ -103,8 +87,7 @@ const SearchInput = () => {
     return (
         <div>
             <Input
-                disabled={!isAuth && !isSearchingUser}
-                fullWidth={true}
+                disabled={!isAuth || isSearchingUser}
                 handleChange={handleChange}
                 handleEnterPress={handleSubmit}
                 handleKeyDown={() => {
@@ -117,8 +100,8 @@ const SearchInput = () => {
                         clearTimeout(typingTimer);
                     }
                     const id = setTimeout(() => {
-                        if (username.length > 2) {
-                            fetchSuggestions({ username });
+                        if (displayName.length > 2) {
+                            fetchSuggestions({ username: displayName });
                         }
                     }, 500);
 
@@ -127,9 +110,9 @@ const SearchInput = () => {
                 icon={<IconSearch/>}
                 name="user-search"
                 placeholder={intl.formatMessage({ id: `search.inputPlaceholder ${!isAuth && '.userNotAuthorized'}` })}
-                value={username}
+                value={displayName}
             />
-            <SearchInputSuggestions handleOnClick={handleSelect} isDropdownLoading={isSuggestionsLoading} items={suggestions} />
+            <SearchInputSuggestions handleOnClick={handleSelect} isSuggestionsLoading={isSuggestionsLoading} suggestions={suggestions} />
         </div>
     );
 };

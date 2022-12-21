@@ -1,30 +1,27 @@
-import { SEARCH_TYPE } from 'platform-components/src/components/constants';
-
+const usernameRegex = /([a-zA-Z0-9]\w{2,24})/;
 const usernameRegexp = new RegExp(/^[\w]{0,25}$/);
 const usernameSubmitRegexp = new RegExp(/^[a-zA-Z0-9][\w]{2,25}$/);
-const userIdRegexp = new RegExp(/^[0-9]{0,20}$/);
-const userIdSubmitRegexp = new RegExp(/^[0-9]{1,20}$/);
+// const userIdRegexp = new RegExp(/^[0-9]{0,20}$/);
+// const userIdSubmitRegexp = new RegExp(/^[0-9]{1,20}$/);
 
-export const isValidSearchSubmit = (userType: SEARCH_TYPE, value: string | undefined) => {
+export const isValidSearchSubmit = (value: string | undefined) => {
     if (value === undefined) {
         return false;
     }
 
-    if (!value.match(userType === SEARCH_TYPE.USERNAME ? usernameSubmitRegexp : userIdSubmitRegexp)) {
-        return false;
-    }
-
-    return true;
+    return value.match(usernameSubmitRegexp);
 };
 
-export const isValidSearchChange = (userType: SEARCH_TYPE, value: string | undefined) => {
+export const isValidSearchChange = (value: string | undefined) => {
     if (value === undefined) {
         return false;
     }
 
-    if (!value.match(userType === SEARCH_TYPE.USERNAME ? usernameRegexp : userIdRegexp)) {
-        return false;
-    }
+    return value.match(usernameRegexp);
+};
 
-    return true;
+export const extractValidDisplayName = (value: string) => {
+    if (usernameRegex.test(value)) {
+        return value.match(usernameRegex)![0];
+    }
 };

@@ -22,7 +22,6 @@ function createContainer(targetParent: Element) {
     return targetParent.appendChild(newContainer);
 }
 
-2;
 const container = document.getElementById(rootContainerId) ?? createContainer(document.body);
 const root = createRoot(container);
 
