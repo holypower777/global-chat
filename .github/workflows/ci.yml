@@ -29,6 +29,7 @@ jobs:
     name: Lint js, ts, css, scss
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v3
       - name: Lint js and ts code
         uses: borales/actions-yarn@v4
         with:
@@ -42,6 +43,7 @@ jobs:
     name: Tests
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v3
       - name: Run tests
         uses: borales/actions-yarn@v4
         with:
