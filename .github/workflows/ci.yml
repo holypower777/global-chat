@@ -1,0 +1,43 @@
+name: ci
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+  workflow_dispatch:
+jobs:
+  install:
+    name: Intall deps
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set Node.js 18.x
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18.x
+      - name: Run install
+        uses: borales/actions-yarn@v4
+        with:
+          cmd: lerna bootstrap
+  lint:
+    needs: install
+    name: Lint js, ts, css, scss
+    runs-on: ubuntu-latest
+    steps:
+      - name: Lint js and ts code
+        uses: borales/actions-yarn@v4
+        with:
+          cmd: lint:js
+      - name: Lint css
+        uses: borales/actions-yarn@v4
+        with:
+          cmd: lint:css 
+  test:
+    needs: install
+    name: Tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run tests
+        uses: borales/actions-yarn@v4
+        with:
+          cmd: test
