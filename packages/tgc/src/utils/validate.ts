@@ -1,27 +1,10 @@
-const usernameRegex = /([a-zA-Z0-9]\w{2,24})/;
-const usernameRegexp = new RegExp(/^[\w]{0,25}$/);
-const usernameSubmitRegexp = new RegExp(/^[a-zA-Z0-9][\w]{2,25}$/);
-// const userIdRegexp = new RegExp(/^[0-9]{0,20}$/);
-// const userIdSubmitRegexp = new RegExp(/^[0-9]{1,20}$/);
+const usernameRegex = /^([a-zA-Z0-9]\w{0,24})$/;
 
-export const isValidSearchSubmit = (value: string | undefined) => {
-    if (value === undefined) {
-        return false;
+export const clearMismatchedChars = (value: string) => value.replace(/[\W]+/g, '');
+export const containsDisplayName = (value: string) => usernameRegex.test(value);
+export const adjustDisplayName = (value: string) => {
+    if (containsDisplayName(value)) {
+        return value.replace(/^_+/, '').match(usernameRegex)![0];
     }
-
-    return value.match(usernameSubmitRegexp);
-};
-
-export const isValidSearchChange = (value: string | undefined) => {
-    if (value === undefined) {
-        return false;
-    }
-
-    return value.match(usernameRegexp);
-};
-
-export const extractValidDisplayName = (value: string) => {
-    if (usernameRegex.test(value)) {
-        return value.match(usernameRegex)![0];
-    }
+    return value;
 };

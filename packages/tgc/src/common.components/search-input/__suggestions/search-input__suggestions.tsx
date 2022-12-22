@@ -2,6 +2,7 @@ import b from 'b_';
 import cx from 'classnames';
 import { Spin, Text } from 'platform-components';
 import React from 'react';
+import './search-input__suggestions.scss';
 
 export interface SuggestionProps {
     suggestions: Array<string>;
@@ -17,7 +18,7 @@ const SearchInputSuggestions = ({ suggestions, isSuggestionsLoading, handleOnCli
     return (
         <ul className={cx(b('search-input', 'suggestions'), 'custom-scroll')}>
             {isSuggestionsLoading && <Spin size={Spin.SIZE.S}/>}
-            {suggestions.map(suggestion => (<Text handleClick={() => handleOnClick(suggestion)}
+            {suggestions.map(suggestion => (<Text handleClick={() => handleOnClick(suggestion)} key={suggestion}
                 tag={Text.TAG.LI}
             >{suggestion}</Text>))}
         </ul>);

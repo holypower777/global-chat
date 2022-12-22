@@ -71,6 +71,12 @@ const Input = ({
         }
     };
 
+    const keyUpHandler = () => {
+        if (handleKeyUp) {
+            handleKeyUp();
+        }
+    };
+
     return (
         <div className={cx(b('input', { disabled, readonly, size, focus }), mix)} data-testid="input">
             {prefix && <div className={b('input', 'prefix', { size, disabled })}>{prefix}</div>}
@@ -84,7 +90,7 @@ const Input = ({
                 onChange={handleChange}
                 onFocus={() => (setFocus(true))}
                 onKeyDown={keyDownHandler}
-                onKeyUp={handleKeyUp}
+                onKeyUp={keyUpHandler}
                 placeholder={placeholder}
                 readOnly={readonly}
                 required={required}

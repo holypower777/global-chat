@@ -1,3 +1,4 @@
+import './search-input.scss';
 import { useLazyGetDisplayNameSuggestionsQuery } from 'platform-apis';
 import { IconSearch, Input, LINKS, NOTIFICATIONS_DURATION, SNACKBAR_TYPE } from 'platform-components';
 import React, { useState } from 'react';
@@ -14,7 +15,10 @@ import {
     getSuggestions,
 } from '../../store/slices/twitch-user';
 import { getIsAuth } from '../../store/slices/user';
-import { addNotification, isValidSearchChange, isValidSearchSubmit } from '../../utils';
+import {
+    addNotification, adjustDisplayName, clearMismatchedChars,
+    containsDisplayName,
+} from '../../utils';
 
 import SearchInputSuggestions from './__suggestions/search-input__suggestions';
 
@@ -40,14 +44,16 @@ const SearchInput = ({ displayName: propsDisplayName = '' }:SearchInputProps) =>
     const [fetchSuggestions] = useLazyGetDisplayNameSuggestionsQuery();
 
     const handleSubmit = () => {
+        const adjustedDisplayName = adjustDisplayName(displayName);
 
+        setDisplayName(adjustedDisplayName);
         if (typingTimer) {
             clearTimeout(typingTimer);
         }
 
-        if (!isValidSearchSubmit(userType, displayName)) {
+        if (!containsDisplayName(adjustedDisplayName)) {
             addNotification({
-                id: `notification.searchInput.${userType}.submit`,
+                id: 'notification.searchInput.username.submit',
                 type: SNACKBAR_TYPE.ERROR,
                 autoHideDuration: NOTIFICATIONS_DURATION.S,
             }, dispatch);
@@ -59,33 +65,23 @@ const SearchInput = ({ displayName: propsDisplayName = '' }:SearchInputProps) =>
         dispatch(clearMessages());
         dispatch(clearSuggestions());
 
-        navigate(`${LINKS.MESSAGES}/${displayName}`);
+        navigate(`${LINKS.MESSAGES}/${adjustedDisplayName}`);
     };
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        if (!isValidSearchChange(userType, e.target.value)) {
-            addNotification({
-                id: `notification.searchInput.${userType}`,
-                type: SNACKBAR_TYPE.WARNING,
-                autoHideDuration: NOTIFICATIONS_DURATION.S,
-            }, dispatch);
-            return;
-        }
-
         if (e.target.value.length <= 2) {
             dispatch(clearSuggestions());
         }
 
-        setDisplayName(e.target.value);
+        setDisplayName(clearMismatchedChars(e.target.value));
     };
 
-    const handleSelect = () => {
-        setDisplayName(displayName);
-        handleSubmit(displayName);
+    const handleSelect = (pickedName: string) => {
+        setDisplayName(pickedName);
         dispatch(clearSuggestions());
     };
 
     return (
-        <div>
+        <div className="search-input">
             <Input
                 disabled={!isAuth || isSearchingUser}
                 handleChange={handleChange}
@@ -107,9 +103,9 @@ const SearchInput = ({ displayName: propsDisplayName = '' }:SearchInputProps) =>
 
                     setTypingTimer(id);
                 }}
-                icon={<IconSearch/>}
                 name="user-search"
-                placeholder={intl.formatMessage({ id: `search.inputPlaceholder ${!isAuth && '.userNotAuthorized'}` })}
+                placeholder={intl.formatMessage({ id: `search.inputPlaceholder${!isAuth ? '.userNotAuthorized' : ''}` })}
+                prefix={<IconSearch/>}
                 value={displayName}
             />
             <SearchInputSuggestions handleOnClick={handleSelect} isSuggestionsLoading={isSuggestionsLoading} suggestions={suggestions} />
