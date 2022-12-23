@@ -6,12 +6,12 @@ on:
     branches: [ master ]
   workflow_dispatch:
 jobs:
-  install:
-    name: Intall deps
+  lint:
+    name: Lint js, ts, css, scss
+    runs-on: ubuntu-latest
     strategy:
       matrix:
         node-version: [18.x]
-    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
       - name: Set Node.js ${{ matrix.node-version }}
@@ -24,12 +24,6 @@ jobs:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
       - run: lerna bootstrap
-  lint:
-    needs: install
-    name: Lint js, ts, css, scss
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
       - name: Lint js and ts code
         uses: borales/actions-yarn@v4
         with:
@@ -39,11 +33,23 @@ jobs:
         with:
           cmd: lint:css 
   test:
-    needs: install
     name: Tests
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [18.x]
     steps:
       - uses: actions/checkout@v3
+      - name: Set Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: Bootstrap all deps ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+      - run: lerna bootstrap
       - name: Run tests
         uses: borales/actions-yarn@v4
         with:

@@ -1,6 +1,7 @@
 export * from './body';
 export * from './error';
 export * from './messages';
+export * from './stats';
 export * from './overall-stats';
 export * from './query';
 export * from './twitch-user-channel';

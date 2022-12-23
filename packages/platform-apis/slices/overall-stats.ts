@@ -1,55 +1,32 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { setDailyStats, setIsDailyStatsFetching, setIsPlotsFetching, setIsStatsFetching, setOverallPlots, setOverallStats } from 'twitch-chat/src/store/slices/overall-stats';
+import { createApi } from '@reduxjs/toolkit/query/react';
 
-import { baseUrl, getDailyStatsDef, getOverallStatsDef, getOverallStatsPlotsDef } from '../api-defs';
-import { convertDailyStatsApi, convertOverallStatsApi, convertOverallStatsPlotsApi, DailyStats, OverallStats, OverallStatsPlots } from '../types/overall-stats';
+import { getOverallStatsDef, getOverallStatsPlotsDef } from '../api-defs';
+import { OverallStats, OverallStatsPlots } from '../types/overall-stats';
 import { GetOverallStatsPlotsQuery } from '../types/query';
+import authFetchBase from '../utils/authFetchBase';
+import convertApiToDTO from '../utils/convertApiToDTO';
 
 export const overallStatsApi = createApi({
     reducerPath: 'overallStatsApi',
-    baseQuery: fetchBaseQuery({ baseUrl }),
+    baseQuery: authFetchBase,
     endpoints: (builder) => ({
         getOverallStats: builder.query<OverallStats, void>({
             query: getOverallStatsDef,
-            transformResponse: convertOverallStatsApi,
-            onQueryStarted: async (id, { dispatch, queryFulfilled }) => {
-                dispatch(setIsStatsFetching(true));
-
-                const { data } = await queryFulfilled;
-                
-                dispatch(setOverallStats(data));
-                dispatch(setIsStatsFetching(false));
-            },
+            transformResponse: (response) =>
+                convertApiToDTO<OverallStats>(response, ['time']),
+            onQueryStarted: async (id, { dispatch, queryFulfilled }) => {},
         }),
-        getOverallStatsPlots: builder.query<OverallStatsPlots, GetOverallStatsPlotsQuery | object>({
+        getOverallStatsPlots: builder.query<
+            OverallStatsPlots,
+            GetOverallStatsPlotsQuery
+        >({
             query: getOverallStatsPlotsDef,
-            transformResponse: convertOverallStatsPlotsApi,
-            onQueryStarted: async (id, { dispatch, queryFulfilled }) => {
-                dispatch(setIsPlotsFetching(true));
-
-                const { data } = await queryFulfilled;
-
-                dispatch(setOverallPlots(data));
-                dispatch(setIsPlotsFetching(false));
-            },
-        }),
-        getDailyStats: builder.query<DailyStats, void>({
-            query: getDailyStatsDef,
-            transformResponse: convertDailyStatsApi,
-            onQueryStarted: async (id, { dispatch, queryFulfilled }) => {
-                dispatch(setIsDailyStatsFetching(true));
-
-                const { data } = await queryFulfilled;
-
-                dispatch(setDailyStats(data));
-                dispatch(setIsDailyStatsFetching(false));
-            },
+            transformResponse: (response) =>
+                convertApiToDTO<OverallStatsPlots>(response, ['time']),
+            onQueryStarted: async (id, { dispatch, queryFulfilled }) => {},
         }),
     }),
 });
 
-export const { 
-    useGetOverallStatsQuery, 
-    useGetOverallStatsPlotsQuery,
-    useGetDailyStatsQuery,
-} = overallStatsApi;
+export const { useGetOverallStatsQuery, useGetOverallStatsPlotsQuery } =
+    overallStatsApi;

@@ -1,123 +1,87 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
-import { NOTIFICATIONS_DURATION, SEARCH_TYPE, SETTINGS, SNACKBAR_TYPE } from 'platform-components';
-import { setChannels, setSelectedChannel } from 'twitch-chat/src/store/slices/channels';
-import { setMessagesDates } from 'twitch-chat/src/store/slices/messages';
-import { updateSetting } from 'twitch-chat/src/store/slices/settings';
-import { clearSuggestions, setIsSuggestionsLoading, setIsUserWithChannelsFetching, setMostActiveChannel, setSuggestions, setTwitchUser } from 'twitch-chat/src/store/slices/twitch-user';
-import { RootState } from 'twitch-chat/src/store/store';
-import { addNotification, findMostFrequestChannel } from 'twitch-chat/src/utils';
 
 import {
-    getTwitchUserWithChannelsByUsernameDef,
-    getRandomTwitchUser,
     getDisplayNameSuggestionsDef,
+    getTwitchUserByDisplayNameDef,
+    getTwitchUserChannelsDef,
+    getTwitchUserStatsDef,
+    getTwitchChannelStatsDef,
+    getRandomTwitchUserDef,
 } from '../api-defs';
-import { convertCommonUserToAPI } from '../types';
-import { DisplayNameQuery, GetTwitchUserQuery } from '../types/query';
-import { convertTwitchUserApi, TwitchUser, TwitchUserAPI } from '../types/twitch-user';
-import { convertTwitchUserChannelsApi, TwitchUserChannels, TwitchUserChannelsAPI } from '../types/twitch-user-channel';
+import { ChannelIdQuery, DisplayNameQuery, UserIdQuery } from '../types/query';
+import { TwitchUser, TwitchUserStats } from '../types/twitch-user';
+import {
+    TwitchUserChannel,
+    TwitchUserChannelStats,
+} from '../types/twitch-user-channel';
 import authFetchBase from '../utils/authFetchBase';
+import convertApiToDTO from '../utils/convertApiToDTO';
 
-import { usersApi } from './users';
-
-interface TwitchUserWithChannelsResponseTypeRaw {
-    user: TwitchUserAPI;
-    channels: TwitchUserChannelsAPI;
-    messages_dates: Array<string>;
+interface TwitchUserChannelsResponseType {
+    items: Array<TwitchUserChannel>;
+    mostEngagment: Array<TwitchUserChannel>;
+    lastActive: Array<TwitchUserChannel>;
 }
-
-interface TwitchUserWithChannelsResponseType {
-    user: TwitchUser;
-    channels: TwitchUserChannels;
-    messagesDates: Array<Date>;
-}
-
-type TwitchUserResponseType = TwitchUser;
 
 export const twitchUsersApi = createApi({
     reducerPath: 'twitchUsersApi',
     baseQuery: authFetchBase,
     endpoints: (builder) => ({
-        getRandomTwitchUser: builder.query<TwitchUserResponseType, void>({
-            query: getRandomTwitchUser,
-            keepUnusedDataFor: 0,
-            transformResponse: convertTwitchUserApi,
-            onQueryStarted: async (id, { dispatch, queryFulfilled }) => {
-                await queryFulfilled;
-                dispatch(updateSetting({ key: SETTINGS.USER_TYPE, value: SEARCH_TYPE.USERNAME }));
-            },
+        getTwitchUser: builder.query<TwitchUser, DisplayNameQuery>({
+            query: getTwitchUserByDisplayNameDef,
+            transformResponse: (response) =>
+                convertApiToDTO<TwitchUser>(response, ['createdAt']),
+            onQueryStarted: async (id, { dispatch, queryFulfilled }) => {},
         }),
-        getTwitchUserWithChannelsByUsername:
-            builder.query<TwitchUserWithChannelsResponseType, GetTwitchUserQuery>({
-                query: getTwitchUserWithChannelsByUsernameDef,
-                transformResponse: (response: TwitchUserWithChannelsResponseTypeRaw) => {
-                    return {
-                        user: convertTwitchUserApi(response.user),
-                        channels: convertTwitchUserChannelsApi(response.channels),
-                        messagesDates: response.messages_dates ? response.messages_dates.map((e) => new Date(e)) : [],
-                    };
-                },
-                onQueryStarted: async (id, { dispatch, getState, queryFulfilled }) => {
-                    dispatch(setIsUserWithChannelsFetching(true));
-                    dispatch(setSelectedChannel(null));
-
-                    try {
-                        const { meta, data } = await queryFulfilled; //@ts-ignore
-                        const responsesLeft = meta.response.headers.get('Ratelimit-Remaining'); //@ts-ignore
-                        const firstRequest = meta.response.headers.get('First-Request') || 0;
-
-                        dispatch(updateSetting({ key: SETTINGS.FIRST_REQUEST, value: Number(firstRequest) }));
-
-                        if (Number(responsesLeft) === 1) {
-                            addNotification({
-                                id: 'notification.oneRequestLeft',
-                                type: SNACKBAR_TYPE.WARNING,
-                                autoHideDuration: NOTIFICATIONS_DURATION.M,
-                            }, dispatch);
-                        }
-
-                        dispatch(setTwitchUser(data.user));
-                        dispatch(setMostActiveChannel(findMostFrequestChannel(data.channels)));
-                        dispatch(setChannels(data.channels));
-                        dispatch(setMessagesDates(data.messagesDates));
-
-                        const userId = (getState() as RootState).user.userId;
-
-                        if (userId !== 0) {
-                            dispatch(usersApi.endpoints.postSearchHistory.initiate({
-                                userId,
-                                body: convertCommonUserToAPI({
-                                    userId: data.user.userId,
-                                    displayName: data.user.displayName,
-                                    profileImageUrl: data.user.profileImageUrl,
-                                }),
-                            }));
-                        }
-
-                        dispatch(setIsUserWithChannelsFetching(false));
-                    } catch (error) {
-                        dispatch(setIsUserWithChannelsFetching(false));
-                    }
-                },
-            }),
-        getDisplayNameSuggestions:
-            builder.query<Array<string>, DisplayNameQuery>({
-                query: getDisplayNameSuggestionsDef,
-                transformResponse: (response: Array<string> | null) => response && response.length > 0 ? response : [],
-                onQueryStarted: async (id, { dispatch, queryFulfilled }) => {
-                    dispatch(setIsSuggestionsLoading(true));
-                    dispatch(clearSuggestions());
-                    const { data } = await queryFulfilled;
-
-                    dispatch(setSuggestions(data));
-                    dispatch(setIsSuggestionsLoading(false));
-                },
-            }),
+        getTwitchUserChannels: builder.query<
+            TwitchUserChannelsResponseType,
+            UserIdQuery
+        >({
+            query: getTwitchUserChannelsDef,
+            transformResponse: (response) =>
+                convertApiToDTO<TwitchUserChannelsResponseType>(response, [
+                    'firstMsgDate',
+                    'lastMsgDate',
+                ]),
+            onQueryStarted: async (id, { dispatch, queryFulfilled }) => {},
+        }),
+        getTwitchUserStats: builder.query<TwitchUserStats, UserIdQuery>({
+            query: getTwitchUserStatsDef,
+            transformResponse: (response) =>
+                convertApiToDTO<TwitchUserStats>(response),
+            onQueryStarted: async (id, { dispatch, queryFulfilled }) => {},
+        }),
+        getTwitchChannelStats: builder.query<
+            TwitchUserChannelStats,
+            ChannelIdQuery
+        >({
+            query: getTwitchChannelStatsDef,
+            transformResponse: (response) =>
+                convertApiToDTO<TwitchUserChannelStats>(response),
+            onQueryStarted: async (id, { dispatch, queryFulfilled }) => {},
+        }),
+        getDisplayNameSuggestions: builder.query<
+            Array<string>,
+            DisplayNameQuery
+        >({
+            query: getDisplayNameSuggestionsDef,
+            onQueryStarted: async (id, { dispatch, queryFulfilled }) => {},
+        }),
+        getRandomTwitchUser: builder.query<TwitchUser, void>({
+            query: getRandomTwitchUserDef,
+            keepUnusedDataFor: 0,
+            transformResponse: (response) =>
+                convertApiToDTO<TwitchUser>(response, ['createdAt']),
+            onQueryStarted: async (id, { dispatch, queryFulfilled }) => {},
+        }),
     }),
 });
 
 export const {
-    useLazyGetTwitchUserWithChannelsByUsernameQuery,
-    useLazyGetRandomTwitchUserQuery,
+    useGetTwitchUserQuery,
+    useLazyGetTwitchUserChannelsQuery,
+    useLazyGetTwitchUserStatsQuery,
+    useLazyGetTwitchChannelStatsQuery,
     useLazyGetDisplayNameSuggestionsQuery,
+    useLazyGetRandomTwitchUserQuery,
 } = twitchUsersApi;

@@ -1,10 +1,16 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
-import { pushMessages, setIsMessagesFetching } from 'twitch-chat/src/store/slices/messages';
 
-import { getMessagesByUserIdAndChannelIdDef } from '../api-defs';
-import { convertMessagesApi, Messages, MessagesAPI } from '../types/messages';
-import { GetTwitchUserWithChannelsQuery } from '../types/query';
+import {
+    getMessagesByChannelIdDef,
+    getMessagesByUserIdAndChannelIdDef,
+} from '../api-defs';
+import { TwitchMessages } from '../types';
+import {
+    GetMessagesByChannelIdQuery,
+    GetMessagesByUserAndChannelIdQuery,
+} from '../types/query';
 import authFetchBase from '../utils/authFetchBase';
+import convertApiToDTO from '../utils/convertApiToDTO';
 
 interface MessagesOfChannelsResponseCommonType {
     dateFrom: string;
@@ -17,37 +23,36 @@ interface MessagesOfChannelsResponseCommonType {
     total: number;
 }
 
-interface MessagesOfChannelsResponseTypeRaw extends MessagesOfChannelsResponseCommonType {
-    items: MessagesAPI;
-}
-
-interface MessagesOfChannelsResponseType extends MessagesOfChannelsResponseCommonType {
-    items: Messages;
+interface MessagesResponseTypeRaw extends MessagesOfChannelsResponseCommonType {
+    items: Array<unknown>;
 }
 
 export const messagesApi = createApi({
     reducerPath: 'messagesApi',
     baseQuery: authFetchBase,
     endpoints: (builder) => ({
-        getMessagesByUserIdAndChannelId: 
-            builder.query<MessagesOfChannelsResponseType, GetTwitchUserWithChannelsQuery>({
-                query: getMessagesByUserIdAndChannelIdDef,
-                transformResponse: (response: MessagesOfChannelsResponseTypeRaw) => ({
-                    ...response,
-                    items: convertMessagesApi(response.items),
-                }),
-                onQueryStarted: async (id, { dispatch, queryFulfilled }) => {
-                    dispatch(setIsMessagesFetching(true));
-
-                    const { data } = await queryFulfilled;
-
-                    dispatch(pushMessages(data.items));
-                    dispatch(setIsMessagesFetching(false));
-                },
-            }),
+        getMessagesByUserIdAndChannelId: builder.query<
+            TwitchMessages,
+            GetMessagesByUserAndChannelIdQuery
+        >({
+            query: getMessagesByUserIdAndChannelIdDef,
+            transformResponse: (response: MessagesResponseTypeRaw) =>
+                convertApiToDTO<TwitchMessages>(response.items, ['time']),
+            onQueryStarted: async (id, { dispatch, queryFulfilled }) => {},
+        }),
+        getChannelMessages: builder.query<
+            TwitchMessages,
+            GetMessagesByChannelIdQuery
+        >({
+            query: getMessagesByChannelIdDef,
+            transformResponse: (response: MessagesResponseTypeRaw) =>
+                convertApiToDTO<TwitchMessages>(response.items, ['time']),
+            onQueryStarted: async (id, { dispatch, queryFulfilled }) => {},
+        }),
     }),
 });
 
 export const {
+    useLazyGetChannelMessagesQuery,
     useLazyGetMessagesByUserIdAndChannelIdQuery,
 } = messagesApi;

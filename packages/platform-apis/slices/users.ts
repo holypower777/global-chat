@@ -1,51 +1,52 @@
 import { createApi } from '@reduxjs/toolkit/dist/query/react';
-import { setUser, updateUserFavorites, updateUserHistory } from 'twitch-chat/src/store/slices/user';
 
-import { deleteUserFavoriteDef, getUserByIdDef, postSearchHistoryDef, postUserFavoriteDef } from '../api-defs';
-import { TokenQuery, User, UserIdQuery } from '../types';
+import {
+    deleteUserFavoriteDef,
+    getUserByIdDef,
+    postSearchHistoryDef,
+    postUserFavoriteDef,
+} from '../api-defs';
+import { TwitchUsersCommon, User, UserIdQuery } from '../types';
 import { UserCommonBody } from '../types/body';
-import { convertCommonUsersApi, convertUserApi, UserCommons } from '../types/user';
 import authFetchBase from '../utils/authFetchBase';
+import convertApiToDTO from '../utils/convertApiToDTO';
 
 export const usersApi = createApi({
     reducerPath: 'usersApi',
     baseQuery: authFetchBase,
     endpoints: (builder) => ({
-        getUserById: builder.query<User, UserIdQuery & TokenQuery>({
+        getUserById: builder.query<User, UserIdQuery>({
             query: getUserByIdDef,
-            transformResponse: convertUserApi,
-            onQueryStarted: async (id, { dispatch, queryFulfilled }) => {
-                const { data } = await queryFulfilled;
-
-                dispatch(setUser(data));
-            },
+            transformResponse: (response) =>
+                convertApiToDTO<User>(response, ['paidUntil', 'joinedAt']),
+            onQueryStarted: async (id, { dispatch, queryFulfilled }) => {},
         }),
-        postUserFavorite: builder.mutation<UserCommons, UserIdQuery & UserCommonBody>({
+        postUserFavorite: builder.mutation<
+            TwitchUsersCommon,
+            UserIdQuery & UserCommonBody
+        >({
             query: postUserFavoriteDef,
-            transformResponse: convertCommonUsersApi,
-            onQueryStarted: async (id, { dispatch, queryFulfilled }) => {
-                const { data } = await queryFulfilled;
-
-                dispatch(updateUserFavorites(data));
-            },
+            transformResponse: (response) =>
+                convertApiToDTO<TwitchUsersCommon>(response),
+            onQueryStarted: async (id, { dispatch, queryFulfilled }) => {},
         }),
-        deleteUserFavorite: builder.mutation<UserCommons, UserIdQuery & UserCommonBody>({
+        deleteUserFavorite: builder.mutation<
+            TwitchUsersCommon,
+            UserIdQuery & UserCommonBody
+        >({
             query: deleteUserFavoriteDef,
-            transformResponse: convertCommonUsersApi,
-            onQueryStarted: async (id, { dispatch, queryFulfilled }) => {
-                const { data } = await queryFulfilled;
-
-                dispatch(updateUserFavorites(data));
-            },
+            transformResponse: (response) =>
+                convertApiToDTO<TwitchUsersCommon>(response),
+            onQueryStarted: async (id, { dispatch, queryFulfilled }) => {},
         }),
-        postSearchHistory: builder.mutation<UserCommons, UserIdQuery & UserCommonBody>({
+        postSearchHistory: builder.mutation<
+            TwitchUsersCommon,
+            UserIdQuery & UserCommonBody
+        >({
             query: postSearchHistoryDef,
-            transformResponse: convertCommonUsersApi,
-            onQueryStarted: async (id, { dispatch, queryFulfilled }) => {
-                const { data } = await queryFulfilled;
-
-                dispatch(updateUserHistory(data));
-            },
+            transformResponse: (response) =>
+                convertApiToDTO<TwitchUsersCommon>(response),
+            onQueryStarted: async (id, { dispatch, queryFulfilled }) => {},
         }),
     }),
 });
@@ -54,4 +55,5 @@ export const {
     useLazyGetUserByIdQuery,
     usePostUserFavoriteMutation,
     useDeleteUserFavoriteMutation,
+    usePostSearchHistoryMutation,
 } = usersApi;

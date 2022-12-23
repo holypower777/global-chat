@@ -22,22 +22,31 @@ module.exports = {
             },
             {
                 test: /\.(s(a|c)ss)$/,
-                use: [MiniCssExtractPlugin.loader, 'css-loader', {
-                    loader: 'sass-loader',
-                    options: {
-                        sassOptions: {
-                            includePaths: [path.resolve(__dirname, './packages/platform-components/src')],
+                use: [
+                    MiniCssExtractPlugin.loader,
+                    'css-loader',
+                    {
+                        loader: 'sass-loader',
+                        options: {
+                            sassOptions: {
+                                includePaths: [
+                                    path.resolve(
+                                        __dirname,
+                                        './packages/platform-components/src'
+                                    ),
+                                ],
+                            },
                         },
                     },
-                }],
+                ],
             },
         ],
     },
     resolve: {
         extensions: ['.ts', '.tsx', '.js', '.json'],
         fallback: {
-            'stream': require.resolve('stream-browserify'),
-            'crypto': require.resolve('crypto-browserify'),
+            stream: require.resolve('stream-browserify'),
+            crypto: require.resolve('crypto-browserify'),
         },
     },
 };

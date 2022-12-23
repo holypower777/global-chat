@@ -1,4 +1,3 @@
-/* eslint-disable camelcase */
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/dist/query/react';
 
 import { baseBadgesUrl, getSubscriberBadgesByChannelIdDef } from '../api-defs';
@@ -16,7 +15,10 @@ export const subscriberBadgesApi = createApi({
     reducerPath: 'subscriberBadgesApi',
     baseQuery: fetchBaseQuery({ baseUrl: baseBadgesUrl }),
     endpoints: (builder) => ({
-        getSubscriberBadgesByChannelId: builder.query<SubscriberBadgesResponseType, ChannelIdQuery>({
+        getSubscriberBadgesByChannelId: builder.query<
+            SubscriberBadgesResponseType,
+            ChannelIdQuery
+        >({
             query: getSubscriberBadgesByChannelIdDef,
             transformResponse: (response: SubscriberBadgesResponseTypeRaw) => ({
                 badgeSets: response.badge_sets,
@@ -25,4 +27,5 @@ export const subscriberBadgesApi = createApi({
     }),
 });
 
-export const { useLazyGetSubscriberBadgesByChannelIdQuery } = subscriberBadgesApi;
+export const { useLazyGetSubscriberBadgesByChannelIdQuery } =
+    subscriberBadgesApi;
