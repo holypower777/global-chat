@@ -71,7 +71,7 @@ export const Variants: StoryFn<typeof Input> = () => (
             prefix={<IconSearch />}
         />
         <Input
-            placeholder="Input with prefix"
+            placeholder="Input with suffix"
             suffix={<IconSearch />}
         />
         <Input disabled placeholder="disabled" />

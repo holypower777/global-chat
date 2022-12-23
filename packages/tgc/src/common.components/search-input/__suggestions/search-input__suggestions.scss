@@ -1,0 +1,54 @@
+@import 'design/colors';
+@import 'design/transitions';
+@import 'design/shadows';
+@import 'design/mixins';
+@import 'design/breakpoints';
+
+.search-input
+{
+  &__suggestions
+  {
+    position: absolute;
+    z-index: 8;
+    top: 51px;
+    left: 0;
+
+    display: flex;
+    overflow-y: auto;
+
+    flex-direction: column;
+    gap: 8px;
+
+    width: 480px;
+    max-height: 180px;
+
+    padding: 10px;
+
+    color: $Black;
+
+    background-color: $WildSand;
+    box-shadow: $shadow300;
+
+    .spin
+    {
+      margin: 0 auto;
+    }
+
+    li
+    {
+      cursor: pointer;
+
+      transition: $transitionColor01;
+
+      &:hover
+      {
+        color: $Twitch;
+      }
+    }
+
+    @include media-breakpoint-down($tabletBp)
+    {
+      width: inherit;
+    }
+  }
+}

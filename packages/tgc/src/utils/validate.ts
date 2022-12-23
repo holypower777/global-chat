@@ -1,30 +1,10 @@
-import { SEARCH_TYPE } from 'platform-components/src/components/constants';
+const usernameRegex = /^([a-zA-Z0-9]\w{0,24})$/;
 
-const usernameRegexp = new RegExp(/^[\w]{0,25}$/);
-const usernameSubmitRegexp = new RegExp(/^[a-zA-Z0-9][\w]{2,25}$/);
-const userIdRegexp = new RegExp(/^[0-9]{0,20}$/);
-const userIdSubmitRegexp = new RegExp(/^[0-9]{1,20}$/);
-
-export const isValidSearchSubmit = (userType: SEARCH_TYPE, value: string | undefined) => {
-    if (value === undefined) {
-        return false;
+export const clearMismatchedChars = (value: string) => value.replace(/[\W]+/g, '');
+export const containsDisplayName = (value: string) => usernameRegex.test(value);
+export const adjustDisplayName = (value: string) => {
+    if (containsDisplayName(value)) {
+        return value.replace(/^_+/, '').match(usernameRegex)![0];
     }
-
-    if (!value.match(userType === SEARCH_TYPE.USERNAME ? usernameSubmitRegexp : userIdSubmitRegexp)) {
-        return false;
-    }
-
-    return true;
-};
-
-export const isValidSearchChange = (userType: SEARCH_TYPE, value: string | undefined) => {
-    if (value === undefined) {
-        return false;
-    }
-
-    if (!value.match(userType === SEARCH_TYPE.USERNAME ? usernameRegexp : userIdRegexp)) {
-        return false;
-    }
-
-    return true;
+    return value;
 };
