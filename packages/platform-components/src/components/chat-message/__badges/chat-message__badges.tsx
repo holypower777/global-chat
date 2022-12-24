@@ -1,4 +1,3 @@
-/* eslint-disable react/no-multi-comp */
 import b from 'b_';
 import React from 'react';
 
@@ -9,7 +8,7 @@ import './chat-message__badges.scss';
 
 interface ChatMessageBadges {
     subBadges: object;
-    badges: string | undefined;
+    badges?: string;
 }
 
 const ChatMessageBadges = ({ subBadges, badges }: ChatMessageBadges) => {
@@ -30,7 +29,7 @@ const ChatMessageBadges = ({ subBadges, badges }: ChatMessageBadges) => {
                         !subBadges || //@ts-ignore
                         !subBadges.badgeSets || //@ts-ignore
                         !subBadges.badgeSets.subscriber || //@ts-ignore
-                        !subBadges.badgeSets.subscriber.versions[version] ||//@ts-ignore
+                        !subBadges.badgeSets.subscriber.versions[version] || //@ts-ignore
                         !subBadges.badgeSets.subscriber.versions[version].image_url_1x
                     ) {
                         imageSrc = commonBadges.subscriber.versions[1].image_url_1x;
@@ -39,14 +38,17 @@ const ChatMessageBadges = ({ subBadges, badges }: ChatMessageBadges) => {
                         imageSrc = subBadges.badgeSets.subscriber.versions[version].image_url_1x;
                     }
                 } else {
-                    //@ts-ignore
-                    // eslint-disable-next-line no-lonely-if
-                    if (commonBadges[badge] && commonBadges[badge].versions[version] && commonBadges[badge].versions[version].image_url_1x) {
+                    if (
+                        //@ts-ignore
+                        commonBadges[badge] && //@ts-ignore
+                        commonBadges[badge].versions[version] && //@ts-ignore
+                        commonBadges[badge].versions[version].image_url_1x
+                    ) {
                         //@ts-ignore
                         imageSrc = commonBadges[badge].versions[version].image_url_1x;
                     }
                 }
-                
+
                 if (imageSrc) {
                     return <Badge imageSrc={imageSrc} key={i} />;
                 }

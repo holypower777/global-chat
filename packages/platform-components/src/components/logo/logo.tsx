@@ -31,13 +31,19 @@ const Logo = ({ full = false }: LogoProps) => {
             <H1
                 id="logo.text"
                 mix={b('logo', 'text', { desktop: true })}
-                values={{ platform: <span className={b('logo', 'text', { twitch: true })}>Twitch</span> }}
+                values={{
+                    platform: <span className={b('logo', 'text', { twitch: true })}>Twitch</span>,
+                }}
             />
-            {!full && <H1
-                id="logo.text.small"
-                mix={b('logo', 'text', { mobile: true })}
-                values={{ platform: <span className={b('logo', 'text', { twitch: true })}>T</span> }}
-            />}
+            {!full && (
+                <H1
+                    id="logo.text.small"
+                    mix={b('logo', 'text', { mobile: true })}
+                    values={{
+                        platform: <span className={b('logo', 'text', { twitch: true })}>T</span>,
+                    }}
+                />
+            )}
             <div className={b('logo', 'smile')}>
                 {transitions(({ opacity }, item) =>
                     item ? (

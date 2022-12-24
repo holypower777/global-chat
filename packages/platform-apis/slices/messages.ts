@@ -1,14 +1,8 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
 
-import {
-    getMessagesByChannelIdDef,
-    getMessagesByUserIdAndChannelIdDef,
-} from '../api-defs';
+import { getMessagesByChannelIdDef, getMessagesByUserIdAndChannelIdDef } from '../api-defs';
 import { TwitchMessages } from '../types';
-import {
-    GetMessagesByChannelIdQuery,
-    GetMessagesByUserAndChannelIdQuery,
-} from '../types/query';
+import { GetMessagesByChannelIdQuery, GetMessagesByUserAndChannelIdQuery } from '../types/query';
 import authFetchBase from '../utils/authFetchBase';
 import convertApiToDTO from '../utils/convertApiToDTO';
 
@@ -38,21 +32,18 @@ export const messagesApi = createApi({
             query: getMessagesByUserIdAndChannelIdDef,
             transformResponse: (response: MessagesResponseTypeRaw) =>
                 convertApiToDTO<TwitchMessages>(response.items, ['time']),
+            // eslint-disable-next-line @typescript-eslint/no-unused-vars
             onQueryStarted: async (id, { dispatch, queryFulfilled }) => {},
         }),
-        getChannelMessages: builder.query<
-            TwitchMessages,
-            GetMessagesByChannelIdQuery
-        >({
+        getChannelMessages: builder.query<TwitchMessages, GetMessagesByChannelIdQuery>({
             query: getMessagesByChannelIdDef,
             transformResponse: (response: MessagesResponseTypeRaw) =>
                 convertApiToDTO<TwitchMessages>(response.items, ['time']),
+            // eslint-disable-next-line @typescript-eslint/no-unused-vars
             onQueryStarted: async (id, { dispatch, queryFulfilled }) => {},
         }),
     }),
 });
 
-export const {
-    useLazyGetChannelMessagesQuery,
-    useLazyGetMessagesByUserIdAndChannelIdQuery,
-} = messagesApi;
+export const { useLazyGetChannelMessagesQuery, useLazyGetMessagesByUserIdAndChannelIdQuery } =
+    messagesApi;

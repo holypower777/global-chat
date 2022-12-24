@@ -1,72 +1,66 @@
-import { createSelector, createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { Messages } from 'platform-apis/types';
+// @reference
+// import { createSelector, createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { RootState } from '../store';
+// import { Messages } from 'platform-apis/types';
 
-interface MessagesState {
-    messages: Messages;
-    messagesDates: Array<Date>;
-    isFetching: boolean;
-}
+// import { RootState } from '../store';
 
-const initialState: MessagesState = {
-    messages: [],
-    messagesDates: [],
-    isFetching: false,
-};
+// interface MessagesState {
+//     messages: Messages;
+//     messagesDates: Array<Date>;
+//     isFetching: boolean;
+// }
 
-export const messagesSlice = createSlice({
-    name: 'messages',
-    initialState,
-    reducers: {
-        setMessages: (state, action: PayloadAction<Messages>) => {
-            state.messages = action.payload;
-        },
-        pushMessages: (state, action: PayloadAction<Messages>) => {
-            state.messages.push(...action.payload);
-        },
-        setMessagesDates: (state, action: PayloadAction<Array<Date>>) => {
-            state.messagesDates = action.payload;
-        },
-        clearMessages: (state) => {
-            state.messages = [];
-        },
-        setIsMessagesFetching: (state, action: PayloadAction<boolean>) => {
-            state.isFetching = action.payload;
-        },
-    },
-});
+// const initialState: MessagesState = {
+//     messages: [],
+//     messagesDates: [],
+//     isFetching: false,
+// };
 
-export const {
-    setMessages,
-    pushMessages,
-    setMessagesDates,
-    clearMessages,
-    setIsMessagesFetching,
-} = messagesSlice.actions;
+// export const messagesSlice = createSlice({
+//     name: 'messages',
+//     initialState,
+//     reducers: {
+//         setMessages: (state, action: PayloadAction<Messages>) => {
+//             state.messages = action.payload;
+//         },
+//         pushMessages: (state, action: PayloadAction<Messages>) => {
+//             state.messages.push(...action.payload);
+//         },
+//         setMessagesDates: (state, action: PayloadAction<Array<Date>>) => {
+//             state.messagesDates = action.payload;
+//         },
+//         clearMessages: (state) => {
+//             state.messages = [];
+//         },
+//         setIsMessagesFetching: (state, action: PayloadAction<boolean>) => {
+//             state.isFetching = action.payload;
+//         },
+//     },
+// });
 
-const getRootMessages = (state: RootState) => state.messages;
-export const getMessages = createSelector(
-    getRootMessages,
-    (rootMessages) => {
-        let previousDay = 0;
-        return rootMessages.messages.map((msg) => {
-            if (previousDay !== msg.time!.getDate()) {
-                previousDay = msg.time!.getDate();
-                return { ...msg, renderDate: true };
-            }
+// export const { setMessages, pushMessages, setMessagesDates, clearMessages, setIsMessagesFetching } =
+//     messagesSlice.actions;
 
-            return msg;
-        });
-    },
-);
-export const getMessagesDates = createSelector(
-    getRootMessages,
-    (rootMessages) => rootMessages.messagesDates,
-);
-export const getIsMessagesFetching = createSelector(
-    getRootMessages,
-    (rootMessages) => rootMessages.isFetching
-);
+// const getRootMessages = (state: RootState) => state.messages;
+// export const getMessages = createSelector(getRootMessages, (rootMessages) => {
+//     let previousDay = 0;
+//     return rootMessages.messages.map((msg) => {
+//         if (previousDay !== msg.time!.getDate()) {
+//             previousDay = msg.time!.getDate();
+//             return { ...msg, renderDate: true };
+//         }
 
-export default messagesSlice.reducer;
+//         return msg;
+//     });
+// });
+// export const getMessagesDates = createSelector(
+//     getRootMessages,
+//     (rootMessages) => rootMessages.messagesDates
+// );
+// export const getIsMessagesFetching = createSelector(
+//     getRootMessages,
+//     (rootMessages) => rootMessages.isFetching
+// );
+
+// export default messagesSlice.reducer;

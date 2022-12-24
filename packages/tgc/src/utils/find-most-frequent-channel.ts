@@ -1,17 +1,18 @@
-import { TwitchUserChannels } from 'platform-apis/types';
+// @reference
+// import { TwitchUserChannels } from 'platform-apis/types';
 
-const findMostFrequestChannel = (channels: TwitchUserChannels) => {
-    let mostFreq = '';
-    let max = 0;
+// const findMostFrequestChannel = (channels: TwitchUserChannels) => {
+//     let mostFreq = '';
+//     let max = 0;
 
-    channels.forEach((chan) => {
-        if (chan.messages > max) {
-            max = chan.messages;
-            mostFreq = chan.displayName;
-        }
-    });
+//     channels.forEach((chan) => {
+//         if (chan.messages > max) {
+//             max = chan.messages;
+//             mostFreq = chan.displayName;
+//         }
+//     });
 
-    return mostFreq;
-};
+//     return mostFreq;
+// };
 
-export default findMostFrequestChannel;
+// export default findMostFrequestChannel;

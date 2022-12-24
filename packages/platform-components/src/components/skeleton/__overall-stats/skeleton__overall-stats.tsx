@@ -12,11 +12,13 @@ const SkeletonOverallStats = React.memo(({ disablePlots = false }: SkeletonOvera
 
     return (
         <div className={baseClassName}>
-            {!disablePlots && <div className={b(baseClassName, 'plots')}>
-                <div className={b(baseClassName, 'plots-plot')} />
-                <div className={b(baseClassName, 'plots-plot')} />
-                <div className={b(baseClassName, 'plots-plot')} />
-            </div>} 
+            {!disablePlots && (
+                <div className={b(baseClassName, 'plots')}>
+                    <div className={b(baseClassName, 'plots-plot')} />
+                    <div className={b(baseClassName, 'plots-plot')} />
+                    <div className={b(baseClassName, 'plots-plot')} />
+                </div>
+            )}
             <div className={b(baseClassName, 'stats')}>
                 <div className={b(baseClassName, 'stats-amount-msg')} />
                 <div className={b(baseClassName, 'stats-unique-users')} />

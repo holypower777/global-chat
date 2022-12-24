@@ -1,3 +1,4 @@
+/* eslint-disable react/no-multi-comp */
 import { Meta, StoryFn } from '@storybook/react';
 import React from 'react';
 
@@ -13,9 +14,7 @@ export default {
 } as Meta<typeof Icons.default>;
 
 export const Overview: StoryFn<typeof Icons.default> = (args) => (
-    <StoryOverview
-        componentName="Icon"
-    >
+    <StoryOverview componentName="Icon">
         <Icons.IconTwitch {...args} />
     </StoryOverview>
 );
@@ -33,13 +32,15 @@ export const Sizes: StoryFn<typeof Icons.default> = () => (
         {Object.keys(Icons).map((iconName) => {
             if (iconName !== 'default') {
                 return (
-                    <Spacer>
+                    <Spacer key={iconName}>
                         <Text>{iconName}</Text>
                         <Spacer direction="row">
-                            {Object.values(Icons.default.SIZE).reverse().map((size) =>
-                                //@ts-ignore
-                                Icons[iconName]({ size })
-                            )}
+                            {Object.values(Icons.default.SIZE)
+                                .reverse()
+                                .map((size) =>
+                                    //@ts-ignore
+                                    Icons[iconName]({ size })
+                                )}
                         </Spacer>
                     </Spacer>
                 );

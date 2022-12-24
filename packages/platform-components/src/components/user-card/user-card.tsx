@@ -44,8 +44,8 @@ const UserCard = ({
     }, [height]);
 
     return (
-        <animated.div 
-            className={cx(b('user-card', { open: isOpen }), mix)} 
+        <animated.div
+            className={cx(b('user-card', { open: isOpen }), mix)}
             data-testid="user-card"
             style={expand}
         >
@@ -53,11 +53,11 @@ const UserCard = ({
                 <UserCardHeader
                     displayName={displayName}
                     handleStarClick={handleStarClick}
-                    handleToggle={() => (setIsOpen(!isOpen))}
+                    handleToggle={() => setIsOpen(!isOpen)}
                     isBroadcaster={isBroadcaster}
                     isFavorite={isFavorite}
                 />
-                {isOpen && <UserCardSettings updateSettings={handleSettingsUpdate} />}
+                {isOpen ? <UserCardSettings updateSettings={handleSettingsUpdate} /> : null}
             </div>
         </animated.div>
     );

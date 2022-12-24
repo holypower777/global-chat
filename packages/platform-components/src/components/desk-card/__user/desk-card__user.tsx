@@ -41,9 +41,10 @@ const DeskCardUser = ({
             >
                 <div className={b('desk-card', 'user-container')}>
                     <img alt="user avatar" src={avatar} />
-                    <Text ellipsis size={Text.SIZE.S}>{displayName}</Text>
+                    <Text ellipsis size={Text.SIZE.S}>
+                        {displayName}
+                    </Text>
                 </div>
-
             </div>
             <UserPanelInfo
                 handleLogout={handleLogout}

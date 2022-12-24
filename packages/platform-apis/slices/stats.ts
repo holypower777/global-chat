@@ -10,8 +10,8 @@ export const statsApi = createApi({
     endpoints: (builder) => ({
         getDailyStats: builder.query<DailyStats, void>({
             query: getDailyStatsDef,
-            transformResponse: (response) =>
-                convertApiToDTO<DailyStats>(response),
+            transformResponse: (response) => convertApiToDTO<DailyStats>(response),
+            // eslint-disable-next-line @typescript-eslint/no-unused-vars
             onQueryStarted: async (id, { dispatch, queryFulfilled }) => {},
         }),
     }),

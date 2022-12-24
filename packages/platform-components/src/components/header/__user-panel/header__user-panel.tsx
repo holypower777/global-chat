@@ -1,6 +1,7 @@
 import b from 'b_';
-import { User, UserCommonAPI } from 'platform-apis/types';
 import React, { useState } from 'react';
+
+import { User, TwitchUserCommon } from 'platform-apis/types';
 
 import { SimpleCallback } from '../../../typings';
 import { LINKS } from '../../constants';
@@ -13,7 +14,7 @@ import UserPanelInfo from './__user-panel__info/__user-panel__info';
 export interface UserPanelProps {
     user: User;
     handleLogout: SimpleCallback;
-    handleRemoveFavorite: (user: UserCommonAPI) => void;
+    handleRemoveFavorite: (user: TwitchUserCommon) => void;
 }
 
 const HeaderUserPanel = ({ user, handleLogout, handleRemoveFavorite }: UserPanelProps) => {
@@ -21,11 +22,15 @@ const HeaderUserPanel = ({ user, handleLogout, handleRemoveFavorite }: UserPanel
 
     return (
         <div className={b('header', 'user-panel', { open: isPanelOpen })}>
-            {user.userId !== 0
-                ? <IconUser handleClick={() => setIsPanelOpen(true)} />
-                : <a className={b('header', 'link')} href={LINKS.AUTH}>
-                    <Text id="user-panel.login" weight={Text.WEIGHT.M} />
-                </a>
+            {
+                /** @ts-ignore */
+                user.userId !== 0 ? (
+                    <IconUser handleClick={() => setIsPanelOpen(true)} />
+                ) : (
+                    <a className={b('header', 'link')} href={LINKS.AUTH}>
+                        <Text id="user-panel.login" weight={Text.WEIGHT.M} />
+                    </a>
+                )
             }
             <UserPanelInfo
                 handleLogout={handleLogout}

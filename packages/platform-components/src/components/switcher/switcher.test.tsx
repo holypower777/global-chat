@@ -45,7 +45,7 @@ describe('switcher', () => {
             expect(checked).toBeTruthy();
         });
 
-        it('doesn\'t trigger when toggle is disabled', () => {
+        it("doesn't trigger when toggle is disabled", () => {
             const handleToggle = jest.fn();
             const { switcher } = setup({ checked: false, disabled: true, handleToggle });
             fireEvent.click(switcher);

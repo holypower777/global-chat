@@ -1,6 +1,12 @@
 import { createSelector, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { decode } from 'jws';
-import { LANGUAGES, SEARCH_TYPE, SETTINGS, SORT_ORDER } from 'platform-components/src/components/constants';
+
+import {
+    LANGUAGES,
+    SEARCH_TYPE,
+    SETTINGS,
+    SORT_ORDER,
+} from 'platform-components/src/components/constants';
 import { getLocalStorageValue } from 'platform-components/src/hooks';
 import { getDefaultLanguage } from 'platform-components/src/utils';
 
@@ -56,64 +62,43 @@ export const settingsSlice = createSlice({
 
 export const { updateSetting } = settingsSlice.actions;
 export const getSettings = (state: RootState) => state.settings;
-export const getSortByDateSetting = createSelector(
-    getSettings,
-    (settings) => settings.sortByDate,
-);
-export const getShowBadgesSetting = createSelector(
-    getSettings,
-    (settings) => settings.showBadges,
-);
+export const getSortByDateSetting = createSelector(getSettings, (settings) => settings.sortByDate);
+export const getShowBadgesSetting = createSelector(getSettings, (settings) => settings.showBadges);
 export const getShowMessageTimeSetting = createSelector(
     getSettings,
-    (settings) => settings.showMessageTime,
+    (settings) => settings.showMessageTime
 );
-export const getUserTypeSetting = createSelector(
-    getSettings,
-    (settings) => settings.userType,
-);
+export const getUserTypeSetting = createSelector(getSettings, (settings) => settings.userType);
 export const getLiveChatShowBadgesSetting = createSelector(
     getSettings,
-    (settings) => settings.liveChatShowBadges,
+    (settings) => settings.liveChatShowBadges
 );
 export const getLiveChatShowMessageTimeSetting = createSelector(
     getSettings,
-    (settings) => settings.liveChatShowMessageTime,
+    (settings) => settings.liveChatShowMessageTime
 );
 export const getLiveChatUseChatColors = createSelector(
     getSettings,
-    (settings) => settings.liveChatUseChatColors,
+    (settings) => settings.liveChatUseChatColors
 );
-export const getLanguage = createSelector(
-    getSettings,
-    (settings) => settings.language,
-);
-export const getAT = createSelector(
-    getSettings,
-    (settings) => settings.at,  
-);
-export const getRT = createSelector(
-    getSettings,
-    (settings) => settings.rt,  
-);
-export const getUserIdFromAT = createSelector(
-    getAT,
-    (at) => {
-        if (at) {
-            const { payload } = decode(at);
-            return payload.user_id;
-        }
-
-        return 0;
+export const getLanguage = createSelector(getSettings, (settings) => settings.language);
+export const getAT = createSelector(getSettings, (settings) => settings.at);
+export const getRT = createSelector(getSettings, (settings) => settings.rt);
+export const getUserIdFromAT = createSelector(getAT, (at) => {
+    if (at) {
+        const { payload } = decode(at);
+        return payload.user_id;
     }
-);
+
+    return 0;
+});
 const getFirstRequest = createSelector(
     getSettings,
     (settings) => new Date(settings.firstRequest * 1000)
 );
 export const getLimitsExpiryTimestamp = createSelector(
     getFirstRequest,
-    (firstRequest) => new Date(firstRequest.getTime() + 60 * 60 * 24 * 1000),
+    (firstRequest) => new Date(firstRequest.getTime() + 60 * 60 * 24 * 1000)
 );
 
 export default settingsSlice.reducer;

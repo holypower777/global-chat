@@ -1,8 +1,9 @@
 import { AnyAction, Dispatch } from '@reduxjs/toolkit';
-import { NOTIFICATIONS_DURATION, SNACKBAR_TYPE } from 'platform-components';
-import { ChildrenProps } from 'platform-components/src/typings';
 import React, { ErrorInfo } from 'react';
 import { connect } from 'react-redux';
+
+import { NOTIFICATIONS_DURATION, SNACKBAR_TYPE } from 'platform-components';
+import { ChildrenProps } from 'platform-components/src/typings';
 
 import { addNotification } from '../../utils';
 
@@ -25,11 +26,14 @@ class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoundarySta
     }
 
     componentDidCatch(error: Error, errorInfo: ErrorInfo) {
-        addNotification({
-            id: 'notification.commonError',
-            type: SNACKBAR_TYPE.ERROR,
-            autoHideDuration: NOTIFICATIONS_DURATION.M,
-        }, this.props.dispatch);
+        addNotification(
+            {
+                id: 'notification.commonError',
+                type: SNACKBAR_TYPE.ERROR,
+                autoHideDuration: NOTIFICATIONS_DURATION.M,
+            },
+            this.props.dispatch
+        );
 
         console.error(error, errorInfo);
     }

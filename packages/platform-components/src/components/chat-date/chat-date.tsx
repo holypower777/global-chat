@@ -10,7 +10,10 @@ export interface ChatProps {
     date: Date;
 }
 
-const ChatDate = ({ date }: ChatProps) => 
-    <Text data-testid="chat-date" mix="chat-date">{formatDate(date)}</Text>;
+const ChatDate = ({ date }: ChatProps) => (
+    <Text data-testid="chat-date" mix="chat-date">
+        {formatDate(date)}
+    </Text>
+);
 
 export default ChatDate;

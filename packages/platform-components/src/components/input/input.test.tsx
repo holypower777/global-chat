@@ -53,7 +53,11 @@ describe('input', () => {
 
         it('input with value must trigger enter handle one time', () => {
             const handleEnterPress = jest.fn();
-            const { input } = setup({ handleEnterPress, value: 'not empty', handleChange: () => ({}) });
+            const { input } = setup({
+                handleEnterPress,
+                value: 'not empty',
+                handleChange: () => ({}),
+            });
 
             fireEvent.keyDown(input, { key: 'Enter' });
             expect(handleEnterPress).toBeCalledTimes(1);

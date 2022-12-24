@@ -1,21 +1,24 @@
-import { Action, AnyAction, Dispatch, MiddlewareAPI } from '@reduxjs/toolkit';
-import { SETTINGS } from 'platform-components';
+// @reference
+// import { Action, AnyAction, Dispatch, MiddlewareAPI } from '@reduxjs/toolkit';
 
-import { clearMessages } from '../slices/messages';
-import { UpdateSetting, updateSetting } from '../slices/settings';
+// import { SETTINGS } from 'platform-components';
 
-const settingsMiddleware = (store: MiddlewareAPI) => (next: Dispatch<AnyAction>) => (action: Action<unknown>) => {
-    if (updateSetting.match(action)) {
-        const { key, value } = action.payload as UpdateSetting;
+// import { clearMessages } from '../slices/messages';
+// import { UpdateSetting, updateSetting } from '../slices/settings';
 
-        localStorage.setItem(key, JSON.stringify(value));
+// const settingsMiddleware =
+//     (store: MiddlewareAPI) => (next: Dispatch<AnyAction>) => (action: Action<unknown>) => {
+//         if (updateSetting.match(action)) {
+//             const { key, value } = action.payload as UpdateSetting;
 
-        if (key === SETTINGS.SORT_BY_DATE) {
-            store.dispatch(clearMessages());
-        }
-    }
+//             localStorage.setItem(key, JSON.stringify(value));
 
-    return next(action);
-};
+//             if (key === SETTINGS.SORT_BY_DATE) {
+//                 store.dispatch(clearMessages());
+//             }
+//         }
 
-export default settingsMiddleware;
+//         return next(action);
+//     };
+
+// export default settingsMiddleware;

@@ -21,19 +21,13 @@ export interface TabsTabProps extends Tab {
     /** Whether the tab is active */
     isActive: boolean;
     /** Set the handler to handle click event */
-    handleClick: SimpleCallback
+    handleClick: SimpleCallback;
 }
 
-const TabsTab = ({
-    isActive = false,
-    intlId,
-    values = {},
-    icon,
-    handleClick,
-}: TabsTabProps) => {
+const TabsTab = ({ isActive = false, intlId, values = {}, icon, handleClick }: TabsTabProps) => {
     const className = b('tabs', 'tab', { active: isActive });
 
-    return(
+    return (
         <li
             className={className}
             data-active={isActive}

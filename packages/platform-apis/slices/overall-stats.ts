@@ -12,21 +12,17 @@ export const overallStatsApi = createApi({
     endpoints: (builder) => ({
         getOverallStats: builder.query<OverallStats, void>({
             query: getOverallStatsDef,
-            transformResponse: (response) =>
-                convertApiToDTO<OverallStats>(response, ['time']),
+            transformResponse: (response) => convertApiToDTO<OverallStats>(response, ['time']),
+            // eslint-disable-next-line @typescript-eslint/no-unused-vars
             onQueryStarted: async (id, { dispatch, queryFulfilled }) => {},
         }),
-        getOverallStatsPlots: builder.query<
-            OverallStatsPlots,
-            GetOverallStatsPlotsQuery
-        >({
+        getOverallStatsPlots: builder.query<OverallStatsPlots, GetOverallStatsPlotsQuery>({
             query: getOverallStatsPlotsDef,
-            transformResponse: (response) =>
-                convertApiToDTO<OverallStatsPlots>(response, ['time']),
+            transformResponse: (response) => convertApiToDTO<OverallStatsPlots>(response, ['time']),
+            // eslint-disable-next-line @typescript-eslint/no-unused-vars
             onQueryStarted: async (id, { dispatch, queryFulfilled }) => {},
         }),
     }),
 });
 
-export const { useGetOverallStatsQuery, useGetOverallStatsPlotsQuery } =
-    overallStatsApi;
+export const { useGetOverallStatsQuery, useGetOverallStatsPlotsQuery } = overallStatsApi;

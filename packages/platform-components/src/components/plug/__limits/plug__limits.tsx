@@ -18,24 +18,33 @@ const PlugLimits = ({
 
     return (
         <Plug plu="limits" {...props}>
-            {isRunning && <>
-                <H3
-                    id="plug.limits.header"
-                    values={{ time: `${hours}:${minutes}:${seconds}` }}
-                    weight={Text.WEIGHT.M}
-                />
-                <Text
-                    id="plug.limits"
-                    values={{ //@ts-ignore
-                        boosty: (val) =>
-                            (<a className={b('plug', 'link')} href={LINKS.BOOSTY} target="_blank">{val}</a>),
-                    }}
-                />
-                <IconLock height={70} width={70} />
-            </>}
+            {isRunning ? (
+                <>
+                    <H3
+                        id="plug.limits.header"
+                        values={{ time: `${hours}:${minutes}:${seconds}` }}
+                        weight={Text.WEIGHT.M}
+                    />
+                    <Text
+                        id="plug.limits"
+                        values={{
+                            //@ts-ignore
+                            boosty: (val) => (
+                                <a
+                                    className={b('plug', 'link')}
+                                    href={LINKS.BOOSTY}
+                                    target="_blank"
+                                >
+                                    {val}
+                                </a>
+                            ),
+                        }}
+                    />
+                    <IconLock height={70} width={70} />
+                </>
+            ) : null}
         </Plug>
     );
 };
 
 export default PlugLimits;
-

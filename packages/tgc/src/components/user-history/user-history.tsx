@@ -1,140 +1,141 @@
-import { useLazyGetRandomTwitchUserQuery, useLazyGetTwitchUserWithChannelsByUsernameQuery } from 'platform-apis';
-import { BackendErrorResponse } from 'platform-apis/types';
-import { BACKEND_ERROR, FROM_PAGE, LINKS, Plug, SEARCH_PARAMS, SNACKBAR_TYPE, Spin, Tab, Tabs } from 'platform-components';
-import { useWindowSize } from 'platform-components/src/hooks';
-import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
-import SwipeableViews from 'react-swipeable-views';
+// @reference
+// import { useLazyGetRandomTwitchUserQuery, useLazyGetTwitchUserWithChannelsByUsernameQuery } from 'platform-apis';
+// import { BackendErrorResponse } from 'platform-apis/types';
+// import { BACKEND_ERROR, FROM_PAGE, LINKS, Plug, SEARCH_PARAMS, SNACKBAR_TYPE, Spin, Tab, Tabs } from 'platform-components';
+// import { useWindowSize } from 'platform-components/src/hooks';
+// import React, { useEffect, useState } from 'react';
+// import { useDispatch, useSelector } from 'react-redux';
+// import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
+// import SwipeableViews from 'react-swipeable-views';
 
-import { removeNotification, updateNotificationLoadingState } from '../../store/slices/notifications';
-import { getUserTypeSetting } from '../../store/slices/settings';
-import { getIsTwitchUserFetching } from '../../store/slices/twitch-user';
-import { addNotification } from '../../utils';
+// import { removeNotification, updateNotificationLoadingState } from '../../store/slices/notifications';
+// import { getUserTypeSetting } from '../../store/slices/settings';
+// import { getIsTwitchUserFetching } from '../../store/slices/twitch-user';
+// import { addNotification } from '../../utils';
 
-import Channels from './channels/channels';
-import Chat from './chat/chat';
-import UserHistoryHelmet from './user-history.helmet';
+// import Channels from './channels/channels';
+// import Chat from './chat/chat';
+// import UserHistoryHelmet from './user-history.helmet';
 
-import './user-history.scss';
+// import './user-history.scss';
 
-const UserHistory = () => {
-    const dispatch = useDispatch();
-    const navigate = useNavigate();
-    const { username } = useParams();
-    const [searchParams] = useSearchParams();
-    const { width } = useWindowSize();
+// const UserHistory = () => {
+//     const dispatch = useDispatch();
+//     const navigate = useNavigate();
+//     const { username } = useParams();
+//     const [searchParams] = useSearchParams();
+//     const { width } = useWindowSize();
 
-    const userType = useSelector(getUserTypeSetting);
-    const isTwitchUserFetching = useSelector(getIsTwitchUserFetching);
+//     const userType = useSelector(getUserTypeSetting);
+//     const isTwitchUserFetching = useSelector(getIsTwitchUserFetching);
 
-    const [activeTab, setActiveTab] = useState(0);
-    const [notificationKey, setNotificationKey] = useState(0);
-    
-    const [fetchTwitchUser, { error }] = useLazyGetTwitchUserWithChannelsByUsernameQuery();
-    const [fetchRandomUser, { data: randomUser, isFetching: isRandomUserFetching }] = useLazyGetRandomTwitchUserQuery();
+//     const [activeTab, setActiveTab] = useState(0);
+//     const [notificationKey, setNotificationKey] = useState(0);
 
-    useEffect(() => {
-        if (!searchParams.get(SEARCH_PARAMS.FROM)) {
-            dispatch(removeNotification(notificationKey));
-        }
+//     const [fetchTwitchUser, { error }] = useLazyGetTwitchUserWithChannelsByUsernameQuery();
+//     const [fetchRandomUser, { data: randomUser, isFetching: isRandomUserFetching }] = useLazyGetRandomTwitchUserQuery();
 
-        if (searchParams.get(SEARCH_PARAMS.FROM) === FROM_PAGE.RANDOM_USER) {
-            const key = addNotification({
-                type: SNACKBAR_TYPE.TWITCH,
-                id: 'notification.userHistory.nextRandom',
-                handleClick: () => (!isRandomUserFetching && fetchRandomUser()),
-                clickable: true,
-            }, dispatch);
-            setNotificationKey(key);
-        }
-    }, [searchParams]);
+//     useEffect(() => {
+//         if (!searchParams.get(SEARCH_PARAMS.FROM)) {
+//             dispatch(removeNotification(notificationKey));
+//         }
 
-    useEffect(() => {
-        return () => {
-            dispatch(removeNotification(notificationKey));
-        };
-    }, [notificationKey]);
+//         if (searchParams.get(SEARCH_PARAMS.FROM) === FROM_PAGE.RANDOM_USER) {
+//             const key = addNotification({
+//                 type: SNACKBAR_TYPE.TWITCH,
+//                 id: 'notification.userHistory.nextRandom',
+//                 handleClick: () => (!isRandomUserFetching && fetchRandomUser()),
+//                 clickable: true,
+//             }, dispatch);
+//             setNotificationKey(key);
+//         }
+//     }, [searchParams]);
 
-    useEffect(() => {
-        dispatch(updateNotificationLoadingState({ key: notificationKey, isLoading: isRandomUserFetching }));
-    }, [isRandomUserFetching]);
+//     useEffect(() => {
+//         return () => {
+//             dispatch(removeNotification(notificationKey));
+//         };
+//     }, [notificationKey]);
 
-    useEffect(() => {
-        if (randomUser) {
-            navigate(`${LINKS.MESSAGES}/${randomUser.displayName}?from=${FROM_PAGE.RANDOM_USER}`);
-        }
-    }, [randomUser]);
+//     useEffect(() => {
+//         dispatch(updateNotificationLoadingState({ key: notificationKey, isLoading: isRandomUserFetching }));
+//     }, [isRandomUserFetching]);
 
-    useEffect(() => {
-        if (username) {
-            fetchTwitchUser({ username, type: userType });
-        }
-    }, [username]);
+//     useEffect(() => {
+//         if (randomUser) {
+//             navigate(`${LINKS.MESSAGES}/${randomUser.displayName}?from=${FROM_PAGE.RANDOM_USER}`);
+//         }
+//     }, [randomUser]);
 
-    const handleChangeTab = (index: number) => (setActiveTab(index));
+//     useEffect(() => {
+//         if (username) {
+//             fetchTwitchUser({ username, type: userType });
+//         }
+//     }, [username]);
 
-    if (error) {
-        //@ts-ignore
-        const intlId = (error.data as BackendErrorResponse).error.intlId;
-        let plugType;
+//     const handleChangeTab = (index: number) => (setActiveTab(index));
 
-        switch (intlId) {
-            case BACKEND_ERROR.USER_HIDDEN:
-                plugType = Plug.TYPE.DONATION;
-                break;
-            case BACKEND_ERROR.USER_NOT_FOUND:
-                plugType = Plug.TYPE.USER_NOT_FOUND;
-                break;
-            case BACKEND_ERROR.NO_CHAT_ACTIVITY:
-                plugType = Plug.TYPE.NO_CHAT_ACTIVITY;
-                break;
-            default:
-                plugType = Plug.TYPE.INTERNAL_ERROR;
-        }
+//     if (error) {
+//         //@ts-ignore
+//         const intlId = (error.data as BackendErrorResponse).error.intlId;
+//         let plugType;
 
-        return (
-            <main className="user-history__error">
-                <UserHistoryHelmet isFound={false} />
-                <Plug type={plugType} />
-            </main>
-        );
-    }
+//         switch (intlId) {
+//             case BACKEND_ERROR.USER_HIDDEN:
+//                 plugType = Plug.TYPE.DONATION;
+//                 break;
+//             case BACKEND_ERROR.USER_NOT_FOUND:
+//                 plugType = Plug.TYPE.USER_NOT_FOUND;
+//                 break;
+//             case BACKEND_ERROR.NO_CHAT_ACTIVITY:
+//                 plugType = Plug.TYPE.NO_CHAT_ACTIVITY;
+//                 break;
+//             default:
+//                 plugType = Plug.TYPE.INTERNAL_ERROR;
+//         }
 
-    if (width && width < 769) {
-        return (
-            <main className="user-history">
-                <UserHistoryHelmet />
-                {isTwitchUserFetching && <Spin center size={Spin.SIZE.L} />}
-                {!isTwitchUserFetching && <>
-                    <Tabs activeTab={activeTab} setActiveTab={handleChangeTab}>
-                        <Tab label="Channels" />
-                        <Tab label="History" />
-                    </Tabs>
-                    <SwipeableViews
-                        containerStyle={{ height: 'calc(100vh - 160px)' }}
-                        index={activeTab}
-                        onChangeIndex={handleChangeTab}
-                        resistance={true}
-                    >
-                        <Channels handlePickChannel={() => handleChangeTab(1)} />
-                        <Chat />
-                    </SwipeableViews>
-                </>}
-            </main>
-        );
-    }
+//         return (
+//             <main className="user-history__error">
+//                 <UserHistoryHelmet isFound={false} />
+//                 <Plug type={plugType} />
+//             </main>
+//         );
+//     }
 
-    return (
-        <main className="user-history">
-            <UserHistoryHelmet />
-            {isTwitchUserFetching && <Spin center size={Spin.SIZE.L} />}
-            {!isTwitchUserFetching && <>
-                <Channels />
-                <Chat />
-            </>}
-        </main>
-    );
-};
+//     if (width && width < 769) {
+//         return (
+//             <main className="user-history">
+//                 <UserHistoryHelmet />
+//                 {isTwitchUserFetching && <Spin center size={Spin.SIZE.L} />}
+//                 {!isTwitchUserFetching && <>
+//                     <Tabs activeTab={activeTab} setActiveTab={handleChangeTab}>
+//                         <Tab label="Channels" />
+//                         <Tab label="History" />
+//                     </Tabs>
+//                     <SwipeableViews
+//                         containerStyle={{ height: 'calc(100vh - 160px)' }}
+//                         index={activeTab}
+//                         onChangeIndex={handleChangeTab}
+//                         resistance={true}
+//                     >
+//                         <Channels handlePickChannel={() => handleChangeTab(1)} />
+//                         <Chat />
+//                     </SwipeableViews>
+//                 </>}
+//             </main>
+//         );
+//     }
 
-export default UserHistory;
+//     return (
+//         <main className="user-history">
+//             <UserHistoryHelmet />
+//             {isTwitchUserFetching && <Spin center size={Spin.SIZE.L} />}
+//             {!isTwitchUserFetching && <>
+//                 <Channels />
+//                 <Chat />
+//             </>}
+//         </main>
+//     );
+// };
+
+// export default UserHistory;

@@ -1,3 +1,4 @@
+/* eslint-disable react/no-multi-comp */
 import { Meta, StoryFn } from '@storybook/react';
 import React from 'react';
 
@@ -65,7 +66,11 @@ export const Variants: StoryFn<typeof Text> = () => (
             <Text center>Text center</Text>
         </div>
         <div style={{ width: 200 }}>
-            <Text ellipsis>ellipsis. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolorem magni distinctio, praesentium odio corporis ea minima ipsam accusantium, placeat nihil facilis rem eveniet quia, explicabo aliquid et repudiandae labore facere!</Text>
+            <Text ellipsis>
+                ellipsis. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolorem magni
+                distinctio, praesentium odio corporis ea minima ipsam accusantium, placeat nihil
+                facilis rem eveniet quia, explicabo aliquid et repudiandae labore facere!
+            </Text>
         </div>
         <Text title="title">Text with title</Text>
     </Spacer>

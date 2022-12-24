@@ -20,14 +20,9 @@ export const commonSlice = createSlice({
     },
 });
 
-export const {
-    setLastSearches,
-} = commonSlice.actions;
+export const { setLastSearches } = commonSlice.actions;
 
 const getRootCommon = (state: RootState) => state.common;
-export const getLastSearches = createSelector(
-    getRootCommon,
-    (common) => common.lastSearches,
-);
+export const getLastSearches = createSelector(getRootCommon, (common) => common.lastSearches);
 
 export default commonSlice.reducer;

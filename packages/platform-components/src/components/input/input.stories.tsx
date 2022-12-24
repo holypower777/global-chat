@@ -1,3 +1,4 @@
+/* eslint-disable react/no-multi-comp */
 import { StoryFn, Meta } from '@storybook/react';
 import React, { useState } from 'react';
 
@@ -14,12 +15,12 @@ export default {
 
 const Template: StoryFn<typeof Input> = (args: InputProps) => {
     const [value, setValue] = useState('');
-    
+
     return (
         <StoryOverview
             componentName="Input"
             notOkList={[
-                'Don\'t use it to insert long paragraphs, instead there is a need to develope <InputArea/> component.',
+                "Don't use it to insert long paragraphs, instead there is a need to develope <InputArea/> component.",
             ]}
             okList={[
                 'Use it to insert names, titles and other short textual information.',
@@ -27,11 +28,7 @@ const Template: StoryFn<typeof Input> = (args: InputProps) => {
             ]}
             usage="Input allows to insert short text values."
         >
-            <Input 
-                {...args} 
-                handleChange={(e) => setValue(e.target.value)} 
-                value={value}
-            />
+            <Input {...args} handleChange={(e) => setValue(e.target.value)} value={value} />
         </StoryOverview>
     );
 };
@@ -66,14 +63,8 @@ export const Variants: StoryFn<typeof Input> = () => (
             prefix={<IconSearch />}
             suffix={<IconDots />}
         />
-        <Input
-            placeholder="Input with prefix"
-            prefix={<IconSearch />}
-        />
-        <Input
-            placeholder="Input with suffix"
-            suffix={<IconSearch />}
-        />
+        <Input placeholder="Input with prefix" prefix={<IconSearch />} />
+        <Input placeholder="Input with suffix" suffix={<IconSearch />} />
         <Input disabled placeholder="disabled" />
         <Input readonly value="read only" />
         <Input autoFocus placeholder="focused" />

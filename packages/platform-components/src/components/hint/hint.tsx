@@ -53,7 +53,7 @@ const Hint = ({
     useEffect(() => {
         if (ref && ref.current && hintRef && hintRef.current) {
             setTimeout(() => {
-                setHintHeight(hintRef!.current!.getBoundingClientRect().height);
+                setHintHeight(hintRef?.current?.getBoundingClientRect().height || 0);
             }, 0);
         }
 
@@ -63,39 +63,39 @@ const Hint = ({
 
             switch (direction) {
                 case DIRECTIONS.LEFT:
-                    style.left = dimensions.left - width - (padding * 2) - gap;
-                    
+                    style.left = dimensions.left - width - padding * 2 - gap;
+
                     if (dimensions.top < window.innerHeight / 2) {
-                        style.top = dimensions.top + (dimensions.height / 2) - (hintHeight / 2);
+                        style.top = dimensions.top + dimensions.height / 2 - hintHeight / 2;
                     } else {
-                        style.bottom = (window.innerHeight - dimensions.top) + gap;
+                        style.bottom = window.innerHeight - dimensions.top + gap;
                     }
                     break;
                 case DIRECTIONS.RIGHT:
                     style.left = dimensions.right + gap;
 
                     if (dimensions.top < window.innerHeight / 2) {
-                        style.top = dimensions.top + (dimensions.height / 2) - (hintHeight / 2);
+                        style.top = dimensions.top + dimensions.height / 2 - hintHeight / 2;
                     } else {
-                        style.bottom = (window.innerHeight - dimensions.top) + gap;
+                        style.bottom = window.innerHeight - dimensions.top + gap;
                     }
                     break;
                 case DIRECTIONS.TOP:
-                    style.left = (dimensions.left + (dimensions.width / 2)) - (width / 2);
+                    style.left = dimensions.left + dimensions.width / 2 - width / 2;
 
                     if (dimensions.top < window.innerHeight / 2) {
                         style.top = dimensions.top - hintHeight - gap;
                     } else {
-                        style.bottom = (window.innerHeight - dimensions.top) + gap;
+                        style.bottom = window.innerHeight - dimensions.top + gap;
                     }
                     break;
                 default:
-                    style.left = (dimensions.left + (dimensions.width / 2)) - (width / 2);
+                    style.left = dimensions.left + dimensions.width / 2 - width / 2;
 
                     if (dimensions.top < window.innerHeight / 2) {
                         style.top = dimensions.top + dimensions.height + gap;
                     } else {
-                        style.bottom = (window.innerHeight - dimensions.top) + gap;
+                        style.bottom = window.innerHeight - dimensions.top + gap;
                     }
                     break;
             }
@@ -121,25 +121,27 @@ const Hint = ({
     return (
         <span ref={ref}>
             {children}
-            {transition((styles, item) => item && <Portal
-                className={b('hint', 'portal')}
-                dataTestId={b('hint', 'portal')}
-            >
-                <animated.div 
-                    className={cx(b('hint', { direction }), mix)} 
-                    data-testid="hint" 
-                    onClick={() => (setIsShown(false))}
-                    ref={hintRef}
-                    style={{ ...hintStyle, ...styles }}
-                >
-                    <Text center id={textId} values={values} />
-                    <IconCircleCross
-                        clickable
-                        mix={b('hint', 'close')}
-                        size={Icon.SIZE.S}
-                    />
-                </animated.div>
-            </Portal>)}
+            {transition(
+                (styles, item) =>
+                    item && (
+                        <Portal className={b('hint', 'portal')} dataTestId={b('hint', 'portal')}>
+                            <animated.div
+                                className={cx(b('hint', { direction }), mix)}
+                                data-testid="hint"
+                                onClick={() => setIsShown(false)}
+                                ref={hintRef}
+                                style={{ ...hintStyle, ...styles }}
+                            >
+                                <Text center id={textId} values={values} />
+                                <IconCircleCross
+                                    clickable
+                                    mix={b('hint', 'close')}
+                                    size={Icon.SIZE.S}
+                                />
+                            </animated.div>
+                        </Portal>
+                    )
+            )}
         </span>
     );
 };

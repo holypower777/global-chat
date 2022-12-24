@@ -37,7 +37,7 @@ describe('button', () => {
             expect(handleClick).toHaveBeenCalledTimes(1);
         });
 
-        it('doesn\'t trigger when button is disabled', () => {
+        it("doesn't trigger when button is disabled", () => {
             const handleClick = jest.fn();
             const { button } = setup({ handleClick, disabled: true });
 
@@ -45,7 +45,7 @@ describe('button', () => {
             expect(handleClick).not.toHaveBeenCalled();
         });
 
-        it('doesn\'t trigger when button is loading', () => {
+        it("doesn't trigger when button is loading", () => {
             const handleClick = jest.fn();
             const { button } = setup({ handleClick, loading: true });
 
@@ -53,7 +53,7 @@ describe('button', () => {
             expect(handleClick).not.toHaveBeenCalled();
         });
 
-        it('doesn\'t trigger when button both is loading and is disabled', () => {
+        it("doesn't trigger when button both is loading and is disabled", () => {
             const handleClick = jest.fn();
             const { button } = setup({ handleClick, loading: true, disabled: true });
 

@@ -11,9 +11,7 @@ export default {
 } as Meta<typeof ChatDate>;
 
 export const Overview: StoryFn<typeof ChatDate> = (args) => (
-    <StoryOverview
-        componentName="Chat-date"
-    >
+    <StoryOverview componentName="Chat-date">
         <ChatDate {...args} />
     </StoryOverview>
 );

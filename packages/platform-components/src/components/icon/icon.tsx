@@ -24,17 +24,17 @@ export interface SingleIconProps extends MixProps {
 
 export interface IconProps extends SingleIconProps, ChildrenProps {
     /** Icon name */
-    ico: string
+    ico: string;
     /** Icon BEM modifiers */
     mods?: Record<string, unknown>;
 }
 
 const Icon = ({
-    ico, 
-    mods = {}, 
-    children, 
-    mix, 
-    handleClick, 
+    ico,
+    mods = {},
+    children,
+    mix,
+    handleClick,
     title,
     size = SIZE_EXTENDED.S,
     width,
@@ -44,8 +44,8 @@ const Icon = ({
     const className = b('icon', ico, { ...mods });
 
     return (
-        <i 
-            className={cx(className, b('icon', { size, clickable }), mix)} 
+        <i
+            className={cx(className, b('icon', { size, clickable }), mix)}
             data-testid="icon"
             onClick={handleClick}
             style={{ width, height }}

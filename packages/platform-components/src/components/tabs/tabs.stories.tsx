@@ -1,3 +1,4 @@
+/* eslint-disable react/no-multi-comp */
 import { Meta, StoryFn } from '@storybook/react';
 import React, { useState } from 'react';
 
@@ -20,8 +21,8 @@ export const Overview: StoryFn<typeof Tabs> = (args) => {
             componentName="Tabs"
             usage="Tabs component enables navigation between content at the same page."
         >
-            <Tabs 
-                {...args} 
+            <Tabs
+                {...args}
                 activeId={activeTab}
                 handleTabClick={(id: number) => setActiveTab(id)}
             />
@@ -38,7 +39,7 @@ Overview.args = {
 
 export const Variants: StoryFn<typeof Tabs> = () => (
     <Spacer>
-        <Tabs 
+        <Tabs
             activeId={0}
             handleTabClick={() => ({})}
             tabs={[
@@ -48,7 +49,7 @@ export const Variants: StoryFn<typeof Tabs> = () => (
                 { id: 3, intlId: 'Tab4' },
             ]}
         />
-        <Tabs 
+        <Tabs
             activeId={0}
             handleTabClick={() => ({})}
             tabs={[
@@ -56,7 +57,7 @@ export const Variants: StoryFn<typeof Tabs> = () => (
                 { id: 1, intlId: 'link.overallStats', icon: <IconChart size={Icon.SIZE.L} /> },
             ]}
         />
-        <Tabs 
+        <Tabs
             activeId={0}
             handleTabClick={() => ({})}
             tabs={[

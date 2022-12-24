@@ -1,4 +1,5 @@
 import { createSelector, createSlice, PayloadAction } from '@reduxjs/toolkit';
+
 import { NotificationsType, Notification } from 'platform-components/src/typings';
 
 import { RootState } from '../store';
@@ -52,7 +53,7 @@ export const {
 const getRootNotifications = (state: RootState) => state.notifications;
 export const getNotifications = createSelector(
     getRootNotifications,
-    (rootNotifications) => rootNotifications.notifications,
+    (rootNotifications) => rootNotifications.notifications
 );
 
 export default notificationsSlice.reducer;

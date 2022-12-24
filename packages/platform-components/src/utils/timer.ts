@@ -6,10 +6,10 @@ const timer = (fn: SimpleCallback, countdown: number) => {
     let totalTimeRun: number;
     const startTime = new Date().getTime();
 
-    const timeDiff = (date1: number, date2?: number) => 
+    const timeDiff = (date1: number, date2?: number) =>
         date2 ? date2 - date1 : new Date().getTime() - date1;
 
-    const cancel = () => (clearTimeout(ident));
+    const cancel = () => clearTimeout(ident);
 
     const pause = () => {
         clearTimeout(ident);

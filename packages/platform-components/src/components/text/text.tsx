@@ -1,8 +1,14 @@
 import b from 'b_';
 import cx from 'classnames';
-import { MessageFormatPrimitiveValue, MixProps, OptionalChildrenProps, SimpleCallback } from 'platform-components/src/typings';
 import React, { CSSProperties } from 'react';
 import { useIntl } from 'react-intl';
+
+import {
+    MessageFormatPrimitiveValue,
+    MixProps,
+    OptionalChildrenProps,
+    SimpleCallback,
+} from 'platform-components/src/typings';
 
 import { SIZE, SIZE_EXTENDED, TEXT_TAG } from '../constants';
 
@@ -52,9 +58,19 @@ const Text = ({
     const content = id ? intl.formatMessage({ id, defaultMessage: id }, values) : children;
 
     if (tag === TEXT_TAG.LI) {
-        return <li className={className} data-testid="text" onClick={handleClick} {...props}>{content}{id ? children : null}</li>;
+        return (
+            <li className={className} data-testid="text" onClick={handleClick} {...props}>
+                {content}
+                {id ? children : null}
+            </li>
+        );
     }
-    return <span className={className} data-testid="text" onClick={handleClick} {...props}>{content}{id ? children : null}</span>;
+    return (
+        <span className={className} data-testid="text" onClick={handleClick} {...props}>
+            {content}
+            {id ? children : null}
+        </span>
+    );
 };
 
 Text.TAG = TEXT_TAG;

@@ -1,3 +1,4 @@
+/* eslint-disable react/no-multi-comp */
 import { Meta, StoryFn } from '@storybook/react';
 import React from 'react';
 
@@ -12,9 +13,7 @@ export default {
 } as Meta<typeof Plugs.default>;
 
 export const Overview: StoryFn<typeof Plugs.default> = (args) => (
-    <StoryOverview
-        componentName="Plug"
-    >
+    <StoryOverview componentName="Plug">
         <Plugs.PlugDonation {...args} />
     </StoryOverview>
 );

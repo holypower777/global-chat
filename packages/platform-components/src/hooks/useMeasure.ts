@@ -1,7 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useEffect, useLayoutEffect, useMemo, useState } from 'react';
 
-type UseMeasureRect = Pick<DOMRectReadOnly, 'x' | 'y' | 'top' | 'left' | 'right' | 'bottom' | 'height' | 'width'>;
+type UseMeasureRect = Pick<
+    DOMRectReadOnly,
+    'x' | 'y' | 'top' | 'left' | 'right' | 'bottom' | 'height' | 'width'
+>;
 export type UseMeasureRef<E extends Element = Element> = (element: E) => void;
 type UseMeasureResult<E extends Element = Element> = [UseMeasureRef<E>, UseMeasureRect];
 
@@ -20,14 +23,15 @@ const isBrowser = typeof window !== 'undefined';
 const useIsomorphicLayoutEffect = isBrowser ? useLayoutEffect : useEffect;
 
 function useMeasure<E extends Element = Element>(): UseMeasureResult<E> {
-    const [element, ref] = useState<E | null>(null);
+    const [element, setElement] = useState<E | null>(null);
     const [rect, setRect] = useState<UseMeasureRect>(defaultState);
 
     const observer = useMemo(
         () =>
             new (window as any).ResizeObserver((entries: any) => {
                 if (entries[0]) {
-                    const { x, y, width, height, top, left, bottom, right } = entries[0].contentRect;
+                    const { x, y, width, height, top, left, bottom, right } =
+                        entries[0].contentRect;
                     setRect({ x, y, width, height, top, left, bottom, right });
                 }
             }),
@@ -41,13 +45,12 @@ function useMeasure<E extends Element = Element>(): UseMeasureResult<E> {
 
         observer.observe(element);
 
-        // eslint-disable-next-line consistent-return
         return () => {
             observer.disconnect();
         };
     }, [element]);
 
-    return [ref, rect];
+    return [setElement, rect];
 }
 
 export default isBrowser && typeof (window as any).ResizeObserver !== 'undefined'

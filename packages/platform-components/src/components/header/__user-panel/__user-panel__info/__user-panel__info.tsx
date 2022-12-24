@@ -1,6 +1,5 @@
 import b from 'b_';
 import cx from 'classnames';
-import { convertCommonUserToAPI } from 'platform-apis/types';
 import React, { useRef, useState } from 'react';
 import { animated, useSpring } from 'react-spring';
 import { Link } from 'wouter';
@@ -23,8 +22,8 @@ const UserPanelInfo = ({
     handleLogout,
     isPanelOpen,
     setIsPanelOpen,
-    handleRemoveFavorite,
-}: UserPanelInfoProps) => {
+}: // handleRemoveFavorite,
+UserPanelInfoProps) => {
     const rootClass = b('header', 'user-panel');
     const [isFavoritesOpen, setIsFavoritesOpen] = useState(false);
     const [isSearchOpen, setIsSearchOpen] = useState(false);
@@ -36,21 +35,15 @@ const UserPanelInfo = ({
         right: isPanelOpen ? '0' : '-100%',
     });
 
+    // @ts-ignore
     if (user.userId === 0) {
         return null;
     }
 
     return (
-        <animated.aside
-            className={b(rootClass, 'info')}
-            ref={ref}
-            style={{ right }}
-        >
+        <animated.aside className={b(rootClass, 'info')} ref={ref} style={{ right }}>
             <div className={b(rootClass, 'info_name')}>
-                <Text
-                    size={Text.SIZE.L}
-                    weight={Text.WEIGHT.M}
-                >
+                <Text size={Text.SIZE.L} weight={Text.WEIGHT.M}>
                     {user.displayName}
                 </Text>
                 <IconCross handleClick={() => setIsPanelOpen(false)} />
@@ -64,41 +57,41 @@ const UserPanelInfo = ({
                 />
             </Link>
             <Text
-                handleClick={() => (setIsSearchOpen(!isSearchOpen))}
+                handleClick={() => setIsSearchOpen(!isSearchOpen)}
                 id="user-panel.user.search"
                 mix={b(rootClass, 'info_collapse')}
                 size={Text.SIZE.L}
                 weight={Text.WEIGHT.M}
             />
-            {isSearchOpen && <ul className={cx(b(rootClass, 'info_list'), 'custom-scroll')}>
-                {user.searchHistory.map((e) => (
-                    <Link key={e.userId} to={`${LINKS.MESSAGES}/${e.displayName}`}>
-                        <Text tag={Text.TAG.LI}>{e.displayName}</Text>
-                    </Link>
-                ))}
-            </ul>}
+            {isSearchOpen ? (
+                <ul className={cx(b(rootClass, 'info_list'), 'custom-scroll')}>
+                    {user.searchHistory.map((e) => (
+                        <Link key={e.userId} to={`${LINKS.MESSAGES}/${e.displayName}`}>
+                            <Text tag={Text.TAG.LI}>{e.displayName}</Text>
+                        </Link>
+                    ))}
+                </ul>
+            ) : null}
             <div
                 className={b(rootClass, 'info_collapse')}
-                onClick={() => (setIsFavoritesOpen(!isFavoritesOpen))}
+                onClick={() => setIsFavoritesOpen(!isFavoritesOpen)}
             >
-                <Text
-                    id="user-panel.user.favorites"
-                    size={Text.SIZE.L}
-                    weight={Text.WEIGHT.M}
-                />
+                <Text id="user-panel.user.favorites" size={Text.SIZE.L} weight={Text.WEIGHT.M} />
             </div>
-            {isFavoritesOpen && <ul className={cx(b(rootClass, 'info_list'), 'custom-scroll')}>
-                {user.favorites.map((e) => (
-                    <li key={e.userId}>
-                        <Link to={`${LINKS.MESSAGES}/${e.displayName}`}>
-                            <Text>{e.displayName}</Text>
-                        </Link>
-                        <IconCross handleClick={() => handleRemoveFavorite(convertCommonUserToAPI(e))} />
-                    </li>
-                ))}
-            </ul>}
+            {isFavoritesOpen ? (
+                <ul className={cx(b(rootClass, 'info_list'), 'custom-scroll')}>
+                    {user.favorites.map((e) => (
+                        <li key={e.userId}>
+                            <Link to={`${LINKS.MESSAGES}/${e.displayName}`}>
+                                <Text>{e.displayName}</Text>
+                            </Link>
+                            <IconCross handleClick={() => {} /** handleRemoveFavorite(e) */} />
+                        </li>
+                    ))}
+                </ul>
+            ) : null}
             <Text
-                handleClick={() => (handleLogout())}
+                handleClick={() => handleLogout()}
                 id="user-panel.logout"
                 mix={b(rootClass, 'info_logout')}
                 size={Text.SIZE.L}

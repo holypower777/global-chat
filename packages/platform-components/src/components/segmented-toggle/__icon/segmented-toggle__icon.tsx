@@ -24,8 +24,8 @@ const SegmentedToggleIcon = ({
     active = false,
     mix,
 }: SegmentedToggleIconProps) => {
-    return(
-        <button 
+    return (
+        <button
             className={cx(b('segmented-toggle', 'icon', { active }), mix)}
             data-testid={b('segmented-toggle', 'icon')}
             onClick={handleClick}

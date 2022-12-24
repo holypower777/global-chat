@@ -41,9 +41,19 @@ const Button = ({
     mix,
     children = null,
 }: ButtonProps) => {
-    return(
-        <button 
-            className={cx(b('button', { size, disabled, theme, loading: loading && theme, block, icon: !!icon && size }), mix)}
+    return (
+        <button
+            className={cx(
+                b('button', {
+                    size,
+                    disabled,
+                    theme,
+                    loading: loading && theme,
+                    block,
+                    icon: !!icon && size,
+                }),
+                mix
+            )}
             data-testid="button"
             disabled={disabled}
             onClick={() => {
