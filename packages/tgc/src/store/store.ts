@@ -1,5 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { setupListeners } from '@reduxjs/toolkit/dist/query';
+
 import {
     messagesApi,
     twitchUsersApi,
@@ -9,19 +10,19 @@ import {
     authApi,
 } from 'platform-apis';
 
-import channelsMiddleware from './middlewares/channels';
+// import channelsMiddleware from './middlewares/channels';
 import rtkQueryErrorMiddleware from './middlewares/errors';
-import settingsMiddleware from './middlewares/settings';
-import usersMiddleware from './middlewares/users';
-import channelsSlice from './slices/channels';
+// import settingsMiddleware from './middlewares/settings';
+// import usersMiddleware from './middlewares/users';
+// import channelsSlice from './slices/channels';
 import commonSlice from './slices/common';
 // import liveChatSlice from './slices/live-chat';
-import messagesSlice from './slices/messages';
+// import messagesSlice from './slices/messages';
 import notificationsSlice from './slices/notifications';
-import overallStatsSlice from './slices/overall-stats';
+// import overallStatsSlice from './slices/overall-stats';
 import settingsSlice from './slices/settings';
-import twitchUserSlice from './slices/twitch-user';
-import userSlice from './slices/user';
+// import twitchUserSlice from './slices/twitch-user';
+// import userSlice from './slices/user';
 
 export const store = configureStore({
     reducer: {
@@ -31,14 +32,14 @@ export const store = configureStore({
         [subscriberBadgesApi.reducerPath]: subscriberBadgesApi.reducer,
         [usersApi.reducerPath]: usersApi.reducer,
         [authApi.reducerPath]: authApi.reducer,
-        messages: messagesSlice,
+        // messages: messagesSlice,
         notifications: notificationsSlice,
-        channels: channelsSlice,
+        // channels: channelsSlice,
         // liveChat: liveChatSlice,
-        twitchUser: twitchUserSlice,
+        // twitchUser: twitchUserSlice,
         settings: settingsSlice,
-        overallStats: overallStatsSlice,
-        user: userSlice,
+        // overallStats: overallStatsSlice,
+        // user: userSlice,
         common: commonSlice,
     },
 
@@ -50,10 +51,10 @@ export const store = configureStore({
             subscriberBadgesApi.middleware,
             usersApi.middleware,
             authApi.middleware,
-            settingsMiddleware,
-            channelsMiddleware,
-            rtkQueryErrorMiddleware,
-            usersMiddleware,
+            // settingsMiddleware,
+            // channelsMiddleware,
+            rtkQueryErrorMiddleware
+            // usersMiddleware
         ),
     devTools: process.env.NODE_ENV === 'production' ? false : true,
 });

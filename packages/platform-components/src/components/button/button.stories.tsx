@@ -1,3 +1,4 @@
+/* eslint-disable react/no-multi-comp */
 import { Meta, StoryFn } from '@storybook/react';
 import React from 'react';
 
@@ -42,7 +43,9 @@ Overview.argTypes = {
 
 export const Sizes: StoryFn<typeof Button> = () => (
     <Spacer>
-        <Button block size={Button.SIZE.M}>Size M block width</Button>
+        <Button block size={Button.SIZE.M}>
+            Size M block width
+        </Button>
         <Spacer direction="row">
             <Button size={Button.SIZE.L}>Size L</Button>
             <Button size={Button.SIZE.M}>Size M</Button>
@@ -70,9 +73,15 @@ export const Variants: StoryFn<typeof Button> = () => (
     <Spacer>
         <Button disabled>Disabled</Button>
         <Spacer direction="row">
-            <Button loading theme={Button.THEME.LIGHT}>Loading light</Button>
-            <Button loading theme={Button.THEME.DARK}>Loading dark</Button>
-            <Button loading theme={Button.THEME.TWITCH}>Loading twitch</Button>
+            <Button loading theme={Button.THEME.LIGHT}>
+                Loading light
+            </Button>
+            <Button loading theme={Button.THEME.DARK}>
+                Loading dark
+            </Button>
+            <Button loading theme={Button.THEME.TWITCH}>
+                Loading twitch
+            </Button>
         </Spacer>
         <Button prefix={<IconChart />}>With prefix</Button>
         <Button suffix={<IconChart />}>With suffix</Button>

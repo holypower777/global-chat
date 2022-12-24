@@ -13,7 +13,7 @@ const months: Record<string, string> = {
     '12': 'December',
 };
 
-const addBackwordZero = (d: number): string => ('0' + (d)).slice(-2);
+const addBackwordZero = (d: number): string => ('0' + d).slice(-2);
 
 const isValidDate = (d: Date) => !isNaN(d.getTime());
 
@@ -21,7 +21,7 @@ export const formatDate = (d: Date | null, withMonthName = false) => {
     if (!d) {
         return '';
     }
-    
+
     const year = d.getFullYear();
     const day = addBackwordZero(d.getDate());
     const month = addBackwordZero(d.getMonth() + 1);
@@ -38,7 +38,9 @@ export const getHoursAndMinutes = (d: Date | null, withSeconds = false) => {
         return '';
     }
 
-    return `${addBackwordZero(d.getHours())}:${addBackwordZero(d.getMinutes())}${withSeconds ? ':' + addBackwordZero(d.getMinutes()) : ''}`;
+    return `${addBackwordZero(d.getHours())}:${addBackwordZero(d.getMinutes())}${
+        withSeconds ? ':' + addBackwordZero(d.getMinutes()) : ''
+    }`;
 };
 
 export const getFullDate = (d: Date | null, withMonthName = false, withSeconds = false) => {

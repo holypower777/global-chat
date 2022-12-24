@@ -10,11 +10,18 @@ const PlugInternalError = ({ ...props }: MixProps) => (
         <H3 id="plug.internalError.header" weight={Text.WEIGHT.M} />
         <Text
             id="plug.internalError"
-            values={{ //@ts-ignore
-                reload: (val) =>
-                    (<span className={b('plug', 'link')} onClick={() => window.location.reload()}>{val}</span>), //@ts-ignore
-                bug: (val) =>
-                    (<a className={b('plug', 'link')} href={LINKS.BUG_REPORT} target="_blank">{val}</a>),
+            values={{
+                //@ts-ignore
+                reload: (val) => (
+                    <span className={b('plug', 'link')} onClick={() => window.location.reload()}>
+                        {val}
+                    </span>
+                ), //@ts-ignore
+                bug: (val) => (
+                    <a className={b('plug', 'link')} href={LINKS.BUG_REPORT} target="_blank">
+                        {val}
+                    </a>
+                ),
             }}
         />
         <IconHierarchy height={70} width={70} />

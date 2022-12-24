@@ -1,3 +1,4 @@
+/* eslint-disable react/no-multi-comp */
 import { Meta, StoryFn } from '@storybook/react';
 import React from 'react';
 
@@ -19,12 +20,12 @@ export const Overview: StoryFn<typeof Hint> = (args) => (
             'Don’t Use it to provide additional information about interactive controls',
             'Don’t use it to provide lengthy information. Recommended message length: less than 35 characters.',
         ]}
-        okList={[
-            'Use it to provide a hint for a specific element.',
-        ]}
+        okList={['Use it to provide a hint for a specific element.']}
         usage="Used to involve the user in some feature"
     >
-        <Hint {...args}><Text>Hint to that element is shown</Text></Hint>
+        <Hint {...args}>
+            <Text>Hint to that element is shown</Text>
+        </Hint>
     </StoryOverview>
 );
 Overview.args = {

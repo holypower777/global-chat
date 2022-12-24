@@ -3,7 +3,12 @@ import cx from 'classnames';
 import React from 'react';
 import { useIntl } from 'react-intl';
 
-import { MessageFormatPrimitiveValue, MixProps, OptionalChildrenProps, SimpleCallback } from '../../typings';
+import {
+    MessageFormatPrimitiveValue,
+    MixProps,
+    OptionalChildrenProps,
+    SimpleCallback,
+} from '../../typings';
 import { SIZE } from '../constants';
 
 import './header-text.scss';
@@ -64,21 +69,28 @@ const HeaderText = ({
 }: HeaderTextProps) => {
     const intl = useIntl();
     const headerSize = size || mapTagToSize(tag);
-    const className = cx(b('header-text', { uppercase, ellipsis, size: headerSize, tag, weight, capitalize }), mix);
+    const className = cx(
+        b('header-text', { uppercase, ellipsis, size: headerSize, tag, weight, capitalize }),
+        mix
+    );
     const content = id ? intl.formatMessage({ id, defaultMessage: id }, values) : children;
 
-    return React.createElement(tag, { className, onClick: handleClick, 'data-testid': 'header-text' }, content);
+    return React.createElement(
+        tag,
+        { className, onClick: handleClick, 'data-testid': 'header-text' },
+        content
+    );
 };
 
-export interface HProps extends Omit<HeaderTextProps, 'tag'> {}
+export type HProps = Omit<HeaderTextProps, 'tag'>;
 
 /* eslint-disable react/no-multi-comp */
-export const H1 = (props: HProps) => (<HeaderText tag={TAG.H1} weight={SIZE.L} {...props} />);
-export const H2 = (props: HProps) => (<HeaderText tag={TAG.H2} weight={SIZE.M} {...props} />);
-export const H3 = (props: HProps) => (<HeaderText tag={TAG.H3} {...props} />);
-export const H4 = (props: HProps) => (<HeaderText tag={TAG.H4} {...props} />);
-export const H5 = (props: HProps) => (<HeaderText tag={TAG.H5} {...props} />);
-export const H6 = (props: HProps) => (<HeaderText tag={TAG.H6} {...props} />);
+export const H1 = (props: HProps) => <HeaderText tag={TAG.H1} weight={SIZE.L} {...props} />;
+export const H2 = (props: HProps) => <HeaderText tag={TAG.H2} weight={SIZE.M} {...props} />;
+export const H3 = (props: HProps) => <HeaderText tag={TAG.H3} {...props} />;
+export const H4 = (props: HProps) => <HeaderText tag={TAG.H4} {...props} />;
+export const H5 = (props: HProps) => <HeaderText tag={TAG.H5} {...props} />;
+export const H6 = (props: HProps) => <HeaderText tag={TAG.H6} {...props} />;
 
 HeaderText.TAG = TAG;
 HeaderText.SIZE = SIZE;

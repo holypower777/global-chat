@@ -107,7 +107,10 @@ export const LINKS = {
     BUG_REPORT: 'https://github.com/holypower777/global-chat/issues/new/choose',
     IDEAS: 'https://github.com/holypower777/global-chat/discussions',
     KOSTI4EG_TWITCH: 'https://www.twitch.tv/kosti4eg',
-    AUTH: process.env.NODE_ENV === 'development' ? 'http://localhost:3000/auth/twitch/login' : 'https://global-chat.ru/auth/twitch/login',
+    AUTH:
+        process.env.NODE_ENV === 'development'
+            ? 'http://localhost:3000/auth/twitch/login'
+            : 'https://global-chat.ru/auth/twitch/login',
     NO_LIMITS: '/no-limits',
 };
 
@@ -174,17 +177,17 @@ export interface REPLY_MESSAGE {
 }
 
 export const MONTHS = [
-    'january', 
-    'february', 
-    'march', 
-    'april', 
-    'may', 
-    'june', 
-    'july', 
-    'august', 
-    'september', 
-    'october', 
-    'november', 
+    'january',
+    'february',
+    'march',
+    'april',
+    'may',
+    'june',
+    'july',
+    'august',
+    'september',
+    'october',
+    'november',
     'december',
 ];
 

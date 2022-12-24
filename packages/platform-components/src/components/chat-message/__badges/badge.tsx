@@ -6,10 +6,7 @@ interface BadgeProps {
 
 const Badge = ({ imageSrc }: BadgeProps) => (
     <div className="badge">
-        <img 
-            alt="badge" 
-            src={imageSrc} 
-        />
+        <img alt="badge" src={imageSrc} />
     </div>
 );
 

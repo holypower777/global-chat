@@ -11,26 +11,21 @@ import {
 } from './types/query';
 
 export const baseUrl =
-    process.env.NODE_ENV === 'development'
-        ? 'http://192.168.1.12:3000/v1/'
-        : '/v1/';
+    process.env.NODE_ENV === 'development' ? 'http://192.168.1.12:3000/v1/' : '/v1/';
 export const baseAuthUrl =
     process.env.NODE_ENV === 'development' ? 'http://192.168.1.12:3000/' : '/';
 export const baseBadgesUrl = 'https://badges.twitch.tv/';
 
 // twitch-users defs
-export const getTwitchUserByDisplayNameDef = ({
-    displayName,
-}: DisplayNameQuery) => `twitch-user/${displayName}`;
+export const getTwitchUserByDisplayNameDef = ({ displayName }: DisplayNameQuery) =>
+    `twitch-user/${displayName}`;
 export const getTwitchUserChannelsDef = ({ userId }: UserIdQuery) =>
     `twitch-user/${userId}/channels`;
-export const getTwitchUserStatsDef = ({ userId }: UserIdQuery) =>
-    `twitch-user/${userId}/stats`;
+export const getTwitchUserStatsDef = ({ userId }: UserIdQuery) => `twitch-user/${userId}/stats`;
 export const getTwitchChannelStatsDef = ({ channelId }: ChannelIdQuery) =>
     `twitch-user/channel/${channelId}/stats`;
-export const getDisplayNameSuggestionsDef = ({
-    displayName,
-}: DisplayNameQuery) => `twitch-user/${displayName}/suggestions`;
+export const getDisplayNameSuggestionsDef = ({ displayName }: DisplayNameQuery) =>
+    `twitch-user/${displayName}/suggestions`;
 export const getRandomTwitchUserDef = () => 'twitch-user/random';
 
 // messages defs
@@ -56,35 +51,23 @@ export const getMessagesByChannelIdDef = ({
 
 // stats defs
 export const getOverallStatsDef = () => 'stats/overall';
-export const getOverallStatsPlotsDef = ({
-    dateFrom,
-    dateTo,
-}: GetOverallStatsPlotsQuery) =>
+export const getOverallStatsPlotsDef = ({ dateFrom, dateTo }: GetOverallStatsPlotsQuery) =>
     `stats/overall/plots?dateFrom=${dateFrom.getTime()}&dateTo=${dateTo.getTime()}`;
 export const getDailyStatsDef = () => 'stats/daily';
 
 // users defs
 export const getUserByIdDef = ({ userId }: UserIdQuery) => `users/${userId}`;
-export const postUserFavoriteDef = ({
-    userId,
-    body,
-}: UserIdQuery & UserCommonBody) => ({
+export const postUserFavoriteDef = ({ userId, body }: UserIdQuery & UserCommonBody) => ({
     url: `users/${userId}/favorites`,
     method: 'POST',
     body: convertTwitchUserCommonToApi(body),
 });
-export const deleteUserFavoriteDef = ({
-    userId,
-    body,
-}: UserIdQuery & UserCommonBody) => ({
+export const deleteUserFavoriteDef = ({ userId, body }: UserIdQuery & UserCommonBody) => ({
     url: `users/${userId}/favorites`,
     method: 'PUT',
     body: convertTwitchUserCommonToApi(body),
 });
-export const postSearchHistoryDef = ({
-    userId,
-    body,
-}: UserIdQuery & UserCommonBody) => ({
+export const postSearchHistoryDef = ({ userId, body }: UserIdQuery & UserCommonBody) => ({
     url: `users/${userId}/search-history`,
     method: 'POST',
     body: convertTwitchUserCommonToApi(body),
@@ -109,6 +92,5 @@ export const authRefreshTokenDef = ({ userId, refreshToken }: AuthBody) => ({
 });
 
 // badges def
-export const getSubscriberBadgesByChannelIdDef = ({
-    channelId,
-}: ChannelIdQuery) => `v1/badges/channels/${channelId}/display`;
+export const getSubscriberBadgesByChannelIdDef = ({ channelId }: ChannelIdQuery) =>
+    `v1/badges/channels/${channelId}/display`;

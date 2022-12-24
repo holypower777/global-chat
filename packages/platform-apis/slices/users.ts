@@ -19,33 +19,25 @@ export const usersApi = createApi({
             query: getUserByIdDef,
             transformResponse: (response) =>
                 convertApiToDTO<User>(response, ['paidUntil', 'joinedAt']),
+            // eslint-disable-next-line @typescript-eslint/no-unused-vars
             onQueryStarted: async (id, { dispatch, queryFulfilled }) => {},
         }),
-        postUserFavorite: builder.mutation<
-            TwitchUsersCommon,
-            UserIdQuery & UserCommonBody
-        >({
+        postUserFavorite: builder.mutation<TwitchUsersCommon, UserIdQuery & UserCommonBody>({
             query: postUserFavoriteDef,
-            transformResponse: (response) =>
-                convertApiToDTO<TwitchUsersCommon>(response),
+            transformResponse: (response) => convertApiToDTO<TwitchUsersCommon>(response),
+            // eslint-disable-next-line @typescript-eslint/no-unused-vars
             onQueryStarted: async (id, { dispatch, queryFulfilled }) => {},
         }),
-        deleteUserFavorite: builder.mutation<
-            TwitchUsersCommon,
-            UserIdQuery & UserCommonBody
-        >({
+        deleteUserFavorite: builder.mutation<TwitchUsersCommon, UserIdQuery & UserCommonBody>({
             query: deleteUserFavoriteDef,
-            transformResponse: (response) =>
-                convertApiToDTO<TwitchUsersCommon>(response),
+            transformResponse: (response) => convertApiToDTO<TwitchUsersCommon>(response),
+            // eslint-disable-next-line @typescript-eslint/no-unused-vars
             onQueryStarted: async (id, { dispatch, queryFulfilled }) => {},
         }),
-        postSearchHistory: builder.mutation<
-            TwitchUsersCommon,
-            UserIdQuery & UserCommonBody
-        >({
+        postSearchHistory: builder.mutation<TwitchUsersCommon, UserIdQuery & UserCommonBody>({
             query: postSearchHistoryDef,
-            transformResponse: (response) =>
-                convertApiToDTO<TwitchUsersCommon>(response),
+            transformResponse: (response) => convertApiToDTO<TwitchUsersCommon>(response),
+            // eslint-disable-next-line @typescript-eslint/no-unused-vars
             onQueryStarted: async (id, { dispatch, queryFulfilled }) => {},
         }),
     }),

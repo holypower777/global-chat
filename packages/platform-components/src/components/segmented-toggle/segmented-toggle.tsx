@@ -17,10 +17,10 @@ interface SegmentedToggleProps extends MixProps {
     values?: Record<string, MessageFormatPrimitiveValue>;
     /** Specifies whether an option is selected. */
     selected: string;
-    /** Defines a callback function which is called every time option is clicked. 
+    /** Defines a callback function which is called every time option is clicked.
      * Returns a selected element and its value. */
     handleClick: (value: string) => void;
-    /** Accepts <SegmentedToggle.Icon/> or <SegmentedToggle.Button/> 
+    /** Accepts <SegmentedToggle.Icon/> or <SegmentedToggle.Button/>
      * as child items to list down available options */
     children: ReactNode | Array<ReactNode>;
 }
@@ -35,7 +35,8 @@ const SegmentedToggle = ({
 }: SegmentedToggleProps) => {
     const childrenWithProps = React.Children.map(children, (child) => {
         if (React.isValidElement(child)) {
-            return React.cloneElement(child, { // @ts-ignore
+            return React.cloneElement(child, {
+                // @ts-ignore
                 active: child.props.value === selected,
                 handleClick: () => handleClick(child.props.value),
             });
@@ -45,18 +46,11 @@ const SegmentedToggle = ({
     });
 
     return (
-        <div
-            className={cx('segmented-toggle', mix)}
-            data-testid="segmented-toggle"
-        >
-            {labelId && <Text 
-                id={labelId} 
-                mix={b('segmented-toggle', 'label')} 
-                values={values}
-            />}
-            <div className={b('segmented-toggle', 'buttons')}>
-                {childrenWithProps}
-            </div>
+        <div className={cx('segmented-toggle', mix)} data-testid="segmented-toggle">
+            {labelId ? (
+                <Text id={labelId} mix={b('segmented-toggle', 'label')} values={values} />
+            ) : null}
+            <div className={b('segmented-toggle', 'buttons')}>{childrenWithProps}</div>
         </div>
     );
 };

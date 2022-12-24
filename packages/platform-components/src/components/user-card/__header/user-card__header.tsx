@@ -45,17 +45,19 @@ const UserCardHeader = ({
                     clickable
                     title={intl.formatMessage({ id: 'chat.userCard.settings.title' })}
                 />
-                {isBroadcaster && <a
-                    href={`https://twitchtracker.com/${displayName}`}
-                    onClick={(e) => (e.stopPropagation())}
-                    target="_blank"
-                    title={intl.formatMessage({ id: 'chat.userCard.twitchtracker.title' })}
-                >
-                    <IconTwitchtracker clickable />
-                </a>}
+                {isBroadcaster ? (
+                    <a
+                        href={`https://twitchtracker.com/${displayName}`}
+                        onClick={(e) => e.stopPropagation()}
+                        target="_blank"
+                        title={intl.formatMessage({ id: 'chat.userCard.twitchtracker.title' })}
+                    >
+                        <IconTwitchtracker clickable />
+                    </a>
+                ) : null}
                 <a
                     href={`https://www.twitch.tv/${displayName}`}
-                    onClick={(e) => (e.stopPropagation())}
+                    onClick={(e) => e.stopPropagation()}
                     target="_blank"
                     title={intl.formatMessage({ id: 'chat.userCard.twitch.title' })}
                 >

@@ -40,6 +40,7 @@ const StoryOverview = ({
                 <H1 capitalize>{componentName}</H1>
                 <a //@ts-ignore
                     href={`${basePath}/${packet}/src/components/${componentName.toLowerCase()}`}
+                    rel="noreferrer"
                     target="_blank"
                 >
                     <Text size={Text.SIZE.L}>{'</> Source'}</Text>
@@ -47,9 +48,7 @@ const StoryOverview = ({
             </header>
             <div className={b('story-overview', 'wrapper')}>
                 <H2 capitalize>Playground</H2>
-                <div className={b('story-overview', 'block')}>
-                    {children}
-                </div>
+                <div className={b('story-overview', 'block')}>{children}</div>
             </div>
             {(usage.length > 0 || okList.length > 0 || notOkList.length > 0) && (
                 <div className={b('story-overview', 'wrapper')}>
@@ -59,7 +58,9 @@ const StoryOverview = ({
                         <div className={b('story-overview', 'usage')}>
                             {okList.length > 0 && (
                                 <ul className={b('story-overview', 'usage-list', { ok: true })}>
-                                    <Text tag={Text.TAG.LI} weight={Text.WEIGHT.M}>Do</Text>
+                                    <Text tag={Text.TAG.LI} weight={Text.WEIGHT.M}>
+                                        Do
+                                    </Text>
                                     {okList.map((e, i) => (
                                         <li key={i}>
                                             <IconCircleTick />
@@ -70,7 +71,9 @@ const StoryOverview = ({
                             )}
                             {notOkList.length > 0 && (
                                 <ul className={b('story-overview', 'usage-list', { notOk: true })}>
-                                    <Text tag={Text.TAG.LI} weight={Text.WEIGHT.M}>Don't</Text>
+                                    <Text tag={Text.TAG.LI} weight={Text.WEIGHT.M}>
+                                        {`Don't`}
+                                    </Text>
                                     {notOkList.map((e, i) => (
                                         <li key={i}>
                                             <IconForbidden />
@@ -86,7 +89,9 @@ const StoryOverview = ({
             <div className={b('story-overview', 'wrapper')}>
                 <div className={b('story-overview', 'import')}>
                     <H2 capitalize>Import</H2>
-                    <Text handleClick={handleCopy}>({isCopied ? 'copied to clipboard!' : 'click to copy'})</Text>
+                    <Text handleClick={handleCopy}>
+                        ({isCopied ? 'copied to clipboard!' : 'click to copy'})
+                    </Text>
                 </div>
                 <div
                     className={b('story-overview', 'block', { clickable: true })}

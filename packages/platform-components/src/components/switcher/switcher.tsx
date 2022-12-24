@@ -25,12 +25,12 @@ const Switcher = ({
     handleToggle,
     mix,
 }: SwitcherProps) => {
-    return(
+    return (
         <label
             className={cx(b('switcher', { disabled, size, checked: checked && size }), mix)}
             data-testid="switcher"
         >
-            <input 
+            <input
                 checked={checked}
                 className={b('switcher', 'input')}
                 data-testid={b('switcher', 'input')}

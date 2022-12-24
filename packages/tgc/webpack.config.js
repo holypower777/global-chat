@@ -29,9 +29,7 @@ module.exports = {
             favicon: `${__dirname}/../../static/favicon.ico`,
         }),
         new webpack.DefinePlugin({
-            'process.env.NODE_ENV': JSON.stringify(
-                isDevelopment ? 'development' : 'production'
-            ),
+            'process.env.NODE_ENV': JSON.stringify(isDevelopment ? 'development' : 'production'),
             'process.env': JSON.stringify(env),
         }),
     ],

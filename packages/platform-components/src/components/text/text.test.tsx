@@ -34,12 +34,22 @@ describe('text', () => {
     describe('tags', () => {
         it('default span tag', () => {
             const { text } = setup({ id: 'simpleText' });
-            expect(text).toContainHTML(`<span class="${b('text', { size: Text.SIZE.M, weight: Text.WEIGHT.S })}" data-testid="text">${defaultText}</span>`);
+            expect(text).toContainHTML(
+                `<span class="${b('text', {
+                    size: Text.SIZE.M,
+                    weight: Text.WEIGHT.S,
+                })}" data-testid="text">${defaultText}</span>`
+            );
         });
 
         it('must return li tag', () => {
             const { text } = setup({ id: 'simpleText', tag: Text.TAG.LI });
-            expect(text).toContainHTML(`<li class="${b('text', { size: Text.SIZE.M, weight: Text.WEIGHT.S })}" data-testid="text">${defaultText}</li>`);
+            expect(text).toContainHTML(
+                `<li class="${b('text', {
+                    size: Text.SIZE.M,
+                    weight: Text.WEIGHT.S,
+                })}" data-testid="text">${defaultText}</li>`
+            );
         });
     });
 

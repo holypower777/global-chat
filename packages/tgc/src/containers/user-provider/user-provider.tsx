@@ -1,7 +1,9 @@
-import { useLazyGetUserByIdQuery } from 'platform-apis';
-import { ChildrenProps } from 'platform-components/src/typings';
 import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
+
+import { ChildrenProps } from 'platform-components/src/typings';
+
+import { useLazyGetUserByIdQuery } from 'platform-apis';
 
 import { getAT, getUserIdFromAT } from '../../store/slices/settings';
 
@@ -12,7 +14,7 @@ const UserProvider = ({ children }: ChildrenProps) => {
 
     useEffect(() => {
         if (accessToken) {
-            getUser({ userId: tokenUserId, token: accessToken! });
+            getUser({ userId: tokenUserId });
         }
     }, [accessToken]);
 

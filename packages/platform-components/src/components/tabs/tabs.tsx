@@ -8,9 +8,9 @@ import TabsTab, { Tab } from './__tab/tabs__tab';
 import './tabs.scss';
 
 export interface TabsProps extends MixProps {
-    /** Tabs to render. Tab is 
-    * { id: number | string, intlId: string, values?: {}, icon?: ReactNode } 
-    */
+    /** Tabs to render. Tab is
+     * { id: number | string, intlId: string, values?: {}, icon?: ReactNode }
+     */
     tabs: Array<Tab>;
     /** A selected tab id */
     activeId: string | number;
@@ -18,19 +18,11 @@ export interface TabsProps extends MixProps {
     handleTabClick: (id: number | string) => void;
 }
 
-const Tabs = ({
-    tabs = [],
-    activeId,
-    handleTabClick,
-    mix,
-}: TabsProps) => {
+const Tabs = ({ tabs = [], activeId, handleTabClick, mix }: TabsProps) => {
     return (
-        <ul
-            className={cx('tabs', mix)}
-            data-testid="tabs"
-        >
+        <ul className={cx('tabs', mix)} data-testid="tabs">
             {tabs.map((tab) => (
-                <TabsTab 
+                <TabsTab
                     handleClick={() => tab.id !== activeId && handleTabClick(tab.id)}
                     icon={tab.icon}
                     id={tab.id}

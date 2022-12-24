@@ -19,10 +19,10 @@ export interface SpinProps extends MixProps {
 }
 
 const Spin = ({
-    center = false, 
-    hidden = false, 
-    size = SIZE.M, 
-    theme = THEME_EXTENDED.TWITCH, 
+    center = false,
+    hidden = false,
+    size = SIZE.M,
+    theme = THEME_EXTENDED.TWITCH,
     mix,
 }: SpinProps) => {
     return (

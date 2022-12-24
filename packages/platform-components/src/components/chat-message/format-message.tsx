@@ -63,8 +63,14 @@ smiles.set('BibleThump', 'https://static-cdn.jtvnw.net/emoticons/v2/86/default/l
 smiles.set('BigBrother', 'https://static-cdn.jtvnw.net/emoticons/v2/1904/default/light/1.0');
 smiles.set('BigPhish', 'https://static-cdn.jtvnw.net/emoticons/v2/160395/default/light/1.0');
 smiles.set('BirbRave', 'https://cdn.betterttv.net/emote/5c32f7f9b2b08c560f6ae60a/1x');
-smiles.set('BisexualPride', 'https://static-cdn.jtvnw.net/emoticons/v2/307827313/default/light/1.0');
-smiles.set('BlackLivesMatter', 'https://static-cdn.jtvnw.net/emoticons/v2/302537250/default/light/1.0');
+smiles.set(
+    'BisexualPride',
+    'https://static-cdn.jtvnw.net/emoticons/v2/307827313/default/light/1.0'
+);
+smiles.set(
+    'BlackLivesMatter',
+    'https://static-cdn.jtvnw.net/emoticons/v2/302537250/default/light/1.0'
+);
 smiles.set('BlargNaut', 'https://static-cdn.jtvnw.net/emoticons/v2/114738/default/light/1.0');
 smiles.set('BlobDance', 'https://cdn.betterttv.net/emote/5de265d260bd0702dc510c5e/1x');
 smiles.set('BloodTrail', 'https://static-cdn.jtvnw.net/emoticons/v2/69/default/light/1.0');
@@ -171,7 +177,10 @@ smiles.set('FutureMan', 'https://static-cdn.jtvnw.net/emoticons/v2/98562/default
 smiles.set('GachiPls', 'https://cdn.betterttv.net/emote/58868aa5afc2ff756c3f495e/1x');
 smiles.set('GandalfPls', 'https://cdn.betterttv.net/emote/55b9de142c4d51070e45864c/1x');
 smiles.set('GayPride', 'https://static-cdn.jtvnw.net/emoticons/v2/307827321/default/light/1.0');
-smiles.set('GenderFluidPride', 'https://static-cdn.jtvnw.net/emoticons/v2/307827326/default/light/1.0');
+smiles.set(
+    'GenderFluidPride',
+    'https://static-cdn.jtvnw.net/emoticons/v2/307827326/default/light/1.0'
+);
 smiles.set('GingerPower', 'https://static-cdn.jtvnw.net/emoticons/v2/32/default/light/1.0');
 smiles.set('GivePLZ', 'https://static-cdn.jtvnw.net/emoticons/v2/112291/default/light/1.0');
 smiles.set('GlitchCat', 'https://static-cdn.jtvnw.net/emoticons/v2/304486301/default/light/1.0');
@@ -199,7 +208,10 @@ smiles.set('HassaanChop', 'https://static-cdn.jtvnw.net/emoticons/v2/20225/defau
 smiles.set('HeyGuys', 'https://static-cdn.jtvnw.net/emoticons/v2/30259/default/light/1.0');
 smiles.set('HolidayCookie', 'https://static-cdn.jtvnw.net/emoticons/v2/1713813/default/light/1.0');
 smiles.set('HolidayLog', 'https://static-cdn.jtvnw.net/emoticons/v2/1713816/default/light/1.0');
-smiles.set('HolidayOrnament', 'https://static-cdn.jtvnw.net/emoticons/v2/1713818/default/light/1.0');
+smiles.set(
+    'HolidayOrnament',
+    'https://static-cdn.jtvnw.net/emoticons/v2/1713818/default/light/1.0'
+);
 smiles.set('HolidayPresent', 'https://static-cdn.jtvnw.net/emoticons/v2/1713819/default/light/1.0');
 smiles.set('HolidaySanta', 'https://static-cdn.jtvnw.net/emoticons/v2/1713822/default/light/1.0');
 smiles.set('HolidayTree', 'https://static-cdn.jtvnw.net/emoticons/v2/1713825/default/light/1.0');
@@ -208,7 +220,10 @@ smiles.set('HyperChikaCrazy', 'https://cdn.betterttv.net/emote/5c7986feee6ff62c3
 smiles.set('HyperNeko', 'https://cdn.betterttv.net/emote/5afdfe6702e8e2270c373de3/1x');
 smiles.set('HyperNekoCrazy', 'https://cdn.betterttv.net/emote/5b9cf7916c095b77aed39153/1x');
 smiles.set('ImTriggered', 'https://cdn.betterttv.net/emote/55b11f64ac9c447a4e565d14/1x');
-smiles.set('IntersexPride', 'https://static-cdn.jtvnw.net/emoticons/v2/307827332/default/light/1.0');
+smiles.set(
+    'IntersexPride',
+    'https://static-cdn.jtvnw.net/emoticons/v2/307827332/default/light/1.0'
+);
 smiles.set('InuyoFace', 'https://static-cdn.jtvnw.net/emoticons/v2/160396/default/light/1.0');
 smiles.set('ItsBoshyTime', 'https://static-cdn.jtvnw.net/emoticons/v2/133468/default/light/1.0');
 smiles.set('JKanStyle', 'https://static-cdn.jtvnw.net/emoticons/v2/15/default/light/1.0');
@@ -284,7 +299,10 @@ smiles.set('NezukoSlide', 'https://cdn.betterttv.net/emote/5d7bf8fdd2458468c1f44
 smiles.set('NinjaGrumpy', 'https://static-cdn.jtvnw.net/emoticons/v2/138325/default/light/1.0');
 smiles.set('NoGodNo', 'https://cdn.betterttv.net/emote/55a1848cbcf695554143613c/1x');
 smiles.set('NomNom', 'https://static-cdn.jtvnw.net/emoticons/v2/90075/default/light/1.0');
-smiles.set('NonbinaryPride', 'https://static-cdn.jtvnw.net/emoticons/v2/307827356/default/light/1.0');
+smiles.set(
+    'NonbinaryPride',
+    'https://static-cdn.jtvnw.net/emoticons/v2/307827356/default/light/1.0'
+);
 smiles.set('NotATK', 'https://static-cdn.jtvnw.net/emoticons/v2/34875/default/light/1.0');
 smiles.set('NotLikeThis', 'https://static-cdn.jtvnw.net/emoticons/v2/58765/default/light/1.0');
 smiles.set('OMEGALAUGHING', 'https://cdn.betterttv.net/emote/5b3fd6770f8f6c2547825a6f/1x');
@@ -319,7 +337,10 @@ smiles.set('POLICE', 'https://cdn.betterttv.net/emote/5e15e00c0550d42106b90042/1
 smiles.set('PRChase', 'https://static-cdn.jtvnw.net/emoticons/v2/28328/default/light/1.0');
 smiles.set('PagChomp', 'https://cdn.betterttv.net/emote/5f284a13cf6d2144653dee4a/1x');
 smiles.set('PanicVis', 'https://static-cdn.jtvnw.net/emoticons/v2/3668/default/light/1.0');
-smiles.set('PansexualPride', 'https://static-cdn.jtvnw.net/emoticons/v2/307827370/default/light/1.0');
+smiles.set(
+    'PansexualPride',
+    'https://static-cdn.jtvnw.net/emoticons/v2/307827370/default/light/1.0'
+);
 smiles.set('PartyHat', 'https://static-cdn.jtvnw.net/emoticons/v2/965738/default/light/1.0');
 smiles.set('PartyKirby', 'https://cdn.betterttv.net/emote/5c3a9d8bbaa7ba09c9cfca37/1x');
 smiles.set('PartyParrot', 'https://cdn.betterttv.net/emote/59f06613ba7cdd47e9a4cad2/1x');
@@ -674,7 +695,10 @@ smiles.set('peepoLeaveFinger', 'https://cdn.betterttv.net/emote/5e031d608608fb0d
 smiles.set('peepoLove', 'https://cdn.betterttv.net/emote/5a5e0e8d80f53146a54a516b/1x');
 smiles.set('peepoPat', 'https://cdn.betterttv.net/emote/5c5213e59af3bb75410e87bf/1x');
 smiles.set('peepoPats', 'https://cdn.betterttv.net/emote/5c53afb3c5744c56e7a951d1/1x');
-smiles.set('peepoPogClimbingTreeHard4House', 'https://cdn.betterttv.net/emote/5e2bac6ebca2995f13fc1379/1x');
+smiles.set(
+    'peepoPogClimbingTreeHard4House',
+    'https://cdn.betterttv.net/emote/5e2bac6ebca2995f13fc1379/1x'
+);
 smiles.set('peepoPooPoo', 'https://cdn.betterttv.net/emote/5c3427a55752683d16e409d1/1x');
 smiles.set('peepoPopcorn', 'https://cdn.betterttv.net/emote/5e1cf8a988e62a5f14dc71e0/1x');
 smiles.set('peepoRIP', 'https://cdn.betterttv.net/emote/5edbad3dfdee545e30667995/1x');
@@ -760,37 +784,40 @@ smiles.set('xar2EDM', 'https://cdn.betterttv.net/emote/5b7e01fbe429f82909e0013a/
 smiles.set('xqcSlam', 'https://cdn.betterttv.net/emote/5cb9176c750fbb4a2533fc42/1x');
 
 export const messageToSmile = (message: string) => {
-    return message.split(' ').map((e, i) => {
-        if (e.startsWith('http')) {
-            return (
-                <a 
-                    className={b('chat-message', 'link')} 
-                    href={e} 
-                    key={`${e}${i}`} 
-                    target="_blank"
-                >
-                    {e}
-                </a>
-            );
-        }
+    return message
+        .split(' ')
+        .map((e, i) => {
+            if (e.startsWith('http')) {
+                return (
+                    <a
+                        className={b('chat-message', 'link')}
+                        href={e}
+                        key={`${e}${i}`}
+                        rel="noreferrer"
+                        target="_blank"
+                    >
+                        {e}
+                    </a>
+                );
+            }
 
-        if (e.startsWith('@')) {
-            // TODO: redirect to user history
-        }
+            if (e.startsWith('@')) {
+                // TODO: redirect to user history
+            }
 
-        if (smiles.get(e)) {
-            return (
-                <img
-                    alt={e}
-                    className={b('chat-message', 'text_smile')}
-                    key={`${e}${i}`}
-                    src={smiles.get(e)}
-                    title={e}
-                />
-            );
-        }
+            if (smiles.get(e)) {
+                return (
+                    <img
+                        alt={e}
+                        className={b('chat-message', 'text_smile')}
+                        key={`${e}${i}`}
+                        src={smiles.get(e)}
+                        title={e}
+                    />
+                );
+            }
 
-        return e;
-        //@ts-ignore
-    }).reduce((prev, curr) => [prev, ' ', curr]);
+            return e;
+        }) //@ts-ignore
+        .reduce((prev, curr) => [prev, ' ', curr]);
 };

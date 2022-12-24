@@ -1,83 +1,84 @@
-import { TwitchUserChannel, TwitchUserChannels } from 'platform-apis/types';
-import { Rubricator, Text } from 'platform-components';
-import { SimpleCallback } from 'platform-components/src/typings';
-import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+// @reference
+// import { TwitchUserChannel, TwitchUserChannels } from 'platform-apis/types';
+// import { Rubricator, Text } from 'platform-components';
+// import { SimpleCallback } from 'platform-components/src/typings';
+// import React, { useEffect, useState } from 'react';
+// import { useDispatch, useSelector } from 'react-redux';
 
-import { getChannels, getSelectedChannel, setSelectedChannel } from '../../../store/slices/channels';
+// import { getChannels, getSelectedChannel, setSelectedChannel } from '../../../store/slices/channels';
 
-import './channels.scss';
+// import './channels.scss';
 
-interface ChannelsProps {
-    handlePickChannel?: SimpleCallback;
-}
+// interface ChannelsProps {
+//     handlePickChannel?: SimpleCallback;
+// }
 
-const Channels = React.memo(({ handlePickChannel }: ChannelsProps) => {
-    const dispatch = useDispatch();
-    const channels = useSelector(getChannels);
-    const selectedChannel = useSelector(getSelectedChannel);
+// const Channels = React.memo(({ handlePickChannel }: ChannelsProps) => {
+//     const dispatch = useDispatch();
+//     const channels = useSelector(getChannels);
+//     const selectedChannel = useSelector(getSelectedChannel);
 
-    const [sortedChannels, setSortedChannels] = useState<Array<TwitchUserChannels>>([]);
-    const [pickedChannel, setPickedChannel] = useState<TwitchUserChannel | null>(selectedChannel);
+//     const [sortedChannels, setSortedChannels] = useState<Array<TwitchUserChannels>>([]);
+//     const [pickedChannel, setPickedChannel] = useState<TwitchUserChannel | null>(selectedChannel);
 
-    useEffect(() => {
-        if (pickedChannel) {
-            dispatch(setSelectedChannel(pickedChannel));
-        }
-    }, [pickedChannel]);
+//     useEffect(() => {
+//         if (pickedChannel) {
+//             dispatch(setSelectedChannel(pickedChannel));
+//         }
+//     }, [pickedChannel]);
 
-    useEffect(() => {
-        setPickedChannel(selectedChannel);
-    }, [selectedChannel]);
+//     useEffect(() => {
+//         setPickedChannel(selectedChannel);
+//     }, [selectedChannel]);
 
-    useEffect(() => {
-        const channelsCopy = [...channels];
-        channelsCopy.sort((a, b) => {
-            if (a.login < b.login) {
-                return -1;
-            }
-            if (a.login > b.login) {
-                return 1;
-            }
-        
-            return 0;
-        });
+//     useEffect(() => {
+//         const channelsCopy = [...channels];
+//         channelsCopy.sort((a, b) => {
+//             if (a.login < b.login) {
+//                 return -1;
+//             }
+//             if (a.login > b.login) {
+//                 return 1;
+//             }
 
-        const dict = channelsCopy.reduce((a, c) => {
-            const k = c.login[0].toUpperCase();
-            
-            //@ts-ignore
-            if (a[k]) {
-                //@ts-ignore
-                a[k].push(c);
-            } else {
-                //@ts-ignore
-                a[k] = [c];
-            }
+//             return 0;
+//         });
 
-            return a;
-        }, {});
+//         const dict = channelsCopy.reduce((a, c) => {
+//             const k = c.login[0].toUpperCase();
 
-        setSortedChannels(Object.values(dict));
-    }, [channels]);
+//             //@ts-ignore
+//             if (a[k]) {
+//                 //@ts-ignore
+//                 a[k].push(c);
+//             } else {
+//                 //@ts-ignore
+//                 a[k] = [c];
+//             }
 
-    const handleSelect = (item: TwitchUserChannel) => {
-        if (handlePickChannel) {
-            handlePickChannel();
-        }
+//             return a;
+//         }, {});
 
-        setPickedChannel(item);
-    };
+//         setSortedChannels(Object.values(dict));
+//     }, [channels]);
 
-    return (
-        <section className="channels">
-            {sortedChannels.length > 0 ? <Rubricator
-                channels={sortedChannels}
-                handleSelect={handleSelect}
-                selectedItem={pickedChannel}
-            /> : <Text id="userHistory.noChannels" />}
-        </section>
-    );
-});
+//     const handleSelect = (item: TwitchUserChannel) => {
+//         if (handlePickChannel) {
+//             handlePickChannel();
+//         }
 
-export default Channels;
+//         setPickedChannel(item);
+//     };
+
+//     return (
+//         <section className="channels">
+//             {sortedChannels.length > 0 ? <Rubricator
+//                 channels={sortedChannels}
+//                 handleSelect={handleSelect}
+//                 selectedItem={pickedChannel}
+//             /> : <Text id="userHistory.noChannels" />}
+//         </section>
+//     );
+// });
+
+// export default Channels;

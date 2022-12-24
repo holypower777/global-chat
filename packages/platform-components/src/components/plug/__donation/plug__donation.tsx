@@ -10,9 +10,13 @@ const PlugDonation = ({ ...props }: MixProps) => (
         <H3 id="plug.userHidden.header" weight={Text.WEIGHT.M} />
         <Text
             id="plug.userHidden"
-            values={{ //@ts-ignore
-                link: (val) =>
-                    (<a className={b('plug', 'link')} href={LINKS.BOOSTY} target="_blank">{val}</a>),
+            values={{
+                //@ts-ignore
+                link: (val) => (
+                    <a className={b('plug', 'link')} href={LINKS.BOOSTY} target="_blank">
+                        {val}
+                    </a>
+                ),
             }}
         />
         <IconEyeSlash height={70} width={70} />

@@ -17,10 +17,7 @@ import { NOTIFICATIONS_DURATION, SETTINGS } from 'platform-components';
 import { authRefreshTokenDef, baseAuthUrl, baseUrl } from '../api-defs';
 import { BackendErrorResponse } from '../types/error';
 
-const prepareHeaders = (
-    headers: Headers,
-    { getState }: { getState: () => unknown }
-) => {
+const prepareHeaders = (headers: Headers, { getState }: { getState: () => unknown }) => {
     const token = (getState() as RootState).settings.at;
 
     if (token) {
@@ -40,11 +37,11 @@ const baseAuthQuery = fetchBaseQuery({
 
 const mutex = new Mutex();
 
-const authFetchBase: BaseQueryFn<
-    string | FetchArgs,
-    unknown,
-    FetchBaseQueryError
-> = async (args, api, extraOptions) => {
+const authFetchBase: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQueryError> = async (
+    args,
+    api,
+    extraOptions
+) => {
     await mutex.waitForUnlock();
 
     const access_token = (api.getState() as RootState).settings.at;
@@ -104,8 +101,7 @@ const authFetchBase: BaseQueryFn<
                 if (error) {
                     addNotification(
                         {
-                            id: (error.data as BackendErrorResponse).error
-                                .intlId,
+                            id: (error.data as BackendErrorResponse).error.intlId,
                             autoHideDuration: NOTIFICATIONS_DURATION.S,
                         },
                         api.dispatch

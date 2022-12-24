@@ -1,4 +1,3 @@
-/* eslint-disable react/no-multi-comp */
 import b from 'b_';
 import React, { useEffect, useState } from 'react';
 import { useIntl } from 'react-intl';
@@ -26,11 +25,7 @@ const DeskCardStats = ({
     const intl = useIntl();
     const [currentItem, setCurrentItem] = useState(0);
 
-    const {
-        carouselFragment,
-        slideToNextItem,
-        getCurrentActiveItem,
-    } = useSpringCarousel({
+    const { carouselFragment, slideToNextItem, getCurrentActiveItem } = useSpringCarousel({
         withLoop: true,
         disableGestures: true,
         items: [
@@ -47,7 +42,9 @@ const DeskCardStats = ({
                             {intl.formatNumber(messagesAmount)}
                         </Text>
                         <div>
-                            <Text size={Text.SIZE.S} weight={Text.WEIGHT.M}>+{intl.formatNumber(messagesPerDay)} </Text>
+                            <Text size={Text.SIZE.S} weight={Text.WEIGHT.M}>
+                                +{intl.formatNumber(messagesPerDay)}{' '}
+                            </Text>
                             <Text id="desk-card.stats.messages.perDay" />
                         </div>
                     </div>
@@ -66,7 +63,9 @@ const DeskCardStats = ({
                             {intl.formatNumber(usersAmount)}
                         </Text>
                         <div>
-                            <Text size={Text.SIZE.S} weight={Text.WEIGHT.M}>+{intl.formatNumber(usersPerDay)} </Text>
+                            <Text size={Text.SIZE.S} weight={Text.WEIGHT.M}>
+                                +{intl.formatNumber(usersPerDay)}{' '}
+                            </Text>
                             <Text id="desk-card.stats.users.perDay" />
                         </div>
                     </div>

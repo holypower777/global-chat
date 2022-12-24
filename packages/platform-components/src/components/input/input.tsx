@@ -78,17 +78,22 @@ const Input = ({
     };
 
     return (
-        <div className={cx(b('input', { disabled, readonly, size, focus }), mix)} data-testid="input">
-            {prefix && <div className={b('input', 'prefix', { size, disabled })}>{prefix}</div>}
+        <div
+            className={cx(b('input', { disabled, readonly, size, focus }), mix)}
+            data-testid="input"
+        >
+            {prefix ? (
+                <div className={b('input', 'prefix', { size, disabled })}>{prefix}</div>
+            ) : null}
             <input
                 autoFocus={autoFocus}
                 className={b('input', 'field', { size, disabled })}
                 data-testid={b('input', 'field')}
                 disabled={disabled}
                 name={name}
-                onBlur={() => (setFocus(false))}
+                onBlur={() => setFocus(false)}
                 onChange={handleChange}
-                onFocus={() => (setFocus(true))}
+                onFocus={() => setFocus(true)}
                 onKeyDown={keyDownHandler}
                 onKeyUp={keyUpHandler}
                 placeholder={placeholder}
@@ -98,7 +103,9 @@ const Input = ({
                 type={type}
                 value={value}
             />
-            {suffix && <div className={b('input', 'suffix', { size, disabled })}>{suffix}</div>}
+            {suffix ? (
+                <div className={b('input', 'suffix', { size, disabled })}>{suffix}</div>
+            ) : null}
         </div>
     );
 };

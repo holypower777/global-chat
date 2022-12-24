@@ -1,3 +1,4 @@
+/* eslint-disable react/no-multi-comp */
 import { Meta, StoryFn } from '@storybook/react';
 import React, { useState } from 'react';
 
@@ -27,12 +28,11 @@ export const Overview: StoryFn<typeof Switcher> = (args) => {
             ]}
             usage="Toggle Switch allow users to switch between two possible states. They are commonly used to turn a specific setting on or off."
         >
-            <Switcher 
-                checked={checked} 
+            <Switcher
+                checked={checked}
                 disabled={args.disabled}
-                handleToggle={() => (setChecked(!checked))}
+                handleToggle={() => setChecked(!checked)}
                 size={args.size}
-                // {...args}    
             />
         </StoryOverview>
     );

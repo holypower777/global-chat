@@ -15,17 +15,15 @@ export const subscriberBadgesApi = createApi({
     reducerPath: 'subscriberBadgesApi',
     baseQuery: fetchBaseQuery({ baseUrl: baseBadgesUrl }),
     endpoints: (builder) => ({
-        getSubscriberBadgesByChannelId: builder.query<
-            SubscriberBadgesResponseType,
-            ChannelIdQuery
-        >({
-            query: getSubscriberBadgesByChannelIdDef,
-            transformResponse: (response: SubscriberBadgesResponseTypeRaw) => ({
-                badgeSets: response.badge_sets,
-            }),
-        }),
+        getSubscriberBadgesByChannelId: builder.query<SubscriberBadgesResponseType, ChannelIdQuery>(
+            {
+                query: getSubscriberBadgesByChannelIdDef,
+                transformResponse: (response: SubscriberBadgesResponseTypeRaw) => ({
+                    badgeSets: response.badge_sets,
+                }),
+            }
+        ),
     }),
 });
 
-export const { useLazyGetSubscriberBadgesByChannelIdQuery } =
-    subscriberBadgesApi;
+export const { useLazyGetSubscriberBadgesByChannelIdQuery } = subscriberBadgesApi;

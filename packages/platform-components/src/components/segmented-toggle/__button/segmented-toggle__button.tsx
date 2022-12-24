@@ -25,8 +25,8 @@ const SegmentedToggleButton = ({
     active = false,
     mix,
 }: SegmentedToggleButtonProps) => {
-    return(
-        <button 
+    return (
+        <button
             className={cx(b('segmented-toggle', 'button', { active }), mix)}
             data-testid={b('segmented-toggle', 'button')}
             onClick={handleClick}

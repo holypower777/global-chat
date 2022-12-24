@@ -46,7 +46,7 @@ const getMaxColumnLength = (nums: Array<number>, columns: number) => {
 };
 
 const getDistribution = (lengths: Array<number>, columns: number, maxColumnLen: number) => {
-    const balancedColumns: Array<Array<number>> = []; 
+    const balancedColumns: Array<Array<number>> = [];
 
     let tempSum = lengths[0];
     let tempArr: Array<number> = [tempSum];
@@ -75,6 +75,7 @@ const getDistribution = (lengths: Array<number>, columns: number, maxColumnLen: 
 
     if (balancedColumns.length > columns) {
         const last = balancedColumns.pop();
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
         balancedColumns[balancedColumns.length - 1].push(...last!);
     }
 
@@ -82,6 +83,7 @@ const getDistribution = (lengths: Array<number>, columns: number, maxColumnLen: 
         const biggestArray = Math.max(...balancedColumns.map((e) => e.length));
 
         if (balancedColumns[biggestArray]) {
+            // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
             const itemToPush = balancedColumns[biggestArray].pop()!;
 
             balancedColumns.push([itemToPush]);
@@ -101,7 +103,7 @@ const splitIntoColumns = (lengths: Array<number>, columns: number) => {
     }
 
     if (columns > lengths.length) {
-        return lengths.map(e => [e]);
+        return lengths.map((e) => [e]);
     }
 
     const maxColumnLen = getMaxColumnLength(lengths, columns);
@@ -109,7 +111,9 @@ const splitIntoColumns = (lengths: Array<number>, columns: number) => {
         getDistribution(lengths, columns, maxColumnLen),
         getDistribution(lengths, columns, Math.ceil(getSumOfArray(lengths) / columns)),
         getDistribution(lengths, columns, Math.ceil(getSumOfArray(lengths) / columns) - 1),
-        getDistribution(lengths.reverse(), columns, maxColumnLen).map(e => e.reverse()).reverse(),
+        getDistribution(lengths.reverse(), columns, maxColumnLen)
+            .map((e) => e.reverse())
+            .reverse(),
     ];
 
     return findBestDistribution(variants.filter((distr) => distr.length === columns));

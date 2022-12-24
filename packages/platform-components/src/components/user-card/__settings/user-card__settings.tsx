@@ -1,7 +1,8 @@
 import b from 'b_';
-import { getLocalStorageValue } from 'platform-components/src/hooks';
 import React, { useState } from 'react';
 import { useIntl } from 'react-intl';
+
+import { getLocalStorageValue } from 'platform-components/src/hooks';
 
 import { SETTINGS, SORT_ORDER } from '../../constants';
 import Switcher from '../../switcher/switcher';
@@ -15,10 +16,14 @@ interface UserCardSettingsProps {
 
 const UserCardSettings = ({ updateSettings }: UserCardSettingsProps) => {
     const intl = useIntl();
-    const [sortValue, setSortValue] = useState(getLocalStorageValue(SETTINGS.SORT_BY_DATE, SORT_ORDER.DESC));
+    const [sortValue, setSortValue] = useState(
+        getLocalStorageValue(SETTINGS.SORT_BY_DATE, SORT_ORDER.DESC)
+    );
     const [showBadges, setShowBadges] = useState(getLocalStorageValue(SETTINGS.SHOW_BADGES, true));
-    const [showMessageTime, setShowMessageTime] = useState(getLocalStorageValue(SETTINGS.SHOW_MESSAGE_TIME, true));
-    const titleMix = b('user-card', 'title');    
+    const [showMessageTime, setShowMessageTime] = useState(
+        getLocalStorageValue(SETTINGS.SHOW_MESSAGE_TIME, true)
+    );
+    const titleMix = b('user-card', 'title');
 
     return (
         <div className={b('user-card', 'settings')} data-testid={b('user-card', 'settings')}>
@@ -32,8 +37,12 @@ const UserCardSettings = ({ updateSettings }: UserCardSettingsProps) => {
                     }}
                     value={sortValue}
                 >
-                    <option value="desc">{intl.formatMessage({ id: 'chat.userCard.settings.sort.desc' })}</option>
-                    <option value="asc">{intl.formatMessage({ id: 'chat.userCard.settings.sort.asc' })}</option>
+                    <option value="desc">
+                        {intl.formatMessage({ id: 'chat.userCard.settings.sort.desc' })}
+                    </option>
+                    <option value="asc">
+                        {intl.formatMessage({ id: 'chat.userCard.settings.sort.asc' })}
+                    </option>
                 </select>
             </div>
             <div className={b('user-card', 'tuning')}>
@@ -48,7 +57,7 @@ const UserCardSettings = ({ updateSettings }: UserCardSettingsProps) => {
             </div>
             <div className={b('user-card', 'tuning')}>
                 <Text id="chat.userCard.settings.showMessageTime" mix={titleMix} />
-                <Switcher 
+                <Switcher
                     checked={showMessageTime}
                     handleToggle={() => {
                         updateSettings(SETTINGS.SHOW_MESSAGE_TIME, !showMessageTime);

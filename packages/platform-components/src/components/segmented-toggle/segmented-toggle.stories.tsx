@@ -1,3 +1,4 @@
+/* eslint-disable react/no-multi-comp */
 import { Meta, StoryFn } from '@storybook/react';
 import React, { useState } from 'react';
 
@@ -29,11 +30,7 @@ export const Overview: StoryFn<typeof SegmentedToggle> = (args) => {
             ]}
             usage="A segmented toggle allows a user to toggle between multiple options. Only a single option can be selected at a time."
         >
-            <SegmentedToggle
-                {...args}
-                handleClick={(v) => (setSelected(v))}
-                selected={selected}
-            >
+            <SegmentedToggle {...args} handleClick={(v) => setSelected(v)} selected={selected}>
                 <SegmentedToggle.Button value="value1">Option 1</SegmentedToggle.Button>
                 <SegmentedToggle.Button value="value2">Option 2</SegmentedToggle.Button>
                 <SegmentedToggle.Button value="value3">Option 3</SegmentedToggle.Button>
@@ -47,41 +44,24 @@ Overview.args = {
 
 export const Variants: StoryFn<typeof SegmentedToggle> = () => (
     <Spacer>
-        <SegmentedToggle
-            handleClick={() => ({})}
-            selected="value1"
-        >
+        <SegmentedToggle handleClick={() => ({})} selected="value1">
             <SegmentedToggle.Button value="value1">Option 1</SegmentedToggle.Button>
             <SegmentedToggle.Button value="value2">Option 2</SegmentedToggle.Button>
         </SegmentedToggle>
-        <SegmentedToggle
-            handleClick={() => ({})}
-            selected="value2"
-        >
+        <SegmentedToggle handleClick={() => ({})} selected="value2">
             <SegmentedToggle.Button value="value1">Option 1</SegmentedToggle.Button>
             <SegmentedToggle.Button value="value2">Option 2</SegmentedToggle.Button>
             <SegmentedToggle.Button value="value3">Option 3</SegmentedToggle.Button>
         </SegmentedToggle>
-        <SegmentedToggle
-            handleClick={() => ({})}
-            labelId="With label"
-            selected="value1"
-        >
+        <SegmentedToggle handleClick={() => ({})} labelId="With label" selected="value1">
             <SegmentedToggle.Button value="value1">Option 1</SegmentedToggle.Button>
             <SegmentedToggle.Button value="value2">Option 2</SegmentedToggle.Button>
         </SegmentedToggle>
-        <SegmentedToggle
-            handleClick={() => ({})}
-            selected="value2"
-        >
+        <SegmentedToggle handleClick={() => ({})} selected="value2">
             <SegmentedToggle.Icon icon={<IconChart />} value="value1" />
             <SegmentedToggle.Icon icon={<IconUser />} value="value2" />
         </SegmentedToggle>
-        <SegmentedToggle
-            handleClick={() => ({})}
-            labelId="Icons with label"
-            selected="value1"
-        >
+        <SegmentedToggle handleClick={() => ({})} labelId="Icons with label" selected="value1">
             <SegmentedToggle.Icon icon={<IconChart />} value="value1" />
             <SegmentedToggle.Icon icon={<IconUser />} value="value2" />
         </SegmentedToggle>

@@ -6,13 +6,9 @@ import { ChildrenProps } from '../../typings';
 interface PortalProps extends ChildrenProps {
     dataTestId?: string;
     className?: string;
-} 
+}
 
-const Portal = ({
-    dataTestId = 'portal', 
-    className = '', 
-    children,
-}: PortalProps) => {
+const Portal = ({ dataTestId = 'portal', className = '', children }: PortalProps) => {
     const el = document.createElement('div');
 
     useEffect(() => {

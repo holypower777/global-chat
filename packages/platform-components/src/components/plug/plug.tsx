@@ -13,17 +13,9 @@ interface PlugProps extends ChildrenProps, MixProps {
     mods?: Record<string, unknown>;
 }
 
-const Plug = ({
-    mix,
-    plu,
-    mods,
-    children,
-}: PlugProps) => {
+const Plug = ({ mix, plu, mods, children }: PlugProps) => {
     return (
-        <div
-            className={cx('plug', b('plug', plu, mods), mix)}
-            data-testid="plug"
-        >
+        <div className={cx('plug', b('plug', plu, mods), mix)} data-testid="plug">
             {children}
         </div>
     );

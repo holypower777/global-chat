@@ -1,3 +1,4 @@
+/* eslint-disable react/no-multi-comp */
 import { Meta, StoryFn } from '@storybook/react';
 import React from 'react';
 
@@ -58,7 +59,11 @@ export const Variants: StoryFn<typeof HeaderText> = () => (
         <H1 uppercase>Uppercase</H1>
         <H1 capitalize>capitalized</H1>
         <div style={{ width: 200 }}>
-            <H1 ellipsis>ellipsis. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolorem magni distinctio, praesentium odio corporis ea minima ipsam accusantium, placeat nihil facilis rem eveniet quia, explicabo aliquid et repudiandae labore facere!</H1>
+            <H1 ellipsis>
+                ellipsis. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolorem magni
+                distinctio, praesentium odio corporis ea minima ipsam accusantium, placeat nihil
+                facilis rem eveniet quia, explicabo aliquid et repudiandae labore facere!
+            </H1>
         </div>
     </Spacer>
 );
