@@ -30,6 +30,7 @@ module.exports = {
         }),
         new webpack.DefinePlugin({
             'process.env.NODE_ENV': JSON.stringify(isDevelopment ? 'development' : 'production'),
+            'process.env.MOCK_ENABLED': true,
             'process.env': JSON.stringify(env),
         }),
     ],

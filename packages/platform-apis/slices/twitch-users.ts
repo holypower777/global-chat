@@ -13,6 +13,7 @@ import { TwitchUser, TwitchUserStats } from '../types/twitch-user';
 import { TwitchUserChannel, TwitchUserChannelStats } from '../types/twitch-user-channel';
 import authFetchBase from '../utils/authFetchBase';
 import convertApiToDTO from '../utils/convertApiToDTO';
+import mockFetchBase from '../utils/mockFetchBase';
 
 interface TwitchUserChannelsResponseType {
     items: Array<TwitchUserChannel>;
@@ -22,13 +23,21 @@ interface TwitchUserChannelsResponseType {
 
 export const twitchUsersApi = createApi({
     reducerPath: 'twitchUsersApi',
-    baseQuery: authFetchBase,
+    baseQuery: (args, api) => mockFetchBase(args, api, { defaultBase: authFetchBase }),
     endpoints: (builder) => ({
         getTwitchUser: builder.query<TwitchUser, DisplayNameQuery>({
             query: getTwitchUserByDisplayNameDef,
             transformResponse: (response) => convertApiToDTO<TwitchUser>(response, ['createdAt']),
             // eslint-disable-next-line @typescript-eslint/no-unused-vars
-            onQueryStarted: async (id, { dispatch, queryFulfilled }) => {},
+            onQueryStarted: async (id, { dispatch, queryFulfilled }) => {
+                try {
+                    // TODO: dispatch loading true
+                } catch (error) {
+                    console.error(error);
+                } finally {
+                    // TODO: dispatch loading false
+                }
+            },
         }),
         getTwitchUserChannels: builder.query<TwitchUserChannelsResponseType, UserIdQuery>({
             query: getTwitchUserChannelsDef,

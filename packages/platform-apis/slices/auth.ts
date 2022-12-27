@@ -7,10 +7,12 @@ import { NOTIFICATIONS_DURATION, SNACKBAR_TYPE } from 'platform-components';
 
 import { authTwitchLogoutDef, baseAuthUrl } from '../api-defs';
 import { AuthBody } from '../types/body';
+import mockFetchBase from '../utils/mockFetchBase';
 
 export const authApi = createApi({
     reducerPath: 'authApi',
-    baseQuery: fetchBaseQuery({ baseUrl: baseAuthUrl }),
+    baseQuery: (args, api) =>
+        mockFetchBase(args, api, { defaultBase: fetchBaseQuery({ baseUrl: baseAuthUrl }) }),
     endpoints: (builder) => ({
         authLogout: builder.mutation<void, AuthBody>({
             query: authTwitchLogoutDef,
