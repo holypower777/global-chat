@@ -2,6 +2,7 @@ import b from 'b_';
 import cx from 'classnames';
 import React, { CSSProperties } from 'react';
 import { useIntl } from 'react-intl';
+import { Link } from 'wouter';
 
 import {
     MessageFormatPrimitiveValue,
@@ -37,6 +38,8 @@ export interface TextProps extends OptionalChildrenProps, MixProps {
     title?: string;
     /** Set the handler to handle click event */
     handleClick?: SimpleCallback;
+    /** Set link destination */
+    link?: string;
 }
 
 const Text = ({
@@ -51,6 +54,7 @@ const Text = ({
     ellipsis = false,
     handleClick,
     mix,
+    link,
     ...props
 }: TextProps) => {
     const intl = useIntl();
@@ -65,6 +69,15 @@ const Text = ({
             </li>
         );
     }
+
+    if (tag === TEXT_TAG.LINK) {
+        return (
+            <Link className={className} data-testid="text" href={link} target={'blank'}>
+                {content}
+            </Link>
+        );
+    }
+
     return (
         <span className={className} data-testid="text" onClick={handleClick} {...props}>
             {content}
