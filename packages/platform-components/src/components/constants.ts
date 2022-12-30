@@ -33,6 +33,7 @@ export enum DIRECTIONS {
 export enum TEXT_TAG {
     LI = 'li',
     SPAN = 'span',
+    LINK = 'a',
 }
 
 export enum HEADER_TEXT_SIZE {

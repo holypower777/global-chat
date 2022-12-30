@@ -1,9 +1,8 @@
 import b from 'b_';
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { Link } from 'wouter';
 
-import { LANGUAGES, LINKS, SETTINGS, Text } from 'platform-components';
+import { LANGUAGES, LINKS, SETTINGS, Text, TEXT_TAG } from 'platform-components';
 import { getLocalStorageValue } from 'platform-components/src/hooks';
 import { getDefaultLanguage } from 'platform-components/src/utils';
 
@@ -18,21 +17,45 @@ const CommonFooter = () => {
 
     return (
         <footer className="footer">
-            <a className={b('footer', 'donate')} href={LINKS.BOOSTY} target="_blank">
-                <Text id="footer.donate" size={Text.SIZE.XS} />
-            </a>
-            <Link className={b('footer', 'about')} href={LINKS.ABOUT}>
-                <Text id="footer.about" size={Text.SIZE.XS} />
-            </Link>
-            <a className={b('footer', 'github')} href={LINKS.GITHUB} target="_blank">
-                <Text id="footer.github" size={Text.SIZE.XS} />
-            </a>
-            <a className={b('footer', 'bug')} href={LINKS.BUG_REPORT} target="_blank">
-                <Text id="footer.bug" size={Text.SIZE.XS} />
-            </a>
-            <a className={b('footer', 'idea')} href={LINKS.IDEAS} target="_blank">
-                <Text id="footer.idea" size={Text.SIZE.XS} />
-            </a>
+            <Text
+                extLink
+                id="footer.donate"
+                link={LINKS.BOOSTY}
+                mix={b('footer', 'donate')}
+                size={Text.SIZE.XS}
+                tag={TEXT_TAG.LINK}
+            />
+            <Text
+                id="footer.about"
+                link={LINKS.ABOUT}
+                mix={b('footer', 'about')}
+                size={Text.SIZE.XS}
+                tag={TEXT_TAG.LINK}
+            />
+            <Text
+                extLink
+                id="footer.github"
+                link={LINKS.GITHUB}
+                mix={b('footer', 'github')}
+                size={Text.SIZE.XS}
+                tag={TEXT_TAG.LINK}
+            />
+            <Text
+                extLink
+                id="footer.bug"
+                link={LINKS.BUG_REPORT}
+                mix={b('footer', 'bug')}
+                size={Text.SIZE.XS}
+                tag={TEXT_TAG.LINK}
+            />
+            <Text
+                extLink
+                id="footer.idea"
+                link={LINKS.IDEAS}
+                mix={b('footer', 'idea')}
+                size={Text.SIZE.XS}
+                tag={TEXT_TAG.LINK}
+            />
             <Text
                 handleClick={() => {
                     const newLang = lang === LANGUAGES.ENG ? LANGUAGES.RU : LANGUAGES.ENG;
