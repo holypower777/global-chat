@@ -18,6 +18,7 @@ const CommonFooter = () => {
     return (
         <footer className="footer">
             <Text
+                extLink
                 id="footer.donate"
                 link={LINKS.BOOSTY}
                 mix={b('footer', 'donate')}
@@ -32,6 +33,7 @@ const CommonFooter = () => {
                 tag={TEXT_TAG.LINK}
             />
             <Text
+                extLink
                 id="footer.github"
                 link={LINKS.GITHUB}
                 mix={b('footer', 'github')}
@@ -39,6 +41,7 @@ const CommonFooter = () => {
                 tag={TEXT_TAG.LINK}
             />
             <Text
+                extLink
                 id="footer.bug"
                 link={LINKS.BUG_REPORT}
                 mix={b('footer', 'bug')}
@@ -46,6 +49,7 @@ const CommonFooter = () => {
                 tag={TEXT_TAG.LINK}
             />
             <Text
+                extLink
                 id="footer.idea"
                 link={LINKS.IDEAS}
                 mix={b('footer', 'idea')}

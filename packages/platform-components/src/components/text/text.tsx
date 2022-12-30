@@ -40,6 +40,8 @@ export interface TextProps extends OptionalChildrenProps, MixProps {
     handleClick?: SimpleCallback;
     /** Set link destination */
     link?: string;
+    /** Set if link is external */
+    extLink?: boolean;
 }
 
 const Text = ({
@@ -54,7 +56,8 @@ const Text = ({
     ellipsis = false,
     handleClick,
     mix,
-    link,
+    link = '',
+    extLink,
     ...props
 }: TextProps) => {
     const intl = useIntl();
@@ -71,9 +74,18 @@ const Text = ({
     }
 
     if (tag === TEXT_TAG.LINK) {
+        if (extLink) {
+            return (
+                <a className={className} data-testid="text" href={link} target={'_blank'}>
+                    {content}
+                </a>
+            );
+        }
         return (
-            <Link className={className} data-testid="text" href={link} target={'blank'}>
-                {content}
+            <Link href={link}>
+                <a className={className} data-testid="text">
+                    {content}
+                </a>
             </Link>
         );
     }

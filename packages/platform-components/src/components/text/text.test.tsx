@@ -4,6 +4,7 @@ import '@testing-library/jest-dom';
 import React from 'react';
 
 import { renderWithIntl } from '../../utils';
+import { TEXT_TAG } from '../constants';
 
 import Text, { TextProps } from './text';
 
@@ -17,6 +18,8 @@ const setup = ({ ...props }: TextProps) => {
 };
 
 const defaultText = 'Lorem ipsum dolor sit amet';
+const defaultExternalLink = 'https://www.twitch.tv/';
+const defaultLink = '/about';
 
 describe('text', () => {
     it('handle click acts normally', () => {
@@ -49,6 +52,36 @@ describe('text', () => {
                     size: Text.SIZE.M,
                     weight: Text.WEIGHT.S,
                 })}" data-testid="text">${defaultText}</li>`
+            );
+        });
+
+        it('link to external resource', () => {
+            const { text } = setup({
+                id: 'simpleText',
+                tag: TEXT_TAG.LINK,
+                extLink: true,
+                link: defaultExternalLink,
+            });
+            expect(text).toContainHTML(
+                `<a class="${b('text', {
+                    size: Text.SIZE.M,
+                    weight: Text.WEIGHT.S,
+                })}" data-testid="text" href="${defaultExternalLink}" target="_blank">${defaultText}</a>`
+            );
+        });
+
+        it('link to external resource', () => {
+            const { text } = setup({
+                id: 'simpleText',
+                tag: TEXT_TAG.LINK,
+                extLink: false,
+                link: defaultLink,
+            });
+            expect(text).toContainHTML(
+                `<a class="${b('text', {
+                    size: Text.SIZE.M,
+                    weight: Text.WEIGHT.S,
+                })}" data-testid="text" href="${defaultLink}">${defaultText}</a>`
             );
         });
     });
