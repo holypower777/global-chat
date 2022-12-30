@@ -70,7 +70,7 @@ describe('text', () => {
             );
         });
 
-        it('link to external resource', () => {
+        it('link to internal resource', () => {
             const { text } = setup({
                 id: 'simpleText',
                 tag: TEXT_TAG.LINK,
@@ -87,12 +87,12 @@ describe('text', () => {
     });
 
     describe('intl', () => {
-        it('intl id renders propperly', () => {
+        it('intl id renders properly', () => {
             const { text } = setup({ id: 'simpleText' });
             expect(text).toHaveTextContent(defaultText);
         });
 
-        it('intl id with values works propperly', () => {
+        it('intl id with values works properly', () => {
             const { text } = setup({ id: 'textWithValues', values: { name: 'hello' } });
             expect(text).toHaveTextContent('Lorem hello dolor sit amet');
         });
