@@ -27,11 +27,15 @@ export const twitchUsersApi = createApi({
     endpoints: (builder) => ({
         getTwitchUser: builder.query<TwitchUser, DisplayNameQuery>({
             query: getTwitchUserByDisplayNameDef,
-            transformResponse: (response) => convertApiToDTO<TwitchUser>(response, ['createdAt']),
-            // eslint-disable-next-line @typescript-eslint/no-unused-vars
-            onQueryStarted: async (id, { dispatch, queryFulfilled }) => {
+            transformResponse: (response) => {
+                return convertApiToDTO<TwitchUser>(response, ['createdAt']);
+            },
+            onQueryStarted: async (id, { queryFulfilled }) => {
                 try {
                     // TODO: dispatch loading true
+                    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+                    const { data } = await queryFulfilled;
+                    console.log(data);
                 } catch (error) {
                     console.error(error);
                 } finally {

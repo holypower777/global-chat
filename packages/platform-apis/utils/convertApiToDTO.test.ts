@@ -1,4 +1,3 @@
-/* eslint-disable camelcase */
 import convertApiToDTO from './convertApiToDTO';
 
 describe('convertApiToDTO', () => {

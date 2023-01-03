@@ -17,15 +17,21 @@ export const baseAuthUrl =
 export const baseBadgesUrl = 'https://badges.twitch.tv/';
 
 // twitch-users defs
+export const getTwitchUserByDisplayNameMatcher = 'twitch-user/:displayName';
 export const getTwitchUserByDisplayNameDef = ({ displayName }: DisplayNameQuery) =>
     `twitch-user/${displayName}`;
+export const getTwitchUserChannelsMatcher = 'twitch-user/:userId/channels';
 export const getTwitchUserChannelsDef = ({ userId }: UserIdQuery) =>
     `twitch-user/${userId}/channels`;
+export const getTwitchUserStatsMatcher = 'twitch-user/:userId/stats';
 export const getTwitchUserStatsDef = ({ userId }: UserIdQuery) => `twitch-user/${userId}/stats`;
+export const getTwitchChannelStatsMatcher = 'twitch-user/channel/:channelId/stats';
 export const getTwitchChannelStatsDef = ({ channelId }: ChannelIdQuery) =>
     `twitch-user/channel/${channelId}/stats`;
+export const etDisplayNameSuggestions = 'twitch-user/:displayName/suggestions';
 export const getDisplayNameSuggestionsDef = ({ displayName }: DisplayNameQuery) =>
     `twitch-user/${displayName}/suggestions`;
+export const getRandomTwitchUserMatcher = 'twitch-user/random';
 export const getRandomTwitchUserDef = () => 'twitch-user/random';
 
 // messages defs

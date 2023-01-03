@@ -12,6 +12,7 @@ import LanguageProvider from './containers/language-provider/language-provider';
 import LocationProvider from './containers/location-provider/location-provider';
 // import NotificationProvider from './containers/notification-provider/notification-provider';
 // import UserProvider from './containers/user-provider/user-provider';
+import Devtools from './pages/devtools/devtools';
 import { store } from './store/store';
 
 const rootContainerId = 'root';
@@ -46,6 +47,9 @@ const App = () => {
                             <Switch>
                                 <Route component={Home} path="/" />
                                 <Route component={About} path="/about" />
+                                {process.env.NODE_ENV === 'development' && (
+                                    <Route component={Devtools} path="/devtools" />
+                                )}
                             </Switch>
                             <CommonFooter />
                         </LocationProvider>

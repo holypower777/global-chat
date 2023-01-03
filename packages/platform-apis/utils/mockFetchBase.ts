@@ -5,6 +5,8 @@ import {
     FetchBaseQueryError,
 } from '@reduxjs/toolkit/dist/query';
 
+import { RootState } from 'twitch-chat/src/store/store';
+
 import ApiEndpointsMode from '../api-endpoints-mode';
 import generateMock from '../mocks';
 
@@ -26,9 +28,13 @@ const mockFetchBase: BaseQueryFn<
         fetchFn: () => {
             return new Promise((resolve, _) => {
                 const isArgsObject = args === Object(args);
+                // @ts-ignore
                 const url = isArgsObject ? args.url : args;
-                const body = isArgsObject ? args.body : null;
-                const mock = generateMock(api.endpoint, url, body);
+                // @ts-ignore
+                const body = isArgsObject ? args.body : {};
+                const state = api.getState() as RootState;
+                const accessToken = state.settings.at;
+                const mock = generateMock(api.endpoint, url, body, accessToken);
 
                 setTimeout(
                     () =>
