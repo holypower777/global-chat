@@ -35,7 +35,6 @@ export const twitchUsersApi = createApi({
                     // TODO: dispatch loading true
                     // eslint-disable-next-line @typescript-eslint/no-unused-vars
                     const { data } = await queryFulfilled;
-                    console.log(data);
                 } catch (error) {
                     console.error(error);
                 } finally {

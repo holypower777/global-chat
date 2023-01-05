@@ -18,6 +18,8 @@ export const authApi = createApi({
             query: authTwitchLogoutDef,
             onQueryStarted: async (id, { dispatch, queryFulfilled }) => {
                 const { meta } = await queryFulfilled;
+
+                // @ts-ignore
                 if (meta?.response?.status === 204) {
                     dispatch(clearUser());
                     addNotification(

@@ -12,7 +12,7 @@ import {
 
 // import channelsMiddleware from './middlewares/channels';
 import rtkQueryErrorMiddleware from './middlewares/errors';
-// import settingsMiddleware from './middlewares/settings';
+import settingsMiddleware from './middlewares/settings';
 // import usersMiddleware from './middlewares/users';
 // import channelsSlice from './slices/channels';
 import commonSlice from './slices/common';
@@ -51,7 +51,7 @@ export const store = configureStore({
             subscriberBadgesApi.middleware,
             usersApi.middleware,
             authApi.middleware,
-            // settingsMiddleware,
+            settingsMiddleware,
             // channelsMiddleware,
             rtkQueryErrorMiddleware
             // usersMiddleware

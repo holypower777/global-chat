@@ -1,4 +1,4 @@
-import { TwitchUserCommon, TwitchUsersCommon } from './twitch-user';
+import { TwitchUsersCommon } from './twitch-user';
 
 export interface OverallStats {
     totalMessages: number;
@@ -22,11 +22,11 @@ interface PlotsTotal {
 }
 
 interface PlotsMost {
-    value: TwitchUserCommon;
+    value: TwitchUsersCommon;
     time: Date;
 }
 
-export interface OverallStatsPlots {
+interface OverallStatPlots {
     totalMessages: PlotsTotal;
     totalChannels: PlotsTotal;
     totalUsers: PlotsTotal;
@@ -40,3 +40,5 @@ export interface OverallStatsPlots {
     mostPatronUsers: PlotsMost;
     currentlyActiveChannels: PlotsTotal;
 }
+
+export type OverallStatsPlots = Array<OverallStatPlots>;

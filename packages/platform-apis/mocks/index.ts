@@ -2,39 +2,10 @@ import { randUuid, seed } from '@ngneat/falso';
 import { decode } from 'jws';
 import { Key, pathToRegexp } from 'path-to-regexp';
 
-import { getTwitchUserByDisplayNameMatcher } from '../api-defs';
+import { tgcUrl } from '../api-defs';
 import { AccessToken } from '../types';
 
-import { twitchUserMock, twitchUsersMock } from './twitch-user';
-
-interface MockBody {
-    displayName?: string;
-    token?: AccessToken;
-}
-
-interface MockConfig {
-    matcher: string;
-    mock: (body: MockBody) => unknown;
-}
-
-const endpointToMock: Record<string, MockConfig> = {
-    getTwitchUser: {
-        matcher: getTwitchUserByDisplayNameMatcher,
-        mock: ({ displayName, token }) =>
-            twitchUserMock({
-                displayName,
-                isSelf: token?.display_name !== undefined && token?.display_name === displayName,
-            }),
-    },
-    authLogout: {
-        matcher: getTwitchUserByDisplayNameMatcher,
-        mock: ({ displayName, token }) =>
-            twitchUserMock({
-                displayName,
-                isSelf: token?.display_name !== undefined && token?.display_name === displayName,
-            }),
-    },
-};
+import endpointToMock from './endpointToMock';
 
 interface UrlMatcher {
     keys: Array<Key>;
@@ -87,7 +58,9 @@ const generateMock = (
         throw new Error('mock not found');
     }
 
-    const [_, urlPath] = urlMatcher(requiredMock.matcher, url);
+    const combinedUrl = new URL(`${tgcUrl}${url}`);
+
+    const [_, urlPath] = urlMatcher(requiredMock.matcher || '', combinedUrl.pathname.slice(1));
 
     if (urlPath === Object(urlPath)) {
         // @ts-ignore
@@ -96,8 +69,13 @@ const generateMock = (
 
     if (accessToken) {
         const { payload } = decode(accessToken);
+        body = { ...body, token: JSON.parse(payload) as AccessToken };
+    }
 
-        body = { ...body, token: payload as AccessToken };
+    if (combinedUrl.search) {
+        for (const [key, value] of combinedUrl.searchParams.entries()) {
+            body[key] = value;
+        }
     }
 
     return requiredMock.mock(body);

@@ -1,0 +1,33 @@
+@import 'design/colors';
+
+.ui-kit
+{
+    &__shadow
+    {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        width: 140px;
+        height: 140px;
+
+        border-radius: 10px;
+
+        background-color: $WildSand;
+    }
+
+    &__color
+    {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+
+        &-block
+        {
+            width: 100px;
+            height: 100px;
+
+            border-radius: 10px;
+        }
+    }
+}

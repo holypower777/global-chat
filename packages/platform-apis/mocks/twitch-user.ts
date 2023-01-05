@@ -1,8 +1,9 @@
 import { randNumber, randBoolean } from '@ngneat/falso';
 
-import { TwitchUser } from '../types';
+import { TwitchUser, TwitchUserCommon, TwitchUserStats } from '../types';
 import getRandomFromArray from '../utils/getRandomFromArray';
 import randDisplayName from '../utils/randDisplayName';
+import randUserId from '../utils/randUserId';
 
 const twitchUserBroadType = ['partner', 'affiliate', ''];
 const twitchProfileImageUrls = [
@@ -18,12 +19,16 @@ interface TwitchUserMockArgs {
     isSelf?: boolean;
 }
 
+interface TwitchUserStatsMockArgs {
+    userId?: number;
+}
+
 export const twitchUserMock = ({ displayName, isSelf = false }: TwitchUserMockArgs): TwitchUser => {
     const broadcasterType = getRandomFromArray<'partner' | 'affiliate' | ''>(twitchUserBroadType);
     const username = displayName ?? randDisplayName();
 
     return {
-        userId: randNumber({ min: 42061870, max: 406654859 }),
+        userId: randUserId(),
         displayName: username,
         profileImageUrl: getRandomFromArray(twitchProfileImageUrls),
         login: username.toLowerCase(),
@@ -39,4 +44,20 @@ export const twitchUserMock = ({ displayName, isSelf = false }: TwitchUserMockAr
     };
 };
 
-export const twitchUsersMock = (length: number) => new Array(length).fill(0).map(twitchUserMock);
+export const twitchUserCommonMock = (): TwitchUserCommon => ({
+    userId: randUserId(),
+    displayName: randDisplayName(),
+    profileImageUrl: getRandomFromArray(twitchProfileImageUrls),
+});
+
+// export const twitchUsersMock = (length: number) => new Array(length).fill(0).map(twitchUserMock);
+
+export const twitchUserStatsMock = ({ userId }: TwitchUserStatsMockArgs): TwitchUserStats => ({
+    userId: userId ?? randUserId(),
+    messagesAmount: randNumber({ min: 10, max: 10000 }),
+    wereInterested: randNumber({ min: 0, max: 15 }),
+    usernames: [],
+    giftedSubs: randNumber({ min: 0, max: 10 }),
+    subs: randNumber({ min: 0, max: 100 }),
+    bans: randNumber({ min: 0, max: 10 }),
+});

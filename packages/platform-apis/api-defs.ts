@@ -10,6 +10,7 @@ import {
     GetMessagesByChannelIdQuery,
 } from './types/query';
 
+export const tgcUrl = 'https://global-chat.ru/';
 export const baseUrl =
     process.env.NODE_ENV === 'development' ? 'http://192.168.1.12:3000/v1/' : '/v1/';
 export const baseAuthUrl =
@@ -35,6 +36,7 @@ export const getRandomTwitchUserMatcher = 'twitch-user/random';
 export const getRandomTwitchUserDef = () => 'twitch-user/random';
 
 // messages defs
+export const getMessagesByUserIdAndChannelIdMatcher = 'messages/:userId/:channelId';
 export const getMessagesByUserIdAndChannelIdDef = ({
     userId,
     channelId,
@@ -45,6 +47,7 @@ export const getMessagesByUserIdAndChannelIdDef = ({
     dateTo,
 }: GetMessagesByUserAndChannelIdQuery) =>
     `messages/${userId}/${channelId}?limit=${limit}&offset=${offset}&sort=${sort}&dateFrom=${dateFrom?.getTime()}&dateTo=${dateTo?.getTime()}`;
+export const getMessagesByChannelIdMatcher = 'messages/channel/:channelId';
 export const getMessagesByChannelIdDef = ({
     channelId,
     limit = 200,

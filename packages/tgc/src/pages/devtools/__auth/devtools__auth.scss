@@ -1,10 +1,33 @@
+@import 'design/colors';
+@import 'design/shadows';
+
 .devtools
 {
     &__card
     {
         display: flex;
         flex-direction: column;
+        gap: 10px;
 
-        padding: 16 8px;
+        width: fit-content;
+        min-width: 400px;
+
+        padding: 16px 8px;
+
+        border-radius: 10px;
+
+        background-color: $WildSand;
+        box-shadow: $shadow300;
+    }
+}
+
+.card
+{
+    &__input
+    {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        align-items: center;
+        justify-content: space-between;
     }
 }

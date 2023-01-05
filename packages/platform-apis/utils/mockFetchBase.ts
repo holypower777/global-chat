@@ -1,3 +1,4 @@
+import { randNumber, randUuid } from '@ngneat/falso';
 import {
     BaseQueryFn,
     FetchArgs,
@@ -7,8 +8,8 @@ import {
 
 import { RootState } from 'twitch-chat/src/store/store';
 
-import ApiEndpointsMode from '../api-endpoints-mode';
 import generateMock from '../mocks';
+import endpointToMock from '../mocks/endpointToMock';
 
 interface ExtraOptions {
     defaultBase: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQueryError>;
@@ -20,7 +21,10 @@ const mockFetchBase: BaseQueryFn<
     FetchBaseQueryError,
     ExtraOptions
 > = async (args, api, extraOptions) => {
-    if (process.env.NODE_ENV === 'production' || !ApiEndpointsMode[api.endpoint]) {
+    if (
+        process.env.NODE_ENV === 'production' ||
+        (!process.env.MOCK_ENABLED && !endpointToMock[api.endpoint].enabled)
+    ) {
         return extraOptions.defaultBase(args, api, extraOptions);
     }
 
@@ -35,17 +39,27 @@ const mockFetchBase: BaseQueryFn<
                 const state = api.getState() as RootState;
                 const accessToken = state.settings.at;
                 const mock = generateMock(api.endpoint, url, body, accessToken);
+                const responseTime = randNumber({ min: 120, max: 500 });
+                const status = endpointToMock[api.endpoint].status ?? 200;
+                const responseBody =
+                    status === 204
+                        ? null
+                        : new Blob([JSON.stringify(mock, null, 2)], {
+                              type: 'application/json',
+                          });
 
                 setTimeout(
                     () =>
                         resolve(
-                            new Response(
-                                new Blob([JSON.stringify(mock, null, 2)], {
-                                    type: 'application/json',
-                                })
-                            )
+                            new Response(responseBody, {
+                                headers: {
+                                    'X-Request-Id': randUuid(),
+                                    'X-Response-Time': responseTime.toString(),
+                                },
+                                status,
+                            })
                         ),
-                    200
+                    responseTime
                 );
             });
         },
