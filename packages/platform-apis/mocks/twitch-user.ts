@@ -6,7 +6,7 @@ import randDisplayName from '../utils/randDisplayName';
 import randUserId from '../utils/randUserId';
 
 const twitchUserBroadType = ['partner', 'affiliate', ''];
-const twitchProfileImageUrls = [
+export const twitchProfileImageUrls = [
     'https://static-cdn.jtvnw.net/user-default-pictures-uv/13e5fa74-defa-11e9-809c-784f43822e80-profile_image-70x70.png',
     'https://static-cdn.jtvnw.net/user-default-pictures-uv/998f01ae-def8-11e9-b95c-784f43822e80-profile_image-70x70.png',
     'https://static-cdn.jtvnw.net/user-default-pictures-uv/cdd517fe-def4-11e9-948e-784f43822e80-profile_image-70x70.png',

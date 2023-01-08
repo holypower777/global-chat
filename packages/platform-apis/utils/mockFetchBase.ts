@@ -40,11 +40,11 @@ const mockFetchBase: BaseQueryFn<
                 const accessToken = state.settings.at;
                 const mock = generateMock(api.endpoint, url, body, accessToken);
                 const responseTime = randNumber({ min: 120, max: 500 });
-                const status = endpointToMock[api.endpoint].status ?? 200;
+                const status = mock.status ?? 200;
                 const responseBody =
                     status === 204
                         ? null
-                        : new Blob([JSON.stringify(mock, null, 2)], {
+                        : new Blob([JSON.stringify(mock.response, null, 2)], {
                               type: 'application/json',
                           });
 

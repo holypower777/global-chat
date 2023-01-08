@@ -10,10 +10,11 @@ import { TwitchUsersCommon, User, UserIdQuery } from '../types';
 import { UserCommonBody } from '../types/body';
 import authFetchBase from '../utils/authFetchBase';
 import convertApiToDTO from '../utils/convertApiToDTO';
+import mockFetchBase from '../utils/mockFetchBase';
 
 export const usersApi = createApi({
     reducerPath: 'usersApi',
-    baseQuery: authFetchBase,
+    baseQuery: (args, api) => mockFetchBase(args, api, { defaultBase: authFetchBase }),
     endpoints: (builder) => ({
         getUserById: builder.query<User, UserIdQuery>({
             query: getUserByIdDef,

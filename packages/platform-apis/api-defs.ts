@@ -65,6 +65,7 @@ export const getOverallStatsPlotsDef = ({ dateFrom, dateTo }: GetOverallStatsPlo
 export const getDailyStatsDef = () => 'stats/daily';
 
 // users defs
+export const getUserByIdMatcher = 'users/:userId';
 export const getUserByIdDef = ({ userId }: UserIdQuery) => `users/${userId}`;
 export const postUserFavoriteDef = ({ userId, body }: UserIdQuery & UserCommonBody) => ({
     url: `users/${userId}/favorites`,

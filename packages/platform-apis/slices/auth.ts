@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/dist/query/react';
 
-import { clearUser } from 'twitch-chat/src/store/slices/user';
+// import { clearUser } from 'twitch-chat/src/store/slices/user';
 import { addNotification } from 'twitch-chat/src/utils';
 
 import { NOTIFICATIONS_DURATION, SNACKBAR_TYPE } from 'platform-components';
@@ -21,7 +21,7 @@ export const authApi = createApi({
 
                 // @ts-ignore
                 if (meta?.response?.status === 204) {
-                    dispatch(clearUser());
+                    // dispatch(clearUser());
                     addNotification(
                         {
                             id: 'notification.logout',
