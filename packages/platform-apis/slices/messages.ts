@@ -1,11 +1,11 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
 
 import { getMessagesByChannelIdDef, getMessagesByUserIdAndChannelIdDef } from '../api-defs';
+import authFetchBase from '../bases/authFetchBase';
+import mockFetchBase from '../bases/mockFetchBase';
 import { TwitchMessages } from '../types';
 import { GetMessagesByChannelIdQuery, GetMessagesByUserAndChannelIdQuery } from '../types/query';
-import authFetchBase from '../utils/authFetchBase';
 import convertApiToDTO from '../utils/convertApiToDTO';
-import mockFetchBase from '../utils/mockFetchBase';
 
 interface MessagesOfChannelsResponseCommonType {
     dateFrom: string;

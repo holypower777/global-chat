@@ -8,12 +8,12 @@ import {
     getTwitchChannelStatsDef,
     getRandomTwitchUserDef,
 } from '../api-defs';
+import authFetchBase from '../bases/authFetchBase';
+import mockFetchBase from '../bases/mockFetchBase';
 import { ChannelIdQuery, DisplayNameQuery, UserIdQuery } from '../types/query';
 import { TwitchUser, TwitchUserStats } from '../types/twitch-user';
 import { TwitchUserChannel, TwitchUserChannelStats } from '../types/twitch-user-channel';
-import authFetchBase from '../utils/authFetchBase';
 import convertApiToDTO from '../utils/convertApiToDTO';
-import mockFetchBase from '../utils/mockFetchBase';
 
 interface TwitchUserChannelsResponseType {
     items: Array<TwitchUserChannel>;

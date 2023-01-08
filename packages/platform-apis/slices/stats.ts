@@ -1,9 +1,9 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 import { baseUrl, getDailyStatsDef } from '../api-defs';
+import mockFetchBase from '../bases/mockFetchBase';
 import { DailyStats } from '../types/stats';
 import convertApiToDTO from '../utils/convertApiToDTO';
-import mockFetchBase from '../utils/mockFetchBase';
 
 export const statsApi = createApi({
     reducerPath: 'statsApi',

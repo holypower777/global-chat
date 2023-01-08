@@ -6,11 +6,11 @@ import {
     postSearchHistoryDef,
     postUserFavoriteDef,
 } from '../api-defs';
+import authFetchBase from '../bases/authFetchBase';
+import mockFetchBase from '../bases/mockFetchBase';
 import { TwitchUsersCommon, User, UserIdQuery } from '../types';
 import { UserCommonBody } from '../types/body';
-import authFetchBase from '../utils/authFetchBase';
 import convertApiToDTO from '../utils/convertApiToDTO';
-import mockFetchBase from '../utils/mockFetchBase';
 
 export const usersApi = createApi({
     reducerPath: 'usersApi',

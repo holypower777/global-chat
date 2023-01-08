@@ -50,8 +50,6 @@ export const twitchUserCommonMock = (): TwitchUserCommon => ({
     profileImageUrl: getRandomFromArray(twitchProfileImageUrls),
 });
 
-// export const twitchUsersMock = (length: number) => new Array(length).fill(0).map(twitchUserMock);
-
 export const twitchUserStatsMock = ({ userId }: TwitchUserStatsMockArgs): TwitchUserStats => ({
     userId: userId ?? randUserId(),
     messagesAmount: randNumber({ min: 10, max: 10000 }),

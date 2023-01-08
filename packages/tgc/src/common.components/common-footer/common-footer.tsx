@@ -17,9 +17,11 @@ const CommonFooter = () => {
 
     return (
         <footer className="footer">
-            <Text link="/devtools" size={Text.SIZE.XS} tag={Text.TAG.LINK}>
-                Devtools
-            </Text>
+            {process.env.NODE_ENV === 'development' ? (
+                <Text link="/devtools" size={Text.SIZE.XS} tag={Text.TAG.LINK}>
+                    Devtools
+                </Text>
+            ) : null}
             <Text
                 extLink
                 id="footer.donate"

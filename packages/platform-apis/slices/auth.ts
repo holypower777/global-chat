@@ -6,8 +6,8 @@ import { addNotification } from 'twitch-chat/src/utils';
 import { NOTIFICATIONS_DURATION, SNACKBAR_TYPE } from 'platform-components';
 
 import { authTwitchLogoutDef, baseAuthUrl } from '../api-defs';
+import mockFetchBase from '../bases/mockFetchBase';
 import { AuthBody } from '../types/body';
-import mockFetchBase from '../utils/mockFetchBase';
 
 export const authApi = createApi({
     reducerPath: 'authApi',
