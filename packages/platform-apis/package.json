@@ -12,8 +12,10 @@
     "react-redux": "^8.0.5"
   },
   "devDependencies": {
+    "@ngneat/falso": "^6.3.2",
     "@types/jws": "^3.2.4",
-    "@types/react": "^18.0.26"
+    "@types/react": "^18.0.26",
+    "path-to-regexp": "^6.2.1"
   },
   "peerDependencies": {
     "react": "^18.2.0",

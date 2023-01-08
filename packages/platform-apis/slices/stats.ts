@@ -1,12 +1,14 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 import { baseUrl, getDailyStatsDef } from '../api-defs';
+import mockFetchBase from '../bases/mockFetchBase';
 import { DailyStats } from '../types/stats';
 import convertApiToDTO from '../utils/convertApiToDTO';
 
 export const statsApi = createApi({
     reducerPath: 'statsApi',
-    baseQuery: fetchBaseQuery({ baseUrl }),
+    baseQuery: (args, api) =>
+        mockFetchBase(args, api, { defaultBase: fetchBaseQuery({ baseUrl }) }),
     endpoints: (builder) => ({
         getDailyStats: builder.query<DailyStats, void>({
             query: getDailyStatsDef,

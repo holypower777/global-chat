@@ -36,6 +36,7 @@ module.exports = {
             template: `${__dirname}/../../static/index.html`,
         }),
         new webpack.DefinePlugin({
+            'process.env.MOCK_ENABLED': false,
             'process.env': JSON.stringify(env),
         }),
     ],

@@ -1,4 +1,4 @@
-interface TwitchMessage {
+export interface TwitchMessage {
     messageId: string;
     userId: number;
     channelId: number;

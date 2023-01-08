@@ -1,9 +1,10 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
 
 import { getMessagesByChannelIdDef, getMessagesByUserIdAndChannelIdDef } from '../api-defs';
+import authFetchBase from '../bases/authFetchBase';
+import mockFetchBase from '../bases/mockFetchBase';
 import { TwitchMessages } from '../types';
 import { GetMessagesByChannelIdQuery, GetMessagesByUserAndChannelIdQuery } from '../types/query';
-import authFetchBase from '../utils/authFetchBase';
 import convertApiToDTO from '../utils/convertApiToDTO';
 
 interface MessagesOfChannelsResponseCommonType {
@@ -21,24 +22,36 @@ interface MessagesResponseTypeRaw extends MessagesOfChannelsResponseCommonType {
     items: Array<unknown>;
 }
 
+interface MessagesResponse {
+    items: TwitchMessages;
+    total: number;
+    sort: 'asc' | 'desc';
+}
+
 export const messagesApi = createApi({
     reducerPath: 'messagesApi',
-    baseQuery: authFetchBase,
+    baseQuery: (args, api) => mockFetchBase(args, api, { defaultBase: authFetchBase }),
     endpoints: (builder) => ({
         getMessagesByUserIdAndChannelId: builder.query<
-            TwitchMessages,
+            MessagesResponse,
             GetMessagesByUserAndChannelIdQuery
         >({
             query: getMessagesByUserIdAndChannelIdDef,
-            transformResponse: (response: MessagesResponseTypeRaw) =>
-                convertApiToDTO<TwitchMessages>(response.items, ['time']),
+            transformResponse: (response: MessagesResponseTypeRaw) => ({
+                items: convertApiToDTO<TwitchMessages>(response.items, ['time']),
+                sort: response.sort,
+                total: response.total,
+            }),
             // eslint-disable-next-line @typescript-eslint/no-unused-vars
             onQueryStarted: async (id, { dispatch, queryFulfilled }) => {},
         }),
-        getChannelMessages: builder.query<TwitchMessages, GetMessagesByChannelIdQuery>({
+        getChannelMessages: builder.query<MessagesResponse, GetMessagesByChannelIdQuery>({
             query: getMessagesByChannelIdDef,
-            transformResponse: (response: MessagesResponseTypeRaw) =>
-                convertApiToDTO<TwitchMessages>(response.items, ['time']),
+            transformResponse: (response: MessagesResponseTypeRaw) => ({
+                items: convertApiToDTO<TwitchMessages>(response.items, ['time']),
+                sort: response.sort,
+                total: response.total,
+            }),
             // eslint-disable-next-line @typescript-eslint/no-unused-vars
             onQueryStarted: async (id, { dispatch, queryFulfilled }) => {},
         }),

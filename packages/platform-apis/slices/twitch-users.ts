@@ -8,10 +8,11 @@ import {
     getTwitchChannelStatsDef,
     getRandomTwitchUserDef,
 } from '../api-defs';
+import authFetchBase from '../bases/authFetchBase';
+import mockFetchBase from '../bases/mockFetchBase';
 import { ChannelIdQuery, DisplayNameQuery, UserIdQuery } from '../types/query';
 import { TwitchUser, TwitchUserStats } from '../types/twitch-user';
 import { TwitchUserChannel, TwitchUserChannelStats } from '../types/twitch-user-channel';
-import authFetchBase from '../utils/authFetchBase';
 import convertApiToDTO from '../utils/convertApiToDTO';
 
 interface TwitchUserChannelsResponseType {
@@ -22,13 +23,24 @@ interface TwitchUserChannelsResponseType {
 
 export const twitchUsersApi = createApi({
     reducerPath: 'twitchUsersApi',
-    baseQuery: authFetchBase,
+    baseQuery: (args, api) => mockFetchBase(args, api, { defaultBase: authFetchBase }),
     endpoints: (builder) => ({
         getTwitchUser: builder.query<TwitchUser, DisplayNameQuery>({
             query: getTwitchUserByDisplayNameDef,
-            transformResponse: (response) => convertApiToDTO<TwitchUser>(response, ['createdAt']),
-            // eslint-disable-next-line @typescript-eslint/no-unused-vars
-            onQueryStarted: async (id, { dispatch, queryFulfilled }) => {},
+            transformResponse: (response) => {
+                return convertApiToDTO<TwitchUser>(response, ['createdAt']);
+            },
+            onQueryStarted: async (id, { queryFulfilled }) => {
+                try {
+                    // TODO: dispatch loading true
+                    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+                    const { data } = await queryFulfilled;
+                } catch (error) {
+                    console.error(error);
+                } finally {
+                    // TODO: dispatch loading false
+                }
+            },
         }),
         getTwitchUserChannels: builder.query<TwitchUserChannelsResponseType, UserIdQuery>({
             query: getTwitchUserChannelsDef,

@@ -1,3 +1,4 @@
+export * from './auth';
 export * from './body';
 export * from './error';
 export * from './messages';

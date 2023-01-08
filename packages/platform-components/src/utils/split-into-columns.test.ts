@@ -1,4 +1,3 @@
-/* eslint-disable max-nested-callbacks */
 import splitIntoColumns from './split-into-columns';
 
 describe('Split into chunks', () => {

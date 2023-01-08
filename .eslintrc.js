@@ -28,6 +28,25 @@ module.exports = {
                 'no-undef': 'off',
             },
         },
+        {
+            files: ['packages/platform-apis/mocks/*.ts'],
+            rules: {
+                camelcase: 'off',
+            },
+        },
+        {
+            files: ['*.stories.tsx', '*.stories.ts'],
+            rules: {
+                'react/no-multi-comp': 'off',
+            },
+        },
+        {
+            files: ['*.test.ts'],
+            rules: {
+                camelcase: 'off',
+                'max-nested-callbacks': 'off',
+            },
+        },
     ],
     rules: {
         'import-helpers/order-imports': [

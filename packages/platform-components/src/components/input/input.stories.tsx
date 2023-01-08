@@ -1,4 +1,3 @@
-/* eslint-disable react/no-multi-comp */
 import { StoryFn, Meta } from '@storybook/react';
 import React, { useState } from 'react';
 
